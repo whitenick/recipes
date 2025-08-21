@@ -1,2 +1,2 @@
 # recipes
-Recipe collection.
+Food recipe collection.
