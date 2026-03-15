@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nick & Sarah's Kitchen</title>
+  <meta name="description" content="Our personal recipe collection — handpicked, tested, and loved." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">🍽</span>
+          <div class="logo-text">
+            <span class="logo-title">Nick & Sarah's Kitchen</span>
+            <span class="logo-sub">The Recipe Box</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="btn-icon" id="favoritesToggle" title="Show favorites">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="fav-count" id="favCount"></span>
+          </button>
+          <button class="btn-icon" id="printBtn" title="Print current recipe" style="display:none">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Recipe List View -->
+    <div id="listView">
+      <!-- Hero / Search Bar -->
+      <section class="hero">
+        <div class="container">
+          <h1 class="hero-title">What are we <em>cooking?</em></h1>
+          <p class="hero-subtitle">Search through our collection of hand-crafted recipes.</p>
+          <div class="search-wrap">
+            <div class="search-box">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input 
+                type="search" 
+                id="searchInput" 
+                placeholder="Search by name, ingredient, or category…"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <button class="search-clear" id="searchClear" style="display:none">✕</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filters -->
+      <section class="filters-section">
+        <div class="container">
+          <div class="filters-row">
+            <div class="filters-scroll">
+              <button class="filter-chip active" data-category="">All Recipes</button>
+              <!-- Dynamic chips injected here -->
+            </div>
+            <div class="view-toggle">
+              <button class="view-btn active" id="gridViewBtn" title="Grid view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+                </svg>
+              </button>
+              <button class="view-btn" id="listViewBtn" title="List view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="3" y="4" width="18" height="3"/><rect x="3" y="10" width="18" height="3"/>
+                  <rect x="3" y="16" width="18" height="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="results-meta" id="resultsMeta"></div>
+        </div>
+      </section>
+
+      <!-- Recipe Grid -->
+      <section class="recipes-section">
+        <div class="container">
+          <div class="recipe-grid" id="recipeGrid">
+            <!-- Recipe cards injected here -->
+          </div>
+          <div class="empty-state" id="emptyState" style="display:none">
+            <div class="empty-icon">🔍</div>
+            <h3>No recipes found</h3>
+            <p>Try a different search term or browse all recipes.</p>
+            <button class="btn-primary" onclick="clearSearch()">Clear search</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Recipe Detail View -->
+    <div id="detailView" style="display:none">
+      <div class="container">
+        <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Back to recipes
+        </button>
+        <div class="recipe-detail" id="recipeDetail">
+          <!-- Recipe content injected here -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Nick & Sarah's Kitchen &middot; Personal recipe collection</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

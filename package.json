@@ -1,0 +1,11 @@
+{
+  "name": "nicks-sarahs-kitchen",
+  "version": "1.0.0",
+  "description": "Nick & Sarah's personal recipe collection",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "npx serve public -l 3456",
+    "prebuild": "echo '🍳 Building recipe site...'"
+  },
+  "private": true
+}
