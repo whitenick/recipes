@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nick's Kitchen — Serapio Labs</title>
-  <meta name="description" content="A personal recipe collection — handpicked, tested, and loved." />
+  <title>Nick's Kitchen</title>
+  <meta name="description" content="A personal collection of recipes — tested, refined, and kept." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,32 +16,34 @@
   <header class="site-header">
     <div class="container">
       <div class="header-inner">
-        <!-- Logo -->
+
+        <!-- Wordmark -->
         <a href="https://nickwhite.us" class="logo">
-          <span class="logo-icon">🍽</span>
           <div class="logo-text">
-            <span class="logo-title">Nick's <span>Kitchen</span></span>
+            <span class="logo-title">Nick's <em>Kitchen</em></span>
+            <span class="logo-divider"></span>
             <span class="logo-sub">Serapio Labs</span>
           </div>
         </a>
 
         <!-- Actions -->
         <div class="header-actions">
-          <a href="https://nickwhite.us" class="header-home-link">← Home</a>
-          <button class="btn-icon" id="favoritesToggle" title="Show favorites">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <a href="https://nickwhite.us" class="header-home-link">Home</a>
+          <button class="btn-icon" id="favoritesToggle" title="Saved recipes">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
             <span class="fav-count" id="favCount"></span>
           </button>
-          <button class="btn-icon" id="printBtn" title="Print current recipe" style="display:none">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <button class="btn-icon" id="printBtn" title="Print recipe" style="display:none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <polyline points="6 9 6 2 18 2 18 9"></polyline>
               <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
               <rect x="6" y="14" width="12" height="8"></rect>
             </svg>
           </button>
         </div>
+
       </div>
     </div>
   </header>
@@ -52,37 +54,36 @@
     <!-- ── Recipe List View ── -->
     <div id="listView">
 
-      <!-- Hero / Search Bar -->
+      <!-- Hero -->
       <section class="hero">
-        <!-- Glow blob -->
-        <div class="hero-glow"></div>
-
         <div class="container">
-          <!-- Section label (v3 style) -->
+
           <div class="hero-label">
             <span class="hero-label-dot"></span>
-            Recipe Collection
+            The Collection
           </div>
 
-          <h1 class="hero-title">What are we <em>cooking?</em></h1>
-          <p class="hero-subtitle">Handpicked recipes — tested, loved, and ready to cook.</p>
+          <h1 class="hero-title">The Kitchen</h1>
+
+          <p class="hero-subtitle">Recipes collected, tested, and returned to.</p>
 
           <div class="search-wrap">
             <div class="search-box">
-              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
               <input
                 type="search"
                 id="searchInput"
-                placeholder="Search by name, ingredient, or category…"
+                placeholder="Search recipes, ingredients…"
                 autocomplete="off"
                 spellcheck="false"
               />
               <button class="search-clear" id="searchClear" style="display:none">✕</button>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -91,18 +92,18 @@
         <div class="container">
           <div class="filters-row">
             <div class="filters-scroll">
-              <button class="filter-chip active" data-category="">All Recipes</button>
+              <button class="filter-chip active" data-category="">All</button>
               <!-- Dynamic chips injected here -->
             </div>
             <div class="view-toggle">
               <button class="view-btn active" id="gridViewBtn" title="Grid view">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                   <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
                   <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
                 </svg>
               </button>
               <button class="view-btn" id="listViewBtn" title="List view">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                   <rect x="3" y="4" width="18" height="3"/><rect x="3" y="10" width="18" height="3"/>
                   <rect x="3" y="16" width="18" height="3"/>
                 </svg>
@@ -120,23 +121,24 @@
             <!-- Recipe cards injected here -->
           </div>
           <div class="empty-state" id="emptyState" style="display:none">
-            <div class="empty-icon">🔍</div>
-            <h3>No recipes found</h3>
-            <p>Try a different search term or browse all recipes.</p>
+            <div class="empty-icon">◌</div>
+            <h3>Nothing found</h3>
+            <p>Try a different term, or browse the full collection.</p>
             <button class="btn-primary" onclick="clearSearch()">Clear search</button>
           </div>
         </div>
       </section>
+
     </div>
 
     <!-- ── Recipe Detail View ── -->
     <div id="detailView" style="display:none">
       <div class="container">
         <button class="back-btn" id="backBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
-          Back to recipes
+          All Recipes
         </button>
         <div class="recipe-detail" id="recipeDetail">
           <!-- Recipe content injected here -->
@@ -149,7 +151,7 @@
   <!-- ══════════════════════ FOOTER ══════════════════════ -->
   <footer class="site-footer">
     <div class="container">
-      <p>Nick's Kitchen &middot; <a href="https://serapiolabs.com">Serapio Labs</a></p>
+      <p>Nick's Kitchen &nbsp;·&nbsp; <a href="https://serapiolabs.com">Serapio Labs</a></p>
     </div>
   </footer>
 

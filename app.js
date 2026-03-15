@@ -158,9 +158,9 @@ function updateResultsMeta() {
   const shown = filteredRecipes.length;
   
   if (currentSearch || currentCategory || favoritesOnly) {
-    meta.textContent = `Showing ${shown} of ${total} recipe${total !== 1 ? 's' : ''}`;
+    meta.textContent = `${shown} of ${total}`;
   } else {
-    meta.textContent = `${total} recipe${total !== 1 ? 's' : ''} in the collection`;
+    meta.textContent = `${total} recipes`;
   }
 }
 
@@ -214,7 +214,7 @@ function renderGrid() {
   grid.style.display = '';
   empty.style.display = 'none';
   
-  grid.innerHTML = filteredRecipes.map(recipe => renderCard(recipe)).join('');
+  grid.innerHTML = filteredRecipes.map((recipe, i) => renderCard(recipe, i)).join('');
   
   // Attach event listeners
   grid.querySelectorAll('.recipe-card').forEach(card => {
@@ -237,44 +237,42 @@ function renderGrid() {
   });
 }
 
-function renderCard(recipe) {
+function renderCard(recipe, index) {
   const isFav = favorites.has(recipe.id);
-  const emoji = getEmoji(recipe);
-  const tags = recipe.categories.slice(0, 3);
+  const tags = recipe.categories.slice(0, 2);
   const hasMeta = recipe.meta.totalTime || recipe.meta.cookTime || recipe.meta.servings;
+  const num = String(index + 1).padStart(2, '0');
   
   return `
     <div class="recipe-card" data-id="${recipe.id}">
-      <div class="card-emoji">${emoji}</div>
-      <button class="card-fav ${isFav ? 'active' : ''}" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
+      <div class="card-category-bar"></div>
+      <button class="card-fav ${isFav ? 'active' : ''}" title="${isFav ? 'Remove' : 'Save'}">
         ${isFav ? '♥' : '♡'}
       </button>
       <div class="card-body">
+        <div class="card-number">${num}</div>
         <div class="card-title">${escHtml(recipe.title)}</div>
-        <div class="card-desc">${escHtml(recipe.description) || '<span style="color:var(--text-dim)">Click to view recipe</span>'}</div>
-        ${hasMeta ? `
-          <div class="card-meta">
-            ${recipe.meta.totalTime || recipe.meta.cookTime ? `
-              <span class="card-meta-item">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                </svg>
-                ${escHtml(recipe.meta.totalTime || recipe.meta.cookTime)}
-              </span>
-            ` : ''}
-            ${recipe.meta.servings ? `
-              <span class="card-meta-item">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                ${escHtml(recipe.meta.servings)}
-              </span>
-            ` : ''}
-          </div>
-        ` : ''}
-        <div class="card-tags">
-          ${tags.map(t => `<span class="tag ${tagClass(t)}">${escHtml(t)}</span>`).join('')}
+        ${recipe.description ? `<div class="card-desc">${escHtml(recipe.description)}</div>` : ''}
+        <div class="card-divider"></div>
+        <div class="card-meta">
+          ${recipe.meta.totalTime || recipe.meta.cookTime ? `
+            <span class="card-meta-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              ${escHtml(recipe.meta.totalTime || recipe.meta.cookTime)}
+            </span>
+          ` : ''}
+          ${recipe.meta.servings ? `
+            <span class="card-meta-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              </svg>
+              ${escHtml(recipe.meta.servings)}
+            </span>
+          ` : ''}
+          ${!hasMeta ? `<div class="card-tags">${tags.map(t => `<span class="tag ${tagClass(t)}">${escHtml(t)}</span>`).join('')}</div>` : ''}
+          ${hasMeta ? `<div class="card-tags" style="margin-left:auto">${tags.map(t => `<span class="tag ${tagClass(t)}">${escHtml(t)}</span>`).join('')}</div>` : ''}
         </div>
       </div>
     </div>
@@ -306,7 +304,6 @@ function showDetail(recipe) {
   window.scrollTo(0, 0);
   
   const isFav = favorites.has(recipe.id);
-  const emoji = getEmoji(recipe);
   const hasMeta = recipe.meta.totalTime || recipe.meta.cookTime || recipe.meta.prepTime || recipe.meta.servings;
   
   // Build meta grid items
@@ -328,10 +325,7 @@ function showDetail(recipe) {
   
   document.getElementById('recipeDetail').innerHTML = `
     <div class="detail-header">
-      <div class="detail-categories">
-        ${recipe.categories.map(c => `<span class="tag ${tagClass(c)}">${escHtml(c)}</span>`).join('')}
-      </div>
-      <div style="font-size:48px;margin-bottom:16px">${emoji}</div>
+      <div class="detail-eyebrow">${recipe.categories.join(' &nbsp;·&nbsp; ')}</div>
       <h1 class="detail-title">${escHtml(recipe.title)}</h1>
       ${recipe.description ? `<p class="detail-desc">${escHtml(recipe.description)}</p>` : ''}
     </div>
@@ -350,15 +344,11 @@ function showDetail(recipe) {
     <div class="detail-actions">
       <button class="detail-fav-btn ${isFav ? 'active' : ''}" id="detailFavBtn" data-id="${recipe.id}">
         <span class="fav-icon">${isFav ? '♥' : '♡'}</span>
-        <span>${isFav ? 'Saved to favorites' : 'Save to favorites'}</span>
+        <span>${isFav ? 'Saved' : 'Save recipe'}</span>
       </button>
       ${recipe.source ? `
         <span class="detail-source">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-          </svg>
-          <a href="${escHtml(recipe.source)}" target="_blank" rel="noopener">Original recipe</a>
+          <a href="${escHtml(recipe.source)}" target="_blank" rel="noopener">Original source ↗</a>
         </span>
       ` : ''}
     </div>
