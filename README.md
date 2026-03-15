@@ -1,4 +1,4 @@
-# 🍽 Nick & Sarah's Kitchen
+# 🍽 Nick's Kitchen
 
 Personal recipe collection — searchable, mobile-friendly, and always up to date.
 

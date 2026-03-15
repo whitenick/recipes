@@ -1,5 +1,5 @@
 /**
- * Nick & Sarah's Kitchen — App
+ * Nick's Kitchen — App
  */
 
 // ── State ──────────────────────────────────────────────
@@ -378,14 +378,14 @@ function showDetail(recipe) {
   });
   
   // Set page title
-  document.title = `${recipe.title} — Nick & Sarah's Kitchen`;
+  document.title = `${recipe.title} — Nick's Kitchen`;
 }
 
 function showList() {
   document.getElementById('listView').style.display = 'block';
   document.getElementById('detailView').style.display = 'none';
   document.getElementById('printBtn').style.display = 'none';
-  document.title = "Nick & Sarah's Kitchen";
+  document.title = "Nick's Kitchen";
   
   // Re-render in case favorites changed
   applyFilters();
