@@ -1,35 +1,35 @@
 /* ──────────────────────────────────────────────────────────
    Serapio Labs — Recipe Collection
-   Design system: Homepage v3 (Santa Fe / dark terracotta)
+   Design system: Santa Fe Desert Theme (light / cream)
    ────────────────────────────────────────────────────────── */
 
 :root {
   /* ── Surface ── */
-  --bg:              #090909;
-  --bg-card:         #111111;
-  --bg-card-hover:   #161616;
-  --bg-input:        #111111;
+  --bg:              #FAF8F5;   /* Alabaster — main background */
+  --bg-card:         #FFFFFF;   /* Pure white cards */
+  --bg-card-hover:   #F5F1ED;  /* Desert sand hover */
+  --bg-input:        #FFFFFF;  /* White inputs */
 
   /* ── Borders ── */
-  --border:          rgba(255, 255, 255, 0.05);
-  --border-hover:    rgba(255, 255, 255, 0.10);
-  --border-strong:   rgba(255, 255, 255, 0.14);
+  --border:          rgba(44, 36, 22, 0.10);
+  --border-hover:    rgba(44, 36, 22, 0.18);
+  --border-strong:   rgba(44, 36, 22, 0.22);
 
   /* ── Text ── */
-  --text:            #EDEDED;
-  --text-muted:      #888;
-  --text-dim:        #444;
+  --text:            #2C2416;  /* Dark earth — headings & body */
+  --text-muted:      #7A6650;  /* Medium stone */
+  --text-dim:        #AB8476;  /* Beaver brown */
 
-  /* ── Accent — terracotta / sunset orange ── */
-  --accent:          #D97736;
-  --accent-hover:    #B8601F;
-  --accent-light:    #e8956a;
-  --accent-dim:      rgba(217, 119, 54, 0.15);
-  --accent-glow:     rgba(217, 119, 54, 0.12);
-  --accent-border:   rgba(217, 119, 54, 0.25);
+  /* ── Accent — Adobe Clay / terracotta ── */
+  --accent:          #C56F25;
+  --accent-hover:    #A45A1E;
+  --accent-light:    #D4915C;
+  --accent-dim:      rgba(197, 111, 37, 0.12);
+  --accent-glow:     rgba(197, 111, 37, 0.10);
+  --accent-border:   rgba(197, 111, 37, 0.30);
 
   /* ── Chip / filter ── */
-  --chip-bg:         #161616;
+  --chip-bg:         #F5F1ED;  /* Desert sand */
 
   /* ── Radius ── */
   --radius:          12px;
@@ -41,8 +41,8 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* ── Shadows ── */
-  --shadow-card:  0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.6), 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-card:  0 1px 3px rgba(44, 36, 22, 0.08), 0 4px 16px rgba(44, 36, 22, 0.06);
+  --shadow-hover: 0 2px 8px rgba(44, 36, 22, 0.12), 0 8px 32px rgba(44, 36, 22, 0.10);
 }
 
 /* ── Reset ── */
@@ -96,7 +96,7 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(9, 9, 9, 0.88);
+  background: rgba(250, 248, 245, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -156,7 +156,7 @@ body::before {
   transition: background 0.15s, color 0.15s;
 }
 .btn-icon:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(44, 36, 22, 0.06);
   color: var(--text);
 }
 .btn-icon.active { color: var(--accent); }
@@ -165,7 +165,7 @@ body::before {
   top: 3px;
   right: 3px;
   background: var(--accent);
-  color: #000;
+  color: #FFFFFF;
   font-size: 9px;
   font-weight: 700;
   width: 14px;
@@ -190,7 +190,7 @@ body::before {
 }
 .header-home-link:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(44, 36, 22, 0.06);
 }
 
 /* ────────────────────────────────────────
@@ -209,7 +209,7 @@ body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(44, 36, 22, 0.08) 1px, transparent 1px);
   background-size: 32px 32px;
   pointer-events: none;
   z-index: 0;
@@ -303,7 +303,7 @@ body::before {
 #searchInput {
   width: 100%;
   height: 52px;
-  background: rgba(17, 17, 17, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--border-strong);
   border-radius: 26px;
   padding: 0 52px;
@@ -374,12 +374,12 @@ body::before {
 .filter-chip:hover {
   border-color: var(--border-hover);
   color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(44, 36, 22, 0.05);
 }
 .filter-chip.active {
   background: var(--accent);
   border-color: var(--accent);
-  color: #000;
+  color: #FFFFFF;
   font-weight: 600;
 }
 
@@ -401,7 +401,7 @@ body::before {
 .view-btn:hover { color: var(--text-muted); }
 .view-btn.active {
   background: var(--accent);
-  color: #000;
+  color: #FFFFFF;
 }
 
 .results-meta {
@@ -512,17 +512,17 @@ body::before {
   color: var(--text-muted);
   letter-spacing: 0.01em;
 }
-/* Semantic tag colors */
-.tag.seafood    { background: rgba(64,160,225,0.08);  border-color: rgba(64,160,225,0.18);  color: #6db8e0; }
-.tag.chicken    { background: rgba(225,180,64,0.08);  border-color: rgba(225,180,64,0.18);  color: #e0c06b; }
-.tag.beef       { background: rgba(200,80,80,0.08);   border-color: rgba(200,80,80,0.18);   color: #d07070; }
-.tag.baking     { background: rgba(217,119,54,0.08);  border-color: rgba(217,119,54,0.18);  color: #D97736; }
-.tag.vegetarian { background: rgba(80,180,100,0.08);  border-color: rgba(80,180,100,0.18);  color: #70cc88; }
-.tag.soup       { background: rgba(180,100,200,0.08); border-color: rgba(180,100,200,0.18); color: #c090d8; }
-.tag.pasta      { background: rgba(217,119,54,0.08);  border-color: rgba(217,119,54,0.18);  color: #D97736; }
-.tag.breakfast  { background: rgba(255,200,100,0.08); border-color: rgba(255,200,100,0.18); color: #f0cc70; }
-.tag.salad      { background: rgba(80,200,130,0.08);  border-color: rgba(80,200,130,0.18);  color: #70d8a0; }
-.tag.sauce      { background: rgba(200,100,100,0.08); border-color: rgba(200,100,100,0.18); color: #d88080; }
+/* Semantic tag colors — darkened for light background */
+.tag.seafood    { background: rgba(64,160,225,0.12);  border-color: rgba(64,160,225,0.28);  color: #2E6E8A; }
+.tag.chicken    { background: rgba(225,180,64,0.12);  border-color: rgba(225,180,64,0.28);  color: #7A5C10; }
+.tag.beef       { background: rgba(200,80,80,0.10);   border-color: rgba(200,80,80,0.25);   color: #8A2828; }
+.tag.baking     { background: rgba(197,111,37,0.10);  border-color: rgba(197,111,37,0.25);  color: #7A4010; }
+.tag.vegetarian { background: rgba(80,180,100,0.10);  border-color: rgba(80,180,100,0.25);  color: #2A6E3C; }
+.tag.soup       { background: rgba(180,100,200,0.10); border-color: rgba(180,100,200,0.25); color: #6A2E88; }
+.tag.pasta      { background: rgba(197,111,37,0.10);  border-color: rgba(197,111,37,0.25);  color: #7A4010; }
+.tag.breakfast  { background: rgba(200,160,60,0.12);  border-color: rgba(200,160,60,0.28);  color: #705810; }
+.tag.salad      { background: rgba(60,180,110,0.10);  border-color: rgba(60,180,110,0.25);  color: #1A6E42; }
+.tag.sauce      { background: rgba(200,80,80,0.10);   border-color: rgba(200,80,80,0.25);   color: #8A2828; }
 
 /* Favorite button on card */
 .card-fav {
@@ -532,7 +532,7 @@ body::before {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: rgba(9, 9, 9, 0.8);
+  background: rgba(250, 248, 245, 0.92);
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -782,7 +782,7 @@ body::before {
   padding: 9px 14px;
   border-bottom: 1px solid var(--border);
 }
-.recipe-content tr:hover td { background: rgba(255, 255, 255, 0.015); }
+.recipe-content tr:hover td { background: rgba(44, 36, 22, 0.04); }
 .recipe-content blockquote {
   border-left: 2px solid var(--accent);
   padding: 4px 18px;
