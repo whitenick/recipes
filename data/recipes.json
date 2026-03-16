@@ -6,7 +6,8 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 45 mins Cook Time - **Cook Time**: 60 mins Method - **Total Time**: 1 hour 45 minutes Yield - **Servings**: 1",
     "categories": [
-      "Other"
+      "Appetizers",
+      "Vegetarian"
     ],
     "ingredients": [
       "1 16-oz jar grape leaves in brine (about 60 to 70 leaves), I used Oralndo brand (affiliate link)",
@@ -42,7 +43,7 @@
     "subdir": "Todd's Kitchen/Veggy",
     "description": "20 Delicious Uses for Sauerkraut | Get wilder | wildbrine",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [],
     "meta": {
@@ -61,7 +62,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 15 Min Cook Time - **Cook Time**: 6 Hr Serves - **Servings**: 6 people",
     "categories": [
-      "Other"
+      "Pork"
     ],
     "ingredients": [],
     "meta": {
@@ -105,6 +106,7 @@
     "description": "- **Total Time**: 5 mins 10 mins 15 mins - **Servings**: 4",
     "categories": [
       "Pork",
+      "Sauces & Condiments",
       "Quick & Easy"
     ],
     "ingredients": [
@@ -133,7 +135,8 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 10 mins - **Total Time**: 1 hr 25 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Beef",
+      "Appetizers"
     ],
     "ingredients": [
       "12 ounces ground lamb, beef, or turkey",
@@ -248,7 +251,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 1 hr - **Total Time**: 2 hrs 15 mins - **Servings**: 10",
     "categories": [
-      "Other"
+      "Lamb"
     ],
     "ingredients": [
       "½ medium onion, cut into chunks",
@@ -282,7 +285,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 20 mins - **Total Time**: 30 mins - **Servings**: 12",
     "categories": [
-      "Other"
+      "Baking"
     ],
     "ingredients": [
       "1 cup all-purpose flour",
@@ -312,7 +315,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 4 hrs 10 mins - **Total Time**: 4 hrs 20 mins - **Servings**: 6",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "2 cups dry navy beans, soaked overnight",
@@ -372,7 +375,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 20 mins - **Total Time**: 40 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "3 tablespoons olive oil",
@@ -402,7 +405,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 30 mins - **Cook Time**: 1 hr - **Total Time**: 1 hr 30 mins - **Servings**: 10",
     "categories": [
-      "Other"
+      "Beef"
     ],
     "ingredients": [
       "Meatloaf Ingredients:",
@@ -478,6 +481,8 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 5 mins - **Total Time**: 5 mins - **Servings**: 4",
     "categories": [
+      "Appetizers",
+      "Vegetarian",
       "Quick & Easy"
     ],
     "ingredients": [
@@ -505,7 +510,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 45 mins - **Total Time**: 1 hr - **Servings**: 15",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [
       "1 (16 ounce) package elbow macaroni",
@@ -580,7 +585,8 @@
     "subdir": "Todd's Kitchen/Sauces",
     "description": "- **Prep Time**: 5 mins - **Total Time**: 5 mins - **Servings**: 6",
     "categories": [
-      "Other"
+      "Sauces & Condiments",
+      "Soups & Stews"
     ],
     "ingredients": [
       "2 tablespoons paprika",
@@ -638,7 +644,8 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 15 mins - **Total Time**: 30 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Salads",
+      "Vegetarian"
     ],
     "ingredients": [
       "2 cups water",
@@ -671,7 +678,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 50 mins - **Total Time**: 1 hr 20 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Chicken"
     ],
     "ingredients": [
       "1 pound skinless, boneless chicken breast halves - cubed",
@@ -770,6 +777,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 35 mins - **Cook Time**: 1 hr - **Total Time**: 1 hr 35 mins - **Servings**: 6",
     "categories": [
+      "Seafood",
       "Soups & Stews"
     ],
     "ingredients": [
@@ -930,6 +938,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 15 mins - **Total Time**: 15 mins - **Servings**: 4",
     "categories": [
+      "Seafood",
       "Baking"
     ],
     "ingredients": [
@@ -963,7 +972,7 @@
     "subdir": "Todd's Kitchen/Indian",
     "description": "- **Prep Time**: 10 minutes - **Cook Time**: 1 hour - **Total Time**: 1 hour 10 minutes - **Servings**: 6 servings Step 1",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [],
     "meta": {
@@ -982,7 +991,8 @@
     "subdir": "Todd's Kitchen/Indian",
     "description": "Filled with a Punjabi-spiced potato and pea mixture, these samosas prioritize convenience without compromising flavors or textures. Use",
     "categories": [
-      "Other"
+      "Appetizers",
+      "Vegetarian"
     ],
     "ingredients": [],
     "meta": {
@@ -1001,7 +1011,8 @@
     "subdir": "Todd's Kitchen/Desert",
     "description": "- **Prep Time**: 30 mins - **Cook Time**: 1 hr - **Total Time**: 1 hr 30 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Desserts",
+      "Baking"
     ],
     "ingredients": [
       "8 small Granny Smith apples, or as needed",
@@ -1056,7 +1067,8 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Servings**: 4",
     "categories": [
-      "Other"
+      "Breakfast",
+      "Vegetarian"
     ],
     "ingredients": [
       "4 slices of hearty bread (sourdough or multigrain)",
@@ -1082,7 +1094,8 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Total Time**: 15 mins 20 mins time 35 mins - **Servings**: 6 or more people Calories",
     "categories": [
-      "Other"
+      "Appetizers",
+      "Vegetarian"
     ],
     "ingredients": [
       "2 Italian eggplants or small globe eggplants",
@@ -1145,7 +1158,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 5 mins - **Total Time**: 20 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Appetizers"
     ],
     "ingredients": [
       "1 loaf French bread, cut into ¼-inch slices",
@@ -1175,7 +1188,7 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Total Time**: 20 Minutes - **Servings**: 2 pancakes",
     "categories": [
-      "Other"
+      "Breakfast"
     ],
     "ingredients": [
       "FOR PANCAKES",
@@ -1212,7 +1225,7 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 20 mins - **Total Time**: 30 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Baking"
     ],
     "ingredients": [
       "2 large eggs",
@@ -1238,6 +1251,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 10 Min Cook Time - **Cook Time**: 2 Hr - **Servings**: 6 people",
     "categories": [
+      "Pork",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -1399,8 +1413,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 3 Hours 30 Minutes - **Servings**: 6",
     "categories": [
-      "Beef",
-      "Soups & Stews"
+      "Soups & Stews",
+      "Beef"
     ],
     "ingredients": [
       "3 pounds boneless beef chuck (well-marbled), cut into 1½-inch pieces",
@@ -1477,8 +1491,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Servings**: 1 medium onion",
     "categories": [
-      "Beef",
-      "Pasta"
+      "Beef"
     ],
     "ingredients": [
       "4 servings",
@@ -1574,7 +1587,8 @@
     "subdir": "Todd's Kitchen/Desert",
     "description": "- **Prep Time**: 20 Minutes - **Cook Time**: 25 Minutes - **Total Time**: 45 Minutes - **Servings**: 8 to 10",
     "categories": [
-      "Other"
+      "Desserts",
+      "Baking"
     ],
     "ingredients": [
       "1½ cups \u0000nely crushed graham cracker crumbs, from about 12 whole",
@@ -1606,6 +1620,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "Old-fashioned Greek burgers - Bi\u0000ekia",
     "categories": [
+      "Beef",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -1625,6 +1640,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "Old-fashioned Greek burgers - Bi\u0000ekia",
     "categories": [
+      "Beef",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -1644,6 +1660,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Prep Time**: 5mins Cook Time - **Cook Time**: 5mins Total Time - **Total Time**: 10mins - **Servings**: 4servings Calories",
     "categories": [
+      "Appetizers",
       "Sauces & Condiments"
     ],
     "ingredients": [
@@ -1675,7 +1692,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 5 mins - **Cook Time**: 10 mins - **Total Time**: 15 mins - **Servings**: 1",
     "categories": [
-      "Other"
+      "Pork"
     ],
     "ingredients": [
       "4 slices bacon",
@@ -1700,8 +1717,7 @@
     "subdir": "",
     "description": "",
     "categories": [
-      "Beef",
-      "Pasta"
+      "Beef"
     ],
     "ingredients": [
       "Butter — 6 tbsp",
@@ -1735,7 +1751,6 @@
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 1 hr 20 mins - **Total Time**: 1 hr 30 mins - **Servings**: 9",
     "categories": [
       "Beef",
-      "Pasta",
       "Sauces & Condiments"
     ],
     "ingredients": [
@@ -1775,7 +1790,8 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Cook Time**: 30 minutes - **Total Time**: 25 mins 40 mins 1 hr 5 mins - **Servings**: 996 kcal",
     "categories": [
-      "Seafood"
+      "Seafood",
+      "Soups & Stews"
     ],
     "ingredients": [
       "½ cup (118 ml) extra-virgin olive oil",
@@ -1821,7 +1837,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 25 mins - **Total Time**: 40 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Seafood"
     ],
     "ingredients": [
       "2 tablespoons olive oil, divided",
@@ -1951,6 +1967,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Prep Time**: 5mins Cook Time - **Cook Time**: 20mins Total Time - **Total Time**: 25mins - **Servings**: 6servings as an appetizer",
     "categories": [
+      "Appetizers",
       "Chicken",
       "Sauces & Condiments"
     ],
@@ -2131,7 +2148,9 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Total Time**: 5 mins 5 mins - **Servings**: 1 Calories",
     "categories": [
-      "Seafood"
+      "Appetizers",
+      "Seafood",
+      "Sauces & Condiments"
     ],
     "ingredients": [
       "3 tablespoons paprika",
@@ -2159,7 +2178,9 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 45 mins - **Cook Time**: 2 hrs 30 mins - **Total Time**: 3 hrs 15 mins - **Servings**: 10",
     "categories": [
-      "Chicken"
+      "Chicken",
+      "Pork",
+      "Soups & Stews"
     ],
     "ingredients": [
       "1 cup vegetable oil",
@@ -2191,6 +2212,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "Easy Fried Calamari | How to Make Calamari- The Mediterranean Dish",
     "categories": [
+      "Seafood",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -2210,6 +2232,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Servings**: 6",
     "categories": [
+      "Seafood",
       "Sauces & Condiments"
     ],
     "ingredients": [
@@ -2242,7 +2265,9 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Prep Time**: 15 mins - **Servings**: 6 Calories",
     "categories": [
-      "Salads"
+      "Salads",
+      "Appetizers",
+      "Vegetarian"
     ],
     "ingredients": [
       "220 g/7oz bocconcini / baby or cherry mozzarella , halved (Note 1)",
@@ -2274,7 +2299,9 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 10 mins - **Total Time**: 25 mins - **Servings**: 4",
     "categories": [
-      "Salads"
+      "Salads",
+      "Appetizers",
+      "Vegetarian"
     ],
     "ingredients": [
       "1 cup balsamic vinegar",
@@ -2302,7 +2329,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Cook Time**: 5 mins 15 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [
       "175g/6 oz guanciale (pancetta or block bacon), weight after skin removed (Note 1)",
@@ -2333,7 +2360,8 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 4 hrs - **Total Time**: 12 hrs 10 mins - **Servings**: 6 to 8 servings",
     "categories": [
-      "Other"
+      "Pork",
+      "Soups & Stews"
     ],
     "ingredients": [
       "● 1 pound (454g) dried cannellini beans",
@@ -2370,6 +2398,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Prep Time**: 15mins Marinating Time - **Total Time**: 2hrs15mins - **Servings**: 8people Calories",
     "categories": [
+      "Appetizers",
       "Seafood"
     ],
     "ingredients": [
@@ -2402,7 +2431,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 10 mins 15 mins 25 mins - **Servings**: 6 servings",
     "categories": [
-      "Other"
+      "Appetizers"
     ],
     "ingredients": [
       "⅓ pound firm alpine-style cheese such as gruyere",
@@ -2444,6 +2473,7 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Total Time**: 45 minutes",
     "categories": [
+      "Appetizers",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -2463,7 +2493,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 5 mins - **Total Time**: 15 mins - **Servings**: 1",
     "categories": [
-      "Other"
+      "Pork"
     ],
     "ingredients": [
       "1 all-beef hot dog",
@@ -2492,7 +2522,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 20 mins 40 mins 1 hr - **Servings**: 6 people Calories",
     "categories": [
-      "Chicken"
+      "Chicken",
+      "Appetizers"
     ],
     "ingredients": [
       "1 tablespoon olive oil",
@@ -2757,8 +2788,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 15 mins 1 hr 30 mins 1 hr 45 mins - **Servings**: 6 people Calories",
     "categories": [
-      "Chicken",
-      "Soups & Stews"
+      "Soups & Stews",
+      "Chicken"
     ],
     "ingredients": [
       "Chicken",
@@ -2919,8 +2950,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Prep Time**: 15mins Cook Time - **Cook Time**: 30mins Total Time - **Total Time**: 45mins - **Servings**: 6servings Calories",
     "categories": [
-      "Chicken",
-      "Soups & Stews"
+      "Soups & Stews",
+      "Chicken"
     ],
     "ingredients": [
       "Chicken Tortilla Soup",
@@ -2995,8 +3026,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 30 mins - **Total Time**: 40 mins - **Servings**: 6",
     "categories": [
-      "Chicken",
       "Soups & Stews",
+      "Chicken",
       "Pasta",
       "Quick & Easy"
     ],
@@ -3069,7 +3100,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 10 mins 15 mins 25 mins - **Servings**: 8 Calories",
     "categories": [
-      "Other"
+      "Appetizers"
     ],
     "ingredients": [
       "1 tablespoon olive oil",
@@ -3101,7 +3132,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Total Time**: 30 mins 15 mins 45 mins - **Servings**: 6 servings",
     "categories": [
-      "Other"
+      "Appetizers"
     ],
     "ingredients": [
       "underneath the broiler and turn the broiler on.",
@@ -3212,8 +3243,7 @@
     "subdir": "",
     "description": "This recipe focuses on achieving crispy Chinese eggplant coated in a rich garlic sauce. The eggplant is first soaked in saltwater to draw out moisture, then stir-fried until soft and golden. The garlic sauce, made with soy sauce, sugar, and a touch of dark soy for color, is quickly tossed with the e",
     "categories": [
-      "Sauces & Condiments",
-      "Vegetarian"
+      "Sauces & Condiments"
     ],
     "ingredients": [
       "2 Chinese eggplants",
@@ -3275,6 +3305,7 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 5 mins 5 mins 10 mins - **Servings**: 6 servings COURSE",
     "categories": [
+      "Soups & Stews",
       "Seafood"
     ],
     "ingredients": [
@@ -3302,7 +3333,7 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 15 mins 2 hrs 2 hrs 15 mins - **Servings**: 8 People",
     "categories": [
-      "Other"
+      "Soups & Stews"
     ],
     "ingredients": [
       "4 cups water (OR can do half water, half beef broth)",
@@ -3378,6 +3409,7 @@
     "subdir": "Todd's Kitchen/Desert",
     "description": "- **Prep Time**: 30mins Cook Time - **Cook Time**: 35mins Total Time - **Total Time**: 1hr5mins - **Servings**: 8servings Calories",
     "categories": [
+      "Desserts",
       "Vegetarian"
     ],
     "ingredients": [
@@ -3409,6 +3441,7 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Prep Time**: 15 Minutes - **Cook Time**: 1 Hour - **Total Time**: 1 Hour 15 Minutes - **Servings**: 4 to 6",
     "categories": [
+      "Baking",
       "Breakfast"
     ],
     "ingredients": [
@@ -3478,6 +3511,7 @@
     "subdir": "Todd's Kitchen/Indian",
     "description": "- **Total Time**: 1 hour - **Servings**: 8 to 10 servings Step 1",
     "categories": [
+      "Vegetarian",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -3497,8 +3531,7 @@
     "subdir": "Todd's Kitchen/Indian",
     "description": "- **Servings**: 2 Tbsp",
     "categories": [
-      "Beef",
-      "Pasta"
+      "Beef"
     ],
     "ingredients": [
       "4 to 6 Servings",
@@ -3536,7 +3569,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 15 mins 45 mins 1 hr - **Servings**: 8 people Calories",
     "categories": [
-      "Other"
+      "Seafood"
     ],
     "ingredients": [
       "2.67 tablespoons olive oil",
@@ -3604,6 +3637,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Prep Time**: 15mins Cook Time - **Cook Time**: 15mins Total Time - **Total Time**: 30mins - **Servings**: 6as an appetizer Calories",
     "categories": [
+      "Appetizers",
       "Seafood",
       "Sauces & Condiments"
     ],
@@ -3638,6 +3672,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Servings**: 8-10",
     "categories": [
+      "Pork",
+      "Soups & Stews",
       "Sauces & Condiments"
     ],
     "ingredients": [],
@@ -3657,7 +3693,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 1 hr 10 mins - **Total Time**: 1 hr 25 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Pork"
     ],
     "ingredients": [
       "1 ½ pounds lean ground beef",
@@ -3692,7 +3728,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Servings**: 4 servings Step 1",
     "categories": [
-      "Other"
+      "Chicken"
     ],
     "ingredients": [],
     "meta": {
@@ -3711,7 +3747,8 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Servings**: 10 mins 20 mins 30 mins 4 to 6 servings",
     "categories": [
-      "Other"
+      "Breakfast",
+      "Beef"
     ],
     "ingredients": [
       "• 2 to 3 tablespoons unsalted butter",
@@ -3737,7 +3774,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Prep Time**: 30mins Total Time - **Total Time**: 30mins - **Servings**: 10people Calories",
     "categories": [
-      "Other"
+      "Appetizers"
     ],
     "ingredients": [
       "6Roma tomatoes, diced",
@@ -3769,8 +3806,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Servings**: 4-6",
     "categories": [
-      "Seafood",
-      "Soups & Stews"
+      "Soups & Stews",
+      "Seafood"
     ],
     "ingredients": [],
     "meta": {
@@ -3789,8 +3826,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 5 mins 10 mins 15 mins - **Servings**: 2 cans Calories",
     "categories": [
-      "Chicken",
-      "Soups & Stews"
+      "Soups & Stews",
+      "Chicken"
     ],
     "ingredients": [
       "4 Tablespoons Butter",
@@ -3840,7 +3877,8 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Prep Time**: 30 mins - **Cook Time**: 30 mins - **Total Time**: 1 hr - **Servings**: 6",
     "categories": [
-      "Other"
+      "Breakfast",
+      "Baking"
     ],
     "ingredients": [
       "¾ cup all-purpose flour",
@@ -3911,6 +3949,7 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Prep Time**: 15 minutes Cook Time - **Cook Time**: 35 minutes - **Total Time**: 4 hours - **Servings**: 8",
     "categories": [
+      "Desserts",
       "Quick & Easy"
     ],
     "ingredients": [
@@ -3972,7 +4011,7 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Total Time**: 10 mins 20 mins 30 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Pork"
     ],
     "ingredients": [
       "Béchamel sauce:",
@@ -4004,7 +4043,7 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Total Time**: 30 mins - **Servings**: 2",
     "categories": [
-      "Other"
+      "Pork"
     ],
     "ingredients": [
       "4 (1/2-inch-thick) good-quality firm white sandwich bread slices",
@@ -4058,7 +4097,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "Disneyland Turkey Legs - Dinner By Dennis",
     "categories": [
-      "Other"
+      "Chicken"
     ],
     "ingredients": [
       "2 turkey legs",
@@ -4083,7 +4122,7 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Total Time**: 20 mins 1 hr 40 mins 2 hrs - **Servings**: 4 people Author",
     "categories": [
-      "Other"
+      "Chicken"
     ],
     "ingredients": [
       "2 fat ducks, like mallards or pintail",
@@ -4222,6 +4261,8 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 10min TOTAL 10min - **Total Time**: 10min - **Servings**: 1",
     "categories": [
+      "Appetizers",
+      "Vegetarian",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -4280,8 +4321,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Servings**: 4-6",
     "categories": [
-      "Seafood",
       "Soups & Stews",
+      "Seafood",
       "Quick & Easy"
     ],
     "ingredients": [
@@ -4319,7 +4360,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Servings**: 15 mins 50 mins 65 mins 4 servings",
     "categories": [
-      "Other"
+      "Lamb"
     ],
     "ingredients": [
       "• 1 teaspoon salt, plus more to taste",
@@ -4350,6 +4391,7 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Prep Time**: 10 Minutes - **Cook Time**: 25 Minutes - **Total Time**: 35 Minutes - **Servings**: 12 egg bites",
     "categories": [
+      "Breakfast",
       "Pork"
     ],
     "ingredients": [
@@ -4409,6 +4451,7 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Total Time**: 10 mins 25 mins 35 mins - **Servings**: 4 people Calories",
     "categories": [
+      "Breakfast",
       "Sauces & Condiments"
     ],
     "ingredients": [
@@ -4438,7 +4481,7 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Servings**: 6",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [],
     "meta": {
@@ -4457,7 +4500,8 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Servings**: 2-4",
     "categories": [
-      "Other"
+      "Seafood",
+      "Appetizers"
     ],
     "ingredients": [],
     "meta": {
@@ -4519,7 +4563,7 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Servings**: 20 mins 60 mins 80 mins 4 to 6 servings",
     "categories": [
-      "Other"
+      "Soups & Stews"
     ],
     "ingredients": [
       "• 6 large red or yellow onions (about 3 pounds)",
@@ -4554,7 +4598,7 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Servings**: 20 mins 60 mins 80 mins 4 to 6 servings",
     "categories": [
-      "Other"
+      "Soups & Stews"
     ],
     "ingredients": [
       "• 6 large red or yellow onions (about 3 pounds)",
@@ -4589,7 +4633,8 @@
     "subdir": "Beef",
     "description": "A classic French preparation of beef back ribs, braised in red wine with aromatic vegetables and herbs, served with sweet mashed potatoes and coleslaw.",
     "categories": [
-      "Beef"
+      "Beef",
+      "Pork"
     ],
     "ingredients": [
       "4-5 lbs beef back ribs",
@@ -4634,6 +4679,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Prep Time**: 10mins Cook Time - **Cook Time**: 5mins Total Time - **Total Time**: 15mins - **Servings**: 12servings Calories",
     "categories": [
+      "Appetizers",
       "Sauces & Condiments"
     ],
     "ingredients": [
@@ -4664,7 +4710,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Servings**: 6 Servings",
     "categories": [
-      "Seafood"
+      "Appetizers"
     ],
     "ingredients": [
       "Vegetable oil (for frying; about 8 cups)",
@@ -4745,7 +4791,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Prep Time**: 15 minutes - **Cook Time**: 10 minutes - **Total Time**: 25 minutes",
     "categories": [
-      "Other"
+      "Lamb"
     ],
     "ingredients": [
       "2 pounds lamb loin or rib chops thick cut",
@@ -4772,6 +4818,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Servings**: 4-6",
     "categories": [
+      "Pasta",
       "Baking"
     ],
     "ingredients": [],
@@ -4847,7 +4894,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Prep Time**: 30 mins - **Cook Time**: 40 mins - **Total Time**: 1 hr 15 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [
       "3 medium russet potatoes, scrubbed",
@@ -4871,7 +4918,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Total Time**: 10 mins 1 hr 10 mins 1 hr 20 mins - **Servings**: 5",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "1.2 kg / 2.5lb potatoes (Aus: Desiree, US: Yukon Gold, UK: Maris Piper) (Note 1)",
@@ -4899,7 +4946,7 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Servings**: 6 servings Step 1",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [],
     "meta": {
@@ -5010,7 +5057,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Cook Time**: 5 mins 15 mins - **Servings**: 2 people",
     "categories": [
-      "Other"
+      "Seafood"
     ],
     "ingredients": [
       "Extra virgin olive oil, I recommend our Early Harvest Greek EVOO for this recipe.",
@@ -5039,7 +5086,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 1 hr 30 mins - **Total Time**: 1 hr 50 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "6 potatoes, peeled and quartered",
@@ -5099,6 +5146,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Servings**: 4",
     "categories": [
+      "Beef",
       "Salads"
     ],
     "ingredients": [],
@@ -5118,7 +5166,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 1 hr - **Total Time**: 1 hr 45 mins - **Servings**: 6",
     "categories": [
-      "Other"
+      "Seafood"
     ],
     "ingredients": [
       "2 tablespoons kosher salt",
@@ -5212,7 +5260,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 1 hr 20 mins 1 hr 20 mins - **Servings**: 6 Calories",
     "categories": [
-      "Soups & Stews"
+      "Soups & Stews",
+      "Pork"
     ],
     "ingredients": [
       "4 oz. pork shoulder (finely julienned)",
@@ -5285,7 +5334,7 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Prep Time**: 5 mins - **Cook Time**: 45 mins - **Total Time**: 1 hr - **Servings**: 8",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "2 cups dried black beans",
@@ -5375,7 +5424,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 5 minutes - **Cook Time**: 10 minutes - **Total Time**: 15 minutes - **Servings**: 6",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [
       "1 Pound Lean Ground Beef, OR ITALIAN SAUSAGE",
@@ -5437,7 +5486,7 @@
     "subdir": "Todd's Kitchen/Sauces",
     "description": "- **Prep Time**: 5 mins - **Total Time**: 5 mins - **Servings**: 4 to 6",
     "categories": [
-      "Other"
+      "Sauces & Condiments"
     ],
     "ingredients": [
       "6 tablespoons extra-virgin olive oil",
@@ -5488,7 +5537,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 45 mins - **Total Time**: 1 hr 5 mins - **Servings**: 6",
     "categories": [
-      "Other"
+      "Pork",
+      "Soups & Stews"
     ],
     "ingredients": [
       "2 tablespoons peanut oil, divided",
@@ -5527,7 +5577,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 45 mins - **Total Time**: 1 hr 5 mins - **Servings**: 6",
     "categories": [
-      "Other"
+      "Pork",
+      "Soups & Stews"
     ],
     "ingredients": [
       "2 tablespoons peanut oil, divided",
@@ -5564,7 +5615,8 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 15 mins - **Total Time**: 15 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Appetizers",
+      "Sauces & Condiments"
     ],
     "ingredients": [
       "3 cloves garlic, peeled",
@@ -5591,7 +5643,7 @@
     "subdir": "Todd's Kitchen/Indian",
     "description": "Lamb Vindaloo Recipe (Goat Vindaloo) - Swasthi's Recipes",
     "categories": [
-      "Other"
+      "Lamb"
     ],
     "ingredients": [],
     "meta": {
@@ -5610,7 +5662,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 2 hrs - **Total Time**: 2 hrs 20 mins - **Servings**: 6",
     "categories": [
-      "Other"
+      "Lamb",
+      "Soups & Stews"
     ],
     "ingredients": [
       "1 tablespoon vegetable oil",
@@ -5679,7 +5732,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 30 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Seafood"
     ],
     "ingredients": [
       "4 (1-pound) whole branzino, scaled and gutted, heads and tails removed",
@@ -5742,6 +5795,7 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 20 mins 55 mins 1 hr 15 mins - **Servings**: 4 people Calories",
     "categories": [
+      "Soups & Stews",
       "Seafood",
       "Quick & Easy"
     ],
@@ -5789,7 +5843,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 2 hours 45 minutes - **Servings**: 4 servings Step 1",
     "categories": [
-      "Other"
+      "Soups & Stews",
+      "Seafood"
     ],
     "ingredients": [],
     "meta": {
@@ -5808,7 +5863,9 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Prep Time**: 15 min Preheat the oven to 375 degrees F - **Cook Time**: 1 hr 10 min 2 - **Total Time**: 1 hr 25 min - **Servings**: 6 to 8 servings",
     "categories": [
-      "Other"
+      "Seafood",
+      "Pasta",
+      "Quick & Easy"
     ],
     "ingredients": [],
     "meta": {
@@ -5827,6 +5884,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Total Time**: 13 mins 2 mins 15 mins - **Servings**: 4 people Calories",
     "categories": [
+      "Seafood",
       "Baking"
     ],
     "ingredients": [
@@ -5859,7 +5917,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 20 mins 15 mins 35 mins - **Servings**: 4 Calories",
     "categories": [
-      "Other"
+      "Seafood"
     ],
     "ingredients": [
       "2 1 1/2 to 1 3/4-pound cooked Maine lobsters",
@@ -5894,7 +5952,8 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Prep Time**: 30 mins - **Cook Time**: 1 hr 5 mins - **Total Time**: 1 hr 35 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Seafood",
+      "Pasta"
     ],
     "ingredients": [
       "1 (16 ounce) package elbow macaroni",
@@ -5928,6 +5987,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 15 mins - **Total Time**: 15 mins - **Servings**: 4",
     "categories": [
+      "Seafood",
       "Baking"
     ],
     "ingredients": [
@@ -5961,7 +6021,7 @@
     "subdir": "",
     "description": "The BEST popover recipe based on comprehensive review analysis. This recipe from Alexandra's Kitchen achieved an 89% success rate across 18 reviews with a 5/5 star rating. The blender method and warmed milk technique produce consistently lofty, custardy popovers.",
     "categories": [
-      "Baking"
+      "Desserts"
     ],
     "ingredients": [
       "Softened butter (for greasing)",
@@ -5987,7 +6047,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "Make your own chili powder using dried chiles – Jess Pryles",
     "categories": [
-      "Other"
+      "Soups & Stews",
+      "Sauces & Condiments"
     ],
     "ingredients": [
       "Approx 1 oz of dried chiles"
@@ -6028,7 +6089,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Prep Time**: 15 min - **Cook Time**: 25 min Heat the oil in a large pot over medium heat - **Total Time**: 40 min Directions - **Servings**: 4 to 6 first-course servings",
     "categories": [
-      "Soups & Stews"
+      "Soups & Stews",
+      "Seafood"
     ],
     "ingredients": [],
     "meta": {
@@ -6047,7 +6109,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Prep Time**: 20 MINUTES - **Cook Time**: 15 MINUTES - **Total Time**: 2 HOURS 35 MINUTES - **Servings**: 4 SERVINGS",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "Homemade Pizza Dough:",
@@ -6087,7 +6149,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 15 mins - **Total Time**: 25 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "1 tablespoon grapeseed oil or olive oil, or more as needed",
@@ -6122,7 +6184,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 30 mins - **Servings**: 4 - 6",
     "categories": [
-      "Other"
+      "Appetizers"
     ],
     "ingredients": [
       "800g beef tenderloin or 4 rump steaks, cut into",
@@ -6148,7 +6210,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 15mins Cook Time - **Cook Time**: 15mins Total Time - **Total Time**: 30mins - **Servings**: 8people",
     "categories": [
-      "Other"
+      "Beef"
     ],
     "ingredients": [
       "3sliceswhite bread, crusts removed, diced",
@@ -6179,6 +6241,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 1 hr - **Total Time**: 1 hr 15 mins - **Servings**: 8",
     "categories": [
+      "Beef",
       "Quick & Easy"
     ],
     "ingredients": [
@@ -6244,7 +6307,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Total Time**: 30 mins - **Servings**: 6 servings",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [
       "5 1/2 cups chicken stock, preferably homemade",
@@ -6332,7 +6395,8 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Servings**: 6 servings Step 1",
     "categories": [
-      "Other"
+      "Pasta",
+      "Vegetarian"
     ],
     "ingredients": [],
     "meta": {
@@ -6370,7 +6434,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Servings**: 15 mins 15 mins 30 mins 6 servings",
     "categories": [
-      "Other"
+      "Appetizers"
     ],
     "ingredients": [
       "• 2 tablespoons chili powder",
@@ -6417,7 +6481,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Prep Time**: 10 minutes - **Cook Time**: 30 minutes - **Total Time**: 40 minutes - **Servings**: 6 servings",
     "categories": [
-      "Soups & Stews"
+      "Soups & Stews",
+      "Seafood"
     ],
     "ingredients": [
       "3 6.5 oz. cans chopped/minced clams in clam juice ¼ teaspoon red pepper flakes optional",
@@ -6447,7 +6512,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 1 hr - **Cook Time**: 2 hrs 40 mins - **Total Time**: 3 hrs 40 mins - **Servings**: 20",
     "categories": [
-      "Other"
+      "Pork",
+      "Soups & Stews"
     ],
     "ingredients": [
       "1 cup all-purpose flour",
@@ -6526,7 +6592,7 @@
     "subdir": "Todd's Kitchen/Desert",
     "description": "- **Prep Time**: 20mins Chilling Time - **Total Time**: 6hrs20mins - **Servings**: 14servings Calories",
     "categories": [
-      "Other"
+      "Desserts"
     ],
     "ingredients": [
       "Ingredients for the Crust:",
@@ -6581,7 +6647,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Servings**: 20 mins 2 hrs 2 hrs 20 mins 4 to 6 servings",
     "categories": [
-      "Other"
+      "Beef"
     ],
     "ingredients": [
       "• 4 ounces pancetta, diced into 1/4 inch cubes (see recipe note)",
@@ -6615,7 +6681,7 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Prep Time**: 10mins Cook Time - **Cook Time**: 20mins Total Time - **Total Time**: 30mins - **Servings**: 6as a side dish Calories",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "1medium cauliflower, sliced in small florets, or 1/2\" thick steaks",
@@ -6680,7 +6746,7 @@
     "subdir": "Todd's Kitchen/Indian",
     "description": "- **Total Time**: 1 hour 10 minutes - **Servings**: 6 servings Step 1",
     "categories": [
-      "Other"
+      "Chicken"
     ],
     "ingredients": [],
     "meta": {
@@ -6699,6 +6765,7 @@
     "subdir": "",
     "description": "",
     "categories": [
+      "Salads",
       "Vegetarian"
     ],
     "ingredients": [
@@ -6734,7 +6801,8 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Total Time**: 30 mins 2 hrs 45 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Beef",
+      "Pasta"
     ],
     "ingredients": [
       "SUBSCRIBE",
@@ -6850,7 +6918,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 1 hr 50 mins - **Total Time**: 2 hrs 15 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Beef"
     ],
     "ingredients": [
       "1 (3 pound) boneless beef chuck roast",
@@ -6886,7 +6954,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 1 hour 15 minutes - **Servings**: 10 to 12 Step 1",
     "categories": [
-      "Other"
+      "Beef",
+      "Pork"
     ],
     "ingredients": [],
     "meta": {
@@ -6997,7 +7066,7 @@
     "subdir": "Todd's Kitchen/French",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 60 mins - **Total Time**: 1 hr 15 mins - **Servings**: 6",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "Ratatouille",
@@ -7069,7 +7138,7 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "Every Monday, you can find a pot of red beans and rice cooking in someoneʼs kitchen in New Orleans. The food writer and New Orleans",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [],
     "meta": {
@@ -7088,7 +7157,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 15 Min Cook Time - **Cook Time**: 6 Hr Serves - **Servings**: 6 people",
     "categories": [
-      "Other"
+      "Pork"
     ],
     "ingredients": [],
     "meta": {
@@ -7107,6 +7176,8 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Total Time**: 1 hour - **Servings**: 6 to 8 servings Step 1",
     "categories": [
+      "Pork",
+      "Pasta",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -7126,7 +7197,8 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 15 mins - **Total Time**: 1 hr 15 mins - **Servings**: 20",
     "categories": [
-      "Seafood"
+      "Seafood",
+      "Appetizers"
     ],
     "ingredients": [
       "1 (8 ounce) package cream cheese, softened",
@@ -7157,6 +7229,7 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 17 mins - **Total Time**: 37 mins - **Servings**: 6",
     "categories": [
+      "Breakfast",
       "Beef"
     ],
     "ingredients": [
@@ -7183,7 +7256,7 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Total Time**: 45 minutes - **Servings**: 4 servings Step 1",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [],
     "meta": {
@@ -7202,7 +7275,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 5 minutes - **Cook Time**: 10 minutes Total Time - **Total Time**: 15 minutes Yield - **Servings**: 1 piece",
     "categories": [
-      "Other"
+      "Appetizers"
     ],
     "ingredients": [
       "110g cheese (Graviera). Alternatively you can use kefalograviera, kasseri, kefalotyri. Monterey Jack,",
@@ -7230,6 +7303,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Prep Time**: 10 mins - **Total Time**: 10 mins - **Servings**: 4",
     "categories": [
+      "Appetizers",
       "Sauces & Condiments"
     ],
     "ingredients": [
@@ -7258,7 +7332,8 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Servings**: 6 to 8 servings Step 1",
     "categories": [
-      "Other"
+      "Breakfast",
+      "Pork"
     ],
     "ingredients": [],
     "meta": {
@@ -7277,7 +7352,10 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Prep Time**: 5 mins - **Cook Time**: 10 mins - **Total Time**: 15 mins - **Servings**: 8",
     "categories": [
+      "Breakfast",
+      "Pork",
       "Baking",
+      "Sauces & Condiments",
       "Quick & Easy"
     ],
     "ingredients": [
@@ -7342,7 +7420,9 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 10 MINUTES YIELD - **Servings**: 2-4 1X",
     "categories": [
-      "Seafood"
+      "Soups & Stews",
+      "Seafood",
+      "Beef"
     ],
     "ingredients": [
       "10– 16 ounces ahi tuna, thawed (sushi-grade) see notes",
@@ -7478,7 +7558,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Servings**: 4",
     "categories": [
-      "Other"
+      "Lamb"
     ],
     "ingredients": [
       "1 tablespoon olive oil",
@@ -7535,7 +7615,9 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 45 minutes - **Servings**: 6 to 8 servings Step 1",
     "categories": [
-      "Seafood"
+      "Seafood",
+      "Pork",
+      "Soups & Stews"
     ],
     "ingredients": [],
     "meta": {
@@ -7624,7 +7706,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 15 mins - **Total Time**: 25 mins - **Servings**: 8",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [
       "1 pound spaghetti",
@@ -7652,7 +7734,8 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "Silky Truffle Parmesan Cream Sauce",
     "categories": [
-      "Other"
+      "Sauces & Condiments",
+      "Vegetarian"
     ],
     "ingredients": [
       "2 tbsp unsalted butter",
@@ -7679,7 +7762,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Cook Time**: 10 minutes more - **Servings**: 60 mins 2 hrs 3 hrs 6 servings",
     "categories": [
-      "Other"
+      "Lamb"
     ],
     "ingredients": [
       "• 2 pounds boneless (or 3 pounds bone-in) lamb stew meat, lamb shanks, and/or lamb shoulder steaks",
@@ -7828,7 +7911,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 15 Minutes - **Cook Time**: 5 Minutes - **Total Time**: 20 Minutes - **Servings**: 4 burgers",
     "categories": [
-      "Other"
+      "Beef"
     ],
     "ingredients": [
       "1¼ pounds ground chuck (80% lean ground beef)",
@@ -7859,7 +7942,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 12 hrs 4 hrs 30 mins 16 hrs 30 mins - **Servings**: 10 Calories",
     "categories": [
-      "Other"
+      "Chicken"
     ],
     "ingredients": [
       "1 gallon water",
@@ -7899,7 +7982,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Servings**: 10 to 12 servings Step 1",
     "categories": [
-      "Other"
+      "Chicken"
     ],
     "ingredients": [],
     "meta": {
@@ -7950,7 +8033,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Prep Time**: 5 minutes - **Cook Time**: 25 minutes - **Total Time**: 30 minutes - **Servings**: 4 servings Step 1",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [],
     "meta": {
@@ -7969,7 +8052,7 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 15 mins - **Cook Time**: 15 mins - **Total Time**: 30 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [
       "1 (16 ounce) package spaghetti",
@@ -7996,7 +8079,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Prep Time**: 5 mins - **Cook Time**: 15 mins - **Total Time**: 20 mins - **Servings**: 4",
     "categories": [
-      "Other"
+      "Pasta"
     ],
     "ingredients": [
       "2 teaspoons olive oil",
@@ -8077,6 +8160,7 @@
     "subdir": "Todd's Kitchen/Starters",
     "description": "- **Total Time**: 30 mins 30 mins - **Servings**: 2 sushi rolls Calories",
     "categories": [
+      "Appetizers",
       "Seafood",
       "Baking"
     ],
@@ -8108,7 +8192,7 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Total Time**: 10 mins 5 mins 15 mins - **Servings**: 4 servings Calories",
     "categories": [
-      "Other"
+      "Breakfast"
     ],
     "ingredients": [
       "2 cups flour (plus 3 tablespoons for berries)",
@@ -8136,7 +8220,8 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 2 hours Cook Time - **Cook Time**: 25 minutes - **Total Time**: 2 hours",
     "categories": [
-      "Other"
+      "Pork",
+      "Baking"
     ],
     "ingredients": [
       "Homemade Dough for 2",
@@ -8175,7 +8260,7 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 20 mins - **Servings**: 4 to 6",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "4 red bell peppers",
@@ -8245,7 +8330,8 @@
     "subdir": "Todd's Kitchen/Med food",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 20 mins - **Total Time**: 40 mins - **Servings**: 6",
     "categories": [
-      "Other"
+      "Salads",
+      "Vegetarian"
     ],
     "ingredients": [
       "⅓ cup extra-virgin olive oil",
@@ -8360,7 +8446,7 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Prep Time**: 20 minutes - **Cook Time**: 4 hours - **Total Time**: 4 hours 20 minutes - **Servings**: 6 servings",
     "categories": [
-      "Other"
+      "Soups & Stews"
     ],
     "ingredients": [
       "4 pounds boneless beef chuck roast trimmed of excess fat, 1 chipotle pepper in adobo sauce seeded and finely",
@@ -8420,6 +8506,7 @@
     "subdir": "Todd's Kitchen/Sides",
     "description": "- **Servings**: 6 to 8 servings Step 1",
     "categories": [
+      "Sauces & Condiments",
       "Quick & Easy"
     ],
     "ingredients": [],
@@ -8439,7 +8526,7 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Prep Time**: 13mins Cook Time - **Cook Time**: 12mins Total Time - **Total Time**: 25mins - **Servings**: 4people as a side dish Calories",
     "categories": [
-      "Other"
+      "Breakfast"
     ],
     "ingredients": [
       "1 1/4lbrusset potatoes, 2 medium-large",
@@ -8466,7 +8553,7 @@
     "subdir": "Todd's Kitchen/Veggy",
     "description": "- **Prep Time**: 10 minutes - **Cook Time**: 1 hour 30 minutes - **Total Time**: 1 hour 40 minutes - **Servings**: 4 as a side",
     "categories": [
-      "Other"
+      "Vegetarian"
     ],
     "ingredients": [
       "2 pounds potatoes peeled and chopped into chunky wedges (I used 5 medium potatoes)",
@@ -8495,7 +8582,7 @@
     "subdir": "Todd's Kitchen/Pizza",
     "description": "- **Prep Time**: 15 minutes - **Cook Time**: 15 minutes - **Total Time**: 1 hour - **Servings**: 12 servings",
     "categories": [
-      "Other"
+      "Baking"
     ],
     "ingredients": [
       "2-2 ⅓ cups all-purpose flour OR bread flour¹ divided (250-295g)",
@@ -8582,7 +8669,8 @@
     "subdir": "Todd's Kitchen",
     "description": "- **Servings**: 12",
     "categories": [
-      "Other"
+      "Beef",
+      "Pork"
     ],
     "ingredients": [],
     "meta": {
@@ -8744,7 +8832,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Total Time**: 10 mins 10 mins 20 mins - **Servings**: 1 Author",
     "categories": [
-      "Other"
+      "Chicken"
     ],
     "ingredients": [
       "3 slices white bread",
@@ -8866,7 +8954,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Servings**: 4",
     "categories": [
-      "Other"
+      "Beef"
     ],
     "ingredients": [],
     "meta": {
@@ -8885,6 +8973,7 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Servings**: 15 minutes 3-4 hours",
     "categories": [
+      "Beef",
       "Pasta",
       "Sauces & Condiments"
     ],
@@ -8923,7 +9012,7 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Prep Time**: 20 mins - **Cook Time**: 25 mins - **Total Time**: 45 mins - **Servings**: 2",
     "categories": [
-      "Other"
+      "Seafood"
     ],
     "ingredients": [
       "Veracruz Sauce:",
@@ -8959,7 +9048,7 @@
     "subdir": "Todd's Kitchen/Bfast",
     "description": "- **Prep Time**: 10 mins - **Cook Time**: 15 mins - **Total Time**: 25 mins - **Servings**: 5",
     "categories": [
-      "Other"
+      "Breakfast"
     ],
     "ingredients": [
       "2 cups all-purpose flour",
@@ -8987,7 +9076,8 @@
     "subdir": "Todd's Kitchen/Entree",
     "description": "- **Cook Time**: 15 minutes 35 minutes - **Servings**: 6 servings",
     "categories": [
-      "Chicken"
+      "Chicken",
+      "Soups & Stews"
     ],
     "ingredients": [
       "1 small yellow onion , diced",
@@ -9025,6 +9115,8 @@
     "subdir": "Todd's Kitchen/Italian",
     "description": "- **Cook Time**: 10 minutes or until liquid has reduced approximately 50 - **Total Time**: 5 MINUTES 25 MINUTES 30 MINUTES",
     "categories": [
+      "Seafood",
+      "Pasta",
       "Sauces & Condiments"
     ],
     "ingredients": [
@@ -9118,8 +9210,8 @@
     "subdir": "Todd's Kitchen/Soup",
     "description": "- **Total Time**: 20 mins 15 mins 35 mins - **Servings**: 50 wontons",
     "categories": [
-      "Seafood",
-      "Soups & Stews"
+      "Soups & Stews",
+      "Appetizers"
     ],
     "ingredients": [
       "50 - 60 wonton wrappers (Note 1)",
@@ -9205,8 +9297,8 @@
     "subdir": "",
     "description": "1. Use a spiralizer or peeler to create noodles from the zucchinis.",
     "categories": [
-      "Salads",
       "Pasta",
+      "Salads",
       "Sauces & Condiments",
       "Vegetarian"
     ],

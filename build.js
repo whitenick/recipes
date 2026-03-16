@@ -115,90 +115,147 @@ function extractMeta(content) {
   return meta;
 }
 
-function detectCategories(content, title, filename) {
-  // Use title + first 1000 chars of content for category detection
-  // This avoids false positives from ingredient lists (e.g. "chicken broth" in a beef dish)
-  const titleLower = title.toLowerCase();
+function detectCategories(content, title, filename, subdir = '') {
+  // Normalize: replace underscores and hyphens with spaces for reliable \b matching
+  const t = title.toLowerCase().replace(/[_\-]/g, ' ').replace(/\s+/g, ' ').trim();
+  const subdirLower = subdir.toLowerCase();
+
+  // For Todd's Kitchen: extract the immediate folder name as a strong signal
+  const toddFolder = (() => {
+    const m = subdirLower.match(/todd's kitchen\/([^/]+)/);
+    return m ? m[1] : '';
+  })();
+
   const headersAndDesc = (() => {
-    // Extract headings, description, and first paragraphs
     const lines = content.split('\n');
-    const relevant = lines.filter(l => 
-      l.startsWith('#') || 
-      l.startsWith('**') || 
-      l.startsWith('- **') ||
-      l.match(/^(A|The|This) /)
+    const relevant = lines.filter(l =>
+      l.startsWith('#') || l.startsWith('**') || l.startsWith('- **') || /^(A|The|This) /.test(l)
     ).join(' ');
     return (title + ' ' + relevant + ' ' + content.substring(0, 800)).toLowerCase();
   })();
-  
+
   const categories = new Set();
-  
-  // ── Primary protein (use title + headings primarily) ──
-  if (/\b(salmon|trout|cod|tuna|halibut|shrimp|seafood|gravlax|miso salmon|broccoli rabe.*salmon|ajillo|gambas)\b/.test(titleLower + ' ' + headersAndDesc)) {
+
+  // ── Subdir bootstrapping (Todd's Kitchen folders) ──
+  if (toddFolder === 'soup')            categories.add('Soups & Stews');
+  if (toddFolder === 'bfast')           categories.add('Breakfast');
+  if (toddFolder === 'desert')          categories.add('Desserts');
+  if (toddFolder === 'salad')           categories.add('Salads');
+  if (toddFolder === 'starters')        categories.add('Appetizers');
+  if (toddFolder === 'sauces')          categories.add('Sauces & Condiments');
+  if (toddFolder === 'bread')           categories.add('Baking');
+  if (toddFolder === 'veggy')           categories.add('Vegetarian');
+  if (toddFolder === 'pizza')           categories.add('Baking');
+
+  // ── Proteins ──
+  // Check title first; fall back to headersAndDesc for slug-style titles with no readable name
+
+  // For protein detection: use title only for readable titles to avoid false positives
+  // (e.g. "chicken broth" in a beef stew tagging it as Chicken).
+  // For slug-style filenames (underscores/dots in original name), also scan the short description.
+  const isSlugTitle = /[_.]/.test(title) && !/\s{2,}/.test(title);
+  const proteinSrc = isSlugTitle
+    ? t + ' ' + headersAndDesc.substring(0, 250)
+    : t;
+
+  // Seafood
+  if (/\b(salmon|trout|cod|tuna|halibut|tilapia|sea bass|branzino|red snapper|swordfish|mahi|catfish|flounder|sole|anchov|sardine|shrimps?|prawns?|lobster|crabs?|clams?|mussels?|oysters?|scallops?|octopus|squid|calamari|seafood|bouillabaisse|cioppino|gravlax|lox|bisque|sushi|maki|temaki|tonkatsu|black cod|ceviche|crab cakes?|clam chowder|gambas|gamberi|gameri|ajillo|escargots?|paella|po boy|poboy)\b/.test(proteinSrc)) {
     categories.add('Seafood');
   }
-  // Chicken: title says chicken, or dish is named after chicken
-  if (/\b(chicken|poultry)\b/.test(titleLower) || 
-      /^(chicken|sesame chicken|mediterranean.*chicken)\b/.test(titleLower)) {
+  // Chicken (includes turkey, duck — broad poultry bucket)
+  if (/\b(chicken|turkey|duck|poultry|coq au vin|tikka masala|tikka|shawarma|biryani|marsala|piccata|tetrazzini|cacciatore|kiev|katsu|yakitori)\b/.test(proteinSrc)) {
     categories.add('Chicken');
   }
-  // Beef: title or primary content 
-  if (/\b(beef|steak|burger|bolognese|tenderloin|côtes de boeuf|brisket|chuck)\b/.test(titleLower) ||
-      /title.*\b(beef|burger|steak)\b/.test(titleLower)) {
+  // Beef (includes veal, meatball, meatloaf)
+  if (/\b(beef|steaks?|burgers?|brisket|tenderloin|chuck|veal|meatloaf|meatballs?|prime rib|côtes de boeuf|stroganoff|bourguignon|bolognese|pot roast|corned beef|bifteki|chopped steak|smash burger|t bone|ribeye|osso buco|pappardelle|ragù|ragu|short rib|arayes)\b/.test(proteinSrc)) {
     categories.add('Beef');
   }
-  // Pork: explicitly in title or primary content
-  if (/\b(pork|bacon|ham|prosciutto|pancetta)\b/.test(titleLower)) {
+  // Pork
+  if (/\b(pork|bacons?|ham\b|prosciutto|pancetta|chorizo|sausages?|ribs?\b|pulled pork|pork chop|hot dog|coney|blt\b|cassoulet|carnitas|jambalaya|gumbo|stromboli|lardons?|croque)\b/.test(proteinSrc)) {
     categories.add('Pork');
   }
-  
-  // ── Dish type (by title) ──
-  if (/\b(soup|stew|congee|gazpacho|chowder|broth)\b/.test(titleLower)) {
+  // Lamb
+  if (/\b(lamb|mutton|vindaloo|gyro|souvlaki|kofta|moussaka|shepherds? pie|lancashire|lamb chops?|lamb curry|lamb stew)\b/.test(proteinSrc)) {
+    categories.add('Lamb');
+  }
+
+  // ── Dish types ──
+
+  // Soups & Stews
+  if (/\b(soup|stew|bisque|chowder|broth|congee|gazpacho|gumbo|bouillabaisse|jambalaya|posole|minestrone|ramen|pho|wonton|chili\b|hot pot|egg drop|cassoulet|pozole|consommé)\b/.test(t)) {
     categories.add('Soups & Stews');
   }
-  if (/\b(salad)\b/.test(titleLower)) {
-    categories.add('Salads');
-  }
-  if (/\b(breads?|sourdough|popovers?|biscuits?|rolls?|boule|cake|cookie|pastry|muffin)\b/.test(titleLower)) {
-    categories.add('Baking');
-  }
-  if (/\b(lasagna|pasta|noodle|bolognese)\b/.test(titleLower)) {
+  // Pasta
+  if (/\b(pasta|spaghetti|fettuccine|penne|rigatoni|linguine|tagliatelle|pappardelle|bucatini|lasagna|carbonara|amatriciana|aglio|risotto|gnocchi|ravioli|tortellini|noodle|chow mein|lo mein|pad thai|pad krapow|dan dan|macaroni|mac and cheese|mac & cheese)\b/.test(t)) {
     categories.add('Pasta');
   }
-  if (/\b(quiche|breakfast|brunch|waffle|pancake|popover)\b/.test(titleLower) ||
-      filename.toLowerCase().includes('quiche')) {
+  // Salads
+  if (/\b(salad|panzanella|tabbouleh|nicoise|slaw|coleslaw)\b/.test(t)) {
+    categories.add('Salads');
+  }
+  // Baking — exclude savory pies (shepherd's, pot pie, chicken pie)
+  const isSavoryPie = /\b(shepherds?|pot pie|chicken pie|meat pie|fish pie)\b/.test(t);
+  if (/\b(breads?|sourdough|biscuits?|rolls?|boule|cake|cookie|pastry|muffin|tart|crêpes?|crepes?|waffle|pancake|popover|pizza dough|dough|scone|brownie|croissant|quiche lorraine|stromboli|cornbread)\b/.test(t) ||
+      (!isSavoryPie && /\bpie\b/.test(t))) {
+    categories.add('Baking');
+  }
+  // Breakfast
+  if (/\b(breakfast|brunch|waffle|pancake|popover|quiche|eggs? benedict|hash\b|hash brown|omelette|omelet|scramble|frittata|casserole|avocado toast|corned beef hash)\b/.test(t) ||
+      filename.toLowerCase().includes('quiche') || toddFolder === 'bfast') {
     categories.add('Breakfast');
   }
-  if (/\b(sauce|relish|chimichurri|pesto|aioli|salsa|dip|spread|gravlax)\b/.test(titleLower) ||
-      /^(chimichurri|pepper relish)\b/.test(titleLower)) {
+  // Desserts
+  if (/\b(dessert|cheesecake|crème brûlée|creme brulee|mousse|pudding|tiramisu|panna cotta|cobbler|crisp|brownie|ice cream|gelato|sorbet|éclair|macaron|pavlova|key lime|apple pie|no.bake blueberry|blueberry cheesecake)\b/.test(t) ||
+      toddFolder === 'desert') {
+    categories.add('Desserts');
+  }
+  // Dessert-specific pies/cakes (not savory pies)
+  if (!isSavoryPie && /\b(pie\b|cake\b|muffin|tart)\b/.test(t)) {
+    categories.add('Desserts');
+  }
+  // Appetizers
+  if (/\b(nachos?|bruschetta|ceviche|shishito|saganaki|spring rolls?|egg rolls?|dumplings?|dim sum|fritto misto|caprese|hummus|baba ganoush|tapenade|dolmas?|deviled|arancini|samosas?|empanada|pakora|gyoza|wonton|edamame|ritz|lox|schmear|buffalo.*dip|chicken dip|cowboy caviar|chile relleno|fondues?|escargots?|arayes|queso|con queso)\b/.test(t) ||
+      toddFolder === 'starters') {
+    categories.add('Appetizers');
+  }
+  // Sauces & Condiments
+  if (/\b(sauce\b|relish|chimichurri|pesto|aioli|salsa\b|dip\b|spread|gravlax|marinade|seasoning|tapenade|chili powder|dressing|vinaigrette|rub\b|glaze|gravy|hollandaise|béarnaise|bearnaise|remoulade|tzatziki|tahini|harissa|mojo|chutney|bbq sauce|chili oil)\b/.test(t) ||
+      /^(chimichurri|pepper relish|chili powder|béarnaise|bearnaise|tzatziki|italian dressing)\b/.test(t)) {
     categories.add('Sauces & Condiments');
   }
-  if (/\b(sheet[\s-]pan|one[\s-]pan|one[\s-]pot|sheet pan)\b/.test(titleLower + ' ' + headersAndDesc.substring(0, 200))) {
+  // One-Pan / Sheet Pan / Stir-Fry
+  if (/\b(sheet[\s-]pan|one[\s-]pan|one[\s-]pot|skillet\b|stir.fry|stir fry)\b/.test(t + ' ' + headersAndDesc.substring(0, 300))) {
     categories.add('One-Pan');
   }
-  
-  // ── Vegetarian (by title or if no meat detected) ──
-  if (/\b(vegetarian|vegan|meatless|plant.based)\b/.test(titleLower + ' ' + headersAndDesc.substring(0, 400))) {
+  // Vegetarian (explicit label or known veggie dishes)
+  if (/\b(vegetarian|vegan|meatless|plant.based)\b/.test(t + ' ' + headersAndDesc.substring(0, 400))) {
     categories.add('Vegetarian');
   }
-  // Dishes that are clearly vegetarian by content
-  const veggieOnlyDishes = ['eggplant', 'zucchini', 'gazpacho', 'panzanella', 'three sisters', 'congee', 'carrot'];
-  if (veggieOnlyDishes.some(v => titleLower.includes(v))) {
-    if (!categories.has('Seafood') && !categories.has('Chicken') && !categories.has('Beef') && !categories.has('Pork')) {
+  const veggieOnlyDishes = [
+    'eggplant parmesan','eggplant with','zucchini','gazpacho','panzanella','three sisters',
+    'congee','carrot ginger','tabbouleh','hummus','baba ganoush','ratatouille','aloo gobi',
+    'palak paneer','masala dosa','paneer','caprese','margherita pizza','greek potato',
+    'lemon potato','potatoes au gratin','potato au gratin','shakshuka','chakchouka','dolma',
+    'briam','cauliflower','mushroom risotto','black bean','baked bean','boston baked',
+    'quinoa','avocado toast','marry.me chickpea','chickpea','sauerkraut',
+    'tamarind.*carrot','carrot.*tamarind','stuffed pepper','gobi','aloo',
+    'red bean','greek style potato','silky truffle'
+  ];
+  if (veggieOnlyDishes.some(v => new RegExp(v).test(t))) {
+    if (!categories.has('Seafood') && !categories.has('Chicken') && !categories.has('Beef') && !categories.has('Pork') && !categories.has('Lamb')) {
       categories.add('Vegetarian');
     }
   }
-  
-  // ── Quick & Easy ──
-  if (/\b(weeknight|quick|easy|simple|30[\s-]min|fast)\b/.test(headersAndDesc.substring(0, 500))) {
+  // Quick & Easy
+  if (/\b(weeknight|quick|easy|simple|30[\s-]min|fast|10 min)\b/.test(headersAndDesc.substring(0, 500))) {
     categories.add('Quick & Easy');
   }
 
-  // If no category found
+  // If nothing matched, fall back to Other
   if (categories.size === 0) {
     categories.add('Other');
   }
-  
+
   return Array.from(categories);
 }
 
@@ -284,7 +341,7 @@ function processRecipeFile(filePath, subdir = '') {
     const title = extractTitle(content, name);
     const description = extractDescription(content);
     const meta = extractMeta(content);
-    const categories = detectCategories(content, title, filename);
+    const categories = detectCategories(content, title, filename, subdir);
     const ingredients = extractIngredients(content);
     const source = getSource(content);
     
