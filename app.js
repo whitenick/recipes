@@ -34,6 +34,7 @@ async function init() {
 
   buildCategoryChips();
   updateFavCount();
+  loadWeeklyPlan();
   
   // Wire up events
   const searchInput = document.getElementById('searchInput');
@@ -416,6 +417,51 @@ function escHtml(str) {
 
 // Make clearSearch globally accessible (used in HTML)
 window.clearSearch = clearSearch;
+
+// ── Weekly Plan ────────────────────────────────────────
+async function loadWeeklyPlan() {
+  const section = document.getElementById('weeklySection');
+  const grid = document.getElementById('weeklyGrid');
+  if (!section || !grid) return;
+
+  let plan;
+  try {
+    const res = await fetch('data/weekly-plan.json?v=' + Date.now());
+    if (!res.ok) return; // Silently skip if missing
+    plan = await res.json();
+  } catch (e) {
+    return; // No weekly plan file — that's fine
+  }
+
+  const meals = (plan.meals || []).filter(m => m.title);
+  if (meals.length === 0) return;
+
+  // Build date label: "Mar 16 – Mar 22"
+  function fmtDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso + 'T12:00:00Z');
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+  }
+
+  grid.innerHTML = meals.map(meal => {
+    const hasLink = meal.recipeSlug && allRecipes.find(r => r.id === meal.recipeSlug);
+    const linkedClass = hasLink ? ' is-linked' : '';
+    const cookedClass = meal.cooked ? ' is-cooked' : '';
+    const clickAttr = hasLink ? `onclick="window.location.hash='recipe/${escHtml(meal.recipeSlug)}'"` : '';
+
+    return `
+      <div class="meal-card${linkedClass}${cookedClass}" ${clickAttr}>
+        <div class="meal-date">${escHtml(meal.day || fmtDate(meal.date))}</div>
+        <span class="meal-emoji">${meal.emoji || '🍽️'}</span>
+        <div class="meal-title">${escHtml(meal.title)}</div>
+        ${meal.description ? `<div class="meal-desc">${escHtml(meal.description)}</div>` : ''}
+        ${hasLink ? `<div class="meal-link-hint">View recipe →</div>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  section.style.display = '';
+}
 
 // ── Go! ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', init);

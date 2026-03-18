@@ -1,0 +1,16 @@
+{
+  "weekStart": "2026-03-16",
+  "weekEnd": "2026-03-22",
+  "meals": [
+    {
+      "date": "2026-03-18",
+      "day": "Wednesday",
+      "title": "Thai Tofu Curry",
+      "description": "Coconut milk curry with firm tofu",
+      "recipeSlug": null,
+      "emoji": "🍛",
+      "cooked": true
+    }
+  ],
+  "updatedAt": "2026-03-18T23:47:00Z"
+}
