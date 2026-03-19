@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * add-meal.js — Pierre's interface for "What's Nick Cooking"
+ * add-meal.js — Pierre's interface for "What's Cooking"
  *
  * Usage:
  *   node scripts/add-meal.js <date> <title> [description] [emoji] [recipeSlug] [cooked]
