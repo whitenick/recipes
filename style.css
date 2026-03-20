@@ -1042,6 +1042,27 @@ body::before {
   opacity: 0.75;
 }
 
+.meal-card.is-today {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.meal-card.is-today::before {
+  content: 'Today';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
 .meal-date {
   font-size: 10px;
   font-weight: 500;

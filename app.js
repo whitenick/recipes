@@ -443,14 +443,21 @@ async function loadWeeklyPlan() {
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
   }
 
+  // Get today's date in YYYY-MM-DD format (local time)
+  const today = new Date();
+  const todayStr = today.getFullYear() + '-' + 
+    String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+    String(today.getDate()).padStart(2, '0');
+
   grid.innerHTML = meals.map(meal => {
     const hasLink = meal.recipeSlug && allRecipes.find(r => r.id === meal.recipeSlug);
     const linkedClass = hasLink ? ' is-linked' : '';
     const cookedClass = meal.cooked ? ' is-cooked' : '';
+    const todayClass = meal.date === todayStr ? ' is-today' : '';
     const clickAttr = hasLink ? `onclick="window.location.hash='recipe/${escHtml(meal.recipeSlug)}'"` : '';
 
     return `
-      <div class="meal-card${linkedClass}${cookedClass}" ${clickAttr}>
+      <div class="meal-card${linkedClass}${cookedClass}${todayClass}" ${clickAttr}>
         <div class="meal-date">${escHtml(meal.day || fmtDate(meal.date))}</div>
         <span class="meal-emoji">${meal.emoji || '🍽️'}</span>
         <div class="meal-title">${escHtml(meal.title)}</div>
