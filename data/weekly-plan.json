@@ -1,25 +1,6 @@
 {
-  "weekStart": "2026-03-16",
-  "weekEnd": "2026-03-22",
-  "meals": [
-    {
-      "date": "2026-03-18",
-      "day": "Wednesday",
-      "title": "Thai Tofu Curry",
-      "description": "Coconut milk curry with firm tofu",
-      "recipeSlug": null,
-      "emoji": "🍛",
-      "cooked": true
-    },
-    {
-      "date": "2026-03-19",
-      "day": "Thursday",
-      "title": "Crispy Roasted Chicken Thighs with Pan Sauce",
-      "description": "Crispy skin chicken with pan sauce & sweet potato wedges",
-      "recipeSlug": "crispy-roasted-chicken-thighs-with-pan-sauce",
-      "emoji": "🍗",
-      "cooked": false
-    }
-  ],
-  "updatedAt": "2026-03-19T20:45:03.842Z"
+  "weekStart": "",
+  "weekEnd": "",
+  "meals": [],
+  "updatedAt": "2026-03-23T06:00:06.053Z"
 }
