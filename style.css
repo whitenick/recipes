@@ -1111,3 +1111,319 @@ body::before {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   GROCERY LIST FEATURE
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Grocery checkbox on recipe cards ── */
+.grocery-checkbox {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 4px;
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  z-index: 2;
+  opacity: 0.7;
+}
+.grocery-checkbox:hover {
+  border-color: var(--accent);
+  opacity: 1;
+}
+.grocery-checkbox.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  opacity: 1;
+}
+.grocery-checkbox.checked::after {
+  content: '✓';
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+.recipe-card:hover .grocery-checkbox {
+  opacity: 1;
+}
+
+/* ── Grocery overlay ── */
+.grocery-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 24, 16, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s, visibility 0.25s;
+  z-index: 200;
+}
+.grocery-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Grocery slide-out panel ── */
+.grocery-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  max-width: 100%;
+  height: 100vh;
+  background: var(--bg);
+  box-shadow: -4px 0 24px rgba(30, 24, 16, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.grocery-panel.open {
+  transform: translateX(0);
+}
+
+.grocery-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  flex-shrink: 0;
+}
+.grocery-panel-header h2 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+.grocery-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.grocery-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--chip-bg);
+  border-radius: var(--radius);
+  transition: all 0.15s;
+}
+.grocery-action-btn:hover {
+  color: var(--text);
+  background: var(--bg-card-hover);
+}
+.grocery-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  transition: all 0.15s;
+}
+.grocery-close-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text);
+}
+
+.grocery-panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+}
+
+/* ── Empty state ── */
+.grocery-empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+.grocery-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+.grocery-empty h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+.grocery-empty p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Selected recipes header ── */
+.grocery-header-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.grocery-recipe-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.grocery-clear-btn {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.grocery-clear-btn:hover {
+  color: var(--accent-hover);
+}
+
+.grocery-selected-recipes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.grocery-selected-recipe {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--chip-bg);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  color: var(--text);
+}
+.grocery-remove-recipe {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  border-radius: 50%;
+  transition: all 0.15s;
+}
+.grocery-remove-recipe:hover {
+  background: rgba(0,0,0,0.1);
+  color: var(--text);
+}
+
+/* ── Grocery sections ── */
+.grocery-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.grocery-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.grocery-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--chip-bg);
+  border-bottom: 1px solid var(--border);
+}
+.grocery-section-emoji {
+  font-size: 16px;
+}
+.grocery-section-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  flex: 1;
+}
+.grocery-section-count {
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* ── Grocery items ── */
+.grocery-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.grocery-item {
+  padding: 0;
+  border-bottom: 1px solid var(--border);
+}
+.grocery-item:last-child {
+  border-bottom: none;
+}
+.grocery-item-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.grocery-item-check:hover {
+  background: var(--bg-card-hover);
+}
+.grocery-checkbox-input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  margin-top: 1px;
+  cursor: pointer;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+.grocery-item-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.grocery-item-check:has(.grocery-checkbox-input:checked) .grocery-item-text {
+  text-decoration: line-through;
+  color: var(--text-dim);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .grocery-panel {
+    width: 100%;
+  }
+  .grocery-panel-header {
+    padding: 16px 20px;
+  }
+  .grocery-panel-content {
+    padding: 16px 20px;
+  }
+  .grocery-action-btn span {
+    display: none;
+  }
+  .grocery-action-btn {
+    padding: 8px;
+  }
+}

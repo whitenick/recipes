@@ -34,6 +34,7 @@ async function init() {
 
   buildCategoryChips();
   updateFavCount();
+  updateGroceryBadge();
   loadWeeklyPlan();
   
   // Wire up events
@@ -222,6 +223,7 @@ function renderGrid() {
     const id = card.dataset.id;
     card.addEventListener('click', (e) => {
       if (e.target.closest('.card-fav')) return;
+      if (e.target.closest('.grocery-checkbox')) return;
       window.location.hash = `recipe/${id}`;
     });
     
@@ -235,11 +237,23 @@ function renderGrid() {
         if (favoritesOnly) applyFilters();
       });
     }
+    
+    // Grocery checkbox
+    const groceryCheckbox = card.querySelector('.grocery-checkbox');
+    if (groceryCheckbox) {
+      groceryCheckbox.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof toggleRecipeSelection === 'function') {
+          toggleRecipeSelection(id);
+        }
+      });
+    }
   });
 }
 
 function renderCard(recipe, index) {
   const isFav = favorites.has(recipe.id);
+  const isSelected = typeof selectedRecipeIds !== 'undefined' && selectedRecipeIds.has(recipe.id);
   const tags = recipe.categories.slice(0, 2);
   const hasMeta = recipe.meta.totalTime || recipe.meta.cookTime || recipe.meta.servings;
   const num = String(index + 1).padStart(2, '0');
@@ -247,6 +261,7 @@ function renderCard(recipe, index) {
   return `
     <div class="recipe-card" data-id="${recipe.id}">
       <div class="card-category-bar"></div>
+      <div class="grocery-checkbox ${isSelected ? 'checked' : ''}" title="Add to grocery list"></div>
       <button class="card-fav ${isFav ? 'active' : ''}" title="${isFav ? 'Remove' : 'Save'}">
         ${isFav ? '♥' : '♡'}
       </button>
@@ -401,6 +416,15 @@ function updateFavCount() {
     el.classList.add('visible');
   } else {
     el.classList.remove('visible');
+  }
+}
+
+function updateGroceryBadge() {
+  const badge = document.getElementById('groceryBadge');
+  if (badge && typeof selectedRecipeIds !== 'undefined') {
+    const count = selectedRecipeIds.size;
+    badge.textContent = count > 9 ? '9+' : count;
+    badge.classList.toggle('visible', count > 0);
   }
 }
 
