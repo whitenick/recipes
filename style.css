@@ -1427,3 +1427,122 @@ body::before {
     padding: 8px;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   FEATURED RECIPES SECTION
+   ══════════════════════════════════════════════════════════ */
+
+.featured-section {
+  padding: 48px 0 40px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(181, 96, 26, 0.03) 100%);
+}
+
+.featured-header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.featured-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.featured-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 300;
+  color: var(--text);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.featured-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.featured-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.featured-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.featured-card-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+}
+
+.featured-card-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+  padding-right: 60px;
+  line-height: 1.3;
+}
+
+.featured-card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.featured-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.featured-card-meta .tag {
+  font-size: 10px;
+}
+
+@media (max-width: 640px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+  .featured-card {
+    padding: 20px;
+  }
+}

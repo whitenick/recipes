@@ -35,7 +35,7 @@ async function init() {
   buildCategoryChips();
   updateFavCount();
   updateGroceryBadge();
-  loadWeeklyPlan();
+  loadFeaturedRecipes();
   
   // Wire up events
   const searchInput = document.getElementById('searchInput');
@@ -442,51 +442,49 @@ function escHtml(str) {
 // Make clearSearch globally accessible (used in HTML)
 window.clearSearch = clearSearch;
 
-// ── Weekly Plan ────────────────────────────────────────
-async function loadWeeklyPlan() {
-  const section = document.getElementById('weeklySection');
-  const grid = document.getElementById('weeklyGrid');
+// ── Featured Recipes ───────────────────────────────────
+async function loadFeaturedRecipes() {
+  const section = document.getElementById('featuredSection');
+  const grid = document.getElementById('featuredGrid');
+  const titleEl = document.getElementById('featuredTitle');
+  const subtitleEl = document.getElementById('featuredSubtitle');
   if (!section || !grid) return;
 
-  let plan;
+  let featured;
   try {
-    const res = await fetch('data/weekly-plan.json?v=' + Date.now());
-    if (!res.ok) return; // Silently skip if missing
-    plan = await res.json();
+    const res = await fetch('data/featured.json?v=' + Date.now());
+    if (!res.ok) return;
+    featured = await res.json();
   } catch (e) {
-    return; // No weekly plan file — that's fine
+    return; // No featured file — that's fine
   }
 
-  const meals = (plan.meals || []).filter(m => m.title);
-  if (meals.length === 0) return;
+  const recipeIds = featured.recipes || [];
+  if (recipeIds.length === 0) return;
 
-  // Build date label: "Mar 16 – Mar 22"
-  function fmtDate(iso) {
-    if (!iso) return '';
-    const d = new Date(iso + 'T12:00:00Z');
-    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
-  }
+  // Update title/subtitle if provided
+  if (titleEl && featured.title) titleEl.textContent = featured.title;
+  if (subtitleEl && featured.subtitle) subtitleEl.textContent = featured.subtitle;
 
-  // Get today's date in YYYY-MM-DD format (local time)
-  const today = new Date();
-  const todayStr = today.getFullYear() + '-' + 
-    String(today.getMonth() + 1).padStart(2, '0') + '-' + 
-    String(today.getDate()).padStart(2, '0');
+  // Find matching recipes
+  const featuredRecipes = recipeIds
+    .map(id => allRecipes.find(r => r.id === id))
+    .filter(Boolean)
+    .slice(0, 6); // Max 6 featured
 
-  grid.innerHTML = meals.map(meal => {
-    const hasLink = meal.recipeSlug && allRecipes.find(r => r.id === meal.recipeSlug);
-    const linkedClass = hasLink ? ' is-linked' : '';
-    const cookedClass = meal.cooked ? ' is-cooked' : '';
-    const todayClass = meal.date === todayStr ? ' is-today' : '';
-    const clickAttr = hasLink ? `onclick="window.location.hash='recipe/${escHtml(meal.recipeSlug)}'"` : '';
+  if (featuredRecipes.length === 0) return;
 
+  grid.innerHTML = featuredRecipes.map(recipe => {
+    const tags = recipe.categories.slice(0, 2);
     return `
-      <div class="meal-card${linkedClass}${cookedClass}${todayClass}" ${clickAttr}>
-        <div class="meal-date">${escHtml(meal.day || fmtDate(meal.date))}</div>
-        <span class="meal-emoji">${meal.emoji || '🍽️'}</span>
-        <div class="meal-title">${escHtml(meal.title)}</div>
-        ${meal.description ? `<div class="meal-desc">${escHtml(meal.description)}</div>` : ''}
-        ${hasLink ? `<div class="meal-link-hint">View recipe →</div>` : ''}
+      <div class="featured-card" onclick="window.location.hash='recipe/${escHtml(recipe.id)}'">
+        <div class="featured-card-badge">Featured</div>
+        <div class="featured-card-title">${escHtml(recipe.title)}</div>
+        ${recipe.description ? `<div class="featured-card-desc">${escHtml(recipe.description.substring(0, 100))}${recipe.description.length > 100 ? '…' : ''}</div>` : ''}
+        <div class="featured-card-meta">
+          ${recipe.meta.totalTime ? `<span>${escHtml(recipe.meta.totalTime)}</span>` : ''}
+          ${tags.map(t => `<span class="tag ${tagClass(t)}">${escHtml(t)}</span>`).join('')}
+        </div>
       </div>
     `;
   }).join('');
