@@ -221,9 +221,11 @@ function renderGrid() {
   // Attach event listeners
   grid.querySelectorAll('.recipe-card').forEach(card => {
     const id = card.dataset.id;
+    const recipe = allRecipes.find(r => r.id === id);
+    
     card.addEventListener('click', (e) => {
       if (e.target.closest('.card-fav')) return;
-      if (e.target.closest('.grocery-checkbox')) return;
+      if (e.target.closest('.grocery-add-btn')) return;
       window.location.hash = `recipe/${id}`;
     });
     
@@ -238,13 +240,25 @@ function renderGrid() {
       });
     }
     
-    // Grocery checkbox
-    const groceryCheckbox = card.querySelector('.grocery-checkbox');
-    if (groceryCheckbox) {
-      groceryCheckbox.addEventListener('click', (e) => {
+    // Grocery add button
+    const groceryBtn = card.querySelector('.grocery-add-btn');
+    if (groceryBtn) {
+      groceryBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (typeof toggleRecipeSelection === 'function') {
+          const wasSelected = selectedRecipeIds.has(id);
           toggleRecipeSelection(id);
+          const isNowSelected = selectedRecipeIds.has(id);
+          
+          // Update button state
+          groceryBtn.classList.toggle('selected', isNowSelected);
+          groceryBtn.setAttribute('aria-pressed', isNowSelected);
+          groceryBtn.querySelector('.grocery-btn-icon').textContent = isNowSelected ? '✓' : '🛒';
+          groceryBtn.querySelector('.grocery-btn-text').textContent = isNowSelected ? 'Added to List' : 'Add to Grocery List';
+          
+          // Show toast
+          const recipeName = recipe ? recipe.title : 'Recipe';
+          showGroceryToast(recipeName, isNowSelected);
         }
       });
     }
@@ -261,7 +275,6 @@ function renderCard(recipe, index) {
   return `
     <div class="recipe-card" data-id="${recipe.id}">
       <div class="card-category-bar"></div>
-      <div class="grocery-checkbox ${isSelected ? 'checked' : ''}" title="Add to grocery list"></div>
       <button class="card-fav ${isFav ? 'active' : ''}" title="${isFav ? 'Remove' : 'Save'}">
         ${isFav ? '♥' : '♡'}
       </button>
@@ -291,6 +304,12 @@ function renderCard(recipe, index) {
           ${hasMeta ? `<div class="card-tags" style="margin-left:auto">${tags.map(t => `<span class="tag ${tagClass(t)}">${escHtml(t)}</span>`).join('')}</div>` : ''}
         </div>
       </div>
+      <button class="grocery-add-btn ${isSelected ? 'selected' : ''}" 
+              aria-label="${isSelected ? 'Remove from' : 'Add to'} grocery list: ${escHtml(recipe.title)}"
+              aria-pressed="${isSelected}">
+        <span class="grocery-btn-icon">${isSelected ? '✓' : '🛒'}</span>
+        <span class="grocery-btn-text">${isSelected ? 'Added to List' : 'Add to Grocery List'}</span>
+      </button>
     </div>
   `;
 }
@@ -490,6 +509,43 @@ async function loadFeaturedRecipes() {
   }).join('');
 
   section.style.display = '';
+}
+
+// ── Toast Notifications ───────────────────────────────
+let toastTimeout = null;
+
+function showGroceryToast(recipeName, added) {
+  let toast = document.getElementById('groceryToast');
+  
+  // Create toast if it doesn't exist
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'groceryToast';
+    toast.className = 'grocery-toast';
+    toast.innerHTML = `
+      <span class="toast-icon">✓</span>
+      <span class="toast-message"></span>
+    `;
+    document.body.appendChild(toast);
+  }
+  
+  // Update toast content
+  const icon = added ? '✓' : '−';
+  const action = added ? 'Added' : 'Removed';
+  toast.querySelector('.toast-icon').textContent = icon;
+  toast.querySelector('.toast-message').innerHTML = `${action} <strong>${escHtml(recipeName)}</strong> ${added ? 'to' : 'from'} grocery list`;
+  toast.classList.toggle('remove', !added);
+  
+  // Clear any existing timeout
+  if (toastTimeout) clearTimeout(toastTimeout);
+  
+  // Show toast
+  toast.classList.add('show');
+  
+  // Hide after 2 seconds
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2000);
 }
 
 // ── Go! ────────────────────────────────────────────────

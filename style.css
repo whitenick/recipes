@@ -445,6 +445,8 @@ body::before {
   transition: background 0.2s;
   position: relative;
   border: none; /* Grid gap provides the lines */
+  display: flex;
+  flex-direction: column;
 }
 .recipe-card:hover {
   background: var(--bg-card-hover);
@@ -466,6 +468,7 @@ body::before {
 
 .card-body {
   padding: 28px 28px 24px;
+  flex: 1;
 }
 .card-number {
   font-size: 10px;
@@ -1116,41 +1119,85 @@ body::before {
    GROCERY LIST FEATURE
    ══════════════════════════════════════════════════════════ */
 
-/* ── Grocery checkbox on recipe cards ── */
-.grocery-checkbox {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 22px;
-  height: 22px;
-  border: 1.5px solid var(--border-strong);
-  border-radius: 4px;
-  background: var(--bg-card);
-  cursor: pointer;
+/* ── Grocery Add Button on recipe cards (Mobile-first) ── */
+.grocery-add-btn {
+  width: calc(100% - 32px);
+  margin: 0 16px 16px 16px;
+  padding: 12px 16px;
+  background: var(--bg-muted, #f8f9fa);
+  border: 1px solid var(--border, #dee2e6);
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-muted, #495057);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s ease;
-  z-index: 2;
-  opacity: 0.7;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px; /* Touch target minimum */
 }
-.grocery-checkbox:hover {
-  border-color: var(--accent);
-  opacity: 1;
+.grocery-add-btn:hover {
+  background: var(--bg-hover, #e9ecef);
+  border-color: var(--border-strong, #adb5bd);
 }
-.grocery-checkbox.checked {
-  background: var(--accent);
-  border-color: var(--accent);
-  opacity: 1;
+.grocery-add-btn:active {
+  transform: scale(0.98);
 }
-.grocery-checkbox.checked::after {
-  content: '✓';
+.grocery-add-btn.selected {
+  background: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+.grocery-add-btn.selected:hover {
+  background: #c3e6cb;
+}
+.grocery-btn-icon {
+  font-size: 16px;
+}
+.grocery-btn-text {
+  font-size: 14px;
+}
+
+/* ── Toast Notification ── */
+.grocery-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #28a745;
   color: white;
-  font-size: 13px;
-  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  pointer-events: none;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  max-width: calc(100vw - 32px);
 }
-.recipe-card:hover .grocery-checkbox {
+.grocery-toast.show {
   opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.grocery-toast.remove {
+  background: #6c757d;
+}
+.toast-icon {
+  font-size: 16px;
+}
+.toast-message strong {
+  font-weight: 600;
 }
 
 /* ── Grocery overlay ── */
