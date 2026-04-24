@@ -21,7 +21,7 @@ function slugify(str) {
     .replace(/^-|-$/g, '');
 }
 
-const SECTION_HEADINGS = /^(ingredients?|instructions?|notes?|yield|time|overview|description|directions|method|tips?|variations?|servings?|assembly(\s+and\s+serving)?|garnish|equipment|source|preparation|baker'?s?\s+notes?|why\s+this|timeline|serving\s+suggestions?|leftovers?|storage|nutrition|shopping\s+list|grocery|meal\s+plan)$/i;
+const SECTION_HEADINGS = /^(ingredients?|mise\s+en\s+place|instructions?|notes?|yield|time|overview|description|directions|method|tips?|variations?|servings?|assembly(\s+and\s+serving)?|garnish|equipment|source|preparation|baker'?s?\s+notes?|why\s+this|timeline|serving\s+suggestions?|leftovers?|storage|nutrition|shopping\s+list|grocery|meal\s+plan)$/i;
 
 function extractTitle(content, filename) {
   // Try to get title from first # heading that isn't a section name
@@ -262,7 +262,7 @@ function detectCategories(content, title, filename, subdir = '') {
 function extractIngredients(content) {
   const ingredients = [];
   
-  // Strategy 1: Find the Ingredients section and extract all list items
+  // Strategy 1: Find the Ingredients or Mise en Place section and extract all list items
   // We do this line-by-line to avoid regex multiline anchoring issues
   const lines = content.split('\n');
   let inIngredSection = false;
@@ -275,7 +275,8 @@ function extractIngredients(content) {
       const depth = headingMatch[1].length;
       const heading = headingMatch[2].trim().replace(/[:\s]+$/, '');
       
-      if (/^ingredients?$/i.test(heading)) {
+      // Support both "Ingredients" and "Mise en Place" (French culinary standard)
+      if (/^(ingredients?|mise\s+en\s+place)$/i.test(heading)) {
         // Start of ingredients section
         inIngredSection = true;
         ingredDepth = depth;
@@ -320,6 +321,29 @@ function extractIngredients(content) {
       }
     } else if (inIngredTable && !line.trim().startsWith('|') && line.trim()) {
       inIngredTable = false;
+    }
+  }
+  
+  // Strategy 3: Fallback for **For the X:** sub-sections (handles complex multi-part recipes)
+  if (ingredients.length === 0) {
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      // Match **For the X:** patterns
+      if (/^\*\*For the .+:\*\*/.test(line) || /^\*\*For .+:\*\*/.test(line)) {
+        // Extract bullet list items following this sub-section
+        for (let j = i + 1; j < lines.length; j++) {
+          const listMatch = lines[j].match(/^[\s]*[-*]\s+(.+)$/);
+          if (listMatch) {
+            const clean = listMatch[1].replace(/\*\*/g, '').replace(/\[.*?\]/g, '').trim();
+            if (clean && clean.length > 2 && clean.length < 200) {
+              ingredients.push(clean);
+            }
+          } else if (lines[j].trim() && !lines[j].startsWith('*') && !lines[j].startsWith(' ') && !lines[j].startsWith('\t')) {
+            // Stop at non-list, non-empty line (likely next section)
+            break;
+          }
+        }
+      }
     }
   }
   
