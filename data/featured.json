@@ -2,13 +2,13 @@
   "title": "Chef's Picks",
   "subtitle": "Pierre's curated favorites from the collection",
   "recipes": [
+    "salmon-en-papillote-with-fennel-lemon",
     "trout-gravlax-with-alps-style-coleslaw-remoulade",
     "mediterranean-chunky-chicken-salad",
     "stuffed-pork-loin-with-sun-dried-tomato-and-goat-cheese",
     "miso-glazed-salmon-with-shiitake-kale-saut",
-    "crispy-roasted-chicken-thighs-with-pan-sauce",
-    "shakshuka-with-kale-sun-dried-tomatoes"
+    "crispy-roasted-chicken-thighs-with-pan-sauce"
   ],
-  "updatedAt": "2026-04-24",
+  "updatedAt": "2026-04-25",
   "updatedBy": "Pierre"
 }
