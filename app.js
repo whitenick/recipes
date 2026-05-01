@@ -509,6 +509,37 @@ async function loadFeaturedRecipes() {
   }).join('');
 
   section.style.display = '';
+  
+  // Setup collapsible functionality
+  setupFeaturedCollapse(section);
+}
+
+function setupFeaturedCollapse(section) {
+  const toggle = document.getElementById('featuredToggle');
+  const content = document.getElementById('featuredContent');
+  if (!toggle || !content) return;
+  
+  // Restore state from localStorage (default: expanded)
+  const isCollapsed = localStorage.getItem('ns-featured-collapsed') === 'true';
+  if (isCollapsed) {
+    section.classList.add('collapsed');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  
+  // Toggle handler
+  const handleToggle = () => {
+    const collapsed = section.classList.toggle('collapsed');
+    toggle.setAttribute('aria-expanded', !collapsed);
+    localStorage.setItem('ns-featured-collapsed', collapsed);
+  };
+  
+  toggle.addEventListener('click', handleToggle);
+  toggle.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleToggle();
+    }
+  });
 }
 
 // ── Toast Notifications ───────────────────────────────

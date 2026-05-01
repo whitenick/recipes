@@ -98,16 +98,25 @@
       <!-- Featured Recipes -->
       <section class="featured-section" id="featuredSection" style="display:none">
         <div class="container">
-          <div class="featured-header">
-            <div class="featured-label">
-              <span class="hero-label-dot"></span>
-              Curated
+          <div class="featured-header" id="featuredToggle" role="button" tabindex="0" aria-expanded="true" aria-controls="featuredContent">
+            <div class="featured-header-top">
+              <div class="featured-label">
+                <span class="hero-label-dot"></span>
+                Curated
+              </div>
+              <button class="featured-collapse-btn" aria-label="Toggle Chef's Picks">
+                <svg class="collapse-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
             </div>
             <h2 class="featured-title" id="featuredTitle">Chef's Picks</h2>
             <p class="featured-subtitle" id="featuredSubtitle">Curated favorites from the collection</p>
           </div>
-          <div class="featured-grid" id="featuredGrid">
-            <!-- Featured recipe cards injected here -->
+          <div class="featured-content" id="featuredContent">
+            <div class="featured-grid" id="featuredGrid">
+              <!-- Featured recipe cards injected here -->
+            </div>
           </div>
         </div>
       </section>

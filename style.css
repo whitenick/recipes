@@ -1488,6 +1488,63 @@ body::before {
 .featured-header {
   margin-bottom: 28px;
   text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.featured-header:hover .featured-collapse-btn {
+  color: var(--accent);
+}
+
+.featured-header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.featured-collapse-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-collapse-btn:hover {
+  color: var(--accent);
+}
+
+.collapse-icon {
+  transition: transform 0.3s ease;
+}
+
+.featured-section.collapsed .collapse-icon {
+  transform: rotate(-90deg);
+}
+
+.featured-content {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.featured-section.collapsed .featured-content {
+  max-height: 0;
+  opacity: 0;
+}
+
+.featured-section.collapsed .featured-header {
+  margin-bottom: 0;
 }
 
 .featured-label {
