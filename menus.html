@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menus — Nick's Kitchen</title>
+  <meta name="description" content="Stanz-style sandwiches and Sour Duck-style small plates" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F7F4F0;
+      color: #1E1810;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+    .hub { padding: 80px 0 120px; }
+    .hub-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #A9927A; text-align: center; margin-bottom: 32px;
+    }
+    .hub-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 7vw, 82px);
+      font-weight: 300; text-align: center; margin-bottom: 16px;
+      color: #1E1810;
+    }
+    .hub-sub {
+      font-size: 14px; color: #7A6A55; text-align: center;
+      margin-bottom: 64px; font-weight: 300;
+    }
+    .cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1px; background: rgba(44,36,22,0.09);
+      border: 1px solid rgba(44,36,22,0.09);
+      max-width: 960px; margin: 0 auto;
+    }
+    .card {
+      background: #FDFCFA; padding: 48px 40px; cursor: pointer;
+      transition: background 0.2s; text-decoration: none; display: block;
+    }
+    .card:hover { background: #F3EFE9; }
+    .card-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #B5601A; font-weight: 500; margin-bottom: 16px;
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400; margin-bottom: 8px; color: #1E1810;
+    }
+    .card-desc {
+      font-size: 14px; color: #7A6A55; font-weight: 300;
+      line-height: 1.6; margin-bottom: 24px;
+    }
+    .card-examples {
+      list-style: none; padding: 0; margin: 0 0 24px;
+    }
+    .card-examples li {
+      font-size: 13px; color: #A9927A; padding: 2px 0;
+    }
+    .card-tag {
+      display: inline-block; font-size: 11px; color: #B5601A;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid rgba(161,106,61,0.22);
+      border-radius: 3px;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .card { padding: 32px 24px; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hub">
+    <div class="container">
+      <p class="hub-label">Nick's Kitchen</p>
+      <h1 class="hub-title">Menus</h1>
+      <p class="hub-sub">Inspired by two great kitchens. Built with approved base recipes.</p>
+
+      <div class="cards">
+        <a class="card" href="menu-stanz.html">
+          <div class="card-label">Menu One</div>
+          <h2 class="card-title">Stanz Menu</h2>
+          <p class="card-desc">Larchmont, NY deli — straightforward sandwiches, no-nonsense. White bread or toasted baguette, simple builds, honest pricing.</p>
+          <ul class="card-examples">
+            <li>Maple Turkey w/ goat cheese, apple, arugula</li>
+            <li>Roast Beef w/ gorgonzola, caramelized onions</li>
+            <li>Corned Beef on rustic toast</li>
+          </ul>
+          <span class="card-tag">Browse Menu →</span>
+        </a>
+
+        <a class="card" href="menu-sourduck.html">
+          <div class="card-label">Menu Two</div>
+          <h2 class="card-title">Sour Duck Menu</h2>
+          <p class="card-desc">Austin, TX bakery-meets-kitchen — small plates, component-driven stacks. Texas-forward, crafty, playful.</p>
+          <ul class="card-examples">
+            <li>Bryce's Brisket Sandwich w/ smoky BBQ sauce</li>
+            <li>Hand-Punched Fries w/ garlic herb mayo</li>
+            <li>Purple Hull Pea Hummus w/ flatbread</li>
+          </ul>
+          <span class="card-tag">Browse Menu →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

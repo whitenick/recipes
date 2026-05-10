@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sour Duck Menu — Nick's Kitchen</title>
+  <meta name="description" content="Sour Duck-inspired small plates. Texas-forward, bakery-meets-kitchen." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Sour Duck Menu Page Overrides ── */
+    body.menu-page {
+      background: #1A1A1A;
+      color: #F5F0E6;
+    }
+    body.menu-page::before { display: none; }
+
+    .menu-header {
+      background: #222222;
+      border-bottom: 1px solid #333;
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+    .menu-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-nav a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #999;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .menu-nav a:hover { color: #E8A849; }
+    .menu-nav .nav-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      color: #999;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .menu-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      color: #F5F0E6;
+      margin-bottom: 4px;
+    }
+    .menu-subtitle {
+      font-size: 13px;
+      color: #777;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    .menu-content {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 32px 120px;
+    }
+
+    .menu-section {
+      margin-bottom: 56px;
+    }
+    .menu-section-tag {
+      font-size: 10px;
+      font-weight: 500;
+      color: #E8A849;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #333;
+    }
+    .menu-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #F5F0E6;
+      margin-bottom: 32px;
+    }
+
+    .menu-item {
+      padding: 16px 0;
+      border-top: 1px solid #2A2A2A;
+    }
+    .menu-item:hover .menu-item-price {
+      color: #E8A849;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: #F5F0E6;
+      line-height: 1.3;
+    }
+
+    .menu-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      color: #F5F0E6;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+
+    .menu-item-desc {
+      font-size: 13px;
+      color: #888;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .menu-item-note {
+      font-size: 11px;
+      color: #E8A849;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .menu-footer {
+      text-align: center;
+      padding: 32px 0 0;
+      border-top: 1px solid #333;
+      margin-top: 48px;
+    }
+    .menu-footer p {
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 480px) {
+      .menu-nav { margin-bottom: 24px; }
+      .menu-content { padding: 40px 20px 100px; }
+      .menu-section { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body class="menu-page">
+
+  <div class="menu-header">
+    <div class="container">
+      <div class="menu-nav">
+        <a href="index.html">
+          <span class="nav-arrow">←</span>
+          Back to Kitchen
+        </a>
+      </div>
+      <p class="menu-title">Handcrafted. Local. Texas-forward.</p>
+      <h1 class="menu-name">Sour Duck Menu</h1>
+      <p class="menu-subtitle">Bakery-meets-kitchen · Small plates · Big flavors</p>
+    </div>
+  </div>
+
+  <div class="menu-content">
+
+    <div class="menu-section">
+      <div class="menu-section-tag">Small Plates</div>
+      <h2 class="menu-section-title">Things to Start With</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Seeded Pretzel w/ Queso</span>
+          <span class="menu-item-price">$8.50</span>
+        </div>
+        <div class="menu-item-desc">Chunky pretzel sticks, roasted tomato salsa, jalapeño ranch</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Hand-Punched Fries</span>
+          <span class="menu-item-price">$4.00</span>
+        </div>
+        <div class="menu-item-desc">Crispy, flaky potatoes · with garlic herb mayo</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Tater Tots</span>
+          <span class="menu-item-price">$6.00</span>
+        </div>
+        <div class="menu-item-desc">Crispy tots · with deviled egg dip</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Smoked Mushrooms</span>
+          <span class="menu-item-price">$6.25</span>
+        </div>
+        <div class="menu-item-desc">Grilled portobello, goat cheese, Swiss, Oaxaca, sesame seed · drizzled with chimichurri</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Purple Hull Pea Hummus</span>
+          <span class="menu-item-price">$10.00</span>
+        </div>
+        <div class="menu-item-desc">Green, not brown · with flatbread, pickled red onion</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Sour Cream &amp; Onion Beets</span>
+          <span class="menu-item-price">$10.00</span>
+        </div>
+        <div class="menu-item-desc">Roasted seasonal vegetables, lemon tahini sauce</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Bacon Jam</span>
+          <span class="menu-item-price">$6.00</span>
+        </div>
+        <div class="menu-item-desc">Sweet-savory, on grilled brioche toast · with crispy fried chicken crumble</div>
+        <div class="menu-item-note">Try the brisket version too. $8.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Cheesy Garlic Hasselback Baguette</span>
+          <span class="menu-item-price">$11.00</span>
+        </div>
+        <div class="menu-item-desc">Flatbread dough, baked with parmesan, garlic herb mayo · with chipotle aioli for dipping</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Texas Farm Salad</span>
+          <span class="menu-item-price">$14.00</span>
+        </div>
+        <div class="menu-item-desc">House mixed greens, citrus slaw, roasted tomato salsa · with crispy fried chicken or blackened shrimp</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fried Sweet Potato</span>
+          <span class="menu-item-price">$9.00</span>
+        </div>
+        <div class="menu-item-desc">Crispy rounds · with goat cheese onion dip, cilantro, pistachio</div>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-section-tag">Sandwiches</div>
+      <h2 class="menu-section-title">From the Oven, On Buns</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Bryce's Brisket Sandwich</span>
+          <span class="menu-item-price">$20.00</span>
+        </div>
+        <div class="menu-item-desc">Low-and-slow smoked brisket · smoky BBQ sauce · chipotle aioli · pickled jalapenos · on toasted brioche bun</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Devon's Hot Chicken Sandwich</span>
+          <span class="menu-item-price">$13.00</span>
+        </div>
+        <div class="menu-item-desc">Crispy fried chicken · jalapeño ranch · citrus slaw · on toasted brioche bun</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Pulled Chicken</span>
+          <span class="menu-item-price">$14.00</span>
+        </div>
+        <div class="menu-item-desc">Herb-roasted chicken, shredded · bacon jam · Southern coleslaw · on ciabatta</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Smoked Mushroom Danish</span>
+          <span class="menu-item-price">$6.25</span>
+        </div>
+        <div class="menu-item-note">Vegan-friendly · with gochujang-aioli</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Focaccia Melt</span>
+          <span class="menu-item-price">$16.00</span>
+        </div>
+        <div class="menu-item-desc">Braised short rib, caramelized onions, provolone · flatbread dough · with roasted tomato salsa</div>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-section-tag">Bowls &amp; Plates</div>
+      <h2 class="menu-section-title">When You're Hungry</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Braised Short Rib Gnocchi</span>
+          <span class="menu-item-price">$19.50</span>
+        </div>
+        <div class="menu-item-desc">Hand-rolled potato gnocchi · braised short rib · chimichurri · parmesan</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Southwest Grain Bowl</span>
+          <span class="menu-item-price">$14.00</span>
+        </div>
+        <div class="menu-item-desc">Mediterranean couscous, blackened shrimp, smoky BBQ sauce · Southern coleslaw · quick-dill pickles</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Mac &amp; Cheese w/ Brisket</span>
+          <span class="menu-item-price">$18.00</span>
+        </div>
+        <div class="menu-item-desc">Creamy baked mac-and-cheese · smoked brisket · chipotle aioli drizzle · with roasted seasonal vegetables</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Blackened Shrimp Plate</span>
+          <span class="menu-item-price">$22.00</span>
+        </div>
+        <div class="menu-item-desc">Jalapeño-crusted shrimp · cheese grits · chimichurri · with Kale Caesar Base or house mixed greens</div>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-section-tag">Bakery</div>
+      <h2 class="menu-section-title">From the Oven</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fromage (Croissant)</span>
+          <span class="menu-item-price">$5.50</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Chocolate Croissant</span>
+          <span class="menu-item-price">$4.00</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Kouign-Amann</span>
+          <span class="menu-item-price">$5.50</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Buttermilk Biscuit</span>
+          <span class="menu-item-price">$3.50</span>
+        </div>
+        <div class="menu-item-desc">Flaky, layered · with bacon jam for the taking</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Cornbread Squares</span>
+          <span class="menu-item-price">$3.00</span>
+        </div>
+        <div class="menu-item-desc">Sweet, crumbly · with honey mustard dip</div>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-section-tag">Desserts</div>
+      <h2 class="menu-section-title">Sweet Endings</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Bread Pudding</span>
+          <span class="menu-item-price">$8.00</span>
+        </div>
+        <div class="menu-item-desc">Warm · with berry compote · vanilla whipped cream</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Chocolate Brownie</span>
+          <span class="menu-item-price">$7.00</span>
+        </div>
+        <div class="menu-item-desc">Warm · with vanilla whipped cream · caramel drizzle</div>
+      </div>
+    </div>
+
+    <div class="menu-footer">
+      <p>Sour Duck Style · Handcrafted · Seasonal · Texas-forward</p>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stanz Menu — Nick's Kitchen</title>
+  <meta name="description" content="Stanz-inspired sandwiches. Simple. Honest. Done right." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Stanz Menu Page Overrides ── */
+    body.menu-page {
+      background: #FFFFFF;
+      color: #2C2416;
+    }
+    body.menu-page::before { display: none; }
+
+    .menu-header {
+      background: #FAFAF7;
+      border-bottom: 1px solid #E8E4DE;
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+    .menu-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-nav a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #7A6A55;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .menu-nav a:hover { color: #B5601A; }
+    .menu-nav .nav-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid #DDD8D0;
+      border-radius: 4px;
+      color: #7A6A55;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: #7A6A55;
+      margin-bottom: 8px;
+    }
+    .menu-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      color: #2C2416;
+      margin-bottom: 4px;
+    }
+    .menu-subtitle {
+      font-size: 13px;
+      color: #A9927A;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    .menu-content {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 32px 120px;
+    }
+
+    .menu-section {
+      margin-bottom: 56px;
+    }
+    .menu-section-tag {
+      font-size: 10px;
+      font-weight: 500;
+      color: #B5601A;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #DDD8D0;
+    }
+    .menu-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #2C2416;
+      margin-bottom: 32px;
+    }
+
+    .menu-item {
+      padding: 16px 0;
+      border-top: 1px solid #F0EDE8;
+      cursor: pointer;
+    }
+    .menu-item:hover .menu-item-price {
+      color: #B5601A;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: #2C2416;
+      line-height: 1.3;
+    }
+
+    .menu-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      color: #2C2416;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+
+    .menu-item-desc {
+      font-size: 13px;
+      color: #7A6A55;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .menu-footer {
+      text-align: center;
+      padding: 32px 0 0;
+      border-top: 1px solid #E8E4DE;
+      margin-top: 48px;
+    }
+    .menu-footer p {
+      font-size: 11px;
+      color: #A9927A;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 480px) {
+      .menu-nav { margin-bottom: 24px; }
+      .menu-content { padding: 40px 20px 100px; }
+      .menu-section { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body class="menu-page">
+
+  <div class="menu-header">
+    <div class="container">
+      <div class="menu-nav">
+        <a href="index.html">
+          <span class="nav-arrow">←</span>
+          Back to Kitchen
+        </a>
+      </div>
+      <p class="menu-title">Inspired by the deli tradition</p>
+      <h1 class="menu-name">Stanz Menu</h1>
+      <p class="menu-subtitle">Larchmont, NY — Simple sandwiches. Done right.</p>
+    </div>
+  </div>
+
+  <div class="menu-content">
+
+    <div class="menu-section">
+      <div class="menu-section-tag">Lunch</div>
+      <h2 class="menu-section-title">Sandwiches — Served on White or Toasted Baguette, $7.25</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Maple Turkey</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Goat cheese, sliced apple, arugula, honey dijon</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Maple Ham</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Brie, romaine, honey dijon</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Corned Beef</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Caramelized onions, honey dijon</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Spicy Ham</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Fresh mozzarella, sun-dried tomato, arugula, pesto mayo</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Grilled Cajun Chicken</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Corn, caramelized onions, avocado, honey dijon</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Curried Chicken Salad</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Bacon, dried cranberries</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Roast Beef</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Gorgonzola, caramelized onions, arugula</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Shaved Asiago</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Sliced pears, arugula, oil, black pepper</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Smoked Salmon w/ Capers</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Mayo, onions, arugula, tomato</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Green Salami</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Roasted peppers, gorgonzola, arugula, vinaigrette</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Prosciutto</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Fried eggplant, artichoke heart, basil pesto</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Grilled Shrimp</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Basil pesto, arugula, tomato</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Grilled Chicken</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Monterey Jack cheese, basil pesto</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Avocado BLT</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Bacon, lettuce, tomato, mayo</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Warm Goat Cheese</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Bacon, grilled pear, arugula, honey mustard</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Baked Chicken</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Brie cheese, tomato, onions, Russian dressing</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Tuna Salad</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Provolone, tomato, basil, balsamic</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fresh Mozzarella</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Basil, roasted peppers</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Brie Cheese</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Tomato, basil, olive oil</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Roasted Eggplant</span>
+          <span class="menu-item-price">$7.25</span>
+        </div>
+        <div class="menu-item-desc">Goat cheese, radicchio, basil pesto</div>
+      </div>
+
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-section-tag">Breakfast</div>
+      <h2 class="menu-section-title">Omelettes — With Toasted Baguette &amp; Choice of Side</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Omelette</span>
+          <span class="menu-item-price">$15.95</span>
+        </div>
+        <div class="menu-item-desc">Roasted corn, caramelized onion, goat cheese, roasted bell pepper</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Omelette w/ Maple Ham</span>
+          <span class="menu-item-price">$15.95</span>
+        </div>
+        <div class="menu-item-desc">Brie</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Omelette w/ Goat Cheese &amp; Bacon</span>
+          <span class="menu-item-price">$15.95</span>
+        </div>
+        <div class="menu-item-desc">Arugula</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Omelette w/ Prosciutto</span>
+          <span class="menu-item-price">$15.95</span>
+        </div>
+        <div class="menu-item-desc">Gorgonzola</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Omelette w/ Mozzarella</span>
+          <span class="menu-item-price">$15.95</span>
+        </div>
+        <div class="menu-item-desc">Tomato, basil pesto</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Omelette w/ Artichoke Heart</span>
+          <span class="menu-item-price">$15.95</span>
+        </div>
+        <div class="menu-item-desc">Asiago cheese</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Open-Faced Poached Eggs</span>
+          <span class="menu-item-price">$15.95</span>
+        </div>
+        <div class="menu-item-desc">English muffin, avocado, goat cheese</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Open-Faced Corned Beef</span>
+          <span class="menu-item-price">$15.95</span>
+        </div>
+        <div class="menu-item-desc">Soft fried eggs, gruyere, grain mustard, rustic toast</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Ham &amp; Egg French Toast</span>
+          <span class="menu-item-price">$16.50</span>
+        </div>
+        <div class="menu-item-desc">Fried egg and cheese layered between challah french toast</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Smoked Salmon Plate</span>
+          <span class="menu-item-price">$18.95</span>
+        </div>
+        <div class="menu-item-desc">Hummus toast, arugula, caper, lemon</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Bagel w/ Smoked Salmon</span>
+          <span class="menu-item-price">$14.75</span>
+        </div>
+        <div class="menu-item-desc">Tomato, caper, cream cheese, onion</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Challah French Toast</span>
+          <span class="menu-item-price">$13.75</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Buttermilk Pancakes</span>
+          <span class="menu-item-price">$13.75</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Belgian Waffle</span>
+          <span class="menu-item-price">$9.50</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-section-tag">Lighter Side</div>
+      <h2 class="menu-section-title">Starters &amp; Salads</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Two Eggs &amp; Breakfast Potato</span>
+          <span class="menu-item-price">$12.75</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Southern Grits w/ Cheddar &amp; Bacon</span>
+          <span class="menu-item-price">$12.75</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Greek Yogurt</span>
+          <span class="menu-item-price">$12.75</span>
+        </div>
+        <div class="menu-item-desc">Housemade granola, fresh fruit</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Avocado Toast</span>
+          <span class="menu-item-price">$12.75</span>
+        </div>
+        <div class="menu-item-desc">Sunflower seeds, arugula, olive oil</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Hummus Toast</span>
+          <span class="menu-item-price">$11.75</span>
+        </div>
+        <div class="menu-item-desc">Roasted red bell pepper, arugula, olive oil, lemon</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fresh Cooked Oatmeal w/ Fruit</span>
+          <span class="menu-item-price">$12.75</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="menu-footer">
+      <p>Stanz Cafe — Est. 1999, Larchmont, NY</p>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
