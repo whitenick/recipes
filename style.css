@@ -962,6 +962,7 @@ body::before {
   .logo-sub { display: none; }
   .logo-divider { display: none; }
   .header-home-link { display: none; }
+  #mobileMenusLink { display: inline-flex; color: var(--accent); font-weight: 600; }
   .card-body { padding: 20px 20px 18px; }
   .detail-title { letter-spacing: -0.3px; }
 }
