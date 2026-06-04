@@ -1,0 +1,530 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucca's Italian Bistro — Nick's Kitchen</title>
+  <meta name="description" content="LBI beachside weekend menu. Pizza oven. Mario's sandwiches. Blue Claw seafood. Mojitos from the garden." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Lucca's Menu Page Overrides ── */
+    body.menu-page {
+      background: #FFFFFF;
+      color: #2C2416;
+    }
+    body.menu-page::before { display: none; }
+
+    .menu-header {
+      background: #FAFAF7;
+      border-bottom: 1px solid #E8E4DE;
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+    .menu-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-nav a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #7A6A55;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .menu-nav a:hover { color: #B5601A; }
+    .menu-nav .nav-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid #DDD8D0;
+      border-radius: 4px;
+      color: #7A6A55;
+      font-size: 14px;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: #7A6A55;
+      margin-bottom: 8px;
+    }
+    .menu-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      color: #2C2416;
+      margin-bottom: 4px;
+    }
+    .menu-subtitle {
+      font-size: 13px;
+      color: #A9927A;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .menu-location {
+      font-size: 11px;
+      color: #A9927A;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    .menu-content {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 32px 120px;
+    }
+
+    .menu-section {
+      margin-bottom: 56px;
+    }
+    .menu-section-tag {
+      font-size: 10px;
+      font-weight: 500;
+      color: #B5601A;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #DDD8D0;
+    }
+    .menu-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #2C2416;
+      margin-bottom: 32px;
+    }
+
+    .menu-item {
+      padding: 16px 0;
+      border-top: 1px solid #F0EDE8;
+    }
+    .menu-item:last-of-type {
+      border-bottom: 1px solid #F0EDE8;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: #2C2416;
+      line-height: 1.3;
+    }
+
+    .menu-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      color: #2C2416;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+
+    .menu-item-desc {
+      font-size: 13px;
+      color: #7A6A55;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .menu-item-note {
+      font-size: 11px;
+      color: #B5601A;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .menu-schedule {
+      background: #FAFAF7;
+      border: 1px solid #E8E4DE;
+      border-radius: 6px;
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+    .menu-schedule h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #2C2416;
+      margin-bottom: 12px;
+    }
+    .menu-schedule p {
+      font-size: 12px;
+      color: #7A6A55;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .menu-schedule strong {
+      color: #B5601A;
+      font-weight: 500;
+    }
+
+    .menu-footer {
+      text-align: center;
+      padding: 32px 0 0;
+      border-top: 1px solid #E8E4DE;
+      margin-top: 48px;
+    }
+    .menu-footer p {
+      font-size: 11px;
+      color: #A9927A;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 480px) {
+      .menu-nav { margin-bottom: 24px; }
+      .menu-content { padding: 40px 20px 100px; }
+      .menu-section { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body class="menu-page">
+
+  <div class="menu-header">
+    <div class="container">
+      <div class="menu-nav">
+        <a href="index.html">
+          <span class="nav-arrow">←</span>
+          Back to Kitchen
+        </a>
+      </div>
+      <p class="menu-title">Bayside, LBI — Summer Weekend Pop-Up</p>
+      <h1 class="menu-name">Lucca's Italian Bistro</h1>
+      <p class="menu-subtitle">Pizza oven · Beach picnic · Garden mint · Blue Claw seafood</p>
+      <p class="menu-location">Surf City to Harvey Cedars · June 5–7, 2026</p>
+    </div>
+  </div>
+
+  <div class="menu-content">
+
+    <!-- ══════════════════════ WEEKEND SCHEDULE ══════════════════════ -->
+    <div class="menu-schedule">
+      <h3>Weekend at a Glance</h3>
+      <p>
+        <strong>Friday:</strong> Arrive. Harvey Cedars dinner or Blue Claw run &amp; grill at home.
+        <br><strong>Saturday 10 AM:</strong> Mario's run. Beach picnic with cut sandwiches, mint iced tea.
+        <br><strong>Saturday 2 PM:</strong> 🔥 Pizza oven fires. Stays hot all afternoon — pizzas, smash burgers, blistered dogs, chicken sandwiches.
+        <br><strong>Saturday all day:</strong> Mojitos from the garden. Mint iced tea. Cold beer.
+        <br><strong>Sunday:</strong> Clean-out breakfast. Leftover pizza. Head home.
+      </p>
+    </div>
+
+    <!-- ══════════════════════ ANTIPASTI ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Antipasti · Friday</div>
+      <h2 class="menu-section-title">Blue Claw Catch</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Grilled Catch of the Day</span>
+          <span class="menu-item-price">MP</span>
+        </div>
+        <div class="menu-item-desc">Whatever Blue Claw had that morning — simply grilled with olive oil, lemon, sea salt. Salsa verde on the side. Ask them: scallops, tuna, fluke, or whatever just came in.</div>
+        <div class="menu-item-note">Hit Blue Claw before 5 PM · Surf City · Open Wed–Mon 10–6</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Chilled Shrimp Cocktail</span>
+          <span class="menu-item-price">MP</span>
+        </div>
+        <div class="menu-item-desc">Wild-caught shrimp, poached &amp; chilled. Cocktail sauce with fresh horseradish, lemon.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Corn on the Cob</span>
+          <span class="menu-item-price">$4.00</span>
+        </div>
+        <div class="menu-item-desc">Grilled in the husk, lime, salt, butter on the side.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Tomato &amp; Cucumber Salad</span>
+          <span class="menu-item-price">$6.00</span>
+        </div>
+        <div class="menu-item-desc">Cherry tomatoes, cucumber, red onion, parsley, red wine vinaigrette. Make-ahead, gets better as it sits.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ SATURDAY BEACH PICNIC ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Al Mare · Saturday Noon</div>
+      <h2 class="menu-section-title">Mario's Beach Spread</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Mario's Italian Hero</span>
+          <span class="menu-item-price">$8.50</span>
+        </div>
+        <div class="menu-item-desc">Prosciutto, capicola, Italian salami, sharp provolone, lettuce, tomato, onion, oil &amp; vinegar. Cut into sections for sharing.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Super Mario</span>
+          <span class="menu-item-price">$9.50</span>
+        </div>
+        <div class="menu-item-desc">Prosciutto, capicola, salami, extra sharp provolone, roasted peppers. The house specialty.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Chicken Salad Hero</span>
+          <span class="menu-item-price">$7.50</span>
+        </div>
+        <div class="menu-item-desc">Fresh chicken salad, lettuce, tomato on a seeded roll.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Roasted Veg &amp; Fresh Mozzarella</span>
+          <span class="menu-item-price">$8.00</span>
+        </div>
+        <div class="menu-item-desc">Grilled zucchini, roasted peppers, fresh mozzarella, basil, balsamic. The vegetarian option.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Mario's Italian Salad</span>
+          <span class="menu-item-price">$5.00</span>
+        </div>
+        <div class="menu-item-desc">Grab one of their house deli salads to round out the spread.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Crunchy Sides</span>
+          <span class="menu-item-price">$3.00</span>
+        </div>
+        <div class="menu-item-desc">Chips, crunchy veg, pickles — whatever looks good at the deli counter.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ PIZZA ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Forno · Saturday 2PM</div>
+      <h2 class="menu-section-title">Pizza Oven</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Margherita Classica</span>
+          <span class="menu-item-price">$14.00</span>
+        </div>
+        <div class="menu-item-desc">San Marzano tomato, fresh mozzarella, basil, extra-virgin olive oil, sea salt. The benchmark.</div>
+        <div class="menu-item-note">Sarah's: hold the mozz, extra sauce + olive oil finish + flake salt</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Soppressata &amp; Hot Honey</span>
+          <span class="menu-item-price">$16.00</span>
+        </div>
+        <div class="menu-item-desc">Red sauce, spicy soppressata, fresh mozzarella, hot honey drizzle post-oven. Spicy, sweet, salty — this is the crowd-pleaser.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Bianca</span>
+          <span class="menu-item-price">$15.00</span>
+        </div>
+        <div class="menu-item-desc">Thinly sliced potato, fresh rosemary, pecorino, garlic oil, flake salt. No sauce — the potato gets crispy in the oven heat.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">White Pie with Ricotta</span>
+          <span class="menu-item-price">$15.00</span>
+        </div>
+        <div class="menu-item-desc">Whole-milk ricotta, fresh mozzarella, garlic, lemon zest, parsley, olive oil finish.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Funghi &amp; Truffle</span>
+          <span class="menu-item-price">$17.00</span>
+        </div>
+        <div class="menu-item-desc">Mixed mushrooms, mozzarella, thyme, truffle oil finish, pecorino. For the adults.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ PIZZA OVEN GRILL ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">All-Day Grill</div>
+      <h2 class="menu-section-title">Pizza Oven Burgers, Dogs &amp; Chicken</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Pizza Oven Smash Burger</span>
+          <span class="menu-item-price">$12.00</span>
+        </div>
+        <div class="menu-item-desc">80/20 chuck, smashed thin on the oven floor griddle, American cheese, grilled onions, pickles, Martin's potato roll. Two per order.</div>
+        <div class="menu-item-note">Cooked directly on the oven floor — that blister matters</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Blistered All-Beef Dog</span>
+          <span class="menu-item-price">$8.00</span>
+        </div>
+        <div class="menu-item-desc">Split, griddled until blistered and charred. Martin's split-top bun. Ketchup, mustard, sauerkraut, grilled onions, relish bar.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Buttermilk Hot Chicken Sandwich</span>
+          <span class="menu-item-price">$14.00</span>
+        </div>
+        <div class="menu-item-desc">Boneless thigh, buttermilk + hot sauce marinade, grilled on the oven floor. Served on a potato roll with creamy slaw, bread &amp; butter pickles, and a schmear of comeback sauce.</div>
+        <div class="menu-item-note">Marinate overnight for best results</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ DRINKS ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Bevande</div>
+      <h2 class="menu-section-title">Drinks</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Garden Mojito</span>
+          <span class="menu-item-price">$8.00</span>
+        </div>
+        <div class="menu-item-desc">Backyard mint (a shit ton of it), lime, white rum, simple syrup, crushed ice, top with soda. Make it by the pitcher. Slap the mint, don't muddle — keeps it from going bitter.</div>
+        <div class="menu-item-note">Batch recipe: 2 cups lime juice · 1½ cups simple syrup · 2 cups rum · handful of slapped mint per pitcher · top with soda</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fresh Mint Iced Tea</span>
+          <span class="menu-item-price">$4.00</span>
+        </div>
+        <div class="menu-item-desc">Black tea, steeped strong, cooled. Loaded with fresh mint and lemon slices. Big batch in a Nalgene for the beach.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Limoncello Spritz</span>
+          <span class="menu-item-price">$9.00</span>
+        </div>
+        <div class="menu-item-desc">Limoncello, prosecco, soda water, lemon wheel. Beach-appropriate and dangerously easy-drinking.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Cold Beer</span>
+          <span class="menu-item-price">MP</span>
+        </div>
+        <div class="menu-item-desc">Whatever landed in the cooler. Keep it cold, keep it coming.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ SUNDAY WIND-DOWN ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Domenica</div>
+      <h2 class="menu-section-title">Sunday Clean-Out</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Breakfast Frittata</span>
+          <span class="menu-item-price">$10.00</span>
+        </div>
+        <div class="menu-item-desc">Whatever's left — leftover Blue Claw seafood, grilled veggies, Mario's meats, eggs, cheese. Cast iron, oven-set.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Leftover Pizza Toast</span>
+          <span class="menu-item-price">$0.00</span>
+        </div>
+        <div class="menu-item-desc">Cold pizza. Breakfast of champions. Reheat in a dry pan if you're fancy.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Mario's Bread Toast Bar</span>
+          <span class="menu-item-price">$4.00</span>
+        </div>
+        <div class="menu-item-desc">Any leftover Mario's bread, toasted. Butter, jam, or just olive oil + salt.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ DOLCI ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Dolci</div>
+      <h2 class="menu-section-title">Something Sweet</h2>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Affogato</span>
+          <span class="menu-item-price">$7.00</span>
+        </div>
+        <div class="menu-item-desc">Vanilla gelato drowned in a hot shot of espresso. The easiest impressive dessert on earth.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Grilled Peaches</span>
+          <span class="menu-item-price">$8.00</span>
+        </div>
+        <div class="menu-item-desc">Halved, grilled on the pizza oven's dying heat. Mascarpone, honey, torn mint from the garden.</div>
+        <div class="menu-item-note">Do these after the last pizza — the residual oven heat is perfect</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Biscotti &amp; Vin Santo</span>
+          <span class="menu-item-price">$6.00</span>
+        </div>
+        <div class="menu-item-desc">Store-bought almond biscotti (check labels — no nuts for Nick &amp; Sarah), a glass of Vin Santo for dipping. The classic Italian end to a long day.</div>
+      </div>
+
+    </div>
+
+    <div class="menu-footer">
+      <p>Lucca's Italian Bistro · LBI Beachside Pop-Up · June 2026</p>
+      <p style="margin-top:4px;">Garden mint, pizza oven, and good company. Mangia.</p>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
