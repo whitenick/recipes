@@ -1,0 +1,749 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beach Break — Nick's Kitchen</title>
+  <meta name="description" content="LBI beach weekend pop-up. Handmade Italian sandwiches on the sand. Pizza oven. Catch-of-the-day seafood dinner. Clean-out hash Sunday." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Beach Break Menu Overrides ── */
+    body.menu-page {
+      background: #FFFFFF;
+      color: #2C2416;
+    }
+    body.menu-page::before { display: none; }
+
+    .menu-header {
+      background: #FAFAF7;
+      border-bottom: 1px solid #E8E4DE;
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+    .menu-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-nav a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #7A6A55;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .menu-nav a:hover { color: #B5601A; }
+    .menu-nav .nav-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid #DDD8D0;
+      border-radius: 4px;
+      color: #7A6A55;
+      font-size: 14px;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: #7A6A55;
+      margin-bottom: 8px;
+    }
+    .menu-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      color: #2C2416;
+      margin-bottom: 4px;
+    }
+    .menu-subtitle {
+      font-size: 13px;
+      color: #A9927A;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .menu-location {
+      font-size: 11px;
+      color: #A9927A;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    .menu-content {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 32px 120px;
+    }
+
+    .menu-section {
+      margin-bottom: 56px;
+    }
+    .menu-section-tag {
+      font-size: 10px;
+      font-weight: 500;
+      color: #B5601A;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #DDD8D0;
+    }
+    .menu-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #2C2416;
+      margin-bottom: 32px;
+    }
+
+    .menu-item {
+      padding: 16px 0;
+      border-top: 1px solid #F0EDE8;
+    }
+    .menu-item:last-of-type {
+      border-bottom: 1px solid #F0EDE8;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: #2C2416;
+      line-height: 1.3;
+    }
+
+    .menu-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      color: #2C2416;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+
+    .menu-item-desc {
+      font-size: 13px;
+      color: #7A6A55;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .menu-item-note {
+      font-size: 11px;
+      color: #B5601A;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .menu-item-diet {
+      font-size: 10px;
+      font-weight: 500;
+      color: #6A8F5C;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .menu-schedule {
+      background: #FAFAF7;
+      border: 1px solid #E8E4DE;
+      border-radius: 6px;
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+    .menu-schedule h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #2C2416;
+      margin-bottom: 12px;
+    }
+    .menu-schedule p {
+      font-size: 12px;
+      color: #7A6A55;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .menu-schedule strong {
+      color: #B5601A;
+      font-weight: 500;
+    }
+
+    .menu-allergy-box {
+      background: #FEFAF5;
+      border: 1px solid #EADBC8;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 48px;
+    }
+    .menu-allergy-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #8A3A1A;
+      margin-bottom: 8px;
+    }
+    .menu-allergy-box p {
+      font-size: 11px;
+      color: #7A6A55;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .menu-allergy-box strong {
+      color: #8A3A1A;
+      font-weight: 500;
+    }
+
+    .pizza-combo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0 8px;
+    }
+    .pizza-combo {
+      background: #FAFAF7;
+      border: 1px solid #E8E4DE;
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .pizza-combo h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: #2C2416;
+      margin-bottom: 4px;
+    }
+    .pizza-combo p {
+      font-size: 11px;
+      color: #7A6A55;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .pizza-combo .combo-diet {
+      font-size: 9px;
+      font-weight: 500;
+      color: #6A8F5C;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .menu-footer {
+      text-align: center;
+      padding: 32px 0 0;
+      border-top: 1px solid #E8E4DE;
+      margin-top: 48px;
+    }
+    .menu-footer p {
+      font-size: 11px;
+      color: #A9927A;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 560px) {
+      .pizza-combo-grid { grid-template-columns: 1fr; }
+      .menu-nav { margin-bottom: 24px; }
+      .menu-content { padding: 40px 20px 100px; }
+      .menu-section { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body class="menu-page">
+
+  <div class="menu-header">
+    <div class="container">
+      <div class="menu-nav">
+        <a href="index.html">
+          <span class="nav-arrow">←</span>
+          Back to Kitchen
+        </a>
+      </div>
+      <p class="menu-title">LBI Beach House — Summer 2026</p>
+      <h1 class="menu-name">Beach Break</h1>
+      <p class="menu-subtitle">Handmade sandwiches on the sand · Pizza oven · Catch-of-the-day · Clean-out hash</p>
+      <p class="menu-location">June 26–28, 2026 · 6 Friends · Tides &amp; Toppings</p>
+    </div>
+  </div>
+
+  <div class="menu-content">
+
+    <!-- ══════════════════════ DIETARY ══════════════════════ -->
+    <div class="menu-allergy-box">
+      <h3>⚠️ Allergies &amp; Dietary Notes</h3>
+      <p>
+        <strong>Nick &amp; Sarah:</strong> NO PEANUTS, NO TREE NUTS (all forms). Check every label.<br>
+        <strong>Sarah Bianco:</strong> Gluten intolerance — GF bread &amp; crust available for every meal. Marked below.<br>
+        <strong>Livi Schilsky:</strong> Pescatarian — no meat, seafood &amp; veg are fair game. Marked below.<br>
+        <strong>No dairy restrictions</strong> — cheese is fine for everyone (including Sarah). But we'll call out dairy-free options where they shine.
+      </p>
+    </div>
+
+    <!-- ══════════════════════ WEEKEND SCHEDULE ══════════════════════ -->
+    <div class="menu-schedule">
+      <h3>Weekend at a Glance</h3>
+      <p>
+        <strong>Friday lunch:</strong> Nick's handmade custom Mario's Italian sandwiches, individually wrapped to the beach.
+        <br><strong>Friday 2 PM:</strong> 🔥 Pizza oven fires. Warming through the afternoon.
+        <br><strong>Friday afternoon → dinner:</strong> Antipasti from the oven in waves (shishitos, charred Caesar, roasted eggplant, clams, shrimp). Then build-your-own personal 8" pizzas with a toppings bar and suggested combos.
+        <br><strong>Saturday AM:</strong> Boys on the water. Girls, you're on your own for lunch.
+        <br><strong>Saturday evening:</strong> Girls set the beach — apps, charcuterie, drinks. Boys cook whatever we caught (or whatever looked best at the fish market).
+        <br><strong>Sunday:</strong> Clean-out hash. Everyone heads home.
+      </p>
+    </div>
+
+    <!-- ══════════════════════ FRIDAY LUNCH — BEACH SANDWICHES ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Venerdì Mezzogiorno · Beach Sandwiches</div>
+      <h2 class="menu-section-title">Friday Lunch — Mario's on the Sand</h2>
+
+      <p style="font-size:12px;color:#A9927A;line-height:1.8;margin-bottom:28px;font-weight:300;">Nick handmakes these. Each wrapped in butcher paper, carried out to the beach. Pick a spot, rip the paper, eat with sand between your toes.</p>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">The Classic Italian</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Prosciutto, capicola, Italian salami, sharp provolone, lettuce, tomato, red onion, oil &amp; vinegar. Crusty roll. The benchmark Italian sandwich.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">The Godfather</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Prosciutto, capicola, salami, extra sharp provolone, roasted red peppers. The house specialty — bigger, bolder, more going on.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Roasted Veg &amp; Fresh Mozz</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Grilled zucchini, roasted peppers, fresh mozzarella, basil, balsamic glaze. The vegetarian option.</div>
+        <div class="menu-item-diet">✅ Livi · Vegetarian</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fresh Mozz &amp; Tomato</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Fresh mozzarella, thick-sliced tomato, basil, balsamic, olive oil, flake salt. Simple. Perfect. 3 ingredients done right.</div>
+        <div class="menu-item-diet">✅ Livi · ✅ Sarah Bianco (GF wrap)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">GF Italian Wrap</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">The Classic Italian build, wrapped in a sturdy gluten-free wrap instead of a roll. Same fillings, no gluten.</div>
+        <div class="menu-item-diet">✅ Sarah Bianco · Gluten-Free</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Crunchy Sides</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Chips, crunchy veg, pickles, olives — whatever looks good. Grab it, throw it in the beach bag.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ FRIDAY — PIZZA OVEN ANTIPASTI ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Venerdì Pomeriggio · 4 PM</div>
+      <h2 class="menu-section-title">Antipasti from the Oven</h2>
+
+      <p style="font-size:12px;color:#A9927A;line-height:1.8;margin-bottom:28px;font-weight:300;">These hit the oven from 4 PM onward while the oven gets up to pizza temp. Nothing takes more than 4 minutes. Pass pans around family style. Make the eggplant first — it's the showstopper.</p>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Blistered Shishito Peppers</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Tossed in oil and salt, spread on a sheet pan, 2-3 minutes in the oven. They blister and pop. Squeeze lime, hit with flake salt. Zero effort, big payoff.</div>
+        <div class="menu-item-diet">✅ Everyone · GF · Vegan</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Charred Caesar</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Romaine hearts halved lengthwise, brushed with oil, laid directly on the oven floor for 60-90 seconds. Cut side chars, interior stays cool and snappy. Garlicky Caesar dressing, crispy breadcrumbs. A completely different vegetable than raw romaine.</div>
+        <div class="menu-item-note">Sarah's: hold the parmesan · Sarah Bianco's: GF breadcrumbs</div>
+        <div class="menu-item-diet">✅ Livi</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Roasted Eggplant — Honey &amp; Tahini</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Thick eggplant planks, oiled, salted. Sheet pan in the oven until collapsing and deeply browned — 5-6 minutes. Finish with tahini, honey, flake salt, torn mint. Serve warm or at room temp. People who don't like eggplant love this.</div>
+        <div class="menu-item-diet">✅ Everyone · GF · Vegan</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Pizza Oven Broccolini</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Tossed in olive oil, salt, chili flake. Spread on a sheet pan, 3-4 minutes. Tips get dark and crispy, stalks stay tender. Squeeze lemon, shower with pecorino (hold for Sarah — just lemon + salt).</div>
+        <div class="menu-item-diet">✅ Everyone · GF</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Sweet Potato Wedges</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Cut into wedges, tossed in oil, smoked paprika, salt. Oven ambient heat (not the floor) — 8-10 minutes. Edges caramelized and crispy. Garlic aioli for dipping.</div>
+        <div class="menu-item-diet">✅ Everyone · GF · Vegan (if aioli is omitted or vegan)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Pizza Oven Clams</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Littleneck clams on a sheet pan with garlic butter, white wine, parsley. The oven shucks them in their own liquor. A minute or two and they pop open. Sopping bread mandatory.</div>
+        <div class="menu-item-note">Grab 2-3 dozen littlenecks from the fish market</div>
+        <div class="menu-item-diet">✅ Livi · GF (skip the bread)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Garlic Butter Shrimp</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Cast iron skillet on the oven floor. Garlic butter, chili flake, lemon, 2-3 minutes. Pass the pan around.</div>
+        <div class="menu-item-note">Sarah's: sub olive oil for butter · Livi's: yes, this is her thing</div>
+        <div class="menu-item-diet">✅ Livi · ✅ Sarah Bianco (GF)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Garlic Bread Bar</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Brush any good bread with garlic oil, hit the oven for 60-90 seconds. Charred in spots. Best garlic bread you'll ever eat. Dedicated GF baguette for Sarah Bianco.</div>
+        <div class="menu-item-diet">✅ Sarah Bianco (GF loaf)</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ FRIDAY DINNER — PIZZAS ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Venerdì Sera · Forno</div>
+      <h2 class="menu-section-title">Friday Dinner — Build Your Own Pizza</h2>
+
+      <p style="font-size:12px;color:#A9927A;line-height:1.8;margin-bottom:16px;font-weight:300;">Each person gets an ~8-inch personal dough ball. Roll it, top it, launch it. We'll set up a toppings station with everything below — grab what you want, try a combo from the menu, or go rogue. The oven is hot and ready. Pizzas take 90-120 seconds each.</p>
+
+      <p style="font-size:11px;color:#A9927A;line-height:1.6;margin-bottom:20px;font-weight:300;"><strong>Gluten-free crust:</strong> Pre-made GF pizza shells for Sarah Bianco (Caputo Fioreglut preferred — behaves like real dough). Cooked on a separate sheet pan.</p>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:500;color:#2C2416;margin-bottom:12px;">Toppings Bar</h3>
+
+      <div style="font-size:12px;color:#7A6A55;line-height:1.8;font-weight:300;margin-bottom:28px;padding:16px;background:#FAFAF7;border-radius:6px;border:1px solid #E8E4DE;">
+        <strong style="color:#B5601A;">Sauces:</strong> San Marzano tomato · Garlic oil (EVOO + crushed garlic + flake salt) · Red pepper pesto (no nuts) · Ricotta-garlic base<br>
+        <strong style="color:#B5601A;">Cheeses:</strong> Fresh mozzarella (tear it yourself) · Shredded low-moisture mozz · Ricotta (dollops) · Pecorino / Parmesan (shaved) · Goat cheese (crumbled)<br>
+        <strong style="color:#B5601A;">Proteins:</strong> Soppressata · Pepperoni · Italian sausage (cooked, crumbled) · Anchovy filets · Grilled chicken<br>
+        <strong style="color:#B5601A;">Veggies:</strong> Roasted mushrooms · Roasted red peppers · Caramelized onions · Kalamata olives · Artichoke hearts · Cherry tomatoes (halved) · Thinly sliced potato · Capers · Chili flakes<br>
+        <strong style="color:#B5601A;">Post-oven:</strong> Arugula · Fresh basil · Hot honey · Flake salt · Truffle oil · Balsamic glaze · Lemon zest · EVOO drizzle
+      </div>
+
+      <p style="font-size:11px;color:#7A6A55;margin-bottom:8px;font-weight:300;">If you want inspiration, here's what we'd order:</p>
+
+      <div class="pizza-combo-grid">
+        <div class="pizza-combo">
+          <h4>1 · Margherita Classica</h4>
+          <p>San Marzano sauce, fresh mozzarella, basil, EVOO, flake salt post-oven. The benchmark.</p>
+          <div class="combo-diet">✅ Livi · ✅ Bianco (GF)</div>
+        </div>
+        <div class="pizza-combo">
+          <h4>2 · Soppressata &amp; Hot Honey</h4>
+          <p>Red sauce, soppressata, mozzarella, hot honey drizzle. Spicy, sweet, salty.</p>
+          <div class="combo-diet">❌ Livi (meat) · ✅ Bianco (GF)</div>
+        </div>
+        <div class="pizza-combo">
+          <h4>3 · Funghi &amp; Truffle</h4>
+          <p>Garlic oil base, mixed mushrooms, mozzarella, thyme, truffle oil finish, pecorino. Umami bomb.</p>
+          <div class="combo-diet">✅ Livi · ✅ Bianco (GF)</div>
+        </div>
+        <div class="pizza-combo">
+          <h4>4 · Bianca (Potato &amp; Rosemary)</h4>
+          <p>No sauce. Thin-sliced potato, rosemary, pecorino, garlic oil, flake salt. Potato gets crispy in the oven.</p>
+          <div class="combo-diet">✅ Livi · ✅ Bianco (GF) · Hold pecorino for dairy-free</div>
+        </div>
+        <div class="pizza-combo">
+          <h4>5 · Puttanesca</h4>
+          <p>San Marzano sauce, olives, capers, anchovies, garlic, chili flake, parsley. No cheese. Salty, briny, punchy.</p>
+          <div class="combo-diet">✅ Livi · ✅ Bianco (GF) · ✅ Sarah (dairy-free)</div>
+        </div>
+        <div class="pizza-combo">
+          <h4>6 · Sausage + Peppers</h4>
+          <p>Red sauce, mozzarella, crumbled Italian sausage, roasted peppers, caramelized onions.</p>
+          <div class="combo-diet">❌ Livi (meat) · ✅ Bianco (GF)</div>
+        </div>
+        <div class="pizza-combo">
+          <h4>7 · Bianco Veggie</h4>
+          <p>Ricotta dollops, roasted mushrooms, peppers, artichokes, olives, garlic oil base, arugula post-oven.</p>
+          <div class="combo-diet">✅ Livi · ✅ Bianco (GF)</div>
+        </div>
+        <div class="pizza-combo">
+          <h4>8 · Sarah Special (No Cheese)</h4>
+          <p>San Marzano sauce, extra garlic, dried oregano, EVOO, chili flake, fresh basil. Clean. Bright. No dairy.</p>
+          <div class="combo-diet">✅ Livi · ✅ Bianco (GF) · ✅ Sarah · Dairy-Free</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ SATURDAY — FISHING ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Sabato · On the Water</div>
+      <h2 class="menu-section-title">Saturday — Boys Fish, Girls Coast</h2>
+
+      <div class="menu-item" style="border:none;padding:0;">
+        <div class="menu-item-desc" style="font-size:13px;color:#7A6A55;line-height:1.8;"><strong>Boys:</strong> Morning on the boat. Targeting fluke, striper, bluefish. Whatever bites, that's dinner.<br>
+        <strong>Girls:</strong> You're on your own for lunch — beach, town, whatever feels right. We'll text when we're heading in.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ SATURDAY EVENING — BEACH SETUP ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Sabato Sera · Beach Club</div>
+      <h2 class="menu-section-title">Girls' Beach Appetizers &amp; Drinks</h2>
+
+      <p style="font-size:12px;color:#A9927A;line-height:1.8;margin-bottom:28px;font-weight:300;">Girls own the beach setup from 6 PM. Charcuterie, crudo, drinks, sunset. Boys handle the seafood dinner that follows. Meet at the blanket — the bottles are cold.</p>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Charcuterie Board</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc"><strong>Meats:</strong> Prosciutto, soppressata, salami. <strong>Cheeses:</strong> Aged gouda, manchego, blue cheese, fresh mozzarella. <strong>Brine:</strong> Marinated olives, caper berries, cornichons. <strong>Sweet:</strong> Dried figs, apricots, honey comb. <strong>Fresh:</strong> Grapes, sliced apple, pear. <strong>Crackers:</strong> GF + regular (marked). <strong>On the side:</strong> Mostarda, whole-grain mustard.</div>
+        <div class="menu-item-note">No nuts anywhere — check every label. Sarah Bianco's section is the GF crackers.</div>
+        <div class="menu-item-diet">✅ Livi · ✅ Bianco (GF crackers)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Crudo Platter</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Sushi-grade tuna or fluke from the fish market. Thinly sliced, arranged on a platter. Lemon, olive oil, flake salt, cracked pepper, fresh herbs, caper berries scattered. Minimal effort, maximum impression.</div>
+        <div class="menu-item-note">Optional — only if the girls want to flex</div>
+        <div class="menu-item-diet">✅ Livi (this is her territory) · ✅ GF</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Garden Mojitos</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Backyard mint, lime, white rum, simple syrup, crushed ice, top with soda. Make it by the pitcher. <strong>Key move:</strong> Slap the mint, don't muddle — keeps it from going bitter.</div>
+        <div class="menu-item-note">Batch: 2 cups lime juice · 1½ cups simple syrup · 2 cups rum · handful slapped mint per pitcher · top with soda</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Cold Rosé / Crisp White</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Whatever landed in the cooler. Keep it cold, keep it pouring. Vermentino or Albariño if you're picking.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fresh Mint Iced Tea</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Black tea, steeped strong, cooled. Loaded with fresh mint and lemon slices. Big batch in a Nalgene.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Cold Beer</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Whatever's in the cooler.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ SATURDAY NIGHT — SEAFOOD DINNER ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Sabato Sera · Pesce</div>
+      <h2 class="menu-section-title">Boys' Seafood Dinner</h2>
+
+      <p style="font-size:12px;color:#A9927A;line-height:1.8;margin-bottom:28px;font-weight:300;">What we caught determines what we cook. If we skunked, the fish market backup plan is locked and loaded. All prep happens while the sun goes down.</p>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">🎣 If We Catch Fish</span>
+          <span class="menu-item-price">—</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Whole Grilled Striper or Fluke</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Score the skin. Stuff the cavity with lemon, garlic, herbs. Grill 6-8 minutes per side over medium heat. Skin crackles, meat stays juicy. Bring it to the table whole — it's a show. Serve with lemon wedges and flake salt.</div>
+        <div class="menu-item-diet">✅ Livi · ✅ Bianco (GF)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Bluefish — Grilled</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Bluefish is oily and strong-flavored. It needs aggressive treatment. Hit it hard with lemon, garlic, oregano, olive oil. Don't overcook — it dries out fast. Serve with a salsa verde (parsley, capers, anchovy, garlic, olive oil — blitz while it rests).</div>
+        <div class="menu-item-note">The lemon cuts the oiliness. Don't skip it.</div>
+        <div class="menu-item-diet">✅ Livi · ✅ Bianco (GF)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Simple Grilled Filets</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">If we end up with a mix of filets. EVOO, salt, pepper, lemon. 3-4 minutes per side. Salsa verde on the side.</div>
+        <div class="menu-item-diet">✅ Livi · ✅ Bianco (GF)</div>
+      </div>
+
+      <div class="menu-item" style="border-top:1px solid #F0EDE8;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">🐟 Fish Market Backup</span>
+          <span class="menu-item-price">—</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Seared Tuna Steaks</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Pat bone dry. Season hard with salt and pepper. Screaming hot cast iron — 90 seconds per side. Slice against the grain, fan on a platter. Serve with a citrus-soy dipping sauce or salsa verde.</div>
+        <div class="menu-item-diet">✅ Livi · ✅ Bianco (GF)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Sea Scallops al Forno</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Giant sea scallops, patted bone dry, seasoned hard. Screaming hot cast iron on the oven floor — 90 seconds per side. That crust is impossible anywhere else. Lemon butter finish (olive oil for Sarah).</div>
+        <div class="menu-item-diet">✅ Livi · ✅ Bianco (GF)</div>
+      </div>
+
+      <div class="menu-item" style="border-bottom:1px solid #F0EDE8;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Sides for Seafood Dinner</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc"><strong>Grilled corn</strong> in the husk — lime, flake salt, cotija (hold cotija for Sarah)<br>
+        <strong>Tomato &amp; cucumber salad</strong> — cherry tomatoes, cucumber, red onion, parsley, red wine vinaigrette. Make ahead, gets better as it sits.<br>
+        <strong>Arugula salad</strong> — lemon vinaigrette, shaved parmesan (hold for Sarah).<br>
+        <strong>Grilled lemon potatoes</strong> — parboiled, smashed, grilled with lemon, garlic, oregano.<br>
+        <strong>Crusty bread + EVOO</strong> — GF baguette for Sarah Bianco.</div>
+      </div>
+
+      <div class="menu-item" style="border-top:none;padding-top:8px;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">🍷 Suggested Wine</span>
+          <span class="menu-item-price">—</span>
+        </div>
+        <div class="menu-item-desc">Crisp white: Vermentino, Albariño, or Chablis. Bone-chilled. If someone insists on red, a light chilled Nebbiolo. Nothing heavy — this is seafood.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ SUNDAY — CLEAN-OUT ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Domenica</div>
+      <h2 class="menu-section-title">Sunday Clean-Out Hash Brunch</h2>
+
+      <p style="font-size:12px;color:#A9927A;line-height:1.8;margin-bottom:28px;font-weight:300;">Whatever's left from the weekend becomes breakfast. Cast iron, crispy edges, runny yolks. The best meal of the weekend because you didn't plan a thing.</p>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">The Hash</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Diced potatoes + sweet potatoes crisped in a hot pan. Fold in whatever's left — roasted mushrooms, peppers, broccolini, eggplant, sweet potato wedges. Flake in leftover seafood (separate section for Livi) or chop leftover meats for the others. Fried eggs on top, yolks running through everything.</div>
+        <div class="menu-item-note">Naturally GF · Seafood section for Livi, meat section for the rest</div>
+        <div class="menu-item-diet">✅ Everyone · GF</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Cold Leftover Pizza</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Breakfast of champions. Reheat in a dry pan if you're fancy.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fresh Fruit Salad</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Whatever's in season. Toss it together. Simple, bright, balances the hash.</div>
+        <div class="menu-item-diet">✅ Everyone</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Coffee</span>
+          <span class="menu-item-price"></span>
+        </div>
+        <div class="menu-item-desc">Strong. Black. Keep it coming.</div>
+      </div>
+
+    </div>
+
+    <div class="menu-footer">
+      <p>Beach Break · LBI Pop-Up · June 26–28, 2026</p>
+      <p style="margin-top:4px;">Wrapped in butcher paper. Cooked in the oven. Eaten on the beach. Mangia.</p>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
