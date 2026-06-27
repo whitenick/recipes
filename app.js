@@ -11,7 +11,18 @@ let currentView = 'grid'; // 'grid' | 'list'
 let favoritesOnly = false;
 let favorites = new Set(JSON.parse(localStorage.getItem('ns-favorites') || '[]'));
 
-// ── Init ───────────────────────────────────────────────
+// ── OG Meta Tag Helper ──────────────────────────────────────
+function setOgMeta(property, content) {
+  let el = document.querySelector(`meta[property=\"${property}\"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute('property', property);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+// ── Init ───────────────────────────────────────────────"}]
 async function init() {
   // Handle hash-based routing
   window.addEventListener('hashchange', handleRoute);
@@ -402,8 +413,11 @@ function showDetail(recipe) {
     favBtn.querySelector('span:last-child').textContent = nowFav ? 'Saved to favorites' : 'Save to favorites';
   });
   
-  // Set page title
+  // Set page title and OG tags
   document.title = `${recipe.title} — Nick's Kitchen`;
+  setOgMeta('og:title', `${recipe.title} — Nick's Kitchen`);
+  setOgMeta('og:description', recipe.description ? recipe.description.substring(0, 200) : 'A recipe from Nick\'s Kitchen');
+  setOgMeta('og:url', `https://whitenick.github.io/recipes/#recipe/${recipe.id}`);
 }
 
 function showList() {
@@ -411,6 +425,9 @@ function showList() {
   document.getElementById('detailView').style.display = 'none';
   document.getElementById('printBtn').style.display = 'none';
   document.title = "Nick's Kitchen";
+  setOgMeta('og:title', "Nick's Kitchen");
+  setOgMeta('og:description', 'A personal collection of recipes — tested, refined, and kept.');
+  setOgMeta('og:url', 'https://whitenick.github.io/recipes/');
   
   // Re-render in case favorites changed
   applyFilters();
