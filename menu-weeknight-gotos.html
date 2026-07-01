@@ -1,0 +1,555 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weeknight Gotos — Nick's Kitchen</title>
+  <meta name="description" content="Five weeknight dinners that work for Nick, Sarah, and baby Wilson. Quick. Healthy. Nut-free. Real food for real evenings." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Weeknight Gotos Menu Overrides ── */
+    body.menu-page {
+      background: #FFFFFF;
+      color: #2C2416;
+    }
+    body.menu-page::before { display: none; }
+
+    .menu-header {
+      background: #FAFAF7;
+      border-bottom: 1px solid #E8E4DE;
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+    .menu-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-nav a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #7A6A55;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .menu-nav a:hover { color: #B5601A; }
+    .menu-nav .nav-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid #DDD8D0;
+      border-radius: 4px;
+      color: #7A6A55;
+      font-size: 14px;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: #7A6A55;
+      margin-bottom: 8px;
+    }
+    .menu-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      color: #2C2416;
+      margin-bottom: 4px;
+    }
+    .menu-subtitle {
+      font-size: 13px;
+      color: #A9927A;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .menu-location {
+      font-size: 11px;
+      color: #A9927A;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    .menu-content {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 32px 120px;
+    }
+
+    .menu-section {
+      margin-bottom: 56px;
+    }
+    .menu-section-tag {
+      font-size: 10px;
+      font-weight: 500;
+      color: #B5601A;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #DDD8D0;
+    }
+    .menu-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #2C2416;
+      margin-bottom: 8px;
+    }
+    .menu-section-notes {
+      font-size: 12px;
+      color: #A9927A;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .menu-item {
+      padding: 16px 0;
+      border-top: 1px solid #F0EDE8;
+    }
+    .menu-item:last-of-type {
+      border-bottom: 1px solid #F0EDE8;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: #2C2416;
+      line-height: 1.3;
+    }
+
+    .menu-item-time {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: #A9927A;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+
+    .menu-item-desc {
+      font-size: 13px;
+      color: #7A6A55;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .menu-item-note {
+      font-size: 11px;
+      color: #B5601A;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .menu-item-diet {
+      font-size: 10px;
+      font-weight: 500;
+      color: #6A8F5C;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .menu-item-link {
+      font-size: 11px;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+    .menu-item-link a {
+      color: #B5601A;
+      text-decoration: none;
+      border-bottom: 1px solid #EADBC8;
+    }
+    .menu-item-link a:hover { border-color: #B5601A; }
+
+    .menu-allergy-box {
+      background: #FEFAF5;
+      border: 1px solid #EADBC8;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 48px;
+    }
+    .menu-allergy-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #8A3A1A;
+      margin-bottom: 8px;
+    }
+    .menu-allergy-box p {
+      font-size: 11px;
+      color: #7A6A55;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .menu-allergy-box strong {
+      color: #8A3A1A;
+      font-weight: 500;
+    }
+
+    .menu-tip-box {
+      background: #F7FAF5;
+      border: 1px solid #D8E4D0;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+    .menu-tip-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #4A6A3A;
+      margin-bottom: 8px;
+    }
+    .menu-tip-box p {
+      font-size: 11px;
+      color: #6A7A5A;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .menu-tip-box strong {
+      color: #4A6A3A;
+      font-weight: 500;
+    }
+
+    .menu-footer {
+      text-align: center;
+      padding: 32px 0 0;
+      border-top: 1px solid #E8E4DE;
+      margin-top: 48px;
+    }
+    .menu-footer p {
+      font-size: 11px;
+      color: #A9927A;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 560px) {
+      .menu-content { padding: 40px 20px 100px; }
+      .menu-section { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body class="menu-page">
+
+  <div class="menu-header">
+    <div class="container">
+      <div class="menu-nav">
+        <a href="menus.html">
+          <span class="nav-arrow">←</span>
+          All Menus
+        </a>
+        <a href="index.html">
+          <span class="nav-arrow home">⌂</span>
+        </a>
+      </div>
+      <p class="menu-title">Nick + Sarah + Wilson — Summer 2026</p>
+      <h1 class="menu-name">Weeknight Gotos</h1>
+      <p class="menu-subtitle">Five dinners that work when you're tired, the baby's fussy, and you still want to eat well</p>
+      <p class="menu-location">≤45 minutes active · One pan or one pot · Zero nuts · No bullshit</p>
+    </div>
+  </div>
+
+  <div class="menu-content">
+
+    <!-- ══════════════════════ DIETARY ══════════════════════ -->
+    <div class="menu-allergy-box">
+      <h3>⚠️ Allergies — Read Every Label</h3>
+      <p>
+        <strong>Nick &amp; Sarah:</strong> NO PEANUTS, NO TREE NUTS — in any form. No almond flour, no walnut oil, no cashew cream, no Nutella, no pine nuts, no pesto with nuts. Check every condiment, every sauce, every "may contain" statement.<br>
+        <strong>Nick:</strong> Also avoids lentils and peas (all types).<br>
+        <strong>Sarah:</strong> Milk allergy — cheese is fine (feta, mozzarella, parmesan, blue cheese, etc.), but no cream sauces, no milk-based soups, no dairy-heavy desserts. Olive oil and plant butter work for her swaps.<br>
+        <strong>Wilson:</strong> 6 months old — starting solids. These recipes intentionally include components that mash well.
+      </p>
+    </div>
+
+    <div class="menu-tip-box">
+      <h3>🥣 The Weeknight Strategy</h3>
+      <p>
+        Every dinner here follows the same philosophy: <strong>one pan or one pot, minimal cleanup, big flavor.</strong> Most are done in 30-40 minutes flat. A few benefit from Sunday batch cooking (Bolognese, soups) — make a double batch and you've got Wednesday covered too. Each meal has a Wilson-friendly component: something soft, simple, and unseasoned that mashes easily.
+      </p>
+    </div>
+
+    <!-- ══════════════════════ MONDAY ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Monday · 40 Minutes</div>
+      <h2 class="menu-section-title">Crispy Chicken Thighs + Pan Sauce</h2>
+      <div class="menu-section-notes">The most reliable dinner in the rotation. Bone-in skin-on thighs, roasted until the skin shatters, with a 3-minute pan sauce that makes it feel like a restaurant meal. Sweet potato wedges roast alongside on the same pan.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">The Main Event</span>
+          <span class="menu-item-time">50 min · 10 active</span>
+        </div>
+        <div class="menu-item-desc">Four bone-in skin-on chicken thighs, seasoned and roasted at 425°F for 35 minutes, then broiled 2-3 minutes for crackling skin. Sweet potato wedges on the same sheet pan, tossed in oil, salt, smoked paprika. While the chicken rests, deglaze the pan with white wine, shallot, garlic, chicken stock, and mount with cold butter. Takes more time than effort — the oven does the work.</div>
+        <div class="menu-item-note">Wilson: Mashed sweet potato + finely shredded dark meat. A winner every time.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Crispy%20Roasted%20Chicken%20Thighs%20with%20Pan%20Sauce">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: use olive oil in pan sauce, skip butter · ✅ Nick: no lentils/peas</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ TUESDAY ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Tuesday · 35 Minutes</div>
+      <h2 class="menu-section-title">Sheet Pan Sausage + Veggies</h2>
+      <div class="menu-section-notes">One pan. Zero fuss. Italian sausage, kale, asparagus, cherry tomatoes, garlic — all on one sheet pan at 425°F for 20-25 minutes. The juices from the sausage season everything. Finish with lemon and parmesan.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">The Sheet Pan</span>
+          <span class="menu-item-time">35 min · 10 active</span>
+        </div>
+        <div class="menu-item-desc">Italian sausage links (sweet or spicy), kale (stems removed, torn), asparagus (woody ends snapped), cherry tomatoes, smashed garlic. Toss in olive oil, salt, pepper, fennel seeds. Roast 20-25 minutes at 425°F. Finish with lemon slices and fresh basil. The kale gets crispy at the edges, the tomatoes burst, and the sausage renders into everything.</div>
+        <div class="menu-item-note">Wilson: The softest sausage chunk + torn kale + mashed tomato. All on one tray.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Sheet%20Pan%20Sausage%20with%20Kale%2C%20Asparagus%20%26%20Cherry%20Tomatoes">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: skip parmesan finish · ✅ Nick: no lentils/peas</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ WEDNESDAY ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Wednesday · 15 Minutes</div>
+      <h2 class="menu-section-title">Shrimp Ajillo</h2>
+      <div class="menu-section-notes">The fastest dinner in the rotation. Shrimp, garlic, olive oil, chili flake — sizzling in a skillet for 3 minutes. Serve with crusty bread for sopping the oil. It's faster than ordering takeout.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">The Skillet</span>
+          <span class="menu-item-time">15 min · 10 active</span>
+        </div>
+        <div class="menu-item-desc">1 lb large shrimp, peeled and deveined. Pat dry (wet shrimp don't sear). Heat 1/3 cup olive oil in a skillet with 6 cloves thinly sliced garlic and a pinch of chili flake — just until the garlic starts to sizzle. Add shrimp in a single layer. Cook 90 seconds per side. Finish with lemon juice, parsley, flake salt. Serve with crusty bread for the oil.</div>
+        <div class="menu-item-note">Add a quick salad or steamed green beans to round it out. Wilson: mashed avocado + a soft shrimp piece.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Shrimp%20Ajillo">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: naturally dairy-free · ✅ Nick: no lentils/peas</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ THURSDAY ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Thursday · 15 Minutes (if prepped)</div>
+      <h2 class="menu-section-title">Bolognese + Pasta</h2>
+      <div class="menu-section-notes">This one rewards Sunday afternoon. Make a double batch of Bolognese in 90 minutes, freeze half, eat the rest Thursday. Reheating takes the time the pasta takes. Comfort in a bowl — and Wilson can eat the pasta soft.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Batch Day (Sunday)</span>
+          <span class="menu-item-time">90 min · 30 active</span>
+        </div>
+        <div class="menu-item-desc">The real Bolognese — not a weeknight shortcut. Ground beef + pork, soffritto (onion, carrot, celery), white wine, whole milk, San Marzano tomatoes. Cook low and slow, 60 minutes, until the milk and wine are absorbed and the sauce is thick and velvety. Freeze in 2-serving portions. Thursday night: boil pasta (linguine or pappardelle), reheat sauce in a wide pan, toss, serve with parmesan.</div>
+        <div class="menu-item-note">Wilson: Soft pasta pieces with a little sauce. Big hit.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Bolognese">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: hold the parmesan, sub olive oil for the milk butter · ✅ Nick: no lentils/peas</div>
+      </div>
+
+      <div class="menu-tip-box" style="margin-top:20px;">
+        <h3>📦 Freezer Stock — Batch Cooking Recipes</h3>
+        <p>
+          While you're in Bolognese mode, make one of these too. They freeze perfectly and turn a zero-energy night into a real dinner.<br><br>
+          <strong>Chicken Tortilla Soup</strong> — shred the chicken, freeze the base. Reheat + add tortilla strips + avocado. Nut-free, dairy-free for Sarah.<br>
+          <strong>Tomato Ginger Chicken and Rice Soup</strong> — one pot, freezes beautifully. Ginger's good for digestion (Nick's gut protocol).<br>
+          <strong>Carrot Ginger Soup</strong> — silky, naturally sweet, blends into baby food effortlessly.
+        </p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ FRIDAY ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Friday · 25 Minutes</div>
+      <h2 class="menu-section-title">Chicken Cutlets</h2>
+      <div class="menu-section-notes">Friday deserves something that feels like a reward but takes as long as a weeknight. Thin-sliced chicken breast, breaded and pan-fried in oil until golden and shattering. Sandwich it, salad it, or just eat it with lemon and a vegetable.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">The Cutlet</span>
+          <span class="menu-item-time">25 min · 20 active</span>
+        </div>
+        <div class="menu-item-desc">Pound chicken breasts to even 1/4-inch thickness. Season hard with salt and pepper. Dredge in flour, then egg, then seasoned breadcrumbs (add garlic powder, oregano, paprika to the crumbs). Fry in 1/4 inch of oil at 350°F — 3 minutes per side, until deep golden. Drain on paper towel. Serve with lemon wedges and whatever green thing is in the fridge — arugula with lemon vinaigrette, sautéed spinach, or roasted broccoli.</div>
+        <div class="menu-item-note">Make extra + turn into Chicken Parm the next night. Wilson: thin shreds of cutlet + soft vegetable.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=White%20Family%20Chicken%20Cutlets">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free (check breadcrumbs — no "may contain tree nuts") · ✅ Sarah: dairy-free as written</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ THE ROTATION SET ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">The Next 5</div>
+      <h2 class="menu-section-title">Rotate These In</h2>
+      <div class="menu-section-notes">Not every week needs to be the same five. Swap any night for these — they follow the same rules: fast, one-pan or one-pot, nut-free, Wilson-approved.</div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Shiitake &amp; Kale Fried Rice</span>
+          <span class="menu-item-time">20 min</span>
+        </div>
+        <div class="menu-item-desc">Leftover rice + shiitakes + kale + egg + soy + sesame oil. Come home, make rice. Actually use leftover rice from the night before — fresh rice is too wet. The key is high heat and not crowding the pan. Scramble an egg, push it aside, fry the mushrooms, add the kale, toss the rice through. Finish with scallions and sesame seeds.</div>
+        <div class="menu-item-note">Wilson: The soft scrambled egg + well-cooked rice. Skip the soy.</div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: dairy-free · ✅ Nick: no lentils/peas</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Burger Bowls</span>
+          <span class="menu-item-time">25 min</span>
+        </div>
+        <div class="menu-item-desc">No bun, no problem. Good ground beef (80/20) formed loosely, seasoned hard with salt and pepper, seared in a cast iron skillet 4 minutes per side. Rest it. Slice it. Serve over romaine with tomato, red onion, pickles, and your own dressing — a quick buttermilk ranch for Nick, tahini-lemon for Sarah. A burger that doesn't need a bun and leaves you lighter.</div>
+        <div class="menu-item-note">Wilson: Finely minced burger + mashed avocado. Protein and fat he needs.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Burger%20Bowls">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: tahini dressing (seeds, not nuts) · ✅ Nick: no lentils/peas</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Miso-Glazed Salmon</span>
+          <span class="menu-item-time">25 min</span>
+        </div>
+        <div class="menu-item-desc">Whisk white miso, sake (or mirin), soy sauce, a touch of sugar. Coat salmon filets. Broil 8-10 minutes — the glaze caramelizes, the fish stays medium-rare at the center. Serve with steamed rice and a quick shiitake-kale sauté. The miso is great for Nick's gut protocol.</div>
+        <div class="menu-item-note">Wilson: Flaked salmon + well-mashed rice. Omega-3s for the baby brain.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Miso-Glazed%20Salmon%20with%20Shiitake-Kale%20Sauté">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: dairy-free · ✅ Nick: gut-friendly, no lentils/peas</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Black Bean &amp; Chorizo Tacos</span>
+          <span class="menu-item-time">20 min</span>
+        </div>
+        <div class="menu-item-desc">Brown chorizo (casings removed) in a skillet. Add a can of black beans (drained), cumin, chili powder, a splash of water. Smash some beans with the back of a spoon to thicken. Warm corn tortillas direct on the burner. Fill with the chorizo-bean mix, diced onion, cilantro, crema (or lime-smashed avocado for Sarah), hot sauce. A 20-minute taco night that beats delivery.</div>
+        <div class="menu-item-note">Wilson: Mashed black beans + avocado. This is going to be a favorite.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Black%20Bean%20%26%20Chorizo%20Tacos">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: use avocado instead of crema · ✅ Nick: no lentils/peas (beans are fine)</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Mediterranean Sheet Pan Chicken</span>
+          <span class="menu-item-time">40 min · 10 active</span>
+        </div>
+        <div class="menu-item-desc">Chicken thighs (boneless or bone-in) on a sheet pan with red onion wedges, bell peppers, cherry tomatoes, chickpeas, olives. Toss everything in olive oil, lemon juice, oregano, garlic, salt, pepper. Roast at 425°F for 30 minutes (boneless) or 35-40 (bone-in). The chickpeas get crunchy, the tomatoes burst, the chicken stays juicy. Feta on top at the end (hold for Sarah).</div>
+        <div class="menu-item-note">Wilson: Mashed chickpeas + soft pepper + finely shredded chicken. Pre-loaded with flavor.</div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: hold feta, otherwise dairy-free · ✅ Nick: no lentils/peas</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ SUNDAY BATCH ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Sunday · 90 Minutes</div>
+      <h2 class="menu-section-title">The Batch Prep Hour</h2>
+      <div class="menu-section-notes">One Sunday afternoon sets up the week. Pick 2-3 from this list and you'll have a week where dinner is just "reheat and plate."</div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Bolognese (double batch)</span>
+          <span class="menu-item-time">90 min</span>
+        </div>
+        <div class="menu-item-desc">Freeze 2-serving portions. Defrost in the fridge overnight or run the sealed bag under warm water. Reheat in a pan while pasta boils. Done.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Bolognese">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Freezer-friendly · ✅ Wilson-friendly</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Chicken Tortilla Soup</span>
+          <span class="menu-item-time">45 min</span>
+        </div>
+        <div class="menu-item-desc">Big batch. Freezes perfectly. Shredded chicken, black beans (no lentils!), corn, tomatoes, cumin, chili, lime. Store the tortilla strips and avocado separately — add fresh when serving.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Chicken%20Tortilla%20Soup">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: dairy-free · ✅ Nick: no lentils/peas</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Carrot Ginger Soup</span>
+          <span class="menu-item-time">40 min</span>
+        </div>
+        <div class="menu-item-desc">Carrots, onion, ginger, garlic, vegetable stock. Simmer, blend until silky. Coconut milk finish (optional — adds richness for Sarah's calorie goals). Wilson eats this from day one.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Carrot%20Ginger%20Soup">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: dairy-free (use coconut milk) · ✅ Wilson: naturally baby-friendly</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Tomato Ginger Chicken &amp; Rice Soup</span>
+          <span class="menu-item-time">50 min</span>
+        </div>
+        <div class="menu-item-desc">One pot. Chicken thighs, tomato, ginger, garlic, rice. Simmer until the chicken falls apart. Shred, stir back in. Healing, filling, freezes in blocks.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Tomato%20Ginger%20Chicken%20and%20Rice%20Soup">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: dairy-free · ✅ Nick: gut-friendly</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ LUNCH ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Lunch · 10 Minutes</div>
+      <h2 class="menu-section-title">Quick Lunches</h2>
+      <div class="menu-section-notes">Lunch is survival with a baby. These are no-cook or minimal-cook options that come together in the time it takes Wilson to finish a bottle.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Chicken Salad Two Ways</span>
+          <span class="menu-item-time">10 min</span>
+        </div>
+        <div class="menu-item-desc">Use leftover chicken from Monday. Classic: mayo, celery, red onion, lemon, salt, pepper. Mediterranean: olive oil, lemon, cucumber, tomato, red onion, parsley. Both on toast, crackers, or straight out of the bowl.</div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: both are dairy-free</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Soup + Toast</span>
+          <span class="menu-item-time">5 min</span>
+        </div>
+        <div class="menu-item-desc">Leftover batch soup from the freezer. Reheat. Good bread, butter (or olive oil for Sarah), flake salt. Done.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Tidy Burger</span>
+          <span class="menu-item-time">15 min</span>
+        </div>
+        <div class="menu-item-desc">Quick smash burger. 80/20 beef, salt, pepper. Smash thin on a hot cast iron. American cheese (Nick) or not (Sarah). Bun, pickle, onion, mustard. The tidy version is a smaller patty on a regular bun — manageable with one hand while holding a baby.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Tidy%20Burger%20with%20Pepper%20Relish%20Spread">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: skip cheese, add avocado</div>
+      </div>
+
+    </div>
+
+    <div class="menu-footer">
+      <p>Weeknight Gotos · For Nick, Sarah &amp; Wilson</p>
+      <p style="margin-top:4px;">Mise en place before the baby wakes. Serve with a glass of something cold.</p>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
