@@ -80,6 +80,12 @@ How it comes together.
 
 ---
 
+## Chef's Notes
+
+Personal insights from the cook — taste/texture cues, shortcuts that don't compromise quality, how to tell when it's done without a thermometer, the one thing not to skip.
+
+---
+
 ## Tags
 
 #tag1 #tag2
@@ -253,8 +259,9 @@ Create a recipe following this exact structure:
 6. **Timeline:** Work backward from serving time in 5-15 minute blocks. Shows the cook what happens when.
 7. **Execution:** Numbered steps with specific temperatures, specific timing, and specific technique. Bold for make-or-break callouts. Explain the why.
 8. **Plating:** Mandatory. How the dish lands — sauce direction, garnish, accompaniments.
-9. **Critical Notes:** Experience-driven callouts. What matters most, pitfalls, technique truths.
-10. **Tags:** #dietary #protein #style tags.
+9. **Chef's Notes:** Optional but preferred. Personal insights — what to look/smell/listen for, shortcuts that don't compromise, the one thing not to skip.
+10. **Critical Notes:** Experience-driven callouts. What matters most, pitfalls, technique truths.
+11. **Tags:** #dietary #protein #style tags.
 11. **Source line** at the bottom with URL.
 
 Constraints:
