@@ -86,11 +86,11 @@ function extractMeta(content) {
     { key: 'servings', regex: /[-–]\s*\*?\*?[Ss]erv(?:ings?|es?)\*?\*?:?\s*\*?\*?([^\n|*]+)/i },
     { key: 'yield', regex: /[-–]\s*\*?\*?[Yy]ield\*?\*?:?\s*\*?\*?([^\n|*]+)/i },
     // Inline bold format: **Prep Time**: 20 minutes
-    { key: 'prepTime', regex: /\*\*[Pp]rep(?:aration)?\s*[Tt]ime\*\*:\s*([^\n|*]+)/i },
-    { key: 'cookTime', regex: /\*\*[Cc]ook(?:ing)?\s*[Tt]ime\*\*:\s*([^\n|*]+)/i },
-    { key: 'totalTime', regex: /\*\*[Tt]otal\s*[Tt]ime\*\*:\s*([^\n|*]+)/i },
-    { key: 'servings', regex: /\*\*[Ss]erv(?:ings?|es?)\*\*:\s*([^\n|*]+)/i },
-    { key: 'yield', regex: /\*\*[Yy]ield\*\*:\s*([^\n|*]+)/i },
+    { key: 'prepTime', regex: /\*\*[Pp]rep(?:aration)?\s*[Tt]ime(?:\*\*:|:\*\*)\s*([^\n|*]+)/i },
+    { key: 'cookTime', regex: /\*\*[Cc]ook(?:ing)?\s*[Tt]ime(?:\*\*:|:\*\*)\s*([^\n|*]+)/i },
+    { key: 'totalTime', regex: /\*\*[Tt]otal\s*[Tt]ime(?:\*\*:|:\*\*)\s*([^\n|*]+)/i },
+    { key: 'servings', regex: /\*\*[Ss]erv(?:ings?|es?)(?:\*\*:|:\*\*)\s*([^\n|*]+)/i },
+    { key: 'yield', regex: /\*\*[Yy]ield(?:\*\*:|:\*\*)\s*([^\n|*]+)/i },
     // Timeline in Overview
     { key: 'totalTime', regex: /\*\*Timeline:\*\*\s*([^|\n]+)/i },
     // Preparation Time: 25 minutes (no bold)
