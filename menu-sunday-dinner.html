@@ -1,0 +1,466 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunday Dinner — Nick's Kitchen</title>
+  <meta name="description" content="Three chef-crafted dinners built on technique, not time. Pan-roasted chicken, seared duck breast, herb-crusted rack of lamb. Each one done in under an hour." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Sunday Dinner Menu Overrides ── */
+    body.menu-page {
+      background: #FFFFFF;
+      color: #2C2416;
+    }
+    body.menu-page::before { display: none; }
+
+    .menu-header {
+      background: #FAFAF7;
+      border-bottom: 1px solid #E8E4DE;
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+    .menu-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .menu-nav a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #7A6A55;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .menu-nav a:hover { color: #B5601A; }
+    .menu-nav .nav-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid #DDD8D0;
+      border-radius: 4px;
+      color: #7A6A55;
+      font-size: 14px;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: #7A6A55;
+      margin-bottom: 8px;
+    }
+    .menu-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      color: #2C2416;
+      margin-bottom: 4px;
+    }
+    .menu-subtitle {
+      font-size: 13px;
+      color: #A9927A;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .menu-location {
+      font-size: 11px;
+      color: #A9927A;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    .menu-content {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 32px 120px;
+    }
+
+    .menu-section {
+      margin-bottom: 56px;
+    }
+    .menu-section-tag {
+      font-size: 10px;
+      font-weight: 500;
+      color: #B5601A;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #DDD8D0;
+    }
+    .menu-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #2C2416;
+      margin-bottom: 8px;
+    }
+    .menu-section-notes {
+      font-size: 12px;
+      color: #A9927A;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .menu-item {
+      padding: 16px 0;
+      border-top: 1px solid #F0EDE8;
+    }
+    .menu-item:last-of-type {
+      border-bottom: 1px solid #F0EDE8;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: #2C2416;
+      line-height: 1.3;
+    }
+
+    .menu-item-time {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: #A9927A;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+
+    .menu-item-desc {
+      font-size: 13px;
+      color: #7A6A55;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .menu-item-note {
+      font-size: 11px;
+      color: #B5601A;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .menu-item-diet {
+      font-size: 10px;
+      font-weight: 500;
+      color: #6A8F5C;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .menu-item-link {
+      font-size: 11px;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+    .menu-item-link a {
+      color: #B5601A;
+      text-decoration: none;
+      border-bottom: 1px solid #EADBC8;
+    }
+    .menu-item-link a:hover { border-color: #B5601A; }
+
+    .menu-allergy-box {
+      background: #FEFAF5;
+      border: 1px solid #EADBC8;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 48px;
+    }
+    .menu-allergy-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #8A3A1A;
+      margin-bottom: 8px;
+    }
+    .menu-allergy-box p {
+      font-size: 11px;
+      color: #7A6A55;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .menu-allergy-box strong {
+      color: #8A3A1A;
+      font-weight: 500;
+    }
+
+    .menu-tip-box {
+      background: #F7FAF5;
+      border: 1px solid #D8E4D0;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+    .menu-tip-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #4A6A3A;
+      margin-bottom: 8px;
+    }
+    .menu-tip-box p {
+      font-size: 11px;
+      color: #6A7A5A;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .menu-footer {
+      text-align: center;
+      padding: 32px 0 0;
+      border-top: 1px solid #E8E4DE;
+      margin-top: 48px;
+    }
+    .menu-footer p {
+      font-size: 11px;
+      color: #A9927A;
+      letter-spacing: 0.06em;
+    }
+
+    .technique-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #B5601A;
+      border: 1px solid #EADBC8;
+      border-radius: 3px;
+      padding: 2px 8px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 560px) {
+      .menu-content { padding: 40px 20px 100px; }
+      .menu-section { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body class="menu-page">
+
+  <div class="menu-header">
+    <div class="container">
+      <div class="menu-nav">
+        <a href="menus.html">
+          <span class="nav-arrow">←</span>
+          All Menus
+        </a>
+        <a href="index.html">
+          <span class="nav-arrow home">⌂</span>
+        </a>
+      </div>
+      <p class="menu-title">Nick + Sarah — Any Sunday</p>
+      <h1 class="menu-name">Sunday Dinner</h1>
+      <p class="menu-subtitle">Three dinners that look like you spent the whole day cooking. You didn't.</p>
+      <p class="menu-location">≤50 minutes · One skillet or sheet pan · Chef technique · Dairy-free options</p>
+    </div>
+  </div>
+
+  <div class="menu-content">
+
+    <!-- ══════════════════════ DIETARY ══════════════════════ -->
+    <div class="menu-allergy-box">
+      <h3>⚠️ Allergies — Read Every Label</h3>
+      <p>
+        <strong>Nick &amp; Sarah:</strong> NO PEANUTS, NO TREE NUTS — in any form. No almond flour, no walnut oil, no cashew cream, no Nutella, no pine nuts, no pesto with nuts. Check every condiment, every sauce, every "may contain" statement.<br>
+        <strong>Nick:</strong> Also avoids lentils and peas (all types).<br>
+        <strong>Sarah:</strong> Milk allergy — cheese is fine (feta, mozzarella, parmesan, blue cheese, etc.), but no cream sauces, no milk-based soups, no dairy-heavy desserts. Olive oil and plant butter work for her swaps.
+      </p>
+    </div>
+
+    <div class="menu-tip-box">
+      <h3>👨‍🍳 The Philosophy</h3>
+      <p>
+        These three dinners share a common thread: <strong>one or two techniques that do all the work</strong>. Pan-roasting, fat rendering, high-heat roasting, and a 3-minute pan sauce are the difference between "I cooked chicken" and "I cooked a whole roasted chicken with forty cloves of garlic." The active time is under 20 minutes in every case — the oven and the skillet handle the rest. These aren't weeknight gotos. They're Sunday projects that fit into a Sunday schedule.
+      </p>
+    </div>
+
+    <!-- ══════════════════════ ENTRÉE 1 ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">50 Minutes · 15 Active</div>
+      <h2 class="menu-section-title">Pan-Roasted Chicken with 40 Cloves of Garlic</h2>
+      <div class="menu-section-notes">A whole chicken, one cast iron skillet, forty cloves of garlic. The technique that separates good home cooks from great ones: starting skin-side down in a cold pan so the fat renders slowly and the skin turns glass-crackling. The garlic roasts in the pan juices until it's sweet, spreadable, and nothing like raw garlic. Serve with crusty bread for squeezing each clove onto.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Pan-Roast Technique</span>
+          <span class="menu-item-time">50 min · 15 active</span>
+        </div>
+        <div class="menu-item-desc">
+          <strong>The technique:</strong> Start the chicken breast-side down in a cold cast iron skillet. Set the burner to medium, wait 8-10 minutes. The fat renders slowly, the skin turns deep amber. Flip it, scatter 40 unpeeled garlic cloves around the pan, and transfer to a 425°F oven. 30-35 minutes later, the thigh reads 155°F, the garlic has confited into sweet paste, and you have a dinner that smells like a French bistro. Rest 10 minutes. Carve. Squeeze the garlic onto bread. Eat.
+        </div>
+        <div class="menu-item-note">The garlic transforms completely — sweet, nutty, spreadable. Completely different from raw garlic.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Pan-Roasted%20Chicken%20with%2040%20Cloves%20of%20Garlic">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: naturally dairy-free · ✅ Nick: no lentils/peas</div>
+        <div class="technique-tag">Cold-pan rendering</div>
+        <div class="technique-tag" style="margin-left:4px;">Garlic confit</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ ENTRÉE 2 ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">30 Minutes · 15 Active</div>
+      <h2 class="menu-section-title">Seared Duck Breast with Orange &amp; Thyme</h2>
+      <div class="menu-section-notes">A restaurant plate in half an hour. Duck breast with crackling-crisp skin, a medium-rare center, and a bright orange-thyme pan sauce that comes together in the same pan while the duck rests. The skill here is skin rendering — scoring the fat in a diamond pattern, starting in a cold pan, pouring off the rendered fat as it accumulates. Duck fat is a byproduct you save for roasting potatoes the rest of the week.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Skin Rendering + Pan Sauce</span>
+          <span class="menu-item-time">30 min · 15 active</span>
+        </div>
+        <div class="menu-item-desc">
+          <strong>The technique:</strong> Score the duck skin in a diamond pattern — through the fat but not into the meat. Season hard. Start in a cold pan, skin-side down, medium heat. Pour off the fat every 3-4 minutes as it renders. After 8-10 minutes the skin is amber and crisp. Flip, cook 2-3 minutes for medium-rare. Rest. Deglaze the pan with orange juice, sherry vinegar, shallot, and thyme — reduce to a syrupy sauce in 3 minutes. Slice the duck against the grain. Fan on the plate. Sauce around it. Arugula salad on the side to cut the richness.
+        </div>
+        <div class="menu-item-note">Pour off and save the duck fat — it's liquid gold for roasting potatoes later in the week.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Seared%20Duck%20Breast%20with%20Orange%20%26%20Thyme">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: naturally dairy-free · ✅ Nick: no lentils/peas</div>
+        <div class="technique-tag">Skin scoring &amp; rendering</div>
+        <div class="technique-tag" style="margin-left:4px;">Quick pan sauce</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ ENTRÉE 3 ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">30 Minutes · 15 Active</div>
+      <h2 class="menu-section-title">Rack of Lamb with Herb-Parmesan Crust</h2>
+      <div class="menu-section-notes">The "I know what I'm doing" dinner. A frenched rack of lamb — seared hard on the fat cap, painted with Dijon mustard, coated in an herb-and-parmesan breadcrumb crust, then roasted at 450°F for 15 minutes. The bones are a built-in handle. The crust stays golden and crisp. The center stays pink. Carve between the bones, fan on the plate, and watch people's eyes widen.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">High-Heat Roasting + Crusting</span>
+          <span class="menu-item-time">30 min · 15 active</span>
+        </div>
+        <div class="menu-item-desc">
+          <strong>The technique:</strong> Sear the frenched rack fat-side down in a screaming hot skillet — 2-3 minutes until the fat cap is deep brown. Stand it on its ends to sear the cut faces. Remove from heat. Paint the meat side with Dijon mustard (acts as glue). Press the herb-parmesan breadcrumb mixture onto the mustard in a ¼-inch layer. Roast at 450°F for 15-18 minutes. Pull at 125°F for medium-rare. Rest 5-10 minutes — carry-over takes it to 130-135°F. Carve between every bone. Serve with a red wine pan sauce made from the fond in the skillet.
+        </div>
+        <div class="menu-item-note">The mustard layer isn't just flavor — it's structural. It bonds the crust to the meat so it doesn't fall off when you carve.</div>
+        <div class="menu-item-link"><a href="https://whitenick.github.io/recipes/?recipe=Rack%20of%20Lamb%20with%20Herb-Parmesan%20Crust">Full recipe →</a></div>
+        <div class="menu-item-diet">✅ Nut-free · ✅ Sarah: parmesan is fine (hard cheese) · ✅ Nick: no lentils/peas</div>
+        <div class="technique-tag">High-heat roasting</div>
+        <div class="technique-tag" style="margin-left:4px;">Breadcrumb crusting</div>
+        <div class="technique-tag" style="margin-left:4px;">Frenched presentation</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ THE COMMON THREAD ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Technique Library</div>
+      <h2 class="menu-section-title">What These Three Teach You</h2>
+      <div class="menu-section-notes">Cook these three dinners and you'll have mastered the building blocks of professional home cooking. Each one teaches a specific skill that transfers to dozens of other dishes.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Cold-Pan Rendering</span>
+          <span class="menu-item-time">Pan-Roasted Chicken</span>
+        </div>
+        <div class="menu-item-desc">Starting meat skin-side down in a cold pan seems wrong. It's not. The fat renders slowly and evenly, producing crackling-crisp skin instead of burnt rubber. This technique works for duck, pork belly, and any fatty fish with skin.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fat Management</span>
+          <span class="menu-item-time">Duck Breast</span>
+        </div>
+        <div class="menu-item-desc">Scoring, rendering, and pouring off fat as it accumulates. Duck breast teaches you to work with fat instead of against it. The byproduct is duck fat — one of the best cooking mediums on earth.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Resting &amp; Carry-Over Cooking</span>
+          <span class="menu-item-time">All three</span>
+        </div>
+        <div class="menu-item-desc">Every protein in this lineup rests before carving. The internal temperature rises 5-10°F during resting — pull it early, let the carry-over finish the job. Un-rested meat bleeds juice onto the cutting board instead of keeping it inside.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Pan Sauce — 3 Minutes</span>
+          <span class="menu-item-time">Chicken + Duck + Lamb</span>
+        </div>
+        <div class="menu-item-desc">After the protein rests, deglaze the fond in the pan with wine, stock, juice, or vinegar. Reduce by half. Swirl in a fat (butter, olive oil, or the rendered fat you just saved). Season. Pour around the meat. A 3-minute pan sauce is worth more than a jar of anything from a store.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Temperature Is Truth</span>
+          <span class="menu-item-time">All three</span>
+        </div>
+        <div class="menu-item-desc">A thermometer is not optional for these dishes. 155°F for chicken thigh, 130°F for duck breast, 125°F for lamb. Guessing is how good ingredients get wasted. A $15 Thermapen pays for itself in one meal.</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ WINE ══════════════════════ -->
+    <div class="menu-section">
+      <div class="menu-section-tag">Pairings</div>
+      <h2 class="menu-section-title">What to Drink</h2>
+      <div class="menu-section-notes">These dinners ask for wine that can stand up to technique-forward cooking. Keep it simple.</div>
+
+      <div class="menu-item" style="border-top:none;padding-top:0;">
+        <div class="menu-item-header">
+          <span class="menu-item-name">40-Clove Chicken</span>
+          <span class="menu-item-time">Red or white</span>
+        </div>
+        <div class="menu-item-desc">A lighter red (Beaujolais, Pinot Noir) or a full white (white Burgundy, unoaked Chardonnay). The garlic plays well with both.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Duck Breast with Orange</span>
+          <span class="menu-item-time">Red</span>
+        </div>
+        <div class="menu-item-desc">A Côtes du Rhône or a domestic Syrah. The peppery notes match the duck, the fruit handles the orange.</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Rack of Lamb</span>
+          <span class="menu-item-time">Red</span>
+        </div>
+        <div class="menu-item-desc">A Bordeaux, a Rioja Reserva, or a domestic Cabernet Sauvignon. Lamb wants tannin and structure.</div>
+      </div>
+    </div>
+
+    <div class="menu-footer">
+      <p>Sunday Dinner · For Nick &amp; Sarah</p>
+      <p style="margin-top:4px;">Technique over effort. The oven does the work. You take the credit.</p>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
