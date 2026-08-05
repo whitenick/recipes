@@ -361,6 +361,7 @@ function processRecipeFile(filePath, subdir = '') {
     const content = fs.readFileSync(filePath, 'utf8');
     const filename = path.basename(filePath);
     const name = filename.replace(/\.md$/, '');
+    const stat = fs.statSync(filePath);
     
     const title = extractTitle(content, name);
     const description = extractDescription(content);
@@ -387,6 +388,7 @@ function processRecipeFile(filePath, subdir = '') {
         servings: meta.servings || meta.yield || null,
       },
       source,
+      dateAdded: stat.mtime.toISOString(), // file mtime — used for "Recent Recipes"
       content, // full markdown content
     };
   } catch (err) {

@@ -478,7 +478,7 @@ function escHtml(str) {
 // Make clearSearch globally accessible (used in HTML)
 window.clearSearch = clearSearch;
 
-// ── Featured Recipes ───────────────────────────────────
+// ── Recent Recipes ───────────────────────────────────
 async function loadFeaturedRecipes() {
   const section = document.getElementById('featuredSection');
   const grid = document.getElementById('featuredGrid');
@@ -486,35 +486,23 @@ async function loadFeaturedRecipes() {
   const subtitleEl = document.getElementById('featuredSubtitle');
   if (!section || !grid) return;
 
-  let featured;
-  try {
-    const res = await fetch('data/featured.json?v=' + Date.now());
-    if (!res.ok) return;
-    featured = await res.json();
-  } catch (e) {
-    return; // No featured file — that's fine
-  }
+  // Show the most recently added recipes, newest first
+  const recentRecipes = [...allRecipes]
+    .filter(r => r.dateAdded)
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
+    .slice(0, 6); // Max 6 recent
 
-  const recipeIds = featured.recipes || [];
-  if (recipeIds.length === 0) return;
+  if (recentRecipes.length === 0) return;
 
-  // Update title/subtitle if provided
-  if (titleEl && featured.title) titleEl.textContent = featured.title;
-  if (subtitleEl && featured.subtitle) subtitleEl.textContent = featured.subtitle;
+  // Update title/subtitle
+  if (titleEl) titleEl.textContent = 'Recent Recipes';
+  if (subtitleEl) subtitleEl.textContent = 'Fresh from the collection';
 
-  // Find matching recipes
-  const featuredRecipes = recipeIds
-    .map(id => allRecipes.find(r => r.id === id))
-    .filter(Boolean)
-    .slice(0, 6); // Max 6 featured
-
-  if (featuredRecipes.length === 0) return;
-
-  grid.innerHTML = featuredRecipes.map(recipe => {
+  grid.innerHTML = recentRecipes.map(recipe => {
     const tags = recipe.categories.slice(0, 2);
     return `
       <div class="featured-card" onclick="window.location.hash='recipe/${escHtml(recipe.id)}'">
-        <div class="featured-card-badge">Featured</div>
+        <div class="featured-card-badge">New</div>
         <div class="featured-card-title">${escHtml(recipe.title)}</div>
         ${recipe.description ? `<div class="featured-card-desc">${escHtml(recipe.description.substring(0, 100))}${recipe.description.length > 100 ? '…' : ''}</div>` : ''}
         <div class="featured-card-meta">
