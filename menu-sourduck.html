@@ -173,6 +173,22 @@
       .menu-content { padding: 40px 20px 100px; }
       .menu-section { margin-bottom: 40px; }
     }
+  
+    @media print {
+      .menu-header, .menu-footer, .menu-nav { display: none !important; }
+      body.menu-page { background: white !important; color: black !important; }
+      body.menu-page::before { display: none !important; }
+      .menu-name { color: black !important; }
+      .menu-subtitle, .menu-location { color: #555 !important; }
+      .menu-item { page-break-inside: avoid; }
+      .menu-item-name { color: black !important; }
+      .menu-item-price { color: #666 !important; }
+      .menu-item-desc { color: #333 !important; }
+      .menu-item-note { color: #666 !important; }
+      .section-head { color: #666 !important; border-bottom-color: #ddd !important; }
+      .section-desc { color: #555 !important; }
+      .technique-tag { border-color: #ddd !important; color: #333 !important; }
+    }
   </style>
 </head>
 <body class="menu-page">
@@ -180,9 +196,16 @@
   <div class="menu-header">
     <div class="container">
       <div class="menu-nav">
-        <a href="index.html">
+        <a href="menus.html">
           <span class="nav-arrow">←</span>
-          Back to Kitchen
+          All Menus
+        </a>
+        <a href="index.html">
+          <span class="nav-arrow home">⌂</span>
+        </a>
+        <a href="guides.html">
+          <span class="nav-arrow">📖</span>
+          Guides
         </a>
       </div>
       <p class="menu-title">Handcrafted. Local. Texas-forward.</p>

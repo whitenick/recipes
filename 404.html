@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Not Found — Nick's Kitchen</title>
+  <meta name="description" content="Page not found" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .four-oh-four {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      text-align: center;
+      padding: 80px 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .four-oh-four-code {
+      font-family: var(--font-serif);
+      font-size: clamp(80px, 12vw, 140px);
+      font-weight: 300;
+      color: var(--border-strong);
+      line-height: 1;
+      margin-bottom: 12px;
+      letter-spacing: -2px;
+    }
+    .four-oh-four-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .four-oh-four-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 36px;
+      max-width: 360px;
+      line-height: 1.6;
+    }
+    .four-oh-four-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .four-oh-four-link {
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.15s;
+    }
+    .four-oh-four-link.primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+    .four-oh-four-link.primary:hover {
+      opacity: 0.8;
+    }
+    .four-oh-four-link.secondary {
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+    }
+    .four-oh-four-link.secondary:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="https://nickwhite.us" class="logo">
+          <div class="logo-text">
+            <span class="logo-title">Nick's <em>Kitchen</em></span>
+            <span class="logo-divider"></span>
+            <span class="logo-sub">Serapio Labs</span>
+          </div>
+        </a>
+        <div class="header-actions">
+          <a href="index.html" class="header-home-link">Recipes</a>
+          <a href="menus.html" class="header-home-link">Menus</a>
+          <a href="guides.html" class="header-home-link">Guides</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="four-oh-four">
+      <div class="four-oh-four-code">404</div>
+      <h1 class="four-oh-four-title">Page not found</h1>
+      <p class="four-oh-four-desc">That page doesn't live here. Maybe it got eaten by the kitchen dog.</p>
+      <div class="four-oh-four-links">
+        <a href="index.html" class="four-oh-four-link primary">Browse Recipes</a>
+        <a href="guides.html" class="four-oh-four-link secondary">Cooking Guides</a>
+        <a href="menus.html" class="four-oh-four-link secondary">Menus</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Nick's Kitchen · Serapio Labs</p>
+    </div>
+  </footer>
+</body>
+</html>
