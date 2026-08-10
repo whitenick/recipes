@@ -566,7 +566,7 @@
 
         <!-- ═══ 01 BREADING ═══ -->
         <section class="guide-section" id="bread" data-title="The Breading Station" data-kicker="Crispy Coating">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">01</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Crispy Coating</span>
@@ -608,7 +608,7 @@
 
         <!-- ═══ 02 EGGS ═══ -->
         <section class="guide-section" id="eggs" data-title="Eggs" data-kicker="The Right Pan, The Right Heat">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">02</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">The Right Pan, The Right Heat</span>
@@ -643,7 +643,7 @@
 
         <!-- ═══ 03 PAN SEARING ═══ -->
         <section class="guide-section" id="sear" data-title="Pan Searing" data-kicker="Crust Control">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">03</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Crust Control</span>
@@ -678,7 +678,7 @@
 
         <!-- ═══ 04 STEAK DONENESS ═══ -->
         <section class="guide-section" id="steak" data-title="Steak Doneness" data-kicker="Temps &amp; The Hand Test">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">04</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Temps &amp; The Hand Test</span>
@@ -715,7 +715,7 @@
 
         <!-- ═══ 05 KNIFE CUTS ═══ -->
         <section class="guide-section" id="knife" data-title="Knife Cuts" data-kicker="Veg Prep Dimensions">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">05</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Veg Prep Dimensions</span>
@@ -751,7 +751,7 @@
 
         <!-- ═══ 06 BLANCH & SHOCK ═══ -->
         <section class="guide-section" id="blanch" data-title="Blanch &amp; Shock" data-kicker="Bright, Tender Veg">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">06</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Bright, Tender Veg</span>
@@ -782,7 +782,7 @@
 
         <!-- ═══ 07 GRAINS & LEGUMES ═══ -->
         <section class="guide-section" id="grains" data-title="Grains &amp; Legumes" data-kicker="Ratios &amp; Times">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">07</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Ratios &amp; Times</span>
@@ -817,7 +817,7 @@
 
         <!-- ═══ 08 SALT & ACID ═══ -->
         <section class="guide-section" id="salt" data-title="Salt &amp; Acid" data-kicker="Season at Every Layer">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">08</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Season at Every Layer</span>
@@ -851,7 +851,7 @@
 
         <!-- ═══ 09 MOTHER SAUCES ═══ -->
         <section class="guide-section" id="sauces" data-title="The Mother Sauces" data-kicker="Five Roots, Endless Branches">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">09</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Five Roots, Endless Branches</span>
@@ -893,7 +893,7 @@
 
         <!-- ═══ 10 OIL SMOKE POINTS ═══ -->
         <section class="guide-section" id="oils" data-title="Oils &amp; Smoke Points" data-kicker="Pick the Right Fat">
-          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
+          <button class="guide-header" aria-expanded="false">
             <span class="guide-index">10</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Pick the Right Fat</span>
@@ -984,15 +984,17 @@
         sec.querySelector('.guide-header').setAttribute('aria-expanded', 'false');
       }
 
-      /* ── Keyboard accesibility on guide headers ── */
-      document.querySelectorAll('.guide-header').forEach(hdr => {
-        hdr.setAttribute('role', 'button');
-        hdr.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleGuide(hdr);
-          }
-        });
+      /* ── Event delegation: clicks + keyboard on all guide headers ── */
+      document.getElementById('guides').addEventListener('click', (e) => {
+        const hdr = e.target.closest('.guide-header');
+        if (hdr) toggleGuide(hdr);
+      });
+      document.getElementById('guides').addEventListener('keydown', (e) => {
+        const hdr = e.target.closest('.guide-header');
+        if (hdr && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          toggleGuide(hdr);
+        }
       });
 
       /* ── Expand / Collapse All ── */

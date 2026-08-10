@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node build.js",
     "dev": "npx serve public -l 3456",
-    "prebuild": "echo '🍳 Building recipe site...'"
+    "prebuild": "echo '🍳 Building recipe site...'",
+    "test": "node --test test/*.test.js"
   },
   "private": true
 }

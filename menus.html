@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menus — Nick's Kitchen</title>
   <meta name="description" content="Stanz-style sandwiches and Sour Duck-style small plates" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -79,6 +83,25 @@
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="https://nickwhite.us" class="logo">
+          <div class="logo-text">
+            <span class="logo-title">Nick's <em>Kitchen</em></span>
+            <span class="logo-divider"></span>
+            <span class="logo-sub">Serapio Labs</span>
+          </div>
+        </a>
+        <div class="header-actions">
+          <a href="index.html" class="header-home-link">Recipes</a>
+          <a href="menus.html" class="header-home-link active" id="mobileMenusLink">Menus</a>
+          <a href="guides.html" class="header-home-link" id="mobileGuidesLink">Guides</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <div class="hub">
     <div class="container">
       <p class="hub-label">Nick's Kitchen</p>
