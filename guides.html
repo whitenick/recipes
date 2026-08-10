@@ -197,6 +197,31 @@
       border-color: var(--accent);
       box-shadow: 0 0 0 2px var(--accent-dim);
     }
+    .search-clear {
+      position: absolute;
+      right: 16px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: var(--text-dim);
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .search-clear.visible { opacity: 1; pointer-events: auto; }
+    .search-clear:hover { color: var(--text); }
+    .search-result-count {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 10px;
+      min-height: 18px;
+      letter-spacing: 0.04em;
+    }
+    .search-result-count.hidden { visibility: hidden; }
 
     /* ── Layout: TOC + content ── */
     .guide-layout {
@@ -211,14 +236,30 @@
 
     /* TOC */
     .toc { position: sticky; top: 88px; }
+    .toc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
     .toc-label {
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-dim);
       font-weight: 500;
-      margin-bottom: 16px;
     }
+    .toc-toggle-all {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+    .toc-toggle-all:hover { color: var(--accent); background: var(--accent-dim); }
     .toc-list { list-style: none; border-top: 1px solid var(--border); }
     .toc-list li { border-bottom: 1px solid var(--border); }
     .toc-link {
@@ -229,14 +270,23 @@
       font-weight: 400;
       letter-spacing: 0.02em;
       transition: color 0.15s, padding-left 0.15s;
+      border-left: 2px solid transparent;
+      padding-left: 0;
     }
     .toc-link:hover { color: var(--text); padding-left: 6px; }
+    .toc-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      padding-left: 6px;
+      font-weight: 500;
+    }
     .toc-num {
       color: var(--text-dim);
       font-size: 10px;
       margin-right: 8px;
       letter-spacing: 0.1em;
     }
+    .toc-link.active .toc-num { color: var(--accent); }
 
     /* ── Guide sections (accordion) ── */
     .guide-section {
@@ -256,6 +306,10 @@
       transition: background 0.2s;
     }
     .guide-header:hover { background: var(--bg-card-hover); }
+    .guide-header:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
     .guide-index {
       font-size: 11px;
       color: var(--accent);
@@ -411,15 +465,44 @@
     @media (max-width: 900px) {
       .guide-layout { grid-template-columns: 1fr; gap: 32px; }
       .toc { position: static; }
-      .toc-list { display: flex; flex-wrap: wrap; gap: 4px 16px; border-top: none; }
-      .toc-list li { border-bottom: none; }
+      .toc-list {
+        display: flex;
+        gap: 0;
+        border-top: none;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .toc-list::-webkit-scrollbar { display: none; }
+      .toc-list li {
+        border-bottom: none;
+        flex-shrink: 0;
+      }
+      .toc-link {
+        padding: 8px 14px;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+        font-size: 11px;
+      }
+      .toc-link:hover { padding-left: 14px; }
+      .toc-link.active {
+        border-left: none;
+        border-bottom-color: var(--accent);
+        padding-left: 14px;
+      }
       .two-col { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .container { padding: 0 20px; }
+      .hero { padding: 64px 0 36px; }
+      .hero-title { font-size: 36px; }
       .guide-header { padding: 20px; }
       .guide-body-inner { padding: 4px 20px 24px; }
       .guide-table td:first-child { white-space: normal; }
+      .search-result-count { font-size: 10px; }
+      .logo-sub { display: none; }
+      .logo-divider { display: none; }
     }
   </style>
 </head>
@@ -458,7 +541,9 @@
             <path d="m21 21-4.3-4.3"></path>
           </svg>
           <input type="text" id="guideSearch" placeholder="Search guides — breading, eggs, sear…" autocomplete="off" />
+          <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
         </div>
+        <p class="search-result-count hidden" id="searchCount"></p>
       </div>
     </div>
   </section>
@@ -468,8 +553,11 @@
     <div class="guide-layout">
 
       <!-- TOC -->
-      <nav class="toc">
-        <p class="toc-label">Contents</p>
+      <nav class="toc" aria-label="Guide contents">
+        <div class="toc-header">
+          <p class="toc-label">Contents</p>
+          <button class="toc-toggle-all" id="tocToggleAll" title="Expand or collapse all guides">Expand all</button>
+        </div>
         <ul class="toc-list" id="tocList"></ul>
       </nav>
 
@@ -478,7 +566,7 @@
 
         <!-- ═══ 01 BREADING ═══ -->
         <section class="guide-section" id="bread" data-title="The Breading Station" data-kicker="Crispy Coating">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">01</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Crispy Coating</span>
@@ -486,7 +574,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Three stations, in order, left to right. The whole system breaks when you skip a station or don't dry the protein first. <strong>Breading falls off because the surface was wet — fix that, everything else follows.</strong></p>
 
@@ -520,7 +608,7 @@
 
         <!-- ═══ 02 EGGS ═══ -->
         <section class="guide-section" id="eggs" data-title="Eggs" data-kicker="The Right Pan, The Right Heat">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">02</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">The Right Pan, The Right Heat</span>
@@ -528,7 +616,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Eggs are a heat-control game. <strong>Most omelettes fail because the pan was too hot.</strong> Butter should foam and sizzle gently — never brown.</p>
 
@@ -555,7 +643,7 @@
 
         <!-- ═══ 03 PAN SEARING ═══ -->
         <section class="guide-section" id="sear" data-title="Pan Searing" data-kicker="Crust Control">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">03</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Crust Control</span>
@@ -563,7 +651,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">A proper sear is dry protein + screaming-hot pan + patience. <strong>Don't touch the meat until it tells you it's ready.</strong></p>
 
@@ -590,7 +678,7 @@
 
         <!-- ═══ 04 STEAK DONENESS ═══ -->
         <section class="guide-section" id="steak" data-title="Steak Doneness" data-kicker="Temps &amp; The Hand Test">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">04</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Temps &amp; The Hand Test</span>
@@ -598,7 +686,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Pull the steak <strong>5°F below</strong> your target — it keeps cooking while it rests. No thermometer? Use the hand test.</p>
 
@@ -627,7 +715,7 @@
 
         <!-- ═══ 05 KNIFE CUTS ═══ -->
         <section class="guide-section" id="knife" data-title="Knife Cuts" data-kicker="Veg Prep Dimensions">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">05</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Veg Prep Dimensions</span>
@@ -635,7 +723,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Uniform cuts cook evenly. <strong>Size isn't about looks — it's about every piece finishing at the same time.</strong></p>
 
@@ -663,7 +751,7 @@
 
         <!-- ═══ 06 BLANCH & SHOCK ═══ -->
         <section class="guide-section" id="blanch" data-title="Blanch &amp; Shock" data-kicker="Bright, Tender Veg">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">06</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Bright, Tender Veg</span>
@@ -671,7 +759,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Blanch in heavily salted boiling water, then <strong>shock in an ice bath immediately</strong> to lock in color and stop the cook. Set up the ice bath <em>before</em> you start.</p>
 
@@ -694,7 +782,7 @@
 
         <!-- ═══ 07 GRAINS & LEGUMES ═══ -->
         <section class="guide-section" id="grains" data-title="Grains &amp; Legumes" data-kicker="Ratios &amp; Times">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">07</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Ratios &amp; Times</span>
@@ -702,7 +790,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Ratios are by volume. <strong>Liquid, then salt, then simmer covered — no peeking.</strong></p>
 
@@ -729,7 +817,7 @@
 
         <!-- ═══ 08 SALT & ACID ═══ -->
         <section class="guide-section" id="salt" data-title="Salt &amp; Acid" data-kicker="Season at Every Layer">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">08</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Season at Every Layer</span>
@@ -737,7 +825,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Salt makes food taste like itself. Acid makes it taste <em>alive</em>. <strong>Salt at every step, not just the end. Acid at the finish.</strong></p>
 
@@ -763,7 +851,7 @@
 
         <!-- ═══ 09 MOTHER SAUCES ═══ -->
         <section class="guide-section" id="sauces" data-title="The Mother Sauces" data-kicker="Five Roots, Endless Branches">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">09</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Five Roots, Endless Branches</span>
@@ -771,7 +859,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Every classic sauce comes from one of five mothers. Learn the base, and the small sauces are just one extra ingredient away. <strong>This is how you turn pan drippings into something worth eating.</strong></p>
 
@@ -805,7 +893,7 @@
 
         <!-- ═══ 10 OIL SMOKE POINTS ═══ -->
         <section class="guide-section" id="oils" data-title="Oils &amp; Smoke Points" data-kicker="Pick the Right Fat">
-          <button class="guide-header" onclick="toggleGuide(this)">
+          <button class="guide-header" onclick="toggleGuide(this)" aria-expanded="false">
             <span class="guide-index">10</span>
             <span class="guide-title-wrap">
               <span class="guide-kicker">Pick the Right Fat</span>
@@ -813,7 +901,7 @@
             </span>
             <svg class="guide-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="guide-body">
+          <div class="guide-body" role="region">
             <div class="guide-body-inner">
               <p class="guide-intro">Smoke point = the temp where the oil starts breaking down and burning. <strong>Match the fat to the cooking method.</strong> High heat needs high smoke point.</p>
 
@@ -848,62 +936,199 @@
   </footer>
 
   <script>
-    // Build TOC
-    const sections = document.querySelectorAll('.guide-section');
-    const tocList = document.getElementById('tocList');
-    sections.forEach((sec, i) => {
-      const num = String(i + 1).padStart(2, '0');
-      const li = document.createElement('li');
-      li.innerHTML = '<a class="toc-link" href="#' + sec.id + '"><span class="toc-num">' + num + '</span>' + sec.dataset.title + '</a>';
-      li.querySelector('a').addEventListener('click', (e) => {
-        e.preventDefault();
-        openGuide(sec);
-        document.getElementById(sec.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-      tocList.appendChild(li);
-    });
+    (function() {
+      'use strict';
 
-    // Toggle a single guide
-    function toggleGuide(btn) {
-      const sec = btn.closest('.guide-section');
-      if (sec.classList.contains('open')) {
-        closeGuide(sec);
-      } else {
-        openGuide(sec);
+      const LS_KEY = 'pierre_guides_open';
+
+      /* ── Build TOC ── */
+      const sections = document.querySelectorAll('.guide-section');
+      const tocList = document.getElementById('tocList');
+      const tocLinks = [];
+
+      sections.forEach((sec, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        const li = document.createElement('li');
+        li.innerHTML = '<a class="toc-link" href="#' + sec.id + '"><span class="toc-num">' + num + '</span>' + sec.dataset.title + '</a>';
+        const link = li.querySelector('a');
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          openGuide(sec);
+          document.getElementById(sec.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        tocList.appendChild(li);
+        tocLinks.push(link);
+      });
+
+      /* ── Accordion logic ── */
+      function toggleGuide(btn) {
+        const sec = btn.closest('.guide-section');
+        if (sec.classList.contains('open')) {
+          closeGuide(sec);
+        } else {
+          openGuide(sec);
+        }
+        saveState();
       }
-    }
-    function openGuide(sec) {
-      sec.classList.add('open');
-      const body = sec.querySelector('.guide-body');
-      body.style.maxHeight = body.scrollHeight + 'px';
-    }
-    function closeGuide(sec) {
-      sec.classList.remove('open');
-      sec.querySelector('.guide-body').style.maxHeight = 0;
-    }
-    // Open first guide by default
-    if (sections.length) openGuide(sections[0]);
 
-    // Open-by-hash on load
-    if (location.hash) {
-      const t = document.querySelector(location.hash);
-      if (t) openGuide(t);
-    }
+      function openGuide(sec) {
+        sec.classList.add('open');
+        const body = sec.querySelector('.guide-body');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        sec.querySelector('.guide-header').setAttribute('aria-expanded', 'true');
+      }
 
-    // Search
-    const search = document.getElementById('guideSearch');
-    search.addEventListener('input', () => {
-      const q = search.value.trim().toLowerCase();
-      document.body.classList.toggle('searching', q.length > 0);
-      let any = false;
-      sections.forEach(sec => {
-        const hay = (sec.dataset.title + ' ' + sec.dataset.kicker + ' ' + sec.textContent).toLowerCase();
-        const match = hay.includes(q);
-        sec.classList.toggle('hidden', q.length > 0 && !match);
-        if (match) any = true;
+      function closeGuide(sec) {
+        sec.classList.remove('open');
+        sec.querySelector('.guide-body').style.maxHeight = 0;
+        sec.querySelector('.guide-header').setAttribute('aria-expanded', 'false');
+      }
+
+      /* ── Keyboard accesibility on guide headers ── */
+      document.querySelectorAll('.guide-header').forEach(hdr => {
+        hdr.setAttribute('role', 'button');
+        hdr.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleGuide(hdr);
+          }
+        });
       });
-      document.getElementById('emptyState').style.display = (q.length > 0 && !any) ? 'block' : 'none';
-    });
+
+      /* ── Expand / Collapse All ── */
+      const toggleAllBtn = document.getElementById('tocToggleAll');
+      let allExpanded = false;
+
+      toggleAllBtn.addEventListener('click', () => {
+        allExpanded = !allExpanded;
+        toggleAllBtn.textContent = allExpanded ? 'Collapse all' : 'Expand all';
+        sections.forEach(sec => {
+          if (allExpanded) {
+            openGuide(sec);
+          } else {
+            closeGuide(sec);
+          }
+        });
+        saveState();
+      });
+
+      /* ── localStorage persistence ── */
+      function saveState() {
+        const openIds = [];
+        sections.forEach(sec => {
+          if (sec.classList.contains('open')) openIds.push(sec.id);
+        });
+        try {
+          localStorage.setItem(LS_KEY, JSON.stringify(openIds));
+        } catch (e) { /* noop */ }
+      }
+
+      function restoreState() {
+        let openIds = [];
+        try {
+          const stored = localStorage.getItem(LS_KEY);
+          if (stored) openIds = JSON.parse(stored);
+        } catch (e) { /* noop */ }
+
+        if (openIds.length > 0) {
+          openIds.forEach(id => {
+            const sec = document.getElementById(id);
+            if (sec) openGuide(sec);
+          });
+        } else {
+          // Default: open first guide
+          if (sections.length) openGuide(sections[0]);
+        }
+
+        // Check if all are open for the toggle button label
+        const allOpen = Array.from(sections).every(s => s.classList.contains('open'));
+        if (allOpen) {
+          allExpanded = true;
+          toggleAllBtn.textContent = 'Collapse all';
+        }
+      }
+
+      // Open by hash on load
+      if (location.hash) {
+        const t = document.querySelector(location.hash);
+        if (t) openGuide(t);
+      }
+
+      restoreState();
+
+      /* ── Scroll-spy: active TOC link ── */
+      let scrollTimeout;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Debounce to avoid flicker
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+              const id = entry.target.id;
+              tocLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+              });
+            }, 50);
+          }
+        });
+      }, { rootMargin: '-100px 0px -60% 0px', threshold: 0 });
+
+      sections.forEach(sec => observer.observe(sec));
+
+      /* ── Search ── */
+      const search = document.getElementById('guideSearch');
+      const searchClear = document.getElementById('searchClear');
+      const searchCount = document.getElementById('searchCount');
+      let searchDebounce;
+
+      function doSearch() {
+        const q = search.value.trim().toLowerCase();
+        const hasQuery = q.length > 0;
+
+        document.body.classList.toggle('searching', hasQuery);
+        searchClear.classList.toggle('visible', hasQuery);
+
+        let matchCount = 0;
+        sections.forEach(sec => {
+          const hay = (sec.dataset.title + ' ' + sec.dataset.kicker + ' ' + sec.textContent).toLowerCase();
+          const match = hay.includes(q);
+          sec.classList.toggle('hidden', hasQuery && !match);
+          if (match && hasQuery) matchCount++;
+        });
+
+        // Show result count
+        if (hasQuery) {
+          searchCount.classList.remove('hidden');
+          searchCount.textContent = matchCount + ' guide' + (matchCount !== 1 ? 's' : '') + ' match';
+        } else {
+          searchCount.classList.add('hidden');
+          searchCount.textContent = '';
+        }
+
+        document.getElementById('emptyState').style.display = (hasQuery && matchCount === 0) ? 'block' : 'none';
+      }
+
+      search.addEventListener('input', () => {
+        clearTimeout(searchDebounce);
+        searchDebounce = setTimeout(doSearch, 120);
+      });
+
+      searchClear.addEventListener('click', () => {
+        search.value = '';
+        doSearch();
+        search.focus();
+      });
+
+      // Clear search on Escape
+      search.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && search.value) {
+          search.value = '';
+          doSearch();
+          e.preventDefault();
+        }
+      });
+
+    })();
   </script>
 </body>
 </html>
