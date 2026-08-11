@@ -236,7 +236,7 @@ function renderGrid() {
     
     card.addEventListener('click', (e) => {
       if (e.target.closest('.card-fav')) return;
-      if (e.target.closest('.grocery-add-btn')) return;
+      if (e.target.closest('.card-grocery')) return;
       window.location.hash = `recipe/${id}`;
     });
     
@@ -252,7 +252,7 @@ function renderGrid() {
     }
     
     // Grocery add button
-    const groceryBtn = card.querySelector('.grocery-add-btn');
+    const groceryBtn = card.querySelector('.card-grocery');
     if (groceryBtn) {
       groceryBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -263,9 +263,7 @@ function renderGrid() {
           
           // Update button state
           groceryBtn.classList.toggle('selected', isNowSelected);
-          groceryBtn.setAttribute('aria-pressed', isNowSelected);
-          groceryBtn.querySelector('.grocery-btn-icon').textContent = isNowSelected ? '✓' : '🛒';
-          groceryBtn.querySelector('.grocery-btn-text').textContent = isNowSelected ? 'Added to List' : 'Add to Grocery List';
+          groceryBtn.textContent = isNowSelected ? '✓' : '🛒';
           
           // Show toast
           const recipeName = recipe ? recipe.title : 'Recipe';
@@ -276,51 +274,97 @@ function renderGrid() {
   });
 }
 
+// ── Emoji + Color Maps ────────────────────────────────
+const categoryEmoji = {
+  'Appetizers': '🥟',
+  'Baking': '🍞',
+  'Beef': '🥩',
+  'Breakfast': '🍳',
+  'Chicken': '🍗',
+  'Desserts': '🍰',
+  'Lamb': '🍖',
+  'One-Pan': '🍳',
+  'Other': '🍽️',
+  'Pasta': '🍝',
+  'Pork': '🥓',
+  'Quick & Easy': '⚡',
+  'Salads': '🥗',
+  'Sauces & Condiments': '🧂',
+  'Seafood': '🐟',
+  'Soups & Stews': '🍜',
+  'Vegetarian': '🥦',
+};
+
+const categoryColors = {
+  'Appetizers': '#C8A87C',
+  'Baking': '#C8A87C',
+  'Beef': '#BD6B35',
+  'Breakfast': '#E8C872',
+  'Chicken': '#D4893B',
+  'Desserts': '#C8A87C',
+  'Lamb': '#BD6B35',
+  'One-Pan': '#6A7C48',
+  'Other': '#A9927A',
+  'Pasta': '#E8C872',
+  'Pork': '#BD6B35',
+  'Quick & Easy': '#6A7C48',
+  'Salads': '#7EA67A',
+  'Sauces & Condiments': '#A9927A',
+  'Seafood': '#6B9EB0',
+  'Soups & Stews': '#D4893B',
+  'Vegetarian': '#7EA67A',
+};
+
+function getCardEmoji(recipe) {
+  const primary = recipe.categories && recipe.categories[0];
+  return categoryEmoji[primary] || '🍽️';
+}
+
+function getCardColor(recipe) {
+  const primary = recipe.categories && recipe.categories[0];
+  return categoryColors[primary] || '#A9927A';
+}
+
 function renderCard(recipe, index) {
   const isFav = favorites.has(recipe.id);
   const isSelected = typeof selectedRecipeIds !== 'undefined' && selectedRecipeIds.has(recipe.id);
-  const tags = recipe.categories.slice(0, 2);
-  const hasMeta = recipe.meta.totalTime || recipe.meta.cookTime || recipe.meta.servings;
-  const num = String(index + 1).padStart(2, '0');
+  const catColor = getCardColor(recipe);
+  const emoji = getCardEmoji(recipe);
+  const primaryCat = recipe.categories && recipe.categories[0];
+  const time = recipe.meta.totalTime || recipe.meta.cookTime || '';
+  const servings = recipe.meta.servings || '';
+  const metaParts = [];
+  if (primaryCat) metaParts.push(primaryCat);
+  if (time) metaParts.push(time);
+  if (servings) metaParts.push(servings);
   
   return `
-    <div class="recipe-card" data-id="${recipe.id}">
-      <div class="card-category-bar"></div>
-      <button class="card-fav ${isFav ? 'active' : ''}" title="${isFav ? 'Remove' : 'Save'}">
-        ${isFav ? '♥' : '♡'}
-      </button>
-      <div class="card-body">
-        <div class="card-number">${num}</div>
-        <div class="card-title">${escHtml(recipe.title)}</div>
-        ${recipe.description ? `<div class="card-desc">${escHtml(recipe.description)}</div>` : ''}
-        <div class="card-divider"></div>
-        <div class="card-meta">
-          ${recipe.meta.totalTime || recipe.meta.cookTime ? `
-            <span class="card-meta-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-              </svg>
-              ${escHtml(recipe.meta.totalTime || recipe.meta.cookTime)}
-            </span>
-          ` : ''}
-          ${recipe.meta.servings ? `
-            <span class="card-meta-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-              </svg>
-              ${escHtml(recipe.meta.servings)}
-            </span>
-          ` : ''}
-          ${!hasMeta ? `<div class="card-tags">${tags.map(t => `<span class="tag ${tagClass(t)}">${escHtml(t)}</span>`).join('')}</div>` : ''}
-          ${hasMeta ? `<div class="card-tags" style="margin-left:auto">${tags.map(t => `<span class="tag ${tagClass(t)}">${escHtml(t)}</span>`).join('')}</div>` : ''}
+    <div class="recipe-card" data-id="${recipe.id}" style="--cat-color:${catColor}">
+      <div class="card-inner">
+        <div class="card-bar"></div>
+        <div class="card-body">
+          <div class="card-primary-row">
+            <span class="card-emoji">${emoji}</span>
+            <span class="card-title">${escHtml(recipe.title)}</span>
+            <div class="card-actions">
+              <button class="card-fav ${isFav ? 'active' : ''}" title="${isFav ? 'Remove' : 'Save'}">
+                ${isFav ? '♥' : '♡'}
+              </button>
+              <button class="card-grocery ${isSelected ? 'selected' : ''}" 
+                      data-id="${recipe.id}"
+                      aria-label="${isSelected ? 'Remove from' : 'Add to'} grocery list: ${escHtml(recipe.title)}">
+                ${isSelected ? '✓' : '🛒'}
+              </button>
+            </div>
+          </div>
+          <div class="card-secondary-row">
+            ${metaParts.map((p, i) => `
+              ${i > 0 ? '<span class="card-meta-sep">·</span>' : ''}
+              <span class="card-meta-part">${escHtml(p)}</span>
+            `).join('')}
+          </div>
         </div>
       </div>
-      <button class="grocery-add-btn ${isSelected ? 'selected' : ''}" 
-              aria-label="${isSelected ? 'Remove from' : 'Add to'} grocery list: ${escHtml(recipe.title)}"
-              aria-pressed="${isSelected}">
-        <span class="grocery-btn-icon">${isSelected ? '✓' : '🛒'}</span>
-        <span class="grocery-btn-text">${isSelected ? 'Added to List' : 'Add to Grocery List'}</span>
-      </button>
     </div>
   `;
 }
