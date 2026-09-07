@@ -32,13 +32,23 @@ This rebuilds `data/recipes.json` from the Obsidian vault and pushes to GitHub. 
 ## Local Development
 
 ```bash
-# Rebuild recipe index
-node build.js
+# Rebuild recipe index (RECIPES_DIR overrides the vault path when set)
+RECIPES_DIR="/path/to/.../Recipes" node build.js
+
+# Run the corpus/pipeline tests
+node --test
 
 # Preview locally
 npx serve . -l 3456
 # → http://localhost:3456
 ```
+
+## Search Data Model
+
+`data/recipes.json` is the normalized corpus consumed by the (upcoming)
+search service. See [`docs/search-data-model.md`](docs/search-data-model.md)
+for the field contract, searchable-vs-filterable mapping, and rebuild/reindex
+instructions.
 
 ## Recipe Format
 
