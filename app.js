@@ -229,48 +229,12 @@ function renderGrid() {
   
   grid.innerHTML = filteredRecipes.map((recipe, i) => renderCard(recipe, i)).join('');
   
-  // Attach event listeners
+  // Attach click to navigate to detail view
   grid.querySelectorAll('.recipe-card').forEach(card => {
     const id = card.dataset.id;
-    const recipe = allRecipes.find(r => r.id === id);
-    
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.card-fav')) return;
-      if (e.target.closest('.card-grocery')) return;
+    card.addEventListener('click', () => {
       window.location.hash = `recipe/${id}`;
     });
-    
-    const favBtn = card.querySelector('.card-fav');
-    if (favBtn) {
-      favBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleFavorite(id);
-        // Update just this card's fav button
-        updateCardFav(favBtn, id);
-        if (favoritesOnly) applyFilters();
-      });
-    }
-    
-    // Grocery add button
-    const groceryBtn = card.querySelector('.card-grocery');
-    if (groceryBtn) {
-      groceryBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (typeof toggleRecipeSelection === 'function') {
-          const wasSelected = selectedRecipeIds.has(id);
-          toggleRecipeSelection(id);
-          const isNowSelected = selectedRecipeIds.has(id);
-          
-          // Update button state
-          groceryBtn.classList.toggle('selected', isNowSelected);
-          groceryBtn.textContent = isNowSelected ? '✓' : '🛒';
-          
-          // Show toast
-          const recipeName = recipe ? recipe.title : 'Recipe';
-          showGroceryToast(recipeName, isNowSelected);
-        }
-      });
-    }
   });
 }
 
@@ -326,9 +290,6 @@ function getCardColor(recipe) {
 }
 
 function renderCard(recipe, index) {
-  const isFav = favorites.has(recipe.id);
-  const isSelected = typeof selectedRecipeIds !== 'undefined' && selectedRecipeIds.has(recipe.id);
-  const catColor = getCardColor(recipe);
   const emoji = getCardEmoji(recipe);
   const primaryCat = recipe.categories && recipe.categories[0];
   const time = recipe.meta.totalTime || recipe.meta.cookTime || '';
@@ -339,30 +300,12 @@ function renderCard(recipe, index) {
   if (servings) metaParts.push(servings);
   
   return `
-    <div class="recipe-card" data-id="${recipe.id}" style="--cat-color:${catColor}">
-      <div class="card-inner">
-        <div class="card-bar"></div>
-        <div class="card-body">
-          <div class="card-primary-row">
-            <span class="card-emoji">${emoji}</span>
-            <span class="card-title">${escHtml(recipe.title)}</span>
-            <div class="card-actions">
-              <button class="card-fav ${isFav ? 'active' : ''}" title="${isFav ? 'Remove' : 'Save'}">
-                ${isFav ? '♥' : '♡'}
-              </button>
-              <button class="card-grocery ${isSelected ? 'selected' : ''}" 
-                      data-id="${recipe.id}"
-                      aria-label="${isSelected ? 'Remove from' : 'Add to'} grocery list: ${escHtml(recipe.title)}">
-                ${isSelected ? '✓' : '🛒'}
-              </button>
-            </div>
-          </div>
-          <div class="card-secondary-row">
-            ${metaParts.map((p, i) => `
-              ${i > 0 ? '<span class="card-meta-sep">·</span>' : ''}
-              <span class="card-meta-part">${escHtml(p)}</span>
-            `).join('')}
-          </div>
+    <div class="recipe-card" data-id="${recipe.id}">
+      <div class="card-body">
+        <div class="card-primary-row">
+          <span class="card-emoji">${emoji}</span>
+          <span class="card-title">${escHtml(recipe.title)}</span>
+          <span class="card-meta">${escHtml(metaParts.join(' · '))}</span>
         </div>
       </div>
     </div>

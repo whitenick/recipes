@@ -427,10 +427,8 @@ body::before {
 
 .recipe-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 
 /* List view override */
@@ -441,39 +439,27 @@ body::before {
 
 /* ── Recipe Card (Dense + Scannable) ── */
 .recipe-card {
-  background: var(--bg-card);
+  background: transparent;
   cursor: pointer;
-  transition: background 0.18s;
-  border: 1px solid transparent;
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--border);
+}
+.recipe-card:last-child {
+  border-bottom: none;
 }
 .recipe-card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-hover);
-}
-
-.card-inner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Colored category bar at top */
-.card-bar {
-  height: 3px;
-  background: var(--cat-color, var(--border));
-  border-radius: 0 0 2px 2px;
+  background: rgba(44, 36, 22, 0.02);
 }
 
 .card-body {
-  padding: 14px 18px 12px;
+  padding: 14px 0;
 }
 
-/* Primary row: emoji + title + actions */
+/* Primary row: emoji + title + inline meta */
 .card-primary-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 2px;
 }
 .card-emoji {
   display: inline-flex;
@@ -496,100 +482,23 @@ body::before {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.card-actions {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  flex-shrink: 0;
-  opacity: 0;
-  transition: opacity 0.18s;
-}
-.recipe-card:hover .card-actions {
-  opacity: 1;
-}
-.card-fav {
-  width: 26px;
-  height: 26px;
-  border: none;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  cursor: pointer;
-  padding: 0;
-  color: var(--text-dim);
-  transition: color 0.15s;
-  border-radius: 50%;
-}
-.card-fav:hover {
-  color: var(--accent);
-}
-.card-fav.active {
-  color: var(--accent);
-}
-.card-grocery {
-  width: 26px;
-  height: 26px;
-  border: none;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  cursor: pointer;
-  padding: 0;
-  color: var(--text-dim);
-  transition: color 0.15s;
-  border-radius: 50%;
-}
-.card-grocery:hover {
-  color: var(--text);
-}
-.card-grocery.selected {
-  color: #3A7B3A;
-}
 
-/* Secondary row: category • time • servings */
-.card-secondary-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: 32px;
-}
-.card-meta-sep {
-  color: var(--border-strong);
-  font-size: 11px;
-  margin: 0 1px;
-}
-.card-meta-part {
+/* Inline metadata — category • time, right-aligned */
+.card-meta {
   font-size: 11px;
   font-weight: 400;
   color: var(--text-muted);
   letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* List view card style */
-.recipe-grid.list-view .recipe-card {
-  border-bottom: 1px solid var(--border);
-  border-left: none;
-  border-right: none;
-  border-top: none;
-}
-.recipe-grid.list-view .card-bar {
-  display: none;
-}
+/* List view — same border-only treatment, slightly tighter spacing */
 .recipe-grid.list-view .card-body {
-  padding: 10px 18px;
-}
-.recipe-grid.list-view .card-primary-row {
-  margin-bottom: 0;
+  padding: 10px 0;
 }
 .recipe-grid.list-view .card-title {
   font-size: 15px;
-}
-.recipe-grid.list-view .card-secondary-row {
-  margin-left: 0;
 }
 
 /* ── Empty State ── */
@@ -946,7 +855,7 @@ body::before {
   .hero { padding: 60px 0 40px; }
   .hero-subtitle { font-size: 13px; }
   #searchInput { font-size: 16px; }
-  .recipe-grid.list-view .card-secondary-row { display: none; }
+  /* Metadata inline — truncation handled by natural layout */
   .detail-meta-grid { flex-wrap: wrap; }
   .detail-meta-item { flex: 1 1 calc(50% - 1px); }
   .detail-actions { flex-wrap: wrap; }
@@ -955,7 +864,7 @@ body::before {
   .header-home-link { display: none; }
   #mobileMenusLink { display: inline-flex; color: var(--accent); font-weight: 600; }
   #mobileGuidesLink { display: inline-flex; color: var(--text); font-weight: 500; }
-  .card-body { padding: 20px 20px 18px; }
+  /* Card padding handled at base level — responsive override removed */
   .detail-title { letter-spacing: -0.3px; }
 }
 @media (max-width: 480px) {
