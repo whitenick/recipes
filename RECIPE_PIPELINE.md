@@ -174,14 +174,31 @@ Each recipe object looks like:
   "categories": ["Chicken", "One-Pan", "Quick & Easy"],
   "ingredients": ["4 bone-in skin-on chicken thighs", "2 shallots, finely minced", ...],
   "meta": {
-    "prepTime": "10 minutes",
-    "cookTime": "40 minutes",
-    "totalTime": "50 minutes",
-    "servings": "2"
+    "prepTime": "10 mins",
+    "cookTime": "40 mins",
+    "totalTime": "50 mins",
+    "servings": "2",
+    "prepTimeMinutes": 10,
+    "cookTimeMinutes": 40,
+    "totalTimeMinutes": 50,
+    "servingsMin": 2,
+    "servingsMax": 2
   },
   "source": "https://example.com/original-recipe",
   "content": "# Crispy Roasted Chicken Thighs with Pan Sauce\n\n**Serves:** 2\n..."
 }
+```
+
+Since normalization (WILS-3), `meta` times/servings are scrubbed of scrape
+debris, unit-normalized, and augmented with numeric facets. The `content`
+field stays for the detail view but is excluded from the search index. See
+[`docs/search-data-model.md`](docs/search-data-model.md) for the full contract.
+
+The vault directory is read from the `RECIPES_DIR` env var when set, falling
+back to the default path:
+
+```bash
+RECIPES_DIR="/path/to/vault/.../Recipes" node build.js
 ```
 
 ### Deploy Script: `/home/jobin/dev/recipes/update.sh`
