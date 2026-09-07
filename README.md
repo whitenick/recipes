@@ -80,6 +80,17 @@ The GitHub Actions workflow (`.github/workflows/pages.yml`) builds the site and 
 
 The Vite `base` is `/recipes/` (the repo is a GitHub Pages *project* site served at `https://whitenick.github.io/recipes/`). If the site ever moves to Cloudflare Pages (the required migration the moment a backend/API exists), set `base: '/'` or `BASE_PATH=/` and the build output is directly deployable there — see the `vite.config.mjs` comment.
 
+## Integration Status (WILS-10)
+
+The full pipeline is verified end-to-end as of the Vite Modernization handoff:
+
+- ✅ `npm test` — 14 corpus/pipeline tests pass.
+- ✅ `npm run build` — clean production build to `dist/` (all pages + recipe corpus asset, `BASE_PATH=/recipes/`).
+- ✅ Production-equivalent check — `npm run preview` serves the built site at `/recipes/` with recipe data loading and all pages reachable.
+- ✅ Host: **GitHub Pages** (static-only → GitHub Pages is the correct host per the hosting rule). No backend exists, so **no Cloudflare migration is needed yet** — see [`docs/backend-decision.md`](docs/backend-decision.md) for the pre-scoped Go service contract and the GitHub Pages → Cloudflare runbook to use the moment a backend lands.
+
+**Handoff:** push to `main` triggers `.github/workflows/pages.yml` → build + deploy `dist/` to GitHub Pages. Nothing else is required to ship.
+
 ## Recipe Format
 
 Recipes are Markdown files in `/home/jobin/obsidian-mac-vault/General/Personal/Culinary/Recipes/`.
