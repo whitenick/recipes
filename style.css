@@ -1,51 +1,34 @@
 /* ──────────────────────────────────────────────────────────
-   Nick's Kitchen — Design System
-   Aesthetic: Desert Modernism · Fine Dining · Santa Fe
-   Ref: Noma, Eleven Madison Park, SingleThread
+   Nick's Kitchen — Design System v2
+   Aesthetic: Clean whitespace · Julienne × DoorDash
+   Font: Lora (serif) · Scoutie Sans (UI)
    ────────────────────────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Scoutie+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-  /* ── Surface ── */
-  --bg:              #F7F4F0;   /* Warm parchment */
-  --bg-card:         #FDFCFA;   /* Off-white card surface */
-  --bg-card-hover:   #F3EFE9;   /* Toasted sand hover */
-  --bg-input:        #FDFCFA;
-
-  /* ── Borders ── */
-  --border:          rgba(44, 36, 22, 0.09);
-  --border-hover:    rgba(44, 36, 22, 0.16);
-  --border-strong:   rgba(44, 36, 22, 0.18);
-
-  /* ── Text ── */
-  --text:            #1E1810;   /* Near-black earth */
-  --text-muted:      #7A6A55;   /* Warm stone */
-  --text-dim:        #A9927A;   /* Faded clay */
-
-  /* ── Accent — Adobe Clay, used with restraint ── */
-  --accent:          #B5601A;   /* Deeper terracotta */
-  --accent-hover:    #944E14;
-  --accent-light:    #C97840;
-  --accent-dim:      rgba(181, 96, 26, 0.08);
-  --accent-border:   rgba(181, 96, 26, 0.22);
-
-  /* ── Chip / filter ── */
-  --chip-bg:         #EDE8E1;
-
-  /* ── Radius ── */
-  --radius:          4px;        /* Restrained — fine dining is angular */
+  --bg:              #FFFFFF;
+  --bg-card:         #F9F8F6;
+  --bg-card-hover:   #F0F0F0;
+  --border:          rgba(0, 0, 0, 0.06);
+  --border-hover:    rgba(0, 0, 0, 0.12);
+  --border-strong:   rgba(0, 0, 0, 0.10);
+  --text:            #1A1A1A;
+  --text-muted:      #7A7A7A;
+  --text-dim:        #AAAAAA;
+  --accent:          #E0783A;
+  --accent-hover:    #CC6A2E;
+  --accent-dim:      rgba(224, 120, 58, 0.08);
+  --accent-border:   rgba(224, 120, 58, 0.22);
+  --chip-bg:         #F0EFEC;
+  --radius:          4px;
   --radius-sm:       3px;
-  --radius-lg:       6px;
+  --radius-lg:       12px;
   --radius-full:     9999px;
-
-  /* ── Typography ── */
-  --font-serif: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
-  --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-
-  /* ── Shadows — ultra subtle ── */
-  --shadow-card:  0 1px 2px rgba(44, 36, 22, 0.05), 0 4px 24px rgba(44, 36, 22, 0.04);
-  --shadow-hover: 0 2px 6px rgba(44, 36, 22, 0.08), 0 12px 40px rgba(44, 36, 22, 0.07);
+  --font-serif:      'Lora', 'Georgia', 'Times New Roman', serif;
+  --font-sans:       'Scoutie Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --shadow-card:     0 1px 2px rgba(0,0,0,0.03), 0 4px 24px rgba(0,0,0,0.02);
+  --shadow-hover:    0 2px 6px rgba(0,0,0,0.05), 0 12px 40px rgba(0,0,0,0.04);
 }
 
 /* ── Reset ── */
@@ -66,34 +49,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 img { max-width: 100%; display: block; }
 input, textarea { font: inherit; }
 
-/* ── Subtle grain — single layer, very quiet ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Layout ── */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 32px;
-  position: relative;
-  z-index: 1;
-}
-
-/* ────────────────────────────────────────
-   HEADER
-   Clean, minimal — a restaurant's signage
-───────────────────────────────────────── */
+/* ── HEADER ── */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(247, 244, 240, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
@@ -102,34 +63,21 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 40px;
 }
-
-/* Wordmark — no emoji, pure type */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-.logo-icon { display: none; }
-.logo-text {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.logo-text { display: flex; align-items: baseline; gap: 10px; }
+.logo-text a { text-decoration: none; color: inherit; }
 .logo-title {
   font-family: var(--font-serif);
   font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-weight: 500;
   color: var(--text);
-  font-style: normal;
-  line-height: 1;
 }
 .logo-title em {
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
 }
 .logo-divider {
   width: 1px;
@@ -142,17 +90,20 @@ body::before {
   color: var(--text-dim);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1;
 }
-
-/* Header actions */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
 }
+.header-nav-link {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+}
+.header-nav-link:hover { color: var(--text); }
 .btn-icon {
   position: relative;
   display: flex;
@@ -164,17 +115,14 @@ body::before {
   color: var(--text-muted);
   transition: background 0.15s, color 0.15s;
 }
-.btn-icon:hover {
-  background: rgba(44, 36, 22, 0.05);
-  color: var(--text);
-}
+.btn-icon:hover { color: var(--text); }
 .btn-icon.active { color: var(--accent); }
 .fav-count {
   position: absolute;
   top: 4px;
   right: 4px;
   background: var(--accent);
-  color: #FFFFFF;
+  color: #FFF;
   font-size: 8px;
   font-weight: 600;
   width: 13px;
@@ -187,63 +135,24 @@ body::before {
 }
 .fav-count.visible { display: flex; }
 
-.header-home-link {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-dim);
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  transition: color 0.15s;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-.header-home-link:hover { color: var(--text); }
-
-/* ────────────────────────────────────────
-   HERO
-   Elegant — no glow blobs, no dot grids
-   Just typography and generous space
-───────────────────────────────────────── */
+/* ── HERO ── */
 .hero {
-  position: relative;
-  padding: 96px 0 64px;
   text-align: center;
-  overflow: hidden;
+  padding: 64px 24px 40px;
+  max-width: 640px;
+  margin: 0 auto;
 }
-
-/* Refined horizontal rule above title */
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, transparent, var(--border-strong));
-}
-
-/* Remove the glow and dot grid */
-.hero-glow { display: none; }
-.hero::after { display: none; }
-
-/* Season label — refined, not a badge */
 .hero-label {
-  position: relative;
-  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   font-size: 10px;
   font-weight: 500;
   color: var(--text-dim);
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
-
-/* Thin lines on either side — refined divider treatment */
 .hero-label::before,
 .hero-label::after {
   content: '';
@@ -252,162 +161,93 @@ body::before {
   height: 1px;
   background: var(--border-strong);
 }
-
-/* No pulsing dot */
-.hero-label-dot { display: none; }
-
 .hero-title {
-  position: relative;
-  z-index: 1;
   font-family: var(--font-serif);
-  font-size: clamp(48px, 7vw, 82px);
-  font-weight: 300;
-  letter-spacing: -0.5px;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 400;
+  letter-spacing: -0.3px;
   line-height: 1.08;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   color: var(--text);
 }
-.hero-title em {
-  font-style: italic;
-  font-weight: 300;
-  color: var(--text);     /* No accent color on the title — let form do the work */
-}
-
 .hero-subtitle {
-  position: relative;
-  z-index: 1;
   font-size: 14px;
   color: var(--text-muted);
-  margin-bottom: 52px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
   max-width: 340px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* ── Search Toolbar ── */
-.search-toolbar-section {
-  padding: 0 0 20px;
-}
+/* ── SEARCH BAR (AI Chat-style) ── */
 .search-wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 520px;
-  margin: 0 auto;
+  max-width: 600px;
+  margin: 0 auto 24px;
 }
 .search-box {
-  position: relative;
   display: flex;
   align-items: center;
-}
-.search-icon {
-  position: absolute;
-  left: 16px;
-  color: var(--text-dim);
-  pointer-events: none;
-  flex-shrink: 0;
-}
-#searchInput {
-  width: 100%;
-  height: 44px;
-  background: var(--bg-card);
+  background: var(--bg);
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius);
-  padding: 0 40px;
+  border-radius: 16px;
+  padding: 12px 18px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  gap: 10px;
+}
+.search-box:focus-within {
+  border-color: var(--text);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 400;
   color: var(--text);
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  line-height: 1.4;
 }
-#searchInput::placeholder {
-  color: var(--text-dim);
-  font-weight: 300;
-}
-#searchInput:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent-dim);
-}
-.search-clear {
-  position: absolute;
-  right: 12px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  color: var(--text-dim);
-  font-size: 11px;
+.search-box input::placeholder { color: var(--text-dim); }
+.search-box input:focus::placeholder { color: #CCC; }
+
+.search-badge-row {
   display: flex;
-  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 0 0;
   justify-content: center;
-  transition: color 0.15s;
-  cursor: pointer;
 }
-.search-clear:hover { color: var(--text); }
-
-/* ────────────────────────────────────────
-   FILTERS
-───────────────────────────────────────── */
-.filters-section {
-  padding: 0 0 32px;
-  position: relative;
-  z-index: 1;
-}
-.filters-row {
-  display: flex;
+.search-badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 12px;
-}
-.filters-scroll {
-  display: flex;
   gap: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  flex: 1;
-}
-.filters-scroll::-webkit-scrollbar { display: none; }
-
-.filter-chip {
-  flex-shrink: 0;
-  padding: 5px 14px;
-  border-radius: var(--radius-full);
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border-strong);
   background: transparent;
-  border: 1px solid transparent;
-  font-size: 12px;
-  font-weight: 400;
   color: var(--text-muted);
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
-  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.filter-chip:hover {
+.search-badge:hover {
   border-color: var(--border-hover);
   color: var(--text);
 }
-.filter-chip.active {
+.search-badge.active {
   background: var(--text);
   border-color: var(--text);
   color: var(--bg);
-  font-weight: 500;
 }
+.search-badge svg { width: 10px; height: 10px; }
 
-.view-toggle {
-  display: flex;
-  gap: 2px;
-  flex-shrink: 0;
+/* ── COUNT BAR ── */
+.count-bar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 8px;
 }
-.view-btn {
-  padding: 5px 8px;
-  border-radius: var(--radius-sm);
-  color: var(--text-dim);
-  transition: color 0.15s;
-}
-.view-btn:hover { color: var(--text-muted); }
-.view-btn.active { color: var(--text); }
-
 .results-meta {
   font-size: 11px;
   color: var(--text-dim);
@@ -416,127 +256,235 @@ body::before {
   text-transform: uppercase;
 }
 
-/* ────────────────────────────────────────
-   RECIPE GRID
-───────────────────────────────────────── */
-.recipes-section {
-  padding-bottom: 120px;
-  position: relative;
-  z-index: 1;
+/* ── MOBILE FILTERS ── */
+.mobile-filters {
+  display: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 16px 12px;
+  gap: 6px;
+  margin: 0;
 }
-
-.recipe-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-
-/* List view override */
-.recipe-grid.list-view {
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-
-/* ── Recipe Card (Dense + Scannable) ── */
-.recipe-card {
+.mobile-filters::-webkit-scrollbar { display: none; }
+.mobile-filter-chip {
+  display: inline-flex;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  border: 1px solid var(--border-strong);
   background: transparent;
+  color: var(--text-muted);
   cursor: pointer;
-  transition: background 0.15s;
-  border-bottom: 1px solid var(--border);
-}
-.recipe-card:last-child {
-  border-bottom: none;
-}
-.recipe-card:hover {
-  background: rgba(44, 36, 22, 0.02);
-}
-
-.card-body {
-  padding: 14px 0;
-}
-
-/* Primary row: emoji + title + inline meta */
-.card-primary-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.card-emoji {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  font-size: 16px;
   flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.card-title {
-  font-family: var(--font-serif);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.3;
+.mobile-filter-chip:hover {
+  border-color: var(--border-hover);
   color: var(--text);
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
-
-/* Inline metadata — category • time, right-aligned */
-.card-meta {
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-/* List view — same border-only treatment, slightly tighter spacing */
-.recipe-grid.list-view .card-body {
-  padding: 10px 0;
-}
-.recipe-grid.list-view .card-title {
-  font-size: 15px;
-}
-
-/* ── Empty State ── */
-.empty-state {
-  text-align: center;
-  padding: 100px 24px;
-}
-.empty-icon  { font-size: 32px; margin-bottom: 24px; opacity: 0.3; }
-.empty-state h3 {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 400;
-  margin-bottom: 10px;
-}
-.empty-state p  {
-  color: var(--text-muted);
-  margin-bottom: 32px;
-  font-size: 13px;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-}
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
+.mobile-filter-chip.active {
   background: var(--text);
   color: var(--bg);
-  font-weight: 500;
-  font-size: 12px;
-  border-radius: var(--radius);
-  transition: opacity 0.15s;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  border-color: var(--text);
 }
-.btn-primary:hover { opacity: 0.8; }
 
-/* ── Back Button ── */
+/* ── PAGE LAYOUT (DoorDash-style) ── */
+.page-layout {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  padding: 24px 20px;
+  border-right: 1px solid var(--border);
+}
+.sidebar-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.sidebar-hours {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.sidebar-cat {
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s;
+  position: relative;
+}
+.sidebar-cat:hover { color: var(--text); }
+.sidebar-cat.active {
+  color: var(--text);
+  font-weight: 500;
+  padding-left: 14px;
+}
+.sidebar-cat.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--text);
+  border-radius: 1px;
+}
+
+/* ── MAIN CONTENT ── */
+.main-content {
+  flex: 1;
+  padding: 24px 32px;
+}
+
+/* ── SECTION HEADER ── */
+.section-header {
+  margin-bottom: 24px;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.section-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.6;
+}
+
+/* ── RECIPE GRID ── */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── RECIPE CARD (Julienne-style) ── */
+.recipe-card {
+  position: relative;
+  background: #F6F6F6;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.2s;
+  height: 340px;
+}
+.recipe-card:hover { background: var(--bg-card-hover); }
+
+/* Card title: top-left */
+.recipe-card-title {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  max-width: 65%;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text);
+  z-index: 2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Card description: below title */
+.recipe-card-desc {
+  position: absolute;
+  top: 66px;
+  left: 22px;
+  max-width: 65%;
+  font-size: 11px;
+  color: var(--text-muted);
+  z-index: 2;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Save icon: top-right */
+.recipe-card-save {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #CCC;
+  font-size: 18px;
+  transition: opacity 0.2s;
+  opacity: 0.4;
+  padding: 4px;
+}
+.recipe-card:hover .recipe-card-save { opacity: 1; }
+
+/* Circular image: centered */
+.recipe-card-image-wrap {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 148px; height: 148px;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.recipe-card:hover .recipe-card-image-wrap {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+.recipe-card-image-inner {
+  width: 100%; height: 100%;
+  background: #E8E8E8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+}
+
+/* Cook time: bottom-left */
+.recipe-card-attribution {
+  position: absolute;
+  bottom: 20px;
+  left: 22px;
+  font-size: 12px;
+  color: var(--text-muted);
+  z-index: 2;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 80px 24px;
+}
+.empty-icon { font-size: 28px; margin-bottom: 20px; opacity: 0.3; }
+.empty-state h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.empty-state p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+/* ── BACK BUTTON ── */
 .back-btn {
   display: inline-flex;
   align-items: center;
@@ -555,6 +503,95 @@ body::before {
 .back-btn:hover { color: var(--text); }
 .back-btn svg { opacity: 0.6; }
 
+/* ── CONTAINER ── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+  text-align: center;
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.site-footer p {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.site-footer a { color: var(--text-dim); text-decoration: none; transition: color 0.15s; }
+.site-footer a:hover { color: var(--text); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .sidebar { width: 180px; }
+}
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .mobile-filters { display: flex; }
+  .main-content { padding: 20px; }
+}
+@media (max-width: 768px) {
+  .header-inner { padding: 12px 16px; }
+  .logo-sub { display: none; }
+  .hero { padding: 40px 16px 28px; }
+  .hero-title { font-size: 34px; }
+  .hero-subtitle { font-size: 13px; }
+  .search-wrap { margin: 0 16px 20px; }
+  .search-box { border-radius: 12px; padding: 10px 14px; }
+  .count-bar { padding: 0 16px 4px; }
+  .recipe-grid { grid-template-columns: 1fr; gap: 16px; }
+  .recipe-card { height: 300px; }
+  .recipe-card-title { top: 16px; left: 16px; max-width: 70%; font-size: 16px; }
+  .recipe-card-desc { top: 58px; left: 16px; max-width: 70%; font-size: 10px; }
+  .recipe-card-image-wrap { width: 120px; height: 120px; }
+  .recipe-card-image-inner { font-size: 34px; }
+  .recipe-card-attribution { bottom: 16px; left: 16px; font-size: 11px; }
+  .recipe-card-save { top: 16px; right: 16px; }
+  .section-title { font-size: 22px; }
+  .main-content { padding: 16px; }
+}
+@media (max-width: 480px) {
+  .hero-title { font-size: 28px; }
+  .header-actions { gap: 4px; }
+  .search-badge-row { gap: 4px; }
+  .search-badge { font-size: 10px; padding: 4px 10px; }
+  .recipe-grid { gap: 12px; }
+  .recipe-card { height: 280px; border-radius: 16px; }
+  .recipe-card-title { font-size: 15px; }
+  .recipe-card-image-wrap { width: 100px; height: 100px; }
+  .recipe-card-image-inner { font-size: 28px; }
+}
+
+/* ── LOADING ── */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading { animation: spin 3s linear infinite; }
+
+/* ── PRINT ── */
+@media print {
+  .site-header, .hero, .search-wrap, .count-bar, .mobile-filters,
+  .sidebar, .main-content .section-header, .back-btn,
+  .detail-actions, .site-footer { display: none !important; }
+  body { background: white; color: black; }
+  .recipe-detail { max-width: 100%; }
+}
 /* ────────────────────────────────────────
    RECIPE DETAIL
    Feels like reading a menu at a restaurant

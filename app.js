@@ -46,26 +46,51 @@ async function init() {
   buildCategoryChips();
   updateFavCount();
   updateGroceryBadge();
-  loadFeaturedRecipes();
   
   // Wire up events
   const searchInput = document.getElementById('searchInput');
-  const searchClear = document.getElementById('searchClear');
-  const gridViewBtn = document.getElementById('gridViewBtn');
-  const listViewBtn = document.getElementById('listViewBtn');
   const backBtn = document.getElementById('backBtn');
   const favoritesToggle = document.getElementById('favoritesToggle');
 
   searchInput.addEventListener('input', () => {
     currentSearch = searchInput.value.trim();
-    searchClear.style.display = currentSearch ? 'flex' : 'none';
     applyFilters();
   });
   
-  searchClear.addEventListener('click', clearSearch);
-  
-  gridViewBtn.addEventListener('click', () => setView('grid'));
-  listViewBtn.addEventListener('click', () => setView('list'));
+  // Search badge clicks
+  document.querySelectorAll('.search-badge').forEach(badge => {
+    badge.addEventListener('click', () => {
+      const facet = badge.dataset.facet;
+      badge.classList.toggle('active');
+      // Map facet to search term or category
+      const facetMap = {
+        'quick': 'quick',
+        'healthy': 'healthy',
+        'sandwich': 'sandwich',
+        'under30': '',
+        'salad': '',
+        'meat': 'meat'
+      };
+      if (facet === 'under30') {
+        // Quick filter for under 30 min
+        currentSearch = '';
+        applyFilters();
+      } else if (facet === 'salad') {
+        setCategory('Salads');
+      } else {
+        // Toggle search term
+        const term = facetMap[facet] || facet;
+        if (badge.classList.contains('active')) {
+          currentSearch = term;
+          searchInput.value = term;
+        } else {
+          currentSearch = '';
+          searchInput.value = '';
+        }
+        applyFilters();
+      }
+    });
+  });
   
   backBtn.addEventListener('click', () => {
     window.location.hash = '';
@@ -97,37 +122,77 @@ function handleRoute() {
   showList();
 }
 
-// ── Category Chips ──────────────────────────────────────
+// ── Category Chips + Sidebar + Mobile Filters ──────────
 function buildCategoryChips() {
   const allCategories = new Set();
   allRecipes.forEach(r => r.categories.forEach(c => allCategories.add(c)));
   
   const sorted = [...allCategories].sort();
-  const container = document.querySelector('.filters-scroll');
   
+  // Desktop sidebar
+  const sidebar = document.getElementById('categorySidebar');
   sorted.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-chip';
-    btn.dataset.category = cat;
-    btn.textContent = cat;
-    btn.addEventListener('click', () => setCategory(cat));
-    container.appendChild(btn);
+    const div = document.createElement('div');
+    div.className = 'sidebar-cat';
+    div.dataset.category = cat;
+    div.textContent = cat;
+    div.addEventListener('click', () => setCategory(cat));
+    sidebar.appendChild(div);
+  });
+  sidebar.querySelector('[data-category=""]').addEventListener('click', () => setCategory(''));
+  
+  // Mobile filters
+  const mobileContainer = document.getElementById('mobileFilters');
+  sorted.forEach(cat => {
+    const span = document.createElement('span');
+    span.className = 'mobile-filter-chip';
+    span.dataset.category = cat;
+    span.textContent = cat;
+    span.addEventListener('click', () => setCategory(cat));
+    mobileContainer.appendChild(span);
   });
   
-  // Wire up "All" chip
-  container.querySelector('[data-category=""]').addEventListener('click', () => setCategory(''));
+  const sidebarCount = document.getElementById('sidebarCount');
+  if (sidebarCount) sidebarCount.textContent = `${allRecipes.length} recipes`;
   
   applyFilters();
 }
 
 function setCategory(cat) {
   currentCategory = cat;
-  document.querySelectorAll('.filter-chip').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.category === cat);
+  
+  // Update sidebar
+  document.querySelectorAll('.sidebar-cat').forEach(el => {
+    el.classList.toggle('active', el.dataset.category === cat);
   });
-  // Scroll active chip into view
-  const activeChip = document.querySelector('.filter-chip.active');
-  if (activeChip) activeChip.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+  
+  // Update mobile filters
+  document.querySelectorAll('.mobile-filter-chip').forEach(el => {
+    el.classList.toggle('active', el.dataset.category === cat);
+  });
+  
+  // Update section header
+  const titleEl = document.getElementById('sectionTitle');
+  const descEl = document.getElementById('sectionDesc');
+  if (titleEl) {
+    titleEl.textContent = cat || 'All Recipes';
+  }
+  if (descEl) {
+    const descs = {
+      'Recent Recipes': 'Fresh from the collection',
+      'Chicken': 'Poultry perfected',
+      'Beef': 'From the grill and stovetop',
+      'Pasta': 'Noodles and sauces',
+      'Soups': 'Warm bowls',
+      'Seafood': 'From the water',
+      'Salads': 'Fresh and bright',
+      'Vegetarian': 'Plant-forward dishes',
+      'Breakfast': 'Morning meals',
+      'Baking': 'Oven projects',
+    };
+    descEl.textContent = descs[cat] || 'Fresh from the collection';
+  }
+  
   applyFilters();
 }
 
@@ -235,6 +300,17 @@ function renderGrid() {
     card.addEventListener('click', () => {
       window.location.hash = `recipe/${id}`;
     });
+    
+    // Save button click (stop propagation)
+    const saveBtn = card.querySelector('.recipe-card-save');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleFavorite(id);
+        const isFav = favorites.has(id);
+        saveBtn.textContent = isFav ? '♥' : '♡';
+      });
+    }
   });
 }
 
@@ -291,23 +367,28 @@ function getCardColor(recipe) {
 
 function renderCard(recipe, index) {
   const emoji = getCardEmoji(recipe);
-  const primaryCat = recipe.categories && recipe.categories[0];
   const time = recipe.meta.totalTime || recipe.meta.cookTime || '';
-  const servings = recipe.meta.servings || '';
-  const metaParts = [];
-  if (primaryCat) metaParts.push(primaryCat);
-  if (time) metaParts.push(time);
-  if (servings) metaParts.push(servings);
+  const isFav = favorites.has(recipe.id);
+  // Clean description: strip metadata lines, trim, limit to ~48 chars
+  let desc = '';
+  if (recipe.description) {
+    desc = recipe.description
+      .replace(/^- \*\*[^*]+\*\*:.*$/gm, '')  // Strip "- **Meta**: value" lines
+      .replace(/^\d+ \w+.*$/m, '')             // Strip "45 mins Cook Time" artifacts
+      .replace(/\[Title\]/gi, '')               // Strip [Title] placeholders
+      .trim();
+    if (desc.length > 48) desc = desc.substring(0, 45) + '…';
+  }
   
   return `
     <div class="recipe-card" data-id="${recipe.id}">
-      <div class="card-body">
-        <div class="card-primary-row">
-          <span class="card-emoji">${emoji}</span>
-          <span class="card-title">${escHtml(recipe.title)}</span>
-          <span class="card-meta">${escHtml(metaParts.join(' · '))}</span>
-        </div>
+      <div class="recipe-card-title">${escHtml(recipe.title)}</div>
+      ${desc ? `<div class="recipe-card-desc">${escHtml(desc)}</div>` : ''}
+      <button class="recipe-card-save">${isFav ? '♥' : '♡'}</button>
+      <div class="recipe-card-image-wrap">
+        <div class="recipe-card-image-inner">${emoji}</div>
       </div>
+      <div class="recipe-card-attribution">${time ? `⏱ ${escHtml(time)}` : ''}</div>
     </div>
   `;
 }
@@ -462,114 +543,10 @@ function escHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+
 // Make clearSearch globally accessible (used in HTML)
 window.clearSearch = clearSearch;
 
-// ── Recent Recipes ───────────────────────────────────
-async function loadFeaturedRecipes() {
-  const section = document.getElementById('featuredSection');
-  const grid = document.getElementById('featuredGrid');
-  const titleEl = document.getElementById('featuredTitle');
-  const subtitleEl = document.getElementById('featuredSubtitle');
-  if (!section || !grid) return;
-
-  // Show the most recently added recipes, newest first
-  const recentRecipes = [...allRecipes]
-    .filter(r => r.dateAdded)
-    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
-    .slice(0, 6); // Max 6 recent
-
-  if (recentRecipes.length === 0) return;
-
-  // Update title/subtitle
-  if (titleEl) titleEl.textContent = 'Recent Recipes';
-  if (subtitleEl) subtitleEl.textContent = 'Fresh from the collection';
-
-  grid.innerHTML = recentRecipes.map(recipe => {
-    const tags = recipe.categories.slice(0, 2);
-    return `
-      <div class="featured-card" onclick="window.location.hash='recipe/${escHtml(recipe.id)}'">
-        <div class="featured-card-badge">New</div>
-        <div class="featured-card-title">${escHtml(recipe.title)}</div>
-        ${recipe.description ? `<div class="featured-card-desc">${escHtml(recipe.description.substring(0, 100))}${recipe.description.length > 100 ? '…' : ''}</div>` : ''}
-        <div class="featured-card-meta">
-          ${recipe.meta.totalTime ? `<span>${escHtml(recipe.meta.totalTime)}</span>` : ''}
-          ${tags.map(t => `<span class="tag ${tagClass(t)}">${escHtml(t)}</span>`).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  section.style.display = '';
-  
-  // Setup collapsible functionality
-  setupFeaturedCollapse(section);
-}
-
-function setupFeaturedCollapse(section) {
-  const toggle = document.getElementById('featuredToggle');
-  const content = document.getElementById('featuredContent');
-  if (!toggle || !content) return;
-  
-  // Restore state from localStorage (default: expanded)
-  const isCollapsed = localStorage.getItem('ns-featured-collapsed') === 'true';
-  if (isCollapsed) {
-    section.classList.add('collapsed');
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-  
-  // Toggle handler
-  const handleToggle = () => {
-    const collapsed = section.classList.toggle('collapsed');
-    toggle.setAttribute('aria-expanded', !collapsed);
-    localStorage.setItem('ns-featured-collapsed', collapsed);
-  };
-  
-  toggle.addEventListener('click', handleToggle);
-  toggle.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleToggle();
-    }
-  });
-}
-
-// ── Toast Notifications ───────────────────────────────
-let toastTimeout = null;
-
-function showGroceryToast(recipeName, added) {
-  let toast = document.getElementById('groceryToast');
-  
-  // Create toast if it doesn't exist
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'groceryToast';
-    toast.className = 'grocery-toast';
-    toast.innerHTML = `
-      <span class="toast-icon">✓</span>
-      <span class="toast-message"></span>
-    `;
-    document.body.appendChild(toast);
-  }
-  
-  // Update toast content
-  const icon = added ? '✓' : '−';
-  const action = added ? 'Added' : 'Removed';
-  toast.querySelector('.toast-icon').textContent = icon;
-  toast.querySelector('.toast-message').innerHTML = `${action} <strong>${escHtml(recipeName)}</strong> ${added ? 'to' : 'from'} grocery list`;
-  toast.classList.toggle('remove', !added);
-  
-  // Clear any existing timeout
-  if (toastTimeout) clearTimeout(toastTimeout);
-  
-  // Show toast
-  toast.classList.add('show');
-  
-  // Hide after 2 seconds
-  toastTimeout = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 2000);
-}
-
+// ── Go! ────────────────────────────────────────────────
 // ── Go! ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', init);
