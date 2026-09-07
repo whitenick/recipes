@@ -60,6 +60,15 @@ search service. See [`docs/search-data-model.md`](docs/search-data-model.md)
 for the field contract, searchable-vs-filterable mapping, and rebuild/reindex
 instructions.
 
+## Backend Status (WILS-9)
+
+**No backend is currently required** — the site is fully static and search runs
+client-side over the corpus. The moment a backend is genuinely needed (the AI
+Search service, auth, or any server-side piece), it will be a **Go** service and
+the **whole site migrates to Cloudflare**. The decision record, the pre-scoped Go
+service contract, and the GitHub Pages → Cloudflare runbook live in
+[`docs/backend-decision.md`](docs/backend-decision.md).
+
 ## Deploying
 
 The GitHub Actions workflow (`.github/workflows/pages.yml`) builds the site and deploys `dist/` to GitHub Pages on every push to `main`:
