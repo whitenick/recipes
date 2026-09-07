@@ -14,10 +14,10 @@ Personal recipe collection — searchable, mobile-friendly, and always up to dat
 
 ## Tech
 
-- Pure HTML/CSS/JavaScript (no framework)
+- **Vite** frontend build (Serapio Labs stack) — plain HTML/CSS/JS modules, no framework
 - Markdown rendered with `marked.js`
 - Recipes parsed from Obsidian `.md` files
-- Deployed via GitHub Pages
+- Deployed via GitHub Pages (Actions workflow in `.github/workflows/pages.yml`)
 
 ## Updating Recipes
 
@@ -32,15 +32,25 @@ This rebuilds `data/recipes.json` from the Obsidian vault and pushes to GitHub. 
 ## Local Development
 
 ```bash
+# Install dependencies (first time)
+npm install
+
 # Rebuild recipe index (RECIPES_DIR overrides the vault path when set)
 RECIPES_DIR="/path/to/.../Recipes" node build.js
 
 # Run the corpus/pipeline tests
 node --test
 
-# Preview locally
-npx serve . -l 3456
-# → http://localhost:3456
+# Start the Vite dev server
+npm run dev
+# → http://localhost:5173/recipes/
+
+# Production build → dist/
+npm run build
+
+# Preview the production build locally
+npm run preview
+# → http://localhost:4173/recipes/
 ```
 
 ## Search Data Model
@@ -49,6 +59,17 @@ npx serve . -l 3456
 search service. See [`docs/search-data-model.md`](docs/search-data-model.md)
 for the field contract, searchable-vs-filterable mapping, and rebuild/reindex
 instructions.
+
+## Deploying
+
+The GitHub Actions workflow (`.github/workflows/pages.yml`) builds the site and deploys `dist/` to GitHub Pages on every push to `main`:
+
+1. `npm ci`
+2. `npm test`
+3. `npm run build` (with `BASE_PATH=/recipes/`)
+4. Upload `dist/` → GitHub Pages
+
+The Vite `base` is `/recipes/` (the repo is a GitHub Pages *project* site served at `https://whitenick.github.io/recipes/`). If the site ever moves to Cloudflare Pages (the required migration the moment a backend/API exists), set `base: '/'` or `BASE_PATH=/` and the build output is directly deployable there — see the `vite.config.mjs` comment.
 
 ## Recipe Format
 
