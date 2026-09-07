@@ -129,8 +129,30 @@ function buildCategoryChips() {
   
   const sorted = [...allCategories].sort();
   
-  // Desktop sidebar
+  // Desktop sidebar — add "Recent Recipes" as first pseudo-category
   const sidebar = document.getElementById('categorySidebar');
+  
+  // Remove the default "All" that's in the HTML — we'll add it back sorted
+  const existingAll = sidebar.querySelector('[data-category=""]');
+  if (existingAll) existingAll.remove();
+  
+  // Add "Recent Recipes" as first item
+  const recentDiv = document.createElement('div');
+  recentDiv.className = 'sidebar-cat';
+  recentDiv.dataset.category = '__recent__';
+  recentDiv.textContent = 'Recent Recipes';
+  recentDiv.addEventListener('click', () => setCategory('__recent__'));
+  sidebar.appendChild(recentDiv);
+  
+  // Add "All"
+  const allDiv = document.createElement('div');
+  allDiv.className = 'sidebar-cat';
+  allDiv.dataset.category = '';
+  allDiv.textContent = 'All';
+  allDiv.addEventListener('click', () => setCategory(''));
+  sidebar.appendChild(allDiv);
+  
+  // Add real categories
   sorted.forEach(cat => {
     const div = document.createElement('div');
     div.className = 'sidebar-cat';
@@ -139,10 +161,26 @@ function buildCategoryChips() {
     div.addEventListener('click', () => setCategory(cat));
     sidebar.appendChild(div);
   });
-  sidebar.querySelector('[data-category=""]').addEventListener('click', () => setCategory(''));
   
-  // Mobile filters
+  // Mobile filters — same structure
   const mobileContainer = document.getElementById('mobileFilters');
+  // Clear existing "All"
+  mobileContainer.innerHTML = '';
+  
+  const recentSpan = document.createElement('span');
+  recentSpan.className = 'mobile-filter-chip';
+  recentSpan.dataset.category = '__recent__';
+  recentSpan.textContent = 'Recent Recipes';
+  recentSpan.addEventListener('click', () => setCategory('__recent__'));
+  mobileContainer.appendChild(recentSpan);
+  
+  const allSpan = document.createElement('span');
+  allSpan.className = 'mobile-filter-chip';
+  allSpan.dataset.category = '';
+  allSpan.textContent = 'All';
+  allSpan.addEventListener('click', () => setCategory(''));
+  mobileContainer.appendChild(allSpan);
+  
   sorted.forEach(cat => {
     const span = document.createElement('span');
     span.className = 'mobile-filter-chip';
@@ -155,7 +193,8 @@ function buildCategoryChips() {
   const sidebarCount = document.getElementById('sidebarCount');
   if (sidebarCount) sidebarCount.textContent = `${allRecipes.length} recipes`;
   
-  applyFilters();
+  // Default to Recent Recipes
+  setCategory('__recent__');
 }
 
 function setCategory(cat) {
@@ -175,11 +214,15 @@ function setCategory(cat) {
   const titleEl = document.getElementById('sectionTitle');
   const descEl = document.getElementById('sectionDesc');
   if (titleEl) {
-    titleEl.textContent = cat || 'All Recipes';
+    if (cat === '__recent__') {
+      titleEl.textContent = 'Recent Recipes';
+    } else {
+      titleEl.textContent = cat || 'All Recipes';
+    }
   }
   if (descEl) {
     const descs = {
-      'Recent Recipes': 'Fresh from the collection',
+      '__recent__': 'Fresh from the collection',
       'Chicken': 'Poultry perfected',
       'Beef': 'From the grill and stovetop',
       'Pasta': 'Noodles and sauces',
@@ -204,8 +247,8 @@ function applyFilters() {
     // Favorites filter
     if (favoritesOnly && !favorites.has(recipe.id)) return false;
     
-    // Category filter
-    if (currentCategory && !recipe.categories.includes(currentCategory)) return false;
+    // Category filter — skip for __recent__ (show all, sorted by date)
+    if (currentCategory && currentCategory !== '__recent__' && !recipe.categories.includes(currentCategory)) return false;
     
     // Search filter
     if (query) {
@@ -218,6 +261,15 @@ function applyFilters() {
     
     return true;
   });
+  
+  // Sort by dateAdded descending for Recent Recipes
+  if (currentCategory === '__recent__') {
+    filteredRecipes.sort((a, b) => {
+      const da = a.dateAdded ? new Date(a.dateAdded) : new Date(0);
+      const db = b.dateAdded ? new Date(b.dateAdded) : new Date(0);
+      return db - da;
+    });
+  }
   
   renderGrid();
   updateResultsMeta();
