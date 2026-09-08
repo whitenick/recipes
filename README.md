@@ -55,18 +55,40 @@ npm run preview
 
 ## Search Data Model
 
-`data/recipes.json` is the normalized corpus consumed by the (upcoming)
-search service. See [`docs/search-data-model.md`](docs/search-data-model.md)
-for the field contract, searchable-vs-filterable mapping, and rebuild/reindex
-instructions.
+`data/recipes.json` is the normalized corpus consumed by the search service. See
+[`docs/search-data-model.md`](docs/search-data-model.md) for the field contract,
+searchable-vs-filterable mapping, and rebuild/reindex instructions.
+
+## AI Search (WILS-17) — Meilisearch sidecar
+
+The site's search bar is **hybrid (keyword + vector) live search** against a
+**self-hosted Meilisearch** sidecar, replacing the old client-side substring
+filter. It is **opt-in**: unless a search endpoint is configured at build time,
+the site keeps the local substring filter exactly as before.
+
+- Indexer: `node search/indexer.js` (reads `data/recipes.json` → Meilisearch)
+  — see [`docs/search-deployment.md`](docs/search-deployment.md).
+- Frontend client: `src/search.js` (live, debounced, ranks results; falls back
+  to local substring search when the sidecar is unreachable).
+- Deploy the sidecar with `search/docker-compose.yml`; configure it at build
+  time via `VITE_SEARCH_ENDPOINT` / `VITE_SEARCH_KEY` / `VITE_SEARCH_HYBRID`
+  (the key is a **search-only** key — never the master key).
+
+```bash
+# After regenerating data/recipes.json, refresh the search index:
+MEILI_URL=https://search.example.com MEILI_MASTER_KEY=<master key> node search/indexer.js
+
+# Build the site pointed at the sidecar:
+VITE_SEARCH_ENDPOINT=https://search.example.com VITE_SEARCH_KEY=<search-only key> BASE_PATH=/recipes/ npm run build
+```
 
 ## Backend Status (WILS-9)
 
-**No backend is currently required** — the site is fully static and search runs
-client-side over the corpus. The moment a backend is genuinely needed (the AI
-Search service, auth, or any server-side piece), it will be a **Go** service and
-the **whole site migrates to Cloudflare**. The decision record, the pre-scoped Go
-service contract, and the GitHub Pages → Cloudflare runbook live in
+The site itself stays fully static on GitHub Pages — only **search queries** go
+to the out-of-band Meilisearch sidecar (WILS-17). Aside from that sidecar, no
+app server exists and no full site migration is pending; the "no backend for
+the rest of the app" record, the pre-scoped Go service contract, and the GitHub
+Pages → Cloudflare runbook live in
 [`docs/backend-decision.md`](docs/backend-decision.md).
 
 ## Deploying
@@ -78,7 +100,7 @@ The GitHub Actions workflow (`.github/workflows/pages.yml`) builds the site and 
 3. `npm run build` (with `BASE_PATH=/recipes/`)
 4. Upload `dist/` → GitHub Pages
 
-The Vite `base` is `/recipes/` (the repo is a GitHub Pages *project* site served at `https://whitenick.github.io/recipes/`). If the site ever moves to Cloudflare Pages (the required migration the moment a backend/API exists), set `base: '/'` or `BASE_PATH=/` and the build output is directly deployable there — see the `vite.config.mjs` comment.
+The Vite `base` is `/recipes/` (the repo is a GitHub Pages *project* site served at `https://whitenick.github.io/recipes/`). Should the site ever migrate to Cloudflare Pages, set `base: '/'` or `BASE_PATH=/` and the build output is directly deployable there — see the `vite.config.mjs` comment. (The WILS-17 AI Search sidecar runs out-of-band on a VPS and does **not** require this migration.)
 
 ## Integration Status (WILS-10)
 

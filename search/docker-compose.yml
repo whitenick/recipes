@@ -1,0 +1,50 @@
+# Meilisearch self-hosted sidecar for the recipes AI search.
+#
+# Bring up on a small VPS:
+#   MEILI_MASTER_KEY="$(openssl rand -hex 32)" docker compose up -d
+#
+# First-time key security (run once, then store the key in a password manager):
+#   curl -s -H "Authorization: Bearer $MEILI_MASTER_KEY" \
+#     -X POST http://localhost:7700/keys \
+#     -d '{ "description": "recipes public search-only",
+#           "actions": ["search"],
+#           "indexes": ["recipes"],
+#           "expiresAt": null }'
+#   → the returned `key` goes into the site build as VITE_SEARCH_KEY.
+#
+# Persistence: the data.ms volume survives restarts; re-run search/indexer.js
+# after each rebuild of data/recipes.json (see docs/search-deployment.md).
+
+services:
+  meilisearch:
+    image: getmeili/meilisearch:v1.13
+    container_name: recipes-meilisearch
+    restart: unless-stopped
+    ports:
+      - "7700:7700"
+    environment:
+      # REQUIRED: a strong master key. Never expose this to the client.
+      MEILI_MASTER_KEY: "${MEILI_MASTER_KEY}"
+      MEILI_ENV: "production"
+      # Allow the GitHub Pages origin (and the local dev origin) to call the API.
+      MEILI_HTTP_CORS_ORIGIN: "https://whitenick.github.io,http://localhost:5173"
+      # Optional: enable when a tenant-token / signed-search-key flow is adopted.
+      MEILI_HTTP_PAYLOAD_MAX_SIZE: "10485760"
+    volumes:
+      - meili_data:/meili_data
+    # Hybrid (vector) search is configured per-index via the `embedders` setting,
+    # not a CLI flag — see docs/search-deployment.md §Hybrid search.
+
+  # Free, local embedding model for hybrid vector search — no external API cost.
+  # Choose the API details per docs/search-deployment.md; this is the reference.
+  #ollama:
+  #  image: ollama/ollama:latest
+  #  container_name: recipes-ollama
+  #  restart: unless-stopped
+  #  volumes:
+  #    - ollama_data:/root/.ollama
+  #  entrypoint: ["/bin/sh", "-c", "ollama serve & sleep 5 && ollama pull nomic-embed-text && wait"]
+
+volumes:
+  meili_data:
+  #ollama_data:

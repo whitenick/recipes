@@ -5,6 +5,7 @@
  */
 import { marked } from 'marked';
 import recipesUrl from '/data/recipes.json?url';
+import { searchRecipes } from './search.js';
 
 /**
  * Nick's Kitchen — Grocery List Feature
@@ -739,6 +740,10 @@ let currentView = 'grid'; // 'grid' | 'list'
 let favoritesOnly = false;
 let favorites = new Set(JSON.parse(localStorage.getItem('ns-favorites') || '[]'));
 
+// Live-search debounce: serialize rapid typing into one Meilisearch call.
+let searchDebounceTimer = null;
+let searchSeq = 0;
+
 // ── OG Meta Tag Helper ──────────────────────────────────────
 function setOgMeta(property, content) {
   let el = document.querySelector(`meta[property=\"${property}\"]`);
@@ -782,7 +787,7 @@ async function init() {
 
   searchInput.addEventListener('input', () => {
     currentSearch = searchInput.value.trim();
-    applyFilters();
+    scheduleHybridSearch();
   });
   
   // Search badge clicks
@@ -968,6 +973,58 @@ function setCategory(cat) {
 }
 
 // ── Filtering / Search ─────────────────────────────────
+
+// ── Live hybrid search (Meilisearch sidecar) ───────────
+// Debounces keystrokes, calls Meilisearch for a ranked hit list, then runs the
+// existing category/favorites filter on top of that ranking. Falls back to the
+// local substring filter whenever Meilisearch is unconfigured or unreachable,
+// so the static site always works.
+function scheduleHybridSearch() {
+  if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+  if (!currentSearch) {
+    applyFilters();
+    return;
+  }
+  searchDebounceTimer = setTimeout(runHybridSearch, 250);
+}
+
+async function runHybridSearch() {
+  const query = currentSearch;
+  const seq = ++searchSeq;
+  let ranked;
+
+  try {
+    const { hits, available } = await searchRecipes(query);
+    if (!available) { applyFilters(); return; }   // not configured → local filter
+    ranked = hits;
+  } catch (err) {
+    console.log('Meilisearch unavailable, falling back to local search:', err);
+    if (seq !== searchSeq) return;               // superseded by newer keystroke
+    applyFilters();
+    return;
+  }
+  if (seq !== searchSeq || currentSearch !== query) return; // stale response
+
+  const rankedIds = new Map();
+  ranked.forEach((h, i) => { if (h && h.id) rankedIds.set(h.id, i); });
+
+  const byId = new Map(allRecipes.map(r => [r.id, r]));
+  // Keep the ranked order; merge any hits not yet present in allRecipes.
+  const ordered = ranked
+    .map(h => byId.get(h?.id))
+    .filter(r => r);
+  const rest = allRecipes.filter(r => !rankedIds.has(r.id));
+
+  filteredRecipes = ordered.concat(rest).filter(recipe => {
+    if (favoritesOnly && !favorites.has(recipe.id)) return false;
+    if (currentCategory && currentCategory !== '__recent__' && !recipe.categories.includes(currentCategory)) return false;
+    return true;
+  });
+
+  renderGrid();
+  updateResultsMeta();
+}
+
 function applyFilters() {
   const query = currentSearch.toLowerCase();
   
