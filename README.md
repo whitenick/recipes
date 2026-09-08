@@ -59,36 +59,44 @@ npm run preview
 [`docs/search-data-model.md`](docs/search-data-model.md) for the field contract,
 searchable-vs-filterable mapping, and rebuild/reindex instructions.
 
-## AI Search (WILS-17) — Meilisearch sidecar
+## AI Search (WILS-4) — Cloudflare Worker + hosted Meilisearch
 
 The site's search bar is **hybrid (keyword + vector) live search** against a
-**self-hosted Meilisearch** sidecar, replacing the old client-side substring
-filter. It is **opt-in**: unless a search endpoint is configured at build time,
-the site keeps the local substring filter exactly as before.
+**Cloudflare Worker in front of hosted Meilisearch**, replacing the old
+client-side substring filter. It is **opt-in**: unless a search endpoint is
+configured at build time, the site keeps the local substring filter exactly as
+before.
 
-- Indexer: `node search/indexer.js` (reads `data/recipes.json` → Meilisearch)
-  — see [`docs/search-deployment.md`](docs/search-deployment.md).
+- Search service: `search/worker/` (Cloudflare Worker — CORS, server-side key,
+  hybrid→keyword fallback). Deploy + full docs in
+  [`docs/search-deployment.md`](docs/search-deployment.md).
+- Indexer: `node search/indexer.js` (reads `data/recipes.json` → Meilisearch;
+  one idempotent command for initial + incremental sync).
 - Frontend client: `src/search.js` (live, debounced, ranks results; falls back
-  to local substring search when the sidecar is unreachable).
-- Deploy the sidecar with `search/docker-compose.yml`; configure it at build
-  time via `VITE_SEARCH_ENDPOINT` / `VITE_SEARCH_KEY` / `VITE_SEARCH_HYBRID`
-  (the key is a **search-only** key — never the master key).
+  to local substring search when the service is unreachable).
+- Hosting rule: the site migrates to Cloudflare (Pages + this Worker) the
+  moment the search service is live — migration runbook in
+  `docs/backend-decision.md` §4.
 
 ```bash
 # After regenerating data/recipes.json, refresh the search index:
-MEILI_URL=https://search.example.com MEILI_MASTER_KEY=<master key> node search/indexer.js
+MEILI_URL=https://<instance>.meilisearch.com MEILI_MASTER_KEY=<master key> node search/indexer.js
 
-# Build the site pointed at the sidecar:
-VITE_SEARCH_ENDPOINT=https://search.example.com VITE_SEARCH_KEY=<search-only key> BASE_PATH=/recipes/ npm run build
+# Build the site pointed at the search Worker (no key in the build):
+VITE_SEARCH_ENDPOINT=https://recipes-search.<subdomain>.workers.dev BASE_PATH=/recipes/ npm run build
 ```
+
+The Meilisearch key never reaches the browser — the Worker holds
+`MEILI_SEARCH_KEY` as a secret. If embeddings are unavailable the service
+degrades each query to keyword-only (`degraded: true`).
 
 ## Backend Status (WILS-9)
 
-The site itself stays fully static on GitHub Pages — only **search queries** go
-to the out-of-band Meilisearch sidecar (WILS-17). Aside from that sidecar, no
-app server exists and no full site migration is pending; the "no backend for
-the rest of the app" record, the pre-scoped Go service contract, and the GitHub
-Pages → Cloudflare runbook live in
+The site itself stays fully static — only **search queries** go out-of-band to
+the Cloudflare-hosted search service (WILS-4). Aside from that, no app server
+exists and no full site migration is pending; the "no backend for the rest of
+the app" record, the pre-scoped Go service contract, and the GitHub Pages →
+Cloudflare runbook live in
 [`docs/backend-decision.md`](docs/backend-decision.md).
 
 ## Deploying
@@ -100,7 +108,7 @@ The GitHub Actions workflow (`.github/workflows/pages.yml`) builds the site and 
 3. `npm run build` (with `BASE_PATH=/recipes/`)
 4. Upload `dist/` → GitHub Pages
 
-The Vite `base` is `/recipes/` (the repo is a GitHub Pages *project* site served at `https://whitenick.github.io/recipes/`). Should the site ever migrate to Cloudflare Pages, set `base: '/'` or `BASE_PATH=/` and the build output is directly deployable there — see the `vite.config.mjs` comment. (The WILS-17 AI Search sidecar runs out-of-band on a VPS and does **not** require this migration.)
+The Vite `base` is `/recipes/` (the repo is a GitHub Pages *project* site served at `https://whitenick.github.io/recipes/`). Should the site ever migrate to Cloudflare Pages, set `base: '/'` or `BASE_PATH=/` and the build output is directly deployable there — see the `vite.config.mjs` comment. (The WILS-4 AI Search service runs as a Cloudflare Worker out-of-band and does **not** require this migration — but per the hosting rule, wiring the live search bar is what triggers the site's Cloudflare Pages migration; see `docs/backend-decision.md` §4.)
 
 ## Integration Status (WILS-10)
 

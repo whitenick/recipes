@@ -1,0 +1,16 @@
+# Cloudflare Worker config — recipes-search (WILS-4).
+# One Worker in front of hosted Meilisearch; see docs/search-deployment.md.
+name = "recipes-search"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# Public vars are visible to the Worker but safe to commit. Real secrets
+# (MEILI_URL with its embedded key, MEILI_SEARCH_KEY) go in `wrangler secret put`.
+[vars]
+MEILI_INDEX = "recipes"
+ALLOWED_ORIGINS = "https://whitenick.github.io,https://recipes.pages.dev,http://localhost:5173,http://127.0.0.1:5173"
+EMBEDDER = "default"
+
+# Routes: bind to a custom domain/subdomain, e.g.
+#   routes = [{ pattern = "search.recipes.example.com", zone_name = "example.com" }]
+# or use the default workers.dev route (search/worker/README).

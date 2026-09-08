@@ -1,5 +1,5 @@
 /**
- * Regression test for the Meilisearch indexer (WILS-17).
+ * Regression test for the Meilisearch indexer (WILS-3/WILS-4).
  *
  * Exercises search/indexer.js's projection + settings directly and asserts the
  * index contract from docs/search-data-model.md:

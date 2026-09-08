@@ -9,6 +9,7 @@
     "build:data": "node build.js",
     "index:search": "node search/indexer.js",
     "index:search:dry": "node search/indexer.js --dry-run",
+    "smoke:search": "node search/smoke.js",
     "test": "node --test test/*.test.js"
   },
   "private": true,

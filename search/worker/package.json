@@ -1,0 +1,15 @@
+{
+  "name": "recipes-search-worker",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cloudflare Worker in front of hosted Meilisearch for the recipes site (WILS-4)",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "deploy": "wrangler deploy",
+    "test": "node --test ../../test/worker.test.js"
+  },
+  "devDependencies": {
+    "wrangler": "^3.99.0"
+  }
+}

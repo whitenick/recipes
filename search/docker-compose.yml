@@ -1,6 +1,11 @@
-# Meilisearch self-hosted sidecar for the recipes AI search.
+# Meilisearch for the recipes AI search — LOCAL DEV / self-host fallback.
 #
-# Bring up on a small VPS:
+# Production path (WILS-4) is a Cloudflare Worker in front of HOSTED
+# Meilisearch — this compose file is only for local verification and the
+# self-host fallback documented in docs/search-deployment.md. It is NOT the
+# shipped hosting path (hosting rule: search service lives on Cloudflare).
+#
+# Bring up locally:
 #   MEILI_MASTER_KEY="$(openssl rand -hex 32)" docker compose up -d
 #
 # First-time key security (run once, then store the key in a password manager):
@@ -10,7 +15,7 @@
 #           "actions": ["search"],
 #           "indexes": ["recipes"],
 #           "expiresAt": null }'
-#   → the returned `key` goes into the site build as VITE_SEARCH_KEY.
+#   → the returned `key` is what the Worker uses as MEILI_SEARCH_KEY locally.
 #
 # Persistence: the data.ms volume survives restarts; re-run search/indexer.js
 # after each rebuild of data/recipes.json (see docs/search-deployment.md).

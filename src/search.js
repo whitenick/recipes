@@ -1,68 +1,63 @@
 /**
- * Nick's Kitchen — Meilisearch live-search client.
+ * Nick's Kitchen — recipes search client (WILS-4).
  *
- * Replaces the client-side substring filter with ranked, hybrid
- * (keyword + vector) search-as-you-type against a self-hosted Meilisearch
- * sidecar. Configured entirely through build-time env vars so no API key is
- * ever committed to the repo; when no endpoint is configured (or the sidecar
- * is unreachable), the caller silently falls back to the local substring
- * filter, so the static GitHub Pages site never depends on the backend.
+ * Talks to the Cloudflare Worker search service (search/worker), which fronts
+ * hosted Meilisearch. The Worker holds the Meilisearch API key; the browser
+ * only ever sees the Worker URL, so no key ships in the static build.
+ *
+ * Configured entirely through build-time env vars. When no endpoint is
+ * configured (or the service is unreachable), the caller silently falls back
+ * to the local substring filter, so the static site never depends on it.
  *
  * Build-time config (set in `.env`, a CI env, or `npm run build`):
- *   VITE_SEARCH_ENDPOINT   e.g. https://search.example.com          (required to enable)
- *   VITE_SEARCH_KEY        Meilisearch search-only key (never the master key)
- *   VITE_SEARCH_INDEX      default "recipes"
- *   VITE_SEARCH_HYBRID     "true" (default) to enable hybrid search
+ *   VITE_SEARCH_ENDPOINT   Worker base URL, e.g. https://recipes-search.xxx.workers.dev
+ *                          (required to enable)
+ *   VITE_SEARCH_INDEX      index name (default "recipes"; informational — the
+ *                          Worker pins its own index)
+ *   VITE_SEARCH_HYBRID     "true" (default) to request hybrid search; the
+ *                          Worker degrades to keyword-only if embeddings fail
  */
 
 const endpoint = (import.meta.env.VITE_SEARCH_ENDPOINT || '').trim();
-const searchKey = (import.meta.env.VITE_SEARCH_KEY || '').trim();
-const indexName = (import.meta.env.VITE_SEARCH_INDEX || 'recipes').trim();
 const hybridEnabled = (import.meta.env.VITE_SEARCH_HYBRID || 'true').trim().toLowerCase() !== 'false';
 
 export const searchConfig = {
   enabled: endpoint !== '',
   endpoint,
-  index: indexName,
   hybrid: hybridEnabled,
 };
 
 /**
- * Live, ranked search over the configured Meilisearch index.
+ * Live, ranked search over the search service.
  *
  * @param {string} query      the trimmed free-text query ("" disables search)
- * @param {number} limit      max hits to fetch (default 24)
+ * @param {object} [opts]     { limit, categories, maxMinutes }
  * @returns {Promise<{hits: Array<{id:string}>, available: boolean}>}
- *   `available` is false when Meilisearch isn't configured, so callers can
+ *   `available` is false when the service isn't configured, so callers can
  *   fall back to the local filter. Throws on a transport/HTTP error.
  */
-export async function searchRecipes(query, limit = 24) {
+export async function searchRecipes(query, limit = 24, opts = {}) {
   if (!searchConfig.enabled) return { hits: [], available: false };
   if (!query) return { hits: [], available: true };
 
   const body = {
     q: query,
     limit,
-    attributesToRetrieve: ['id', 'title', 'description', 'categories'],
-    showRankingScore: true,
+    hybrid: searchConfig.hybrid,
   };
-  if (hybridEnabled) body.hybrid = { embedder: 'default' };
+  if (Array.isArray(opts.categories) && opts.categories.length) body.categories = opts.categories;
+  if (opts.maxMinutes) body.maxMinutes = opts.maxMinutes;
 
-  const res = await fetch(`${searchConfig.endpoint}/indexes/${encodeURIComponent(indexName)}/search`, {
+  const res = await fetch(`${searchConfig.endpoint}/search`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': `Bearer ${searchKey}`,
-    },
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify(body),
   });
 
   if (!res.ok) {
-    const detail = await res.text().catch(() => '');
-    throw new Error(`Meilisearch search failed (${res.status}): ${detail}`);
+    throw new Error(`Search service failed (${res.status})`);
   }
 
   const data = await res.json();
-  return { hits: data.hits || [], available: true };
+  return { hits: data.hits || [], available: true, degraded: data.degraded === true };
 }

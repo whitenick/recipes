@@ -974,7 +974,7 @@ function setCategory(cat) {
 
 // ── Filtering / Search ─────────────────────────────────
 
-// ── Live hybrid search (Meilisearch sidecar) ───────────
+// ── Live hybrid search (Cloudflare Worker service) ────────────
 // Debounces keystrokes, calls Meilisearch for a ranked hit list, then runs the
 // existing category/favorites filter on top of that ranking. Falls back to the
 // local substring filter whenever Meilisearch is unconfigured or unreachable,
