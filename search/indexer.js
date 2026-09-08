@@ -22,7 +22,7 @@
  *   MEILI_INDEX      index name (default "recipes")
  *   MEILI_HYBRID     by default the indexer configures no embedder here —
  *                    embedding is configured at the Meilisearch instance level
- *                    (see docs/search-deployment.md).
+ *                    (see docs/search-deployment.md §Embeddings).
  */
 
 const fs = require('node:fs');
@@ -104,7 +104,6 @@ const SETTINGS = {
     'meta.servingsMax',
   ],
   sortableAttributes: ['dateAdded'],
-  rankingScoreThreshold: 0.0,
   pagination: { maxTotalHits: 10000 },
 };
 
