@@ -1502,8 +1502,13 @@
     "meta": {
       "prepTime": null,
       "cookTime": null,
-      "totalTime": "1 hour 15 minutes (30 active, 45 cooking)",
-      "servings": "4-6 (makes ~20 appetizer knishes)"
+      "totalTime": "1 hr 15 mins (30 active, 45 cooking)",
+      "servings": "4 - 6 (makes ~20 appetizer knishes)",
+      "prepTimeMinutes": null,
+      "cookTimeMinutes": null,
+      "totalTimeMinutes": 75,
+      "servingsMin": 4,
+      "servingsMax": 20
     },
     "source": null,
     "dateAdded": "2026-09-08T00:00:32.660Z",
