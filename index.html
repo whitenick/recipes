@@ -70,7 +70,12 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#AAA; flex-shrink:0;">
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
-          <input type="search" id="searchInput" placeholder="What are you craving? Try 'quick chicken dinner' or 'something with kale'…" autocomplete="off" spellcheck="false" />
+          <input type="search" id="searchInput" placeholder="What are you craving? Try 'quick chicken dinner' or 'something with kale'…" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-controls="searchDropdown" />
+        </div>
+        <!-- AI rank results dropdown (WILS-5) -->
+        <div class="search-dropdown" id="searchDropdown" hidden>
+          <div class="search-dropdown-status" id="searchDropdownStatus"></div>
+          <div class="search-results" id="searchResults" role="listbox"></div>
         </div>
         <div class="search-badge-row">
           <span class="search-badge active" data-facet="quick">

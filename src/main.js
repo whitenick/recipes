@@ -6,6 +6,7 @@
 import { marked } from 'marked';
 import recipesUrl from '/data/recipes.json?url';
 import { searchRecipes } from './search.js';
+import { createSearchBar } from './search-bar.js';
 
 /**
  * Nick's Kitchen — Grocery List Feature
@@ -740,9 +741,8 @@ let currentView = 'grid'; // 'grid' | 'list'
 let favoritesOnly = false;
 let favorites = new Set(JSON.parse(localStorage.getItem('ns-favorites') || '[]'));
 
-// Live-search debounce: serialize rapid typing into one Meilisearch call.
-let searchDebounceTimer = null;
-let searchSeq = 0;
+// Live-search debounce + ranking are owned by the search-bar component
+// (src/search-bar.js, WILS-5); the app just consumes its results below.
 
 // ── OG Meta Tag Helper ──────────────────────────────────────
 function setOgMeta(property, content) {
@@ -785,11 +785,26 @@ async function init() {
   const backBtn = document.getElementById('backBtn');
   const favoritesToggle = document.getElementById('favoritesToggle');
 
-  searchInput.addEventListener('input', () => {
-    currentSearch = searchInput.value.trim();
-    scheduleHybridSearch();
+  // AI search bar: type-ahead dropdown + debounced ranked queries (WILS-5).
+  // onFallback keeps the classic local substring filter as the base layer on
+  // every keystroke; onRanked swaps in the service's ranked order when hits
+  // arrive, so the grid is never empty while the request is in flight.
+  createSearchBar({
+    search: searchRecipes,
+    lookupRecipe: (id) => allRecipes.find((r) => r && r.id === id) || null,
+    onSelect: (id) => {
+      window.location.hash = `recipe/${id}`;
+    },
+    onRanked: (hits, query) => {
+      currentSearch = query;
+      rankGrid(hits);
+    },
+    onFallback: (query) => {
+      currentSearch = query;
+      applyFilters();
+    },
   });
-  
+
   // Search badge clicks
   document.querySelectorAll('.search-badge').forEach(badge => {
     badge.addEventListener('click', () => {
@@ -974,43 +989,27 @@ function setCategory(cat) {
 
 // ── Filtering / Search ─────────────────────────────────
 
-// ── Live hybrid search (Cloudflare Worker service) ────────────
-// Debounces keystrokes, calls Meilisearch for a ranked hit list, then runs the
-// existing category/favorites filter on top of that ranking. Falls back to the
-// local substring filter whenever Meilisearch is unconfigured or unreachable,
-// so the static site always works.
-function scheduleHybridSearch() {
-  if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
-  if (!currentSearch) {
-    applyFilters();
+// ── Ranked grid update ──────────────────────────────
+// The search-bar component (WILS-5) debounces keystrokes and queries the
+// Cloudflare Worker search service; rankGrid() applies the current
+// category/favorites filter on top of the service's ranked hit list and keeps
+// any recipes the service missed at the tail. The local substring filter in
+// applyFilters() remains the fallback whenever the service is off the path.
+function rankGrid(hits) {
+  // A ranked-but-empty answer means "no matches", not "show everything".
+  if (!hits || hits.length === 0) {
+    filteredRecipes = [];
+    renderGrid();
+    updateResultsMeta();
     return;
   }
-  searchDebounceTimer = setTimeout(runHybridSearch, 250);
-}
-
-async function runHybridSearch() {
-  const query = currentSearch;
-  const seq = ++searchSeq;
-  let ranked;
-
-  try {
-    const { hits, available } = await searchRecipes(query);
-    if (!available) { applyFilters(); return; }   // not configured → local filter
-    ranked = hits;
-  } catch (err) {
-    console.log('Meilisearch unavailable, falling back to local search:', err);
-    if (seq !== searchSeq) return;               // superseded by newer keystroke
-    applyFilters();
-    return;
-  }
-  if (seq !== searchSeq || currentSearch !== query) return; // stale response
 
   const rankedIds = new Map();
-  ranked.forEach((h, i) => { if (h && h.id) rankedIds.set(h.id, i); });
+  hits.forEach((h, i) => { if (h && h.id) rankedIds.set(h.id, i); });
 
   const byId = new Map(allRecipes.map(r => [r.id, r]));
   // Keep the ranked order; merge any hits not yet present in allRecipes.
-  const ordered = ranked
+  const ordered = (hits || [])
     .map(h => byId.get(h?.id))
     .filter(r => r);
   const rest = allRecipes.filter(r => !rankedIds.has(r.id));
