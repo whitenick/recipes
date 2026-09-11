@@ -72,8 +72,13 @@ before.
   [`docs/search-deployment.md`](docs/search-deployment.md).
 - Indexer: `node search/indexer.js` (reads `data/recipes.json` → Meilisearch;
   one idempotent command for initial + incremental sync).
-- Frontend client: `src/search.js` (live, debounced, ranks results; falls back
-  to local substring search when the service is unreachable).
+- Frontend search bar: `src/search-bar.js` — a type-ahead autocomplete over
+  `#searchInput` (debounced queries, keyboard + mouse navigation, loading /
+  empty / error states, results as recipe cards). Each ranked hit also drives
+  the grid order via `src/main.js`. When the service is missing or
+  unreachable the dropdown says so in plain words and the classic local
+  substring filter (`applyFilters()`) takes over — the degradation is always
+  visible, never silent.
 - Hosting rule: the site migrates to Cloudflare (Pages + this Worker) the
   moment the search service is live — migration runbook in
   `docs/backend-decision.md` §4.
