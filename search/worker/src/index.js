@@ -17,7 +17,7 @@
  *   - a tiny, cheap filter layer (categories / max prep time) so the frontend
  *     can facet without knowing Meilisearch's filter syntax
  *
- * Deploy: `wrangler deploy` with the secrets in search/worker/README (vars:
+ * Deploy: `wrangler deploy` with the secrets in docs/search-deployment.md (vars:
  * MEILI_URL, MEILI_SEARCH_KEY, MEILI_INDEX, ALLOWED_ORIGINS, EMBEDDER).
  */
 

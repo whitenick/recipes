@@ -13,4 +13,4 @@ EMBEDDER = "default"
 
 # Routes: bind to a custom domain/subdomain, e.g.
 #   routes = [{ pattern = "search.recipes.example.com", zone_name = "example.com" }]
-# or use the default workers.dev route (search/worker/README).
+# or use the default workers.dev route (see docs/search-deployment.md).
