@@ -1115,8 +1115,243 @@ input, textarea { font: inherit; }
 }
 
 /* ══════════════════════════════════════════════════════════
-   GROCERY LIST FEATURE
+   PEOPLE EDGE — Who made / tried this
    ══════════════════════════════════════════════════════════ */
+
+.people-edge-section {
+  margin: 48px 0;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.people-edge {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.people-edge-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.people-edge-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.people-edge-count {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--chip-bg);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.06em;
+}
+
+.people-edge-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 16px 0;
+}
+
+.people-edge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.people-edge-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  transition: background 0.15s;
+  font-size: 13px;
+}
+
+.people-edge-item:hover {
+  background: var(--bg-card-hover);
+}
+
+.people-edge-item-kind {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.people-edge-item-name {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.people-edge-item-place {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.people-edge-item-place::before {
+  content: '· ';
+  color: var(--text-dim);
+}
+
+.people-edge-item-time {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.people-edge-undo {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--text-dim);
+  border-radius: 50%;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+.people-edge-undo:hover {
+  background: rgba(0,0,0,0.08);
+  color: var(--text);
+}
+
+.people-edge-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.people-edge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  letter-spacing: 0.04em;
+}
+
+.people-edge-btn:hover {
+  border-color: var(--text);
+  color: var(--text);
+  background: var(--bg-card);
+}
+
+.people-edge-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ── Place picker modal ── */
+.people-place-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 24, 16, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 300;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.people-place-modal {
+  background: var(--bg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px 24px 32px;
+  box-shadow: 0 -4px 24px rgba(30, 24, 16, 0.12);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.people-place-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.people-place-close {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text-muted);
+  border-radius: 50%;
+  transition: all 0.15s;
+}
+
+.people-place-close:hover {
+  background: var(--bg-card-hover);
+  color: var(--text);
+}
+
+.people-place-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.people-place-opt {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  text-align: left;
+  color: var(--text);
+  background: var(--bg-card);
+  transition: background 0.15s;
+}
+
+.people-place-opt:hover {
+  background: var(--bg-card-hover);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .people-edge-item { font-size: 12px; padding: 8px 12px; }
+  .people-edge-btn { font-size: 11px; padding: 8px 14px; }
+  .people-place-modal { padding: 16px 20px 24px; }
+}
+
+@media (max-width: 480px) {
+  .people-edge-section { margin: 32px 0; padding-top: 32px; }
+  .people-edge-title { font-size: 16px; }
+}
 
 /* ── Grocery Add Button on recipe cards (Mobile-first) ── */
 .grocery-add-btn {
