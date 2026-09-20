@@ -78,14 +78,14 @@ function seedDataIfEmpty() {
   const DAY = 86400000;
 
   const demoAttempts = [
-    { id: uid(), recipe_id: 'pumpkin-risotto-with-sage-brown-butter', user_id: 'friend-alex', kind: 'made', place_id: 'home', created_at: new Date(now - DAY * 3).toISOString() },
-    { id: uid(), recipe_id: 'pumpkin-risotto-with-sage-brown-butter', user_id: 'friend-jordan', kind: 'tried', place_id: 'restaurant', created_at: new Date(now - DAY * 2).toISOString() },
-    { id: uid(), recipe_id: 'chicken-tikka-masala', user_id: 'friend-sam', kind: 'made', place_id: 'home', created_at: new Date(now - DAY * 5).toISOString() },
-    { id: uid(), recipe_id: 'chicken-tikka-masala', user_id: 'friend-alex', kind: 'tried', place_id: null, created_at: new Date(now - DAY).toISOString() },
-    { id: uid(), recipe_id: 'classic-burger-recipe', user_id: 'friend-jordan', kind: 'made', place_id: 'home', created_at: new Date(now - DAY * 4).toISOString() },
-    { id: uid(), recipe_id: 'classic-burger-recipe', user_id: 'user-local', kind: 'made', place_id: 'home', created_at: new Date(now - DAY * 7).toISOString() },
-    { id: uid(), recipe_id: 'guacamole', user_id: 'friend-sam', kind: 'tried', place_id: 'restaurant', created_at: new Date(now - DAY * 6).toISOString() },
-    { id: uid(), recipe_id: 'guacamole', user_id: 'friend-sam', kind: 'made', place_id: null, created_at: new Date(now - DAY).toISOString() },
+    { id: uid(), recipe_id: 'pumpkin-risotto-with-sage-brown-butter', user_id: 'friend-alex', kind: 'made', place_id: 'home', note: 'Added extra sage — amazing', created_at: new Date(now - DAY * 3).toISOString() },
+    { id: uid(), recipe_id: 'pumpkin-risotto-with-sage-brown-butter', user_id: 'friend-jordan', kind: 'tried', place_id: 'restaurant', note: null, created_at: new Date(now - DAY * 2).toISOString() },
+    { id: uid(), recipe_id: 'chicken-tikka-masala', user_id: 'friend-sam', kind: 'made', place_id: 'home', note: null, created_at: new Date(now - DAY * 5).toISOString() },
+    { id: uid(), recipe_id: 'chicken-tikka-masala', user_id: 'friend-alex', kind: 'tried', place_id: null, note: null, created_at: new Date(now - DAY).toISOString() },
+    { id: uid(), recipe_id: 'classic-burger-recipe', user_id: 'friend-jordan', kind: 'made', place_id: 'home', note: 'Used brioche buns — highly recommend', created_at: new Date(now - DAY * 4).toISOString() },
+    { id: uid(), recipe_id: 'classic-burger-recipe', user_id: 'user-local', kind: 'made', place_id: 'home', note: null, created_at: new Date(now - DAY * 7).toISOString() },
+    { id: uid(), recipe_id: 'guacamole', user_id: 'friend-sam', kind: 'tried', place_id: 'restaurant', note: 'Best guac I have ever had', created_at: new Date(now - DAY * 6).toISOString() },
+    { id: uid(), recipe_id: 'guacamole', user_id: 'friend-sam', kind: 'made', place_id: null, note: null, created_at: new Date(now - DAY).toISOString() },
   ];
 
   const friendships = DEMO_FRIENDS.map(f => ['user-local', f.id]);
@@ -105,7 +105,7 @@ function getPlace(placeId) {
   return places.find(p => p.id === placeId) || null;
 }
 
-function recordAttempt(recipeId, kind, placeId) {
+function recordAttempt(recipeId, kind, placeId, note) {
   const user = getCurrentUser();
   let attempts = load(LS_KEY_ATTEMPTS, []);
 
@@ -122,6 +122,7 @@ function recordAttempt(recipeId, kind, placeId) {
     user_id: user.id,
     kind,
     place_id: placeId || null,
+    note: note || null,
     created_at: new Date().toISOString(),
   });
 
@@ -169,8 +170,11 @@ function renderCookAttempts(recipeId, container) {
       const kindEmoji = a.kind === 'made' ? '🥘' : '👤';
       html += `<div class="people-edge-item" data-attempt-id="${a.id}">
           <span class="people-edge-item-kind">${kindEmoji}</span>
-          <span class="people-edge-item-name">${escHtml(name)}</span>
-          ${place ? `<span class="people-edge-item-place">at ${escHtml(place.name)}</span>` : ''}
+          <div class="people-edge-item-body">
+            <span class="people-edge-item-name">${escHtml(name)}</span>
+            ${place ? `<span class="people-edge-item-place">at ${escHtml(place.name)}</span>` : ''}
+            ${a.note ? `<span class="people-edge-item-note">${escHtml(a.note)}</span>` : ''}
+          </div>
           ${a.user_id === user.id ? `<button class="people-edge-undo" title="Remove">×</button>` : ''}
           <span class="people-edge-item-time">${timeAgo(a.created_at)}</span>
         </div>`;
@@ -197,8 +201,8 @@ function renderCookAttempts(recipeId, container) {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const kind = btn.dataset.kind;
-      showPlacePicker((placeId) => {
-        recordAttempt(recipeId, kind, placeId);
+      showPlacePicker((placeId, note) => {
+        recordAttempt(recipeId, kind, placeId, note);
         renderCookAttempts(recipeId, container);
       });
     });
@@ -220,7 +224,9 @@ function renderCookAttempts(recipeId, container) {
 function showPlacePicker(onPick) {
   const overlay = document.createElement('div');
   overlay.className = 'people-place-overlay';
-  overlay.addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
 
   const places = load(LS_KEY_PLACES, DEFAULT_PLACES);
 
@@ -230,6 +236,9 @@ function showPlacePicker(onPick) {
   let html = `<div class="people-place-header">
     <span>Tag a place (optional)</span>
     <button class="people-place-close">×</button>
+  </div>
+  <div class="people-place-note-wrap">
+    <textarea class="people-place-note-input" placeholder="Add a note (optional)" rows="2"></textarea>
   </div>
   <div class="people-place-options">`;
 
@@ -246,8 +255,9 @@ function showPlacePicker(onPick) {
   box.querySelectorAll('.people-place-opt').forEach(btn => {
     btn.addEventListener('click', () => {
       const placeId = btn.dataset.placeId;
+      const note = box.querySelector('.people-place-note-input').value.trim();
       overlay.remove();
-      onPick(placeId || null);
+      onPick(placeId || null, note || null);
     });
   });
 
