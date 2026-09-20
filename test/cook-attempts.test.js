@@ -68,3 +68,43 @@ test('cook-attempts module has demo seed data for immediate visibility', () => {
   assert.match(js, /DEFAULT_PLACES/, 'must define default places');
   assert.match(js, /pumpkin-risotto/, 'must seed attempt on a real recipe');
 });
+
+test('cook-attempts note field is optional on CookAttempt', () => {
+  const js = read('src/cook-attempts.js');
+  assert.match(js, /note:\s*(.*\n)?.*null/, 'recordAttempt stores note as null when absent');
+});
+
+test('showPlacePicker includes optional note textarea', () => {
+  const js = read('src/cook-attempts.js');
+  assert.match(js, /Add a note \(optional\)/, 'placeholder text for note input');
+  assert.match(js, /people-place-note-input/, 'note textarea has input class');
+  assert.match(js, /\.value\.trim/, 'picks up note value on submit');
+});
+
+test('people-edge CSS includes note display styles', () => {
+  const css = read('src/style.css');
+  assert.match(css, /people-edge-item-body/, 'stylesheet targets note body wrapper');
+  assert.match(css, /people-edge-item-note/, 'stylesheet targets note text');
+  assert.match(css, /people-place-note-input/, 'stylesheet targets note textarea');
+  assert.match(css, /people-place-note-wrap/, 'stylesheet targets note input wrapper');
+});
+
+test('rendered attempt items include optional note', () => {
+  const js = read('src/cook-attempts.js');
+  assert.match(js, /a\.note/, 'render reads note from attempt');
+  assert.match(js, /escHtml\(a\.note\)/, 'note is escaped for safe rendering');
+  assert.match(js, /people-edge-item-note/, 'note has dedicated CSS class');
+});
+
+test('demo seed data includes note field on some entries', () => {
+  const js = read('src/cook-attempts.js');
+  assert.match(js, /note:\s*'Added extra sage/, 'demo entry has a note');
+  assert.match(js, /note:\s*'Best guac/, 'another demo entry has a note');
+  assert.match(js, /note:\s*null/, 'some demo entries have null note');
+});
+
+test('recordAttempt signature accepts note parameter', () => {
+  const js = read('src/cook-attempts.js');
+  assert.match(js, /recordAttempt\(recipeId,\s*kind,\s*placeId,\s*note\)/, 'recordAttempt accepts note param');
+  assert.match(js, /onPick\(placeId\s*\|\|\s*null,\s*note\s*\|\|\s*null\)/, 'showPlacePicker callback passes note');
+});

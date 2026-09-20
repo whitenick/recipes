@@ -1186,6 +1186,14 @@ input, textarea { font: inherit; }
   flex-shrink: 0;
 }
 
+.people-edge-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
 .people-edge-item-name {
   font-weight: 500;
   color: var(--text);
@@ -1199,6 +1207,14 @@ input, textarea { font: inherit; }
 .people-edge-item-place::before {
   content: '· ';
   color: var(--text-dim);
+}
+
+.people-edge-item-note {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.4;
+  word-break: break-word;
 }
 
 .people-edge-item-time {
@@ -1325,6 +1341,34 @@ input, textarea { font: inherit; }
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.people-place-note-wrap {
+  margin-bottom: 16px;
+}
+
+.people-place-note-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg-card);
+  resize: none;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.people-place-note-input:focus {
+  border-color: var(--text);
+  background: var(--bg);
+}
+
+.people-place-note-input::placeholder {
+  color: var(--text-dim);
 }
 
 .people-place-opt {
