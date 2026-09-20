@@ -7,6 +7,7 @@ import { marked } from 'marked';
 import recipesUrl from '/data/recipes.json?url';
 import { searchRecipes } from './search.js';
 import { createSearchBar } from './search-bar.js';
+import { seedDataIfEmpty, renderCookAttempts } from './cook-attempts.js';
 
 /**
  * Nick's Kitchen — Grocery List Feature
@@ -779,6 +780,7 @@ async function init() {
   buildCategoryChips();
   updateFavCount();
   updateGroceryBadge();
+  seedDataIfEmpty();
   
   // Wire up events
   const searchInput = document.getElementById('searchInput');
@@ -1304,6 +1306,8 @@ function showDetail(recipe) {
     </div>
     
     <div class="recipe-content">${rendered}</div>
+
+    <div class="people-edge-section" id="peopleEdgeSection" data-recipe-id="${recipe.id}"></div>
   `;
   
   // Wire fav button
@@ -1316,6 +1320,12 @@ function showDetail(recipe) {
     favBtn.querySelector('.fav-icon').textContent = nowFav ? '♥' : '♡';
     favBtn.querySelector('span:last-child').textContent = nowFav ? 'Saved to favorites' : 'Save to favorites';
   });
+
+  // Render People edge
+  const peopleSection = document.getElementById('peopleEdgeSection');
+  if (peopleSection) {
+    renderCookAttempts(recipe.id, peopleSection);
+  }
   
   // Set page title and OG tags
   document.title = `${recipe.title} — Nick's Kitchen`;
