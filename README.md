@@ -126,6 +126,44 @@ The full pipeline is verified end-to-end as of the Vite Modernization handoff:
 
 **Handoff:** push to `main` triggers `.github/workflows/pages.yml` → build + deploy `dist/` to GitHub Pages. Nothing else is required to ship.
 
+## AI Search Integration (WILS-6)
+
+The AI search bar is **live in the site shell** (`index.html` `search-wrap`,
+wired in `src/main.js` via `src/search-bar.js`), so it ships with every
+production build — not a dev-only page. It is **opt-in**: when
+`VITE_SEARCH_ENDPOINT` is set at build time the bar runs live ranked search
+against the Cloudflare Worker; when it is unset (the current GitHub Pages
+deploy) the bar falls back to the classic local substring filter and says so
+in the dropdown — full acceptance checklist on WILS-6.
+
+**Current verification status (WILS-6):** all checks ran **locally**:
+
+- ✅ `npm test` — 38/38 pass (search-bar, worker, indexer, corpus, recipes).
+- ✅ `npm run build` — clean production build; search bar markup + JS present in `dist/`.
+- ✅ `npm run preview` — built site serves at `/recipes/` with the search bar.
+- ✅ Service behaviour — exercised via `npm run smoke:search` and the worker
+  test suite (local: against real Meilisearch in Docker, per WILS-4). Docker is
+  not required to build/test the site.
+- ⏳ **Deployed endpoints** (Worker + Pages) are **not yet live** — remote
+  deploy requires Nick's Cloudflare account and is the step below.
+
+**Handoff — to go live (one-time):**
+
+1. Deploy the search Worker: `cd search/worker && npx wrangler deploy`, then
+   `npx wrangler secret put MEILI_URL` / `MEILI_SEARCH_KEY` (see
+   `docs/search-deployment.md` §1/§4).
+2. Host Meilisearch and seed: `MEILI_URL=... MEILI_MASTER_KEY=... node search/indexer.js`
+   (one command; see `docs/search-deployment.md` §2).
+3. Rebuild the site pointed at the Worker so the live bar queries it:
+   `VITE_SEARCH_ENDPOINT=<worker-url> npm run build` and deploy — **GitHub
+   Pages works as-is** (CORS already allows `https://whitenick.github.io`), or
+   migrate the site to **Cloudflare Pages** first per the hosting rule
+   (`BASE_PATH=/`; runbook in `docs/backend-decision.md` §4). Then add the CF
+   origin to the Worker's `ALLOWED_ORIGINS`.
+
+Reindex after any corpus rebuild is the same single command above (idempotent).
+Env sample: `.env.example` — no real secrets committed.
+
 ## Recipe Format
 
 Recipes are Markdown files in `/home/jobin/obsidian-mac-vault/General/Personal/Culinary/Recipes/`.
