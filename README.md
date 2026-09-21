@@ -2,7 +2,7 @@
 
 Personal recipe collection — searchable, mobile-friendly, and always up to date.
 
-**Live site:** https://whitenick.github.io/recipes/
+**Live site:** https://recipes.serapiolabs.com/
 
 ## Features
 
@@ -17,7 +17,7 @@ Personal recipe collection — searchable, mobile-friendly, and always up to dat
 - **Vite** frontend build (Serapio Labs stack) — plain HTML/CSS/JS modules, no framework
 - Markdown rendered with `marked.js`
 - Recipes parsed from Obsidian `.md` files
-- Deployed via GitHub Pages (Actions workflow in `.github/workflows/pages.yml`)
+- Deployed via Cloudflare Pages (Workflow in `.github/workflows/pages.yml`)
 
 ## Updating Recipes
 
@@ -43,14 +43,14 @@ node --test
 
 # Start the Vite dev server
 npm run dev
-# → http://localhost:5173/recipes/
+# → http://localhost:5173/
 
 # Production build → dist/
 npm run build
 
 # Preview the production build locally
 npm run preview
-# → http://localhost:4173/recipes/
+# → http://localhost:4173/
 ```
 
 ## Search Data Model
@@ -88,7 +88,7 @@ before.
 MEILI_URL=https://<instance>.meilisearch.com MEILI_MASTER_KEY=<master key> node search/indexer.js
 
 # Build the site pointed at the search Worker (no key in the build):
-VITE_SEARCH_ENDPOINT=https://recipes-search.<subdomain>.workers.dev BASE_PATH=/recipes/ npm run build
+VITE_SEARCH_ENDPOINT=https://recipes-search.<subdomain>.workers.dev npm run build
 ```
 
 The Meilisearch key never reaches the browser — the Worker holds
@@ -106,25 +106,25 @@ Cloudflare runbook live in
 
 ## Deploying
 
-The GitHub Actions workflow (`.github/workflows/pages.yml`) builds the site and deploys `dist/` to GitHub Pages on every push to `main`:
+The GitHub Actions workflow (`.github/workflows/pages.yml`) builds the site and deploys `dist/` to Cloudflare Pages on every push to `main`:
 
 1. `npm ci`
 2. `npm test`
-3. `npm run build` (with `BASE_PATH=/recipes/`)
-4. Upload `dist/` → GitHub Pages
+3. `npm run build`
+4. Upload `dist/` → Cloudflare Pages
 
-The Vite `base` is `/recipes/` (the repo is a GitHub Pages *project* site served at `https://whitenick.github.io/recipes/`). Should the site ever migrate to Cloudflare Pages, set `base: '/'` or `BASE_PATH=/` and the build output is directly deployable there — see the `vite.config.mjs` comment. (The WILS-4 AI Search service runs as a Cloudflare Worker out-of-band and does **not** require this migration — but per the hosting rule, wiring the live search bar is what triggers the site's Cloudflare Pages migration; see `docs/backend-decision.md` §4.)
+The Vite `base` is `/` (Cloudflare Pages root-path site served at `https://recipes.serapiolabs.com/`).
 
-## Integration Status (WILS-10)
+## Integration Status (WILS-10 / WILS-92)
 
-The full pipeline is verified end-to-end as of the Vite Modernization handoff:
+The full pipeline is verified end-to-end as of the Cloudflare Pages migration:
 
 - ✅ `npm test` — 14 corpus/pipeline tests pass.
-- ✅ `npm run build` — clean production build to `dist/` (all pages + recipe corpus asset, `BASE_PATH=/recipes/`).
-- ✅ Production-equivalent check — `npm run preview` serves the built site at `/recipes/` with recipe data loading and all pages reachable.
-- ✅ Host: **GitHub Pages** (static-only → GitHub Pages is the correct host per the hosting rule). No backend exists, so **no Cloudflare migration is needed yet** — see [`docs/backend-decision.md`](docs/backend-decision.md) for the pre-scoped Go service contract and the GitHub Pages → Cloudflare runbook to use the moment a backend lands.
+- ✅ `npm run build` — clean production build to `dist/` (all pages + recipe corpus asset, root-relative paths).
+- ✅ Production-equivalent check — `npm run preview` serves the built site at `/` with recipe data loading and all pages reachable.
+- ✅ Host: **Cloudflare Pages** (`https://recipes.serapiolabs.com/`).
 
-**Handoff:** push to `main` triggers `.github/workflows/pages.yml` → build + deploy `dist/` to GitHub Pages. Nothing else is required to ship.
+**Handoff:** push to `main` triggers `.github/workflows/pages.yml` → build + deploy `dist/` to Cloudflare Pages. Nothing else is required to ship.
 
 ## AI Search Integration (WILS-6)
 
@@ -140,7 +140,7 @@ in the dropdown — full acceptance checklist on WILS-6.
 
 - ✅ `npm test` — 38/38 pass (search-bar, worker, indexer, corpus, recipes).
 - ✅ `npm run build` — clean production build; search bar markup + JS present in `dist/`.
-- ✅ `npm run preview` — built site serves at `/recipes/` with the search bar.
+- ✅ `npm run preview` — built site serves at `/` with the search bar.
 - ✅ Service behaviour — exercised via `npm run smoke:search` and the worker
   test suite (local: against real Meilisearch in Docker, per WILS-4). Docker is
   not required to build/test the site.
@@ -155,11 +155,8 @@ in the dropdown — full acceptance checklist on WILS-6.
 2. Host Meilisearch and seed: `MEILI_URL=... MEILI_MASTER_KEY=... node search/indexer.js`
    (one command; see `docs/search-deployment.md` §2).
 3. Rebuild the site pointed at the Worker so the live bar queries it:
-   `VITE_SEARCH_ENDPOINT=<worker-url> npm run build` and deploy — **GitHub
-   Pages works as-is** (CORS already allows `https://whitenick.github.io`), or
-   migrate the site to **Cloudflare Pages** first per the hosting rule
-   (`BASE_PATH=/`; runbook in `docs/backend-decision.md` §4). Then add the CF
-   origin to the Worker's `ALLOWED_ORIGINS`.
+   `VITE_SEARCH_ENDPOINT=<worker-url> npm run build` and deploy — **Cloudflare
+   Pages works as-is** (CORS already allows `https://recipes.serapiolabs.com`).
 
 Reindex after any corpus rebuild is the same single command above (idempotent).
 Env sample: `.env.example` — no real secrets committed.

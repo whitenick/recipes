@@ -22,7 +22,7 @@ const ENV = {
   MEILI_URL: 'http://meili.test:7700',
   MEILI_SEARCH_KEY: 'k_search_abc',
   MEILI_INDEX: 'recipes',
-  ALLOWED_ORIGINS: 'https://whitenick.github.io,http://localhost:5173',
+  ALLOWED_ORIGINS: 'https://recipes.serapiolabs.com,https://whitenick.github.io,http://localhost:5173',
   EMBEDDER: 'default',
 };
 
@@ -43,6 +43,12 @@ test('CORS: preflight from allowed origin returns 204 with echo headers', async 
   assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://whitenick.github.io');
   assert.ok(res.headers.get('Access-Control-Allow-Methods').includes('POST'));
   assert.ok(res.headers.get('Access-Control-Allow-Headers').includes('Content-Type'));
+});
+
+test('CORS: preflight from new origin returns 204 with echo headers', async () => {
+  const res = await handleRequest(makeRequest('OPTIONS', '/search', { origin: 'https://recipes.serapiolabs.com' }), ENV);
+  assert.equal(res.status, 204);
+  assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://recipes.serapiolabs.com');
 });
 
 test('CORS: preflight from disallowed origin is rejected', async () => {

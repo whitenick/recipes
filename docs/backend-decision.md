@@ -15,7 +15,7 @@ Last reviewed: Stage 2 of the Vite Modernization project (WILS-9).
   favorites, recipe detail, weekly plan, grocery list — run entirely
   client-side against `data/recipes.json` (384 normalized records) served as
   a static asset.
-- GitHub Pages remains the live host (`https://whitenick.github.io/recipes/`),
+- GitHub Pages remains the live host (`https://whitenick.github.io/recipes/`) until the Cloudflare Pages migration (WILS-92) is complete.
   consistent with the hosting rule while the site is static.
 - The Go backend is **pre-scoped and documented** (§3) so the moment a backend
   is genuinely required it ships in Go without re-deciding the architecture.

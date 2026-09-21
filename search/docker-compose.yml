@@ -32,7 +32,7 @@ services:
       MEILI_MASTER_KEY: "${MEILI_MASTER_KEY}"
       MEILI_ENV: "production"
       # Allow the GitHub Pages origin (and the local dev origin) to call the API.
-      MEILI_HTTP_CORS_ORIGIN: "https://whitenick.github.io,http://localhost:5173"
+      MEILI_HTTP_CORS_ORIGIN: "https://recipes.serapiolabs.com,https://whitenick.github.io,http://localhost:5173"
       # Optional: enable when a tenant-token / signed-search-key flow is adopted.
       MEILI_HTTP_PAYLOAD_MAX_SIZE: "10485760"
     volumes:
