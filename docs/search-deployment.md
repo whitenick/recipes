@@ -220,18 +220,18 @@ The site and the search service have different origins, so CORS is required:
 - The Worker answers `OPTIONS` preflights and echoes the allowed
   `Access-Control-Allow-Origin` only for origins in `ALLOWED_ORIGINS`.
 - Add the production site origin(s) there:
-  - GitHub Pages: `https://whitenick.github.io`
-  - Cloudflare Pages (after the site migrates): `https://recipes.pages.dev` or
-    the custom domain
+  - Cloudflare Pages (live host): `https://recipes.pages.dev` or the custom
+    domain `https://recipes.serapiolabs.com`
+  - Legacy GitHub Pages (`https://whitenick.github.io`) now redirects to the
+    Cloudflare domain and no longer needs CORS entries beyond the above
   - Local dev: `http://localhost:5173`, `http://127.0.0.1:5173`
 - The site sends requests with `fetch(workerUrl + '/search')`. No credentials
   header is needed — the Worker injects the Meilisearch key.
 
-**Site migration (hosting rule):** the instant the search service is live the
-site moves to Cloudflare — see `docs/backend-decision.md` §4 (Cloudflare Pages
-build with `BASE_PATH=/`, DNS, Pages project for `dist/`). The Worker is host-
-agnostic in the sense that `ALLOWED_ORIGINS` just lists the origin; update it
-after the domain move.
+**Site migration (hosting rule):** the search service is live; the site is on
+Cloudflare Pages — see `docs/backend-decision.md` §4 (Cloudflare Pages build
+with `BASE_PATH=/`, DNS, Pages project for `dist/`). The Worker is host-
+agnostic in the sense that `ALLOWED_ORIGINS` just lists the origin.
 
 ---
 

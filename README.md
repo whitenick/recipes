@@ -17,7 +17,7 @@ Personal recipe collection — searchable, mobile-friendly, and always up to dat
 - **Vite** frontend build (Serapio Labs stack) — plain HTML/CSS/JS modules, no framework
 - Markdown rendered with `marked.js`
 - Recipes parsed from Obsidian `.md` files
-- Deployed via Cloudflare Pages (Workflow in `.github/workflows/pages.yml`)
+- Hosted on **Cloudflare Pages** at `https://recipes.serapiolabs.com/` (Git integration, auto-deploys on push to `main`)
 
 ## Updating Recipes
 
@@ -106,14 +106,19 @@ Cloudflare runbook live in
 
 ## Deploying
 
-The GitHub Actions workflow (`.github/workflows/pages.yml`) builds the site and deploys `dist/` to Cloudflare Pages on every push to `main`:
+The site is hosted on **Cloudflare Pages** at `https://recipes.serapiolabs.com/`. The
+Cloudflare project is connected to this repo via Git integration, so every push to
+`main` is built and deployed by Cloudflare (root-path build, `VITE_SEARCH_ENDPOINT`
+set in the Cloudflare project's build env). Configuration for that deploy lives in
+the Cloudflare dashboard, not in this repo.
 
-1. `npm ci`
-2. `npm test`
-3. `npm run build`
-4. Upload `dist/` → Cloudflare Pages
+### Legacy GitHub Pages redirect
 
-The Vite `base` is `/` (Cloudflare Pages root-path site served at `https://recipes.serapiolabs.com/`).
+`https://whitenick.github.io/recipes` no longer hosts the site. A GitHub Actions
+workflow (`.github/workflows/pages.yml`) deploys a tiny redirect stub
+(`redirect/`) that bounces every request to the canonical Cloudflare domain,
+preserving the path. The workflow also runs `npm ci && npm test && npm run build`
+as a CI gate on push.
 
 ## Integration Status (WILS-10 / WILS-92)
 
@@ -124,7 +129,7 @@ The full pipeline is verified end-to-end as of the Cloudflare Pages migration:
 - ✅ Production-equivalent check — `npm run preview` serves the built site at `/` with recipe data loading and all pages reachable.
 - ✅ Host: **Cloudflare Pages** (`https://recipes.serapiolabs.com/`).
 
-**Handoff:** push to `main` triggers `.github/workflows/pages.yml` → build + deploy `dist/` to Cloudflare Pages. Nothing else is required to ship.
+**Handoff:** push to `main` triggers the Cloudflare Pages Git integration → build + deploy to Cloudflare Pages. The repo workflow (`pages.yml`) runs CI (`npm test`) and keeps a redirect-only stub on the legacy GitHub Pages URL. Nothing else is required to ship.
 
 ## AI Search Integration (WILS-6)
 
@@ -132,8 +137,8 @@ The AI search bar is **live in the site shell** (`index.html` `search-wrap`,
 wired in `src/main.js` via `src/search-bar.js`), so it ships with every
 production build — not a dev-only page. It is **opt-in**: when
 `VITE_SEARCH_ENDPOINT` is set at build time the bar runs live ranked search
-against the Cloudflare Worker; when it is unset (the current GitHub Pages
-deploy) the bar falls back to the classic local substring filter and says so
+against the Cloudflare Worker; when it is unset (e.g. a build without the
+endpoint env) the bar falls back to the classic local substring filter and says so
 in the dropdown — full acceptance checklist on WILS-6.
 
 **Current verification status (WILS-6):** all checks ran **locally**:

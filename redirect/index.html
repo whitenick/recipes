@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting — Nick's Kitchen</title>
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://recipes.serapiolabs.com/" />
+  <meta http-equiv="refresh" content="0; url=https://recipes.serapiolabs.com/" />
+  <script>
+    const path = location.pathname.replace(/^\/recipes\/?/, '');
+    location.replace('https://recipes.serapiolabs.com/' + path + location.search + location.hash);
+  </script>
+</head>
+<body>
+  <p>This site has moved. Nick's Kitchen now lives at
+  <a href="https://recipes.serapiolabs.com/">recipes.serapiolabs.com</a>.</p>
+</body>
+</html>
