@@ -9,9 +9,8 @@ standalone Rust engine with its own storage and process model. That is the
 recorded fallback rationale: the service the browser talks to is fully on
 Cloudflare (a Worker), while the index it proxies to is hosted Meilisearch.
 
-The recipes site itself stays a static build (currently GitHub Pages; it moves
-to **Cloudflare Pages** the moment the search service is wired in — see
-`docs/backend-decision.md` §4 for the migration runbook).
+The recipes site itself stays a static build on **Cloudflare Pages** (the GitHub
+Pages redirect stub is deprecated — see `docs/backend-decision.md` §4).
 
 > ⚠️ Additive and **opt-in**: if no search endpoint is configured at build
 > time, the site keeps working exactly as before with the local substring
@@ -222,8 +221,8 @@ The site and the search service have different origins, so CORS is required:
 - Add the production site origin(s) there:
   - Cloudflare Pages (live host): `https://recipes.pages.dev` or the custom
     domain `https://recipes.serapiolabs.com`
-  - Legacy GitHub Pages (`https://whitenick.github.io`) now redirects to the
-    Cloudflare domain and no longer needs CORS entries beyond the above
+  - Legacy GitHub Pages (`https://whitenick.github.io`) is deprecated (WILS-95)
+    and no longer needs CORS entries — kept only for historical compatibility
   - Local dev: `http://localhost:5173`, `http://127.0.0.1:5173`
 - The site sends requests with `fetch(workerUrl + '/search')`. No credentials
   header is needed — the Worker injects the Meilisearch key.
