@@ -7,6 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Scoutie+Sans:wght@300;400;500;600&display=swap');
 
 :root {
+  --header-h:        65px;
   --bg:              #FFFFFF;
   --bg-card:         #F9F8F6;
   --bg-card-hover:   #F0F0F0;
@@ -409,7 +410,14 @@ input, textarea { font: inherit; }
 
 /* ── SECTION HEADER ── */
 .section-header {
-  margin-bottom: 24px;
+  position: sticky;
+  top: var(--header-h);
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 8px 0 12px;
+  margin-bottom: 16px;
 }
 .section-title {
   font-family: var(--font-serif);
@@ -601,6 +609,7 @@ input, textarea { font: inherit; }
   .main-content { padding: 20px; }
 }
 @media (max-width: 768px) {
+  :root { --header-h: 61px; }
   .header-inner { padding: 12px 16px; }
   .logo-sub { display: none; }
   .hero { padding: 40px 16px 28px; }
