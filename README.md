@@ -99,9 +99,7 @@ degrades each query to keyword-only (`degraded: true`).
 
 The site itself stays fully static — only **search queries** go out-of-band to
 the Cloudflare-hosted search service (WILS-4). Aside from that, no app server
-exists and no full site migration is pending; the "no backend for the rest of
-the app" record, the pre-scoped Go service contract, and the GitHub Pages →
-Cloudflare runbook live in
+exists and no full site migration is pending; the "no backend for the rest of the app" record, the pre-scoped Go service contract, and the Cloudflare Pages migration runbook live in
 [`docs/backend-decision.md`](docs/backend-decision.md).
 
 ## Deploying
@@ -112,13 +110,13 @@ Cloudflare project is connected to this repo via Git integration, so every push 
 set in the Cloudflare project's build env). Configuration for that deploy lives in
 the Cloudflare dashboard, not in this repo.
 
-### Legacy GitHub Pages redirect
+### Legacy GitHub Pages redirect (deprecated)
 
-`https://whitenick.github.io/recipes` no longer hosts the site. A GitHub Actions
-workflow (`.github/workflows/pages.yml`) deploys a tiny redirect stub
-(`redirect/`) that bounces every request to the canonical Cloudflare domain,
-preserving the path. The workflow also runs `npm ci && npm test && npm run build`
-as a CI gate on push.
+The old GitHub Pages host (`https://whitenick.github.io/recipes`) has been
+retired (WILS-95, 2026-09-22). The redirect stub and its deployment workflow
+(`.github/workflows/pages.yml`) are disabled. The old URL will 404 or may
+redirect to the canonical site depending on any lingering DNS/routing — the
+canonical domain is `https://recipes.serapiolabs.com/`.
 
 ## Integration Status (WILS-10 / WILS-92)
 
@@ -129,7 +127,7 @@ The full pipeline is verified end-to-end as of the Cloudflare Pages migration:
 - ✅ Production-equivalent check — `npm run preview` serves the built site at `/` with recipe data loading and all pages reachable.
 - ✅ Host: **Cloudflare Pages** (`https://recipes.serapiolabs.com/`).
 
-**Handoff:** push to `main` triggers the Cloudflare Pages Git integration → build + deploy to Cloudflare Pages. The repo workflow (`pages.yml`) runs CI (`npm test`) and keeps a redirect-only stub on the legacy GitHub Pages URL. Nothing else is required to ship.
+**Handoff:** push to `main` triggers the Cloudflare Pages Git integration → build + deploy to Cloudflare Pages. Nothing else is required to ship.
 
 ## AI Search Integration (WILS-6)
 

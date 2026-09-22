@@ -1,11 +1,11 @@
 # Backend decision — recipes site (WILS-9)
 
-**Decision:** _No backend is required at this stage._ The recipes site stays a
-pure-static Vite build on GitHub Pages. This document records why, pre-scopes
+**Decision:** _No backend is required at this stage._ The recipes site is a
+pure-static Vite build on Cloudflare Pages. This document records why, pre-scopes
 the Go service contract for when a backend is genuinely needed, and documents
-the GitHub Pages → Cloudflare migration path the moment one lands.
+the GitHub Pages → Cloudflare migration runbook (now complete).
 
-Last reviewed: Stage 2 of the Vite Modernization project (WILS-9).
+Last reviewed: Stage 3 — GitHub Pages deprecated (WILS-95, 2026-09-22).
 
 ---
 
@@ -15,7 +15,7 @@ Last reviewed: Stage 2 of the Vite Modernization project (WILS-9).
   favorites, recipe detail, weekly plan, grocery list — run entirely
   client-side against `data/recipes.json` (384 normalized records) served as
   a static asset.
-- GitHub Pages is a **redirect stub only** (`https://whitenick.github.io/recipes` → `https://recipes.serapiolabs.com/`); the live host is Cloudflare Pages (WILS-92, completed).
+- GitHub Pages redirect stub is **deprecated** (WILS-95, 2026-09-22); the live host is Cloudflare Pages.
   consistent with the hosting rule while the site is static.
 - The Go backend is **pre-scoped and documented** (§3) so the moment a backend
   is genuinely required it ships in Go without re-deciding the architecture.
@@ -91,9 +91,9 @@ site** moves to Cloudflare — no Pages-plus-VPS hybrid. This is the runbook.
    (`https://<project>.pages.dev` or the custom domain); the site sends
    requests there.
 5. **DNS:** repoint/register the custom domain in Cloudflare.
-6. **Deprecate** the GitHub Pages host: **done** — the site now deploys to
-   Cloudflare Pages only; `pages.yml` deploys a redirect stub (`redirect/`)
-   so `https://whitenick.github.io/recipes` bounces to the canonical domain.
+6. **Deprecate** the GitHub Pages host: **done** (WILS-95, 2026-09-22) — `pages.yml`
+   is disabled, the redirect stub is no longer deployed, and `https://whitenick.github.io/recipes`
+   is no longer served. The canonical domain is `https://recipes.serapiolabs.com/`.
 7. **Verification** lives in WILS-10 (integration stage): production build
    served from CF, search query returns results from the deployed origin,
    no regressions.
