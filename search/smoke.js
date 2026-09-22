@@ -23,7 +23,7 @@ const ENV = {
   MEILI_URL,
   MEILI_SEARCH_KEY: SEARCH_KEY,
   MEILI_INDEX: 'recipes',
-  ALLOWED_ORIGINS: 'https://whitenick.github.io,http://localhost:5173,http://127.0.0.1:5173',
+  ALLOWED_ORIGINS: 'https://recipes.serapiolabs.com,https://whitenick.github.io,http://localhost:5173,http://127.0.0.1:5173',
   EMBEDDER: process.env.EMBEDDER || 'default',
 };
 

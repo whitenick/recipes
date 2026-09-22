@@ -537,7 +537,7 @@ function showDetail(recipe) {
   document.title = `${recipe.title} — Nick's Kitchen`;
   setOgMeta('og:title', `${recipe.title} — Nick's Kitchen`);
   setOgMeta('og:description', recipe.description ? recipe.description.substring(0, 200) : 'A recipe from Nick\'s Kitchen');
-  setOgMeta('og:url', `https://whitenick.github.io/recipes/#recipe/${recipe.id}`);
+  setOgMeta('og:url', `https://recipes.serapiolabs.com/#recipe/${recipe.id}`);
 }
 
 function showList() {
@@ -547,7 +547,7 @@ function showList() {
   document.title = "Nick's Kitchen";
   setOgMeta('og:title', "Nick's Kitchen");
   setOgMeta('og:description', 'A personal collection of recipes — tested, refined, and kept.');
-  setOgMeta('og:url', 'https://whitenick.github.io/recipes/');
+  setOgMeta('og:url', 'https://recipes.serapiolabs.com/');
   
   // Re-render in case favorites changed
   applyFilters();

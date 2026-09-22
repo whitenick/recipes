@@ -1,8 +1,8 @@
 import { resolve } from 'node:path';
 
-// GitHub Pages project site lives under /recipes/ (repo name).
-// Change BASE_PATH to '/' when the static site later moves to Cloudflare.
-const base = process.env.BASE_PATH || '/recipes/';
+// Cloudflare Pages site served at the root path.
+// Set BASE_PATH='/recipes/' when running as a GitHub Pages project site.
+const base = process.env.BASE_PATH || '/';
 
 const pages = [
   'index.html',

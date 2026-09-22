@@ -8,7 +8,7 @@ compatibility_date = "2024-11-01"
 # (MEILI_URL with its embedded key, MEILI_SEARCH_KEY) go in `wrangler secret put`.
 [vars]
 MEILI_INDEX = "recipes"
-ALLOWED_ORIGINS = "https://whitenick.github.io,https://recipes.pages.dev,http://localhost:5173,http://127.0.0.1:5173"
+ALLOWED_ORIGINS = "https://recipes.serapiolabs.com,https://whitenick.github.io,https://recipes.pages.dev,http://localhost:5173,http://127.0.0.1:5173"
 EMBEDDER = "default"
 
 # Routes: bind to a custom domain/subdomain, e.g.
