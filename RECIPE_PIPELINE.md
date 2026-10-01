@@ -69,8 +69,9 @@ Every recipe follows the format defined in `_TEMPLATE.md`. The build script hand
 ### Step 1: Title
 Numbered steps with specific temps, timing, and technique.
 
-1. **Critical:** Callouts in bold with the *why*.
-2. Continue with numbered steps.
+1. Heat the pot over **medium-high heat**.
+2. Cook for **5 minutes**.
+3. **Drain excess fat** — the one move that ruins the dish if skipped.
 
 ---
 
@@ -92,6 +93,13 @@ Personal insights from the cook — taste/texture cues, shortcuts that don't com
 
 **Source:** URL
 ```
+
+**Execution bold convention (ruling E — WILS-139):** bold exactly two things (and nothing else):
+
+1. **Deterministic cues** — durations, temperatures, and heat levels ("**5 minutes**", "**350°F**", "**medium-high heat**", "**rolling boil**"). These come from a parser, not a writer's mood.
+2. **The one critical move per step** — the action that ruins the dish if skipped ("**Drain excess fat**", "**Do not overmix**"). One per step, chosen by judgment.
+
+Ingredients, quantities, and labels stay plain. The `Critical:` callout label itself stays plain — the critical *move* carries the bold. A step with no failure point keeps only its time/temp bolds.
 
 ### What the Parser Extracts (and How)
 
@@ -274,7 +282,7 @@ Create a recipe following this exact structure:
 4. **Dietary Notes:** Mandatory section. Flag nut, peanut, lentil, pea status explicitly for Nick and Sarah. Note dairy substitutions for Sarah.
 5. **Mise en Place:** Organized by component (sauce, protein, garnish — not alphabetically). Every ingredient has a full prep spec.
 6. **Timeline:** Work backward from serving time in 5-15 minute blocks. Shows the cook what happens when.
-7. **Execution:** Numbered steps with specific temperatures, specific timing, and specific technique. Bold for make-or-break callouts. Explain the why.
+7. **Execution:** Numbered steps with specific temperatures, specific timing, and specific technique. Bold durations, temperatures/heat levels, and the one critical move per step — nothing else. The Critical: label stays plain. Explain the why.
 8. **Plating:** Mandatory. How the dish lands — sauce direction, garnish, accompaniments.
 9. **Chef's Notes:** Optional but preferred. Personal insights — what to look/smell/listen for, shortcuts that don't compromise, the one thing not to skip.
 10. **Critical Notes:** Experience-driven callouts. What matters most, pitfalls, technique truths.

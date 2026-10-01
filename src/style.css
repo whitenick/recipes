@@ -828,8 +828,8 @@ input, textarea { font: inherit; }
   line-height: 1.7;
 }
 .recipe-content strong {
-  font-weight: 500;
-  color: var(--text);
+  font-weight: 600;
+  color: #B35620;
 }
 .recipe-content em {
   font-style: italic;
