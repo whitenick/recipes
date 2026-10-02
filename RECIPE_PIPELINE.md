@@ -36,6 +36,7 @@ Every recipe follows the format defined in `_TEMPLATE.md`. The build script hand
 **Serves:** N
 **Total time:** X minutes
 **Technique:** Primary techniques
+**Image:** /media/sandwich-sundays/SS-2026-10-04-{slug}/hero.jpg   ← optional cover
 
 ---
 
@@ -112,6 +113,7 @@ Ingredients, quantities, and labels stay plain. The `Critical:` callout label it
 | **Total Time** | `**Total Time:** N minutes` — also `**Timeline:** 6:00 PM` pattern. |
 | **Servings** | `**Serves:** N` or `**Servings:** N` or `**Yield:** N`. |
 | **Categories** | Auto-detected from title, file subdirectory, and content analysis (see §3 below). |
+| **Cover Image** | `**Image:** <url>` line, else the first markdown image, else the first `<img src>` (see [docs/media-pattern.md](docs/media-pattern.md)). Stored as `coverImage`; cards + detail header render it, emoji falls back when absent. |
 | **Ingredients** | Bullet items under an `## Ingredients` or `## Mise en Place` heading. Also table format and `**For the X:**` sub-sections. |
 | **Source URL** | `Source: https://...` at end of file. |
 
@@ -140,7 +142,14 @@ The build script classifies every recipe into categories automatically. This pow
 
 ### All Categories
 
-`Seafood` · `Chicken` · `Beef` · `Pork` · `Lamb` · `Soups & Stews` · `Pasta` · `Salads` · `Baking` · `Breakfast` · `Desserts` · `Appetizers` · `Sauces & Condiments` · `One-Pan` · `Vegetarian` · `Quick & Easy` · `Other`
+`Seafood` · `Chicken` · `Beef` · `Pork` · `Lamb` · `Soups & Stews` · `Pasta` · `Salads` · `Baking` · `Breakfast` · `Desserts` · `Appetizers` · `Sauces & Condiments` · `One-Pan` · `Vegetarian` · `Quick & Easy` · `Sandwich Sundays` · `Other`
+
+**Named collections.** `Sandwich Sundays` is a collection, not a heuristic: a
+recipe joins it by living in the vault's `Sandwich Sundays/` subfolder or by
+carrying the `#sandwichsunday` tag. It surfaces as a leading filter chip, a
+`#sandwich-sundays` route, and a link in the homepage hero; the listing is
+newest-first so the latest Sunday is pinned to the top. It is additive — a
+sandwich still gets its protein/dish-type categories.
 
 ### Limitations
 
@@ -193,6 +202,7 @@ Each recipe object looks like:
     "servingsMax": 2
   },
   "source": "https://example.com/original-recipe",
+  "coverImage": "/media/sandwich-sundays/SS-2026-10-04-crispy-chicken/hero.jpg",
   "content": "# Crispy Roasted Chicken Thighs with Pan Sauce\n\n**Serves:** 2\n..."
 }
 ```

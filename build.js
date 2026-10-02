@@ -441,6 +441,13 @@ function detectCategories(content, title, filename, subdir = '') {
     categories.add('Quick & Easy');
   }
 
+  // ── Named collections (WILS-154) ──
+  // Sandwich Sundays keys off the vault subfolder or the `#sandwichsunday`
+  // tag, so it lands as a first-class filter chip alongside the heuristics.
+  if (isSandwichSundays(content, subdir)) {
+    categories.add('Sandwich Sundays');
+  }
+
   // If nothing matched, fall back to Other
   if (categories.size === 0) {
     categories.add('Other');
@@ -564,6 +571,55 @@ function getSource(content) {
   return sourceMatch ? sourceMatch[1].trim() : null;
 }
 
+// ── Cover image ──────────────────────────────────────────
+// Cover convention, in priority order:
+//   1. an explicit declaration line — `Image: <url>` / `**Image:** <url>`
+//   2. the first markdown image `![alt](url)`
+//   3. the first raw-HTML `<img src="url">`
+// URLs are passed through as authored: absolute (media host) or
+// root-relative (`/media/...`). See docs/media-pattern.md.
+const COVER_DECL_RE = /^\s*\*{0,2}\s*Image\s*\*{0,2}\s*:\s*\*{0,2}\s*(\S+)\s*$/im;
+
+function cleanMediaUrl(raw) {
+  if (!raw) return null;
+  let url = String(raw).trim().replace(/^['"<]+|['">]+$/g, '').replace(/[;,]+$/, '');
+  if (!url) return null;
+  return url;
+}
+
+function extractCoverImage(content) {
+  if (!content) return null;
+
+  const declared = content.match(COVER_DECL_RE);
+  if (declared) {
+    const url = cleanMediaUrl(declared[1]);
+    if (url) return url;
+  }
+
+  const md = content.match(/!\[[^\]]*\]\(\s*<?([^)\s>]+)>?(?:\s+["'][^"']*["'])?\s*\)/);
+  if (md) {
+    const url = cleanMediaUrl(md[1]);
+    if (url) return url;
+  }
+
+  const html = content.match(/<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/i);
+  if (html) {
+    const url = cleanMediaUrl(html[1]);
+    if (url) return url;
+  }
+
+  return null;
+}
+
+// Sandwich Sundays is a named collection surfaced from the vault, not a
+// hand-tagged category: membership is the vault subfolder or the
+// `#sandwichsunday` tag the pilot template carries.
+function isSandwichSundays(content, subdir = '') {
+  const subdirParts = String(subdir).toLowerCase().split('/').map(s => s.trim());
+  if (subdirParts.includes('sandwich sundays')) return true;
+  return /#sandwichsundays?\b/i.test(content || '');
+}
+
 function processRecipeFile(filePath, subdir = '') {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
@@ -577,6 +633,7 @@ function processRecipeFile(filePath, subdir = '') {
     const categories = detectCategories(content, title, filename, subdir);
     const ingredients = extractIngredients(content, title);
     const source = getSource(content);
+    const coverImage = extractCoverImage(content);
 
     const prep = cleanDuration(rawMeta.prepTime, 'prepTime');
     const cook = cleanDuration(rawMeta.cookTime, 'cookTime');
@@ -603,6 +660,7 @@ function processRecipeFile(filePath, subdir = '') {
         servingsMax: serv.max,
       },
       source,
+      coverImage,
       dateAdded: stat.mtime.toISOString(), // file mtime — used for "Recent Recipes"
       content, // full markdown content (kept for the detail view; not part of the search record)
     };
@@ -689,4 +747,7 @@ module.exports = {
   extractMeta,
   extractIngredients,
   isJunkIngredient,
+  extractCoverImage,
+  isSandwichSundays,
+  detectCategories,
 };
