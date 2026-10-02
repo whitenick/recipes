@@ -8,6 +8,9 @@ Personal recipe collection — searchable, mobile-friendly, and always up to dat
 
 - 🔍 Search by name, ingredient, or category
 - 📱 Mobile-friendly responsive design
+- 🥪 **Sandwich Sundays collection** — recipes in the vault's `Sandwich Sundays/` folder (or tagged `#sandwichsunday`) get a chip, a `#sandwich-sundays` route, and a homepage link
+- 📸 **Cover stills** — an `Image:` line (or first image) becomes the card + detail hero; category emoji is the fallback
+- ▶️ Embedded build shorts — `<video controls playsinline>` in the markdown styles cleanly on mobile
 - ♥️ Save favorites to local storage
 - 🖨️ Print-friendly recipe view
 - ⚡ Fast, static site — no server needed
@@ -174,3 +177,8 @@ The build script automatically extracts:
 - Metadata (prep time, cook time, servings)
 - Categories (auto-detected from content)
 - Ingredients (from lists and tables)
+- Cover image (from an `Image:` line or the first image)
+
+Media (hero still + build short) follows the convention in
+[docs/media-pattern.md](docs/media-pattern.md). Sandwich Sundays recipes live in
+the vault's `Sandwich Sundays/` subfolder and carry a `#sandwichsunday` tag.

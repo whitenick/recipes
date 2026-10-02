@@ -28,6 +28,7 @@ Each item in `data/recipes.json` is one recipe object:
 | `meta.servingsMin` | `number \| null` | derived from `servings` | **Filterable** |
 | `meta.servingsMax` | `number \| null` | derived from `servings` | **Filterable** |
 | `source` | `string \| null` | `Source: https://…` line | — (not indexed) |
+| `coverImage` | `string \| null` | `Image:` line / first image (WILS-154) | — (not indexed; local detail/card render) |
 | `dateAdded` | ISO `string` | file mtime | **Sortable** (Recent Recipes) |
 | `content` | `string` (raw markdown) | source file | **Excluded from the index** — kept only for the site's detail view |
 

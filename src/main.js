@@ -859,6 +859,10 @@ async function init() {
 }
 
 // ── Routing ────────────────────────────────────────────
+const COLLECTION_ROUTES = {
+  '#sandwich-sundays': 'Sandwich Sundays',
+};
+
 function handleRoute() {
   const hash = window.location.hash;
   if (hash && hash.startsWith('#recipe/')) {
@@ -870,14 +874,29 @@ function handleRoute() {
     }
   }
   showList();
+  // Dedicated collection routes (e.g. #sandwich-sundays) land on the grid
+  // pre-filtered to the collection and stay shareable.
+  const collection = COLLECTION_ROUTES[hash];
+  if (collection) setCategory(collection);
 }
 
 // ── Category Chips + Sidebar + Mobile Filters ──────────
+const COLLECTION_CATEGORY = 'Sandwich Sundays';
+
 function buildCategoryChips() {
   const allCategories = new Set();
   allRecipes.forEach(r => r.categories.forEach(c => allCategories.add(c)));
   
-  const sorted = [...allCategories].sort();
+  // Collections lead the list; the rest stay alphabetical.
+  const sorted = [...allCategories].sort((a, b) => {
+    if (a === COLLECTION_CATEGORY) return -1;
+    if (b === COLLECTION_CATEGORY) return 1;
+    return a.localeCompare(b);
+  });
+
+  // Homepage collection link only exists while the collection has recipes.
+  const collectionLink = document.getElementById('sandwichSundaysLink');
+  if (collectionLink) collectionLink.hidden = !allCategories.has(COLLECTION_CATEGORY);
   
   // Desktop sidebar — add "Recent Recipes" as first pseudo-category
   const sidebar = document.getElementById('categorySidebar');
@@ -973,6 +992,7 @@ function setCategory(cat) {
   if (descEl) {
     const descs = {
       '__recent__': 'Fresh from the collection',
+      'Sandwich Sundays': 'One sandwich, every Sunday',
       'Chicken': 'Poultry perfected',
       'Beef': 'From the grill and stovetop',
       'Pasta': 'Noodles and sauces',
@@ -1048,8 +1068,9 @@ function applyFilters() {
     return true;
   });
   
-  // Sort by dateAdded descending for Recent Recipes
-  if (currentCategory === '__recent__') {
+  // Sort by dateAdded descending for Recent Recipes; the Sandwich Sundays
+  // run is weekly, so the newest Sunday stays pinned to the top.
+  if (currentCategory === '__recent__' || currentCategory === COLLECTION_CATEGORY) {
     filteredRecipes.sort((a, b) => {
       const da = a.dateAdded ? new Date(a.dateAdded) : new Date(0);
       const db = b.dateAdded ? new Date(b.dateAdded) : new Date(0);
@@ -1167,6 +1188,7 @@ const categoryEmoji = {
   'Pork': '🥓',
   'Quick & Easy': '⚡',
   'Salads': '🥗',
+  'Sandwich Sundays': '🥪',
   'Sauces & Condiments': '🧂',
   'Seafood': '🐟',
   'Soups & Stews': '🍜',
@@ -1187,6 +1209,7 @@ const categoryColors = {
   'Pork': '#BD6B35',
   'Quick & Easy': '#6A7C48',
   'Salads': '#7EA67A',
+  'Sandwich Sundays': '#C8A87C',
   'Sauces & Condiments': '#A9927A',
   'Seafood': '#6B9EB0',
   'Soups & Stews': '#D4893B',
@@ -1217,6 +1240,12 @@ function renderCard(recipe, index) {
       .trim();
     if (desc.length > 48) desc = desc.substring(0, 45) + '…';
   }
+
+  // A parsed cover still replaces the emoji placeholder; if the image fails
+  // to load it removes itself and the emoji underneath shows through.
+  const cover = recipe.coverImage
+    ? `<img class="recipe-card-image" src="${escHtml(recipe.coverImage)}" alt="${escHtml(recipe.title)}" loading="lazy" decoding="async" onerror="this.remove()">`
+    : '';
   
   return `
     <div class="recipe-card" data-id="${recipe.id}">
@@ -1224,7 +1253,7 @@ function renderCard(recipe, index) {
       ${desc ? `<div class="recipe-card-desc">${escHtml(desc)}</div>` : ''}
       <button class="recipe-card-save">${isFav ? '♥' : '♡'}</button>
       <div class="recipe-card-image-wrap">
-        <div class="recipe-card-image-inner">${emoji}</div>
+        <div class="recipe-card-image-inner"><span class="recipe-card-emoji">${emoji}</span>${cover}</div>
       </div>
       <div class="recipe-card-attribution">${time ? `⏱ ${escHtml(time)}` : ''}</div>
     </div>
@@ -1270,6 +1299,9 @@ function showDetail(recipe) {
   // Remove leading source URL if present
   mdContent = mdContent.replace(/^Source:\s*https?:\/\/[^\n]+\n*/i, '');
   mdContent = mdContent.replace(/^https?:\/\/[^\n]+\n*/m, '');
+  // The cover still is the page hero; drop its declaration line from the body
+  // so it never renders twice.
+  mdContent = mdContent.replace(/^\s*\*{0,2}\s*Image\s*\*{0,2}\s*:\s*\*{0,2}\s*\S+\s*$/gim, '');
   
   const rendered = typeof marked !== 'undefined' 
     ? marked.parse(mdContent) 
@@ -1281,6 +1313,12 @@ function showDetail(recipe) {
       <h1 class="detail-title">${escHtml(recipe.title)}</h1>
       ${recipe.description ? `<p class="detail-desc">${escHtml(recipe.description)}</p>` : ''}
     </div>
+    
+    ${recipe.coverImage ? `
+      <figure class="detail-cover">
+        <img src="${escHtml(recipe.coverImage)}" alt="${escHtml(recipe.title)}" loading="eager" decoding="async" onerror="this.closest('figure').remove()">
+      </figure>
+    ` : ''}
     
     ${metaItems.length ? `
       <div class="detail-meta-grid">
@@ -1332,6 +1370,7 @@ function showDetail(recipe) {
   setOgMeta('og:title', `${recipe.title} — Nick's Kitchen`);
   setOgMeta('og:description', recipe.description ? recipe.description.substring(0, 200) : 'A recipe from Nick\'s Kitchen');
   setOgMeta('og:url', `https://recipes.serapiolabs.com/#recipe/${recipe.id}`);
+  if (recipe.coverImage) setOgMeta('og:image', recipe.coverImage);
 }
 
 function showList() {
