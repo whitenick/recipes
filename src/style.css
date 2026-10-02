@@ -1,10 +1,18 @@
 /* ──────────────────────────────────────────────────────────
    Nick's Kitchen — Design System v2
    Aesthetic: Clean whitespace · Julienne × DoorDash
-   Font: Lora (serif) · Scoutie Sans (UI)
+   Font: Lora (serif headings) · Monaspace Neon (body)
    ────────────────────────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Scoutie+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+@font-face {
+  font-family: 'Monaspace Neon';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@main/fonts/Web%20Fonts/Variable%20Web%20Fonts/Monaspace%20Neon/Monaspace%20Neon%20Var.woff2') format('woff2-variations');
+}
 
 :root {
   --header-h:        65px;
@@ -27,7 +35,7 @@
   --radius-lg:       12px;
   --radius-full:     9999px;
   --font-serif:      'Lora', 'Georgia', 'Times New Roman', serif;
-  --font-sans:       'Scoutie Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans:       'Monaspace Neon', 'MonaspaceNeon', ui-monospace, SFMono-Regular, Menlo, monospace;
   --shadow-card:     0 1px 2px rgba(0,0,0,0.03), 0 4px 24px rgba(0,0,0,0.02);
   --shadow-hover:    0 2px 6px rgba(0,0,0,0.05), 0 12px 40px rgba(0,0,0,0.04);
 }
