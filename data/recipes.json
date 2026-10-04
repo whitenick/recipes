@@ -1488,7 +1488,7 @@
   {
     "id": "b-arnaise-sauce-recipe",
     "title": "Béarnaise Sauce Recipe",
-    "filename": "Béarnaise Sauce Recipe - NYT Cooking",
+    "filename": "Béarnaise Sauce Recipe - NYT Cooking",
     "subdir": "Todd's Kitchen/Sauces",
     "description": "Béarnaise sauce is a piquant child of hollandaise, one of the so-called mother sauces of French cuisine. It is simply an emulsification — egg",
     "categories": [
@@ -1800,7 +1800,7 @@
   {
     "id": "best-bolognese-recipe-bon-app-tit",
     "title": "Best Bolognese Recipe _ Bon Appétit",
-    "filename": "Best Bolognese Recipe _ Bon Appétit",
+    "filename": "Best Bolognese Recipe _ Bon Appétit",
     "subdir": "Todd's Kitchen/Italian",
     "description": "Best Bolognese Recipe | Bon Appétit",
     "categories": [
@@ -2706,6 +2706,52 @@
     "coverImage": null,
     "dateAdded": "2026-03-16T00:49:24.822Z",
     "content": "# Broccoli and Cheddar Soup Recipe\n\nA staple of any fast-casual restaurant, broccoli-cheddar soup has somewhat of a cult following on the internet. Thicker than cream of\n\n## Overview\n- **Total Time**: 1 hour\n- **Servings**: 4 to 6 servings Step 1\n\n## Recipe\n\nBroccoli and Cheddar\nSoup\nBy Alison Roman\nTotal Time 1 hour\nRating (4,593)\nA staple of any fast-casual restaurant, broccoli-cheddar soup has somewhat of a cult following on the internet. Thicker than cream of\nbroccoli, this roux-thickened soup can be puréed completely smooth or left chunky and rustic. Either way, be sure to use the sharpest\nCheddar available (white or orange work here). Itʼll provide richness in addition to a necessary acidity.\nINGREDIENTS PREPARATION\nYield: 4 to 6 servings Step 1\nMelt 3 tablespoons butter in a large heavy-bottomed pot over medium heat. Add onion and\ngarlic, and season with salt and pepper. Cook, stirring occasionally, until onion is softened\n6 tablespoons unsalted butter\nand translucent, 5 to 8 minutes.\n1 large yellow onion, finely chopped\n2 cloves garlic, finely chopped\nStep 2\nKosher salt and freshly ground pepper\nAdd broccoli, and season with salt and pepper. Cook, stirring occasionally, until broccoli is\n2 pounds broccoli, florets with stems peeled and\nbright green and slightly tender, 8 to 10 minutes. Using a large cooking spoon, transfer\ntrimmed to 3 inches\nbroccoli mixture to a medium bowl and set aside.\n¼ cup all-purpose flour\n3 cups low-sodium chicken or vegetable broth\nStep 3\n2 cups half-and-half\nHeat remaining 3 tablespoons butter in the same pot over medium heat (don’t worry about\n8 ounces very sharp Cheddar, grated, plus more any remaining broccoli bits). Add flour and whisk constantly, cooking until the mixture has\nfor the top turned a pale golden brown, 2 to 3 minutes.\n¼ teaspoon freshly grated nutmeg\nStep 4\nGradually whisk in chicken broth until no lumps remain (it’ll thicken considerably at first),\nfollowed by half-and-half. Bring to a simmer and stir in cheese, nutmeg and all but 1 cup of\nthe reserved broccoli mixture.\nStep 5\nReduce heat to low and simmer until liquid has thickened and reduced by about ¼ and the\nbroccoli is completely tender, 25 to 30 minutes.\nStep 6\nUsing a hand blender, purée the soup to desired consistency. (Some like to leave bits of\nbroccoli in there. It is up to you how smooth or chunky the soup is.) Alternatively, transfer\nto a blender and purée to desired consistency.\nStep 7\nSeason soup with salt and pepper, and divide among bowls. Top with remaining 1 cup\nbroccoli, more Cheddar (if you like), and lots of freshly ground pepper.\nPrivate Notes\nLeave a Private Note on this recipe and see it here.\n\nSource: https://cooking.nytimes.com\n"
+  },
+  {
+    "id": "broccoli-beef-stir-fry",
+    "title": "Broccoli Beef Stir-Fry (中式牛肉炒西兰花)",
+    "filename": "Broccoli Beef Stir-Fry",
+    "subdir": "",
+    "description": "Classic Chinese takeout staple, made properly at home. Thinly sliced flank steak, velveted with a baking soda soak to guarantee tenderness, then flash-seared in screaming hot oil and tossed with tender-crisp broccoli in a savory oyster-soy sauce. This is a 25-minute dish from knife to plate — the ki",
+    "categories": [
+      "Beef",
+      "One-Pan"
+    ],
+    "ingredients": [
+      "¾ lb (340g) flank steak or sirloin — partial freeze makes slicing easier",
+      "1 tsp baking soda (for velveting — this is what Chinese restaurants do to tenderize)",
+      "1 tbsp soy sauce",
+      "1 tsp cornstarch",
+      "1 large head broccoli (about 12 oz / 340g)",
+      "Kosher salt (for the blanching water)",
+      "2 tbsp oyster sauce (Kikkoman or Panda brand)",
+      "1 tbsp Shaoxing rice wine or dry sherry",
+      "1 tsp toasted sesame oil",
+      "1 tsp sugar",
+      "½ tsp white pepper",
+      "½ cup cold water",
+      "2 tsp cornstarch",
+      "4 cloves garlic, thinly sliced",
+      "1 inch fresh ginger, peeled, thinly sliced into matchsticks",
+      "3 scallions, white parts thinly sliced, greens saved for garnish",
+      "3 tbsp neutral oil with high smoke point (avocado, peanut, grapeseed)",
+      "Steamed jasmine rice, for serving"
+    ],
+    "meta": {
+      "prepTime": null,
+      "cookTime": null,
+      "totalTime": "25 mins (all active)",
+      "servings": null,
+      "prepTimeMinutes": null,
+      "cookTimeMinutes": null,
+      "totalTimeMinutes": 25,
+      "servingsMin": null,
+      "servingsMax": null
+    },
+    "source": null,
+    "coverImage": null,
+    "dateAdded": "2026-10-03T15:24:54.172Z",
+    "content": "# Broccoli Beef Stir-Fry (中式牛肉炒西兰花)\n\n**Serves:** 2-3 as a main with rice\n**Total time:** 25 minutes (all active)\n**Technique:** High-heat stir-fry, velveting\n**Source:** Original — Pierre's Kitchen\n\n---\n\nClassic Chinese takeout staple, made properly at home. Thinly sliced flank steak, velveted with a baking soda soak to guarantee tenderness, then flash-seared in screaming hot oil and tossed with tender-crisp broccoli in a savory oyster-soy sauce. This is a 25-minute dish from knife to plate — the kind of weeknight stir-fry that ruins takeout for you forever.\n\n---\n\n## Dietary Notes\n- **Nut-free**, **peanut-free**, **lentil-free**, **pea-free** ✅\n- **Contains gluten** (soy sauce, oyster sauce)\n- **Dairy-free** ✅\n- *Gluten-free option:* Use tamari + GF oyster sauce (or skip oyster sauce, double the tamari + a pinch of sugar)\n\n---\n\n## Mise en Place\n\n### Beef\n- ¾ lb (340g) flank steak or sirloin — partial freeze makes slicing easier\n- 1 tsp baking soda (for velveting — this is what Chinese restaurants do to tenderize)\n- 1 tbsp soy sauce\n- 1 tsp cornstarch\n\n### Broccoli\n- 1 large head broccoli (about 12 oz / 340g)\n- Kosher salt (for the blanching water)\n\n### Sauce (mix in advance, have it ready)\n- 2 tbsp oyster sauce (Kikkoman or Panda brand)\n- 1 tbsp soy sauce\n- 1 tbsp Shaoxing rice wine or dry sherry\n- 1 tsp toasted sesame oil\n- 1 tsp sugar\n- ½ tsp white pepper\n- ½ cup cold water\n- 2 tsp cornstarch\n\n### Aromatics (have everything minced before you light the wok)\n- 4 cloves garlic, thinly sliced\n- 1 inch fresh ginger, peeled, thinly sliced into matchsticks\n- 3 scallions, white parts thinly sliced, greens saved for garnish\n\n### Cooking\n- 3 tbsp neutral oil with high smoke point (avocado, peanut, grapeseed)\n- Steamed jasmine rice, for serving\n\n---\n\n## Timeline (7:00 PM target)\n\n- **6:35 PM** — Partially freeze beef (if starting from room temp). Prep all ingredients\n- **6:40 PM** — Velvet beef with baking soda. Cut broccoli. Mix sauce\n- **6:45 PM** — Blanch broccoli. Shock in ice water. Pat dry\n- **6:50 PM** — Combine velveted beef with soy + cornstarch\n- **6:55 PM** — Wok screaming hot. Sear beef. Remove. Stir-fry broccoli\n- **7:00 PM** — Add sauce. Toss everything. Plate over rice\n- **7:05 PM** — **Serve** (with garlic eggplant on the side at room temp)\n\n---\n\n## Execution\n\n### Step 1: Velvet the Beef (Chinese Restaurant Trick)\n\n**Critical:** Baking soda changes the pH of the beef's surface, which prevents the proteins from tightening too aggressively over high heat. This is what separates tender restaurant stir-fry from rubbery home-cooked beef.\n\nSlice the flank steak **against the grain** into ⅛-inch thick strips. Cutting against the grain shortens the muscle fibers, making each bite shorter and easier to chew. Slice it while the beef is still partially frozen if you need the stability — this is the standard Asian market move.\n\nPlace the sliced beef in a bowl. Sprinkle **1 tsp baking soda** over it, toss with your hands, and let it sit at room temperature for exactly **10 minutes** — no more, no less. The surface will turn slightly tacky and the beef will look a little frothy. That's exactly right.\n\nRinse the beef thoroughly under cold running water to remove all traces of baking soda. Squeeze dry in a clean kitchen towel or paper towels — moisture is the enemy of a good sear. Pat until the surface is noticeably dry.\n\n**You can also skip the baking soda step** if you bought pre-sliced hot-pot beef or if you have a screaming hot wok burner. But on a standard home stove, this step is the difference between edible and excellent.\n\n### Step 2: Prep the Broccoli\n\nCut the broccoli into florets — not huge, not tiny. About 1½-inch heads with a short stem attached. Peel the outer skin off the stems with a vegetable peeler (the stems are delicious, but the outer layer is fibrous). Cut any thick stems into 2-inch segments, peeled.\n\n**Do not throw the stems away. Peeled, they're as good as the florets and double your yield.**\n\n### Step 3: Make the Sauce\n\nIn a small bowl or measuring cup, whisk together:\n- 2 tbsp oyster sauce\n- 1 tbsp soy sauce\n- 1 tbsp Shaoxing wine or dry sherry\n- 1 tsp sesame oil\n- 1 tsp sugar\n- ½ tsp white pepper\n- ½ cup cold water\n- 2 tsp cornstarch\n\nWhisk until the cornstarch is fully dissolved with no lumps. Set aside at room temperature. The cornstarch will settle as it sits — give it a quick re-whisk just before using.\n\n### Step 4: Season the Beef\n\nAfter rinsing and drying the velveted beef, toss it with **1 tbsp soy sauce** and **1 tsp cornstarch** in a bowl. Mix until every piece is lightly coated. This thin starch coating is what creates the glossy, almost lacquered sheen that takeout beef has.\n\n### Step 5: Blanch the Broccoli\n\nBring a large pot of water to a rolling boil. Add a generous pinch of salt. Drop the broccoli in and cook exactly **90 seconds** — you want it tender-crisp, not soft. Immediately transfer to a bowl of ice water to stop the cooking. Drain well and pat dry. Set aside.\n\n**Critical:** Overcooked broccoli turns to mush the second it hits the stir-fry pan. Undercooked broccoli is too hard for Wilson and won't absorb the sauce. 90 seconds is the number.\n\n### Step 6: Stir-Fry the Beef\n\nPlace a wok or large carbon steel skillet over the highest heat your stove can produce. Let it sit empty for a full **2 minutes** — the pan must be screaming hot before the oil goes in.\n\nAdd **2 tbsp of your high-smoke-point oil**. Swirl to coat. Wait 15 seconds for the oil to shimmer.\n\nAdd the beef in a **single layer** — work in batches if needed. Do not crowd the pan. The beef should sizzle aggressively on contact. Let it cook undisturbed for **45 seconds**, then flip and cook **30 seconds** on the second side. The beef should be browned on the outside and medium-rare within — it will finish cooking in the sauce.\n\nTransfer the beef to a clean bowl with a slotted spoon, leaving the oil and any drippings in the wok.\n\n### Step 7: Stir-Fry the Aromatics and Broccoli\n\nAdd the remaining **1 tbsp oil** to the hot wok. Add the garlic, ginger, and scallion whites. Stir-fry for exactly **15 seconds** — they should sizzle and release aroma immediately.\n\nAdd the blanched broccoli. Toss constantly for **45 seconds** until it's heated through and starting to take on a little color from the wok.\n\n### Step 8: Combine and Sauce\n\nAdd the cooked beef back to the wok. Toss once to distribute.\n\nRe-whisk your sauce (the cornstarch has settled) and pour it into the wok. It should hit the hot metal and immediately start bubbling and thickening. Toss constantly for **30-45 seconds** — the cornstarch-thickened sauce will coat every piece of beef and broccoli in a glossy, savory glaze. The sauce should reduce from thin and watery to a clinging, almost syrupy coating.\n\n**Critical:** The sauce will look thin when it first hits the pan. Trust the cornstarch. Keep tossing. It tightens fast.\n\n### Step 9: Finish and Serve\n\nTransfer to a serving platter immediately. Garnish with the sliced scallion greens and a sprinkle of white pepper.\n\nServe over steamed jasmine rice with the garlic eggplant on the side as a cold appetizer. The contrast — hot savory beef + cold chili-garlic eggplant + plain rice — is the move.\n\n---\n\n## For Wilson (16 Months)\n\nThis one is easy:\n- **The beef** (velveted and sliced thin) is tender enough for his gums. Reserve a small portion before the sauce goes in, or scoop pieces from the top where there's less sauce.\n- **The broccoli stems** (peeled, blanched 90 seconds) are soft enough for him to hold and gum. The florets can be broken into tiny tree-shaped pieces he can grab.\n- **The sauce** has some sodium from soy and oyster sauce — don't drown his portion in it. A light coating is fine.\n- **Serve his plate** with: small pieces of stir-fried broccoli, 3-4 thin strips of the beef, and a mound of plain steamed rice. That's a complete toddler meal with familiar textures.\n- **The garlic eggplant** reserve some plain steamed eggplant flesh (no dressing, no skin) if you want him to try it — scoop from the center of one half before dressing.\n\n---\n\n## Chef's Notes\n\n- **Oyster sauce has no oysters.** It's a mushroom-based condiment. You can find it in any Asian grocery. Kikkoman and Panda brands are both good.\n- **The baking soda velvet step is from the Chinese restaurant playbook.** At home without a jet-engine wok burner, this is the only way to get tender stir-fried beef. Do not skip it.\n- **Mise en place is non-negotiable on this one.** Once the wok is hot, you have no time to chop, measure, or think. Everything must be within arm's reach before you start.\n- **Shaoxing wine substitute:** Dry sherry or mirin work fine. White wine works in a pinch. Skip sake — too clean, wrong flavor profile.\n- **Leftovers reheat surprisingly well** — microwave 30 seconds, covered, then toss in a hot pan for 30 seconds to re-crisp the edges.\n\n---\n\n## Critical Notes\n\n- **Don't crowd the wok.** The beef must sear, not steam. Cook in two batches if your wok is small.\n- **Don't skip the baking soda.** On a home stove, the beef will be tough without it. This is a low-cost, high-impact step.\n- **Don't skip the blanching.** Raw broccoli in the wok will burn before it cooks through. Blanched broccoli absorbs sauce and finishes in the time it takes to toss.\n- **The sauce thickens fast.** Have everything ready to plate the second it tightens. If it reduces too far, add a splash of water to loosen it.\n\n---\n\n## Variations\n\n- **Chicken version:** Swap beef for boneless chicken thighs, sliced thin. Skip the velveting step — chicken doesn't need it.\n- **Pork version:** Thinly sliced pork loin or shoulder. Velveting optional.\n- **Extra vegetables:** Add 1 julienned carrot and 1 sliced red bell pepper to the stir-fry with the broccoli. Same timing.\n- **Spicier:** Add 1 tsp chili flakes or crushed dried chiles to the aromatics. Add ½ tsp chili oil to the sauce.\n- **Gluten-free:** Tamari instead of soy sauce, GF oyster sauce or skip the oyster sauce entirely (double tamari + pinch more sugar).\n\n---\n\n## Tags\n\n#chinese #stir-fry #beef #broccoli #takeout #quick #weeknight #nut-free #peanut-free #lentil-free #pea-free #gluten-free-option\n\n**First cooked:** 2026-10-03\n**Source:** Original — Pierre's Kitchen"
   },
   {
     "id": "broccoli-cheddar-soup",
@@ -4824,6 +4870,48 @@
     "content": "# Chinese Eggplant in Garlic Sauce\n\nThis recipe focuses on achieving crispy Chinese eggplant coated in a rich garlic sauce. The eggplant is first soaked in saltwater to draw out moisture, then stir-fried until soft and golden. The garlic sauce, made with soy sauce, sugar, and a touch of dark soy for color, is quickly tossed with the eggplant to ensure it stays crispy and flavorful. The dish can be served as a side or as a main dish over rice.\n\n- **Preparation Time**: 25 minutes\n- **Cook Time**: 15 minutes\n- **Total Time**: 40 minutes\n- **Servings**: 2-4\n\n## Ingredients:\n- 2 Chinese eggplants\n- 1 teaspoon salt\n- 1 tablespoon cornstarch\n- 2 tablespoons sesame oil\n- 1 teaspoon ginger, minced\n- 3 cloves garlic, chopped\n\n### Sauce:\n- 1 tablespoon light soy sauce\n- 1 tablespoon water\n- 1/2 teaspoon dark soy sauce\n- 2 teaspoons sugar\n- 1 teaspoon cornstarch\n\n## Instructions:\n1. **Prep the Eggplant**: Soak eggplant in saltwater, then pat dry.\n2. **Fry the Eggplant**: Stir-fry the eggplant until soft and golden.\n3. **Prepare the Sauce**: Mix the sauce ingredients.\n4. **Finish the Dish**: Add the sauce to the cooked eggplant and stir until well coated.\n\nFor full instructions, visit [Omnivore's Cookbook](https://omnivorescookbook.com/chinese-eggplant-garlic-sauce).\n"
   },
   {
+    "id": "chinese-garlic-eggplant",
+    "title": "Chinese Garlic Eggplant (蒜蓉茄子)",
+    "filename": "Chinese Garlic Eggplant",
+    "subdir": "",
+    "description": "Cold-steeped Chinese eggplant in a pungent garlic-soy-black vinegar sauce with chili crisp. The eggplant gets split and salted first to draw out bitter juices and firm the flesh, then steamed until tender, then dressed while warm so it soaks up the dressing like a sponge. This is served at room temp",
+    "categories": [
+      "Other"
+    ],
+    "ingredients": [
+      "2 long Chinese eggplants (the thin purple ones — about 12 oz / 340g total)",
+      "*No substitutions* — globe eggplants are too seedy and watery for this",
+      "Kosher salt (about 2 tsp, for the brine)",
+      "6 cloves garlic, minced to a fine paste (not a press — knife work, crush with salt)",
+      "1 tbsp fresh ginger, grated on a microplane",
+      "3 tbsp soy sauce (or tamari for GF)",
+      "2 tbsp Chinese black vinegar (Chinkiang) — the dark, malty one",
+      "*Sub:* 1½ tbsp balsamic + ½ tbsp rice vinegar in a pinch, but it's not the same",
+      "1½ tbsp chili crisp or chile oil (Lao Gan Ma is the gold standard)",
+      "1 tsp sugar (this is not optional — it balances the vinegar and heat)",
+      "1 tsp toasted sesame oil (optional — omit if nut-sensitive)",
+      "2 tbsp neutral oil (grapeseed, canola, or avocado)",
+      "3 scallions, green parts only, thinly sliced on a bias",
+      "2 tbsp cilantro leaves, roughly chopped",
+      "1 tsp sesame seeds, toasted (optional)"
+    ],
+    "meta": {
+      "prepTime": null,
+      "cookTime": null,
+      "totalTime": "1 hr (25 active, 35 resting/brining)",
+      "servings": "2 - 4 as a side/appetizer",
+      "prepTimeMinutes": null,
+      "cookTimeMinutes": null,
+      "totalTimeMinutes": 60,
+      "servingsMin": 2,
+      "servingsMax": 4
+    },
+    "source": null,
+    "coverImage": null,
+    "dateAdded": "2026-10-03T20:35:52.556Z",
+    "content": "# Chinese Garlic Eggplant (蒜蓉茄子)\n\n**Serves:** 2-4 as a side/appetizer\n**Total time:** 1 hour (25 active, 35 resting/brining)\n**Technique:** Salt-brine, steaming, cold dressing\n**Source:** Corrected version — Sichuan home technique via Jobin's reader input\n\n---\n\nCold-steeped Chinese eggplant in a pungent garlic-soy-black vinegar sauce with chili crisp. The eggplant gets split and salted first to draw out bitter juices and firm the flesh, then steamed until tender, then dressed while warm so it soaks up the dressing like a sponge. This is served at room temperature or cold — it's a classic Sichuan cold starter, not a hot dish. The longer it sits, the better it gets. Make it first, let it hang while you cook the rest of dinner.\n\n---\n\n## Dietary Notes\n- **Nut-free** as written (skip sesame oil to be safe), **peanut-free**, **lentil-free**, **pea-free** ✅\n- **Dairy-free**, **gluten-free** if using tamari instead of soy sauce\n- **Vegan** ✅\n\n---\n\n## Mise en Place\n\n### Eggplant\n- 2 long Chinese eggplants (the thin purple ones — about 12 oz / 340g total)\n  - *No substitutions* — globe eggplants are too seedy and watery for this\n- Kosher salt (about 2 tsp, for the brine)\n\n### Garlic Dressing\n- 6 cloves garlic, minced to a fine paste (not a press — knife work, crush with salt)\n- 1 tbsp fresh ginger, grated on a microplane\n- 3 tbsp soy sauce (or tamari for GF)\n- 2 tbsp Chinese black vinegar (Chinkiang) — the dark, malty one\n  - *Sub:* 1½ tbsp balsamic + ½ tbsp rice vinegar in a pinch, but it's not the same\n- 1½ tbsp chili crisp or chile oil (Lao Gan Ma is the gold standard)\n- 1 tsp sugar (this is not optional — it balances the vinegar and heat)\n- 1 tsp toasted sesame oil (optional — omit if nut-sensitive)\n- 2 tbsp neutral oil (grapeseed, canola, or avocado)\n\n### Garnish\n- 3 scallions, green parts only, thinly sliced on a bias\n- 2 tbsp cilantro leaves, roughly chopped\n- 1 tsp sesame seeds, toasted (optional)\n\n---\n\n## Timeline (work backward from 7:00 PM serving)\n\n- **5:50 PM** — Split eggplants. Salt cut faces. Let weep 25-30 min\n- **6:20 PM** — Rinse and pat dry. Start steaming\n- **6:30 PM** — Eggplant done. Score, make dressing\n- **6:35 PM** — Dress. Rest on counter 25 min minimum\n- **7:00 PM** — **Serve at room temp** alongside main dish\n\n---\n\n## Execution\n\n### Step 1: Salt-Brine the Eggplant\n\n**Critical:** This step is not optional. Salting the cut faces draws out bitter compounds and excess moisture, firms the flesh, and prevents the eggplant from turning waterlogged. Without it, the dressing sits on the surface instead of penetrating, and the texture goes flabby.\n\nHalve each eggplant lengthwise. Lay the halves cut-side up on a double layer of paper towels.\n\nSprinkle about **½ tsp kosher salt** over the cut face of each half. Not a delicate sprinkle — you want an even, visible coating. Let them sit at room temperature for **25-30 minutes**. Within 5 minutes you'll see small beads of brown liquid weeping onto the surface and the paper towels. That's the bitter juice leaving.\n\nAfter 25 minutes, rinse each half thoroughly under cold running water to remove all traces of salt. Gently squeeze the flesh or pat dry with paper towels. The flesh should feel noticeably firmer than before.\n\n### Step 2: Steam the Eggplant\n\nFill a wok or large pot with 1 inch of water and bring to a boil. Set up a steamer basket or a heatproof plate on a trivet — you want the eggplant suspended above the water, not touching it.\n\nPlace the eggplant halves in the steamer, cut-side up. Cover and steam over boiling water for **8-10 minutes** — they're thinner now after the brine, so this goes faster. At 8 minutes, poke a chopstick through the thickest part. If it slides through with zero resistance, they're done. If not, give them 2 more minutes.\n\nRemove and let rest on a cutting board until cool enough to handle — about **2 minutes**.\n\n### Step 3: Score and Release\n\n**Critical:** The scoring step creates the surface area for the dressing. Rushing or skipping it gives you a bland eggplant.\n\nScore the cut surface in a crosshatch pattern — straight down, ½ inch apart, cutting about two-thirds of the way through the flesh. Don't go all the way to the skin. The goal is to create a grid of pockets that the dressing can penetrate.\n\nNow press gently on the skin side of each half to \"butterfly\" it open — the scored flesh should open up like a split sausage on a grill. This exposes the maximum surface area.\n\n### Step 4: Make the Dressing\n\nIn a small bowl, combine:\n- 6 cloves garlic, minced to paste\n- 1 tbsp grated ginger\n- 3 tbsp soy sauce\n- 2 tbsp Chinkiang vinegar\n- 1½ tbsp chili crisp or chile oil\n- 1 tsp sugar\n- 1 tsp sesame oil (if using)\n- 2 tbsp neutral oil\n\nWhisk until the sugar is fully dissolved. Taste it: it should hit you with garlic first, then sour, then heat, then a whisper of sweet at the end. Adjust the chili or vinegar until the balance feels right.\n\n### Step 5: Dress and Rest\n\n**Critical:** This is the make-or-break step. The eggplant needs time to absorb the dressing. Hit it immediately while it's still warm from steaming.\n\nPlace the eggplant halves on a serving plate or in a shallow bowl, cut-side up, slightly overlapping if needed. Spoon the dressing evenly over every piece. Make sure it pools in the crosshatch grooves. Every single scored surface should be coated.\n\nLet the dressed eggplant sit at room temperature for **at least 20 minutes** — longer is better. This is not a dish you rush. The eggplant continues to absorb the dressing as it cools. If you can give it 45 minutes, you get a transcendent eggplant. An hour is even better. The flavor compounds in the garlic settle into the eggplant's sponge-like texture.\n\n### Step 6: Garnish and Serve\n\nJust before serving, scatter the sliced scallions, chopped cilantro, and sesame seeds over the top. No more — the aromatics should sit on the surface, not get lost in the dressing.\n\nServe at room temperature alongside your main dish. This is not a hot dish. Never reheat it.\n\n---\n\n## For Wilson (16 Months)\n\nThis one he can eat, but deconstructed:\n- Scoop out some of the **soft interior flesh** from the center of one half — avoid the skin, the crosshatch cuts, and the majority of the dressing\n- The steamed eggplant flesh on its own is silky and mild — he'll eat it like a puree\n- **Do not give him the dressed exterior** — the vinegar, chili, and heavy garlic are too intense for a toddler palate\n- Serve the plain steamed eggplant alongside a familiar safe food — a fruit pouch, yogurt, or soft bread\n- If you want him to share the real dish, give him a tiny corner of the dressed eggplant to taste (the size of your thumbnail), but that's it\n\n---\n\n## Chef's Notes\n\n- **Chinese eggplant is not optional.** Globe eggplants have thick skin, dense flesh, and more seeds. They steam unevenly and turn bitter. Chinese eggplants are uniformly tender, thin-skinned, and soak up flavor like rice paper.\n- **The salt-brine is the most important step you're tempted to skip.** It's not a suggestion — it's the difference between home-cooked and proper Sichuan style. The brine firms the flesh, removes bitterness, and creates the structural integrity that lets the dressing penetrate deep rather than pooling on top.\n- **The resting time is the secret.** This dish at 0 minutes is good. At 20 minutes it's great. At 45 minutes it's what they serve in Chengdu. Plan accordingly.\n- **Lao Gan Ma chili crisp is the move.** The fermented black bean + chili oil combo is what gives this dish its depth without extra work. A clean chili oil works fine. Don't use sriracha — too sweet, too thick.\n- **Leftovers are better.** Pack the next day's lunch from this. Cold eggplant that's been sitting in garlic-chili dressing overnight is the best version.\n\n---\n\n## Critical Notes\n\n- **Don't skip the brine.** If you skip it, the eggplant will be softer, bitter, and the dressing won't penetrate. You'll get a decent dish instead of a great one.\n- **Don't overcook the eggplant.** Mushy is not the goal. You want it tender enough to split open without resistance, firm enough to hold its shape when lifted with chopsticks. 8-10 minutes after brining.\n- **Don't skip the sugar.** It's a half teaspoon in a dish with vinegar and chili. You won't taste sweetness. You'd notice its absence.\n- **Score deep but don't cut through the skin.** The skin is the vessel that holds the structure. Split it and you get eggplant leather.\n\n---\n\n## Tags\n\n#chinese #sichuan #eggplant #starter #cold-dish #vegetarian #vegan #nut-free #peanut-free #lentil-free #pea-free #gluten-free-option\n\n**First cooked:** 2026-10-03\n**Source:** Corrected version after reader input — Sichuan home technique"
+  },
+  {
     "id": "chopped-steak-recipe",
     "title": "Chopped Steak Recipe",
     "filename": "Chopped Steak Recipe - Chef Billy Parisi",
@@ -5176,7 +5264,7 @@
   {
     "id": "classic-rag-bolognese-recipe-bon-app-tit",
     "title": "Classic Ragù Bolognese Recipe _ Bon Appétit",
-    "filename": "Classic Ragù Bolognese Recipe _ Bon Appétit",
+    "filename": "Classic Ragù Bolognese Recipe _ Bon Appétit",
     "subdir": "Todd's Kitchen/Indian",
     "description": "Classic Ragù Bolognese Recipe | Bon Appétit",
     "categories": [
@@ -5731,7 +5819,7 @@
   {
     "id": "cr-me-br-l-e-recipe-6-ingredients-sally-s-baking-addiction",
     "title": "Crème Brûlée Recipe (6 Ingredients) - Sally_s Baking Addiction",
-    "filename": "Crème Brûlée Recipe (6 Ingredients) - Sally_s Baking Addiction",
+    "filename": "Crème Brûlée Recipe (6 Ingredients) - Sally_s Baking Addiction",
     "subdir": "Todd's Kitchen/French",
     "description": "Easy Crème Brûlée Recipe (6 Ingredients) - Sally's Baking Addiction",
     "categories": [
@@ -6373,7 +6461,7 @@
   {
     "id": "egg-bites-with-bacon-gruy-re",
     "title": "Egg Bites with Bacon & Gruyère",
-    "filename": "Egg Bites with Bacon & Gruyère - Once Upon a Chef",
+    "filename": "Egg Bites with Bacon & Gruyère - Once Upon a Chef",
     "subdir": "Todd's Kitchen/Bfast",
     "description": "Egg Bites with Bacon & Gruyère - Once Upon a Chef",
     "categories": [
@@ -6669,9 +6757,9 @@
     "content": "# french_onion_soup\n\nsimplyrecipes.com/recipes/french_onion_soup/?print\n\n## Overview\n- **Servings**: 20 mins 60 mins 80 mins 4 to 6 servings\n\n## Ingredients\n- • 6 large red or yellow onions (about 3 pounds)\n- • 4 tablespoons extra virgin olive oil\n- • 2 tablespoons butter\n- • 1 teaspoon sugar\n- • Kosher salt\n- • 2 cloves garlic, minced\n- • 8 cups beef stock, chicken stock, or a combination of the two\n- • 1/2 cup dry vermouth or dry white wine\n- • 2 bay leaves\n- • 1 tablespoon fresh thyme leaves, a few sprigs of fresh thyme, OR 1/2 teaspoon dried thyme\n- • 1/2 teaspoon freshly ground black pepper\n- • 2 tablespoons brandy (optional)\n- • 8 slices (1 inch thick) French bread or baguette\n- • 1 1/2 cups grated Gruyere cheese\n- • Sprinkling grated Parmesan cheese\n\n## Instructions\n1. Peel and slice the onions:\n2. Peel and thinly slice the onions from root to stem. There should be about 10 cups of sliced onions in total.\n2. Begin caramelizing the onions with olive oil and butter:\n3. simplyrecipes.com/recipes/french_onion_soup/?print\n4. In a 5 to 6 quart thick-bottomed pot, heat 3 tablespoons of olive oil on medium heat. Add the onions and toss to coat with the\n5. olive oil.\n6. Cook the onions, stirring often, until they have softened, about 15 to 20 minutes.\n7. Increase the heat to medium high. Add the remaining tablespoon of olive oil and the butter and cook, stirring often, until the\n8. onions start to brown, about 20 to 40 minutes. The amount of time will vary depending on your pot, stove, and onions.\n3. Sprinkle with the sugar, finish caramelizing, and add garlic:\n4. Sprinkle with sugar (to help with the caramelization) and 1 teaspoon of salt. Continue to cook until the onions are well browned,\n5. about 10 to 15 more minutes.\n6. Add the minced garlic and cook for a minute more.\n4. Deglaze the pot with vermouth or wine:\n5. Add the wine or vermouth to the pot and scrape up the browned bits on the bottom and sides of the pot, deglazing the pot as you\n5. Add the stock, bay leaves, and thyme:\n6. Add the stock, bay leaves, and thyme. Bring to a simmer, cover the pot and lower the heat to maintain a low simmer. Cook for\n7. about 30 minutes.\n6. Season and add the brandy:\n7. Season to taste with more salt and add freshly ground black pepper. Discard the bay leaves. Add brandy if using.\n7. Toast the French bread slices:\n8. While the soup is simmering, line a sheet pan with parchment paper or foil and preheat the oven to 450°F with a rack in the\n9. upper third of the oven.\n10. Brush both sides of the French bread or baguette slices lightly with olive oil (you'll end up using about a tablespoon and a half of\n11. olive oil for this).\n12. Put in the oven and toast until lightly browned, about 5 to 7 minutes. Remove from oven.\n13. Turn the toasts over and sprinkle with the grated Gruyere cheese and Parmesan. Return to oven when it's close to serving time\n14. and bake until the cheese is bubbly and lightly browned.\n8. Serve:\n9. To serve, ladle soup into a bowl and transfer one cheesy toast onto the top of each bowl of soup.\n10. Alternatively, you can use individual oven-proof bowls or one large casserole dish. Ladle the soup into the bowls or casserole\n11. dish. Cover with the toast and sprinkle with cheese. Put into the broiler for 10 minutes at 350° F, or until the cheese bubbles and\n12. is slightly browned.\n13. Did you enjoy this recipe? Let us know with a rating and review!\n14. FILED UNDER:\n15. COMFORT FOOD FALL SOUPS ONIONS FRENCH\n\n## Notes\nMuch of the success of this soup depends on the stock that you are using, and stock varies tremendously in its taste. Depending on your\nstock, you may need to bump up the flavor with some beef bouillon (we recommend Better Than Bouillon brand).\nIngredients\n• 6 large red or yellow onions (about 3 pounds)\n• 4 tablespoons extra virgin olive oil\n• 2 tablespoons butter\n• 1 teaspoon sugar\n• Kosher salt\n• 2 cloves garlic, minced\n• 8 cups beef stock, chicken stock, or a combination of the two\n• 1/2 cup dry vermouth or dry white wine\n• 2 bay leaves\n• 1 tablespoon fresh thyme leaves, a few sprigs of fresh thyme, OR 1/2 teaspoon dried thyme\n• 1/2 teaspoon freshly ground black pepper\n• 2 tablespoons brandy (optional)\n• 8 slices (1 inch thick) French bread or baguette\n• 1 1/2 cups grated Gruyere cheese\n• Sprinkling grated Parmesan cheese\nMethod\n1. Peel and slice the onions:\nPeel and thinly slice the onions from root to stem. There should be about 10 cups of sliced onions in total.\n2. Begin caramelizing the onions with olive oil and butter:\n 1/2\n simplyrecipes.com/recipes/french_onion_soup/?print\nIn a 5 to 6 quart thick-bottomed pot, heat 3 tablespoons of olive oil on medium heat. Add the onions and toss to coat with the\nolive oil.\nCook the onions, stirring often, until they have softened, about 15 to 20 minutes.\nIncrease the heat to medium high. Add the remaining tablespoon of olive oil and the butter and cook, stirring often, until the\nonions start to brown, about 20 to 40 minutes. The amount of time will vary depending on your pot, stove, and onions.\n3. Sprinkle with the sugar, finish caramelizing, and add garlic:\nSprinkle with sugar (to help with the caramelization) and 1 teaspoon of salt. Continue to cook until the onions are well browned,\nabout 10 to 15 more minutes.\nAdd the minced garlic and cook for a minute more.\n4. Deglaze the pot with vermouth or wine:\nAdd the wine or vermouth to the pot and scrape up the browned bits on the bottom and sides of the pot, deglazing the pot as you\ngo.\n5. Add the stock, bay leaves, and thyme:\nAdd the stock, bay leaves, and thyme. Bring to a simmer, cover the pot and lower the heat to maintain a low simmer. Cook for\nabout 30 minutes.\n6. Season and add the brandy:\nSeason to taste with more salt and add freshly ground black pepper. Discard the bay leaves. Add brandy if using.\n7. Toast the French bread slices:\nWhile the soup is simmering, line a sheet pan with parchment paper or foil and preheat the oven to 450°F with a rack in the\nupper third of the oven.\nBrush both sides of the French bread or baguette slices lightly with olive oil (you'll end up using about a tablespoon and a half of\nolive oil for this).\nPut in the oven and toast until lightly browned, about 5 to 7 minutes. Remove from oven.\nTurn the toasts over and sprinkle with the grated Gruyere cheese and Parmesan. Return to oven when it's close to serving time\nand bake until the cheese is bubbly and lightly browned.\n8. Serve:\nTo serve, ladle soup into a bowl and transfer one cheesy toast onto the top of each bowl of soup.\nAlternatively, you can use individual oven-proof bowls or one large casserole dish. Ladle the soup into the bowls or casserole\ndish. Cover with the toast and sprinkle with cheese. Put into the broiler for 10 minutes at 350° F, or until the cheese bubbles and\nis slightly browned.\nDid you enjoy this recipe? Let us know with a rating and review!\nFILED UNDER:\nCOMFORT FOOD FALL SOUPS ONIONS FRENCH\n\n"
   },
   {
-    "id": "french-style-beef-back-rib-co-tes-de-boeuf",
-    "title": "French-Style Beef Back Rib (Côtes de Boeuf)",
-    "filename": "French-Style Beef Back Rib (Côtes de Boeuf)",
+    "id": "french-style-beef-back-rib-c-tes-de-boeuf",
+    "title": "French-Style Beef Back Rib (Côtes de Boeuf)",
+    "filename": "French-Style Beef Back Rib (Côtes de Boeuf)",
     "subdir": "Beef",
     "description": "A classic French preparation of beef back ribs, braised in red wine with aromatic vegetables and herbs, served with sweet mashed potatoes and coleslaw.",
     "categories": [
@@ -6837,7 +6925,7 @@
   {
     "id": "fritto-misto-recipe-bon-app-tit",
     "title": "Fritto Misto Recipe _ Bon Appétit",
-    "filename": "Fritto Misto Recipe _ Bon Appétit",
+    "filename": "Fritto Misto Recipe _ Bon Appétit",
     "subdir": "Todd's Kitchen/Italian",
     "description": "Fritto Misto Recipe | Bon Appétit",
     "categories": [
@@ -7400,7 +7488,7 @@
   {
     "id": "grilled-steak-with-chimichurri-shiitake-kale-saut",
     "title": "Grilled Steak with Chimichurri & Shiitake-Kale Sauté",
-    "filename": "Grilled Steak with Chimichurri & Shiitake-Kale Sauté",
+    "filename": "Grilled Steak with Chimichurri & Shiitake-Kale Sauté",
     "subdir": "",
     "description": "",
     "categories": [
@@ -9659,7 +9747,7 @@
   {
     "id": "miso-glazed-salmon-with-shiitake-kale-saut",
     "title": "Miso-Glazed Salmon with Shiitake-Kale Sauté",
-    "filename": "Miso-Glazed Salmon with Shiitake-Kale Sauté",
+    "filename": "Miso-Glazed Salmon with Shiitake-Kale Sauté",
     "subdir": "",
     "description": "",
     "categories": [
@@ -10542,7 +10630,7 @@
   {
     "id": "pappardelle-with-veal-rag-recipe-grace-parisi",
     "title": "Pappardelle with Veal Ragù Recipe - Grace Parisi",
-    "filename": "Pappardelle with Veal Ragù Recipe - Grace Parisi",
+    "filename": "Pappardelle with Veal Ragù Recipe - Grace Parisi",
     "subdir": "Todd's Kitchen/Italian",
     "description": "Pappardelle with Veal Ragù Recipe - Grace Parisi",
     "categories": [
@@ -11180,7 +11268,7 @@
   {
     "id": "recipe-icelandic-wild-mushroom-soup-hotel-rang",
     "title": "Recipe_ Icelandic Wild Mushroom Soup - Hotel Rangá",
-    "filename": "Recipe_ Icelandic Wild Mushroom Soup - Hotel Rangá",
+    "filename": "Recipe_ Icelandic Wild Mushroom Soup - Hotel Rangá",
     "subdir": "Todd's Kitchen",
     "description": "Recipe: Icelandic Wild Mushroom Soup - Hotel Rangá",
     "categories": [
@@ -14255,7 +14343,7 @@
   {
     "id": "veal-rag-pasta-pasta-with-rag-sauce",
     "title": "Veal Ragù Pasta (Pasta with Ragù Sauce)",
-    "filename": "Veal Ragù Pasta (Pasta with Ragù Sauce)",
+    "filename": "Veal Ragù Pasta (Pasta with Ragù Sauce)",
     "subdir": "Todd's Kitchen/Italian",
     "description": "Veal Ragù Pasta (Pasta with Ragù Sauce)",
     "categories": [
@@ -14373,6 +14461,51 @@
     "coverImage": null,
     "dateAdded": "2026-03-16T00:47:37.576Z",
     "content": "# waffles\n\nallrecipes.com/recipe/20513/classic-waffles/?print\n\n## Overview\n- **Prep Time**: 10 mins\n- **Cook Time**: 15 mins\n- **Total Time**: 25 mins\n- **Servings**: 5\n\n## Ingredients\n- 2 cups all-purpose flour\n- 1 teaspoon salt\n- 4 teaspoons baking powder\n- 2 tablespoons white sugar\n- 2 eggs\n- 1 ½ cups warm milk\n- ⅓ cup butter, melted\n- 1 teaspoon vanilla extract\n\n## Instructions\n1. Step 1\n2. Gather all ingredients.\n3. Step 2\n4. In a large bowl, mix together flour, salt, baking powder and sugar; set aside. Preheat waffle iron to desired temperature.\n5. allrecipes.com/recipe/20513/classic-waffles/?print\n6. Step 3\n7. In a separate bowl, beat the eggs. Stir in the milk, butter and vanilla.\n8. Step 4\n9. Pour the milk mixture into the flour mixture; beat until blended.\n10. Step 5\n11. Ladle the batter into a preheated waffle iron.\n12. Step 6\n13. Cook the waffles until golden and crisp.\n14. Step 7\n15. Serve immediately and enjoy!\n\n"
+  },
+  {
+    "id": "white-chicken-chili",
+    "title": "White Chicken Chili",
+    "filename": "White Chicken Chili",
+    "subdir": "",
+    "description": "Aggregated from the five most popular white chicken chili recipes on Allrecipes, Taste of Home, Food Network, Simply Recipes, and The Kitchn. Approachable comfort-food flavors — familiar enough for Sarah, rich enough for anyone. Mild and creamy by default, optional heat if desired.",
+    "categories": [
+      "Chicken",
+      "Soups & Stews"
+    ],
+    "ingredients": [
+      "2 tbsp olive oil",
+      "1 large yellow onion, diced",
+      "4 cloves garlic, minced",
+      "1½ lbs boneless skinless chicken breasts, cut into ¾-inch pieces",
+      "1 tsp ground cumin",
+      "½ tsp dried oregano (Mexican blend preferred)",
+      "Salt and black pepper to taste",
+      "5 cups chicken broth",
+      "2 cans (15 oz each) Great Northern beans, drained and rinsed",
+      "1 can (4 oz) mild green chiles, undrained",
+      "1 cup corn (frozen thawed, canned drained, or cream-style)",
+      "8 oz cream cheese, cubed",
+      "Shredded Monterey Jack or Pepper Jack cheese, for topping",
+      "Sour cream, for serving",
+      "Fresh cilantro, chopped (optional garnish)",
+      "Lime wedges, for serving",
+      "Tortilla chips or strips, for topping"
+    ],
+    "meta": {
+      "prepTime": "10 mins",
+      "cookTime": "30 mins",
+      "totalTime": "40 mins",
+      "servings": "6 – 8",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 30,
+      "totalTimeMinutes": 40,
+      "servingsMin": 6,
+      "servingsMax": 8
+    },
+    "source": null,
+    "coverImage": null,
+    "dateAdded": "2026-10-04T16:32:45.184Z",
+    "content": "# White Chicken Chili\n\n## Overview\n- **Prep Time**: 10 minutes\n- **Cook Time**: 30 minutes\n- **Total Time**: 40 minutes\n- **Servings**: 6–8\n\n## Description\nAggregated from the five most popular white chicken chili recipes on Allrecipes, Taste of Home, Food Network, Simply Recipes, and The Kitchn. Approachable comfort-food flavors — familiar enough for Sarah, rich enough for anyone. Mild and creamy by default, optional heat if desired.\n\n## Ingredients\n- 2 tbsp olive oil\n- 1 large yellow onion, diced\n- 4 cloves garlic, minced\n- 1½ lbs boneless skinless chicken breasts, cut into ¾-inch pieces\n- 1 tsp ground cumin\n- ½ tsp dried oregano (Mexican blend preferred)\n- Salt and black pepper to taste\n- 5 cups chicken broth\n- 2 cans (15 oz each) Great Northern beans, drained and rinsed\n- 1 can (4 oz) mild green chiles, undrained\n- 1 cup corn (frozen thawed, canned drained, or cream-style)\n- 8 oz cream cheese, cubed\n- Shredded Monterey Jack or Pepper Jack cheese, for topping\n- Sour cream, for serving\n- Fresh cilantro, chopped (optional garnish)\n- Lime wedges, for serving\n- Tortilla chips or strips, for topping\n\n## Instructions\n1. Heat olive oil in a large pot over medium heat. Add onion and cook until soft and translucent, about 5 minutes. Add garlic and cook 1 minute more.\n2. Add chicken pieces, cumin, oregano, salt, and pepper. Cook until chicken is browned on all sides, about 6–8 minutes.\n3. Pour in chicken broth, scraping any browned bits from the bottom of the pot. Add Great Northern beans, green chiles (with their juice), and corn. Stir well.\n4. Bring to a boil, then reduce heat to low and simmer covered for 15–20 minutes, until chicken is cooked through and tender.\n5. Add cubed cream cheese and stir until fully melted and incorporated into the broth. The chili will thicken and become creamy.\n6. Taste and adjust seasoning — add more salt, pepper, or cumin if needed. For extra heat, dice in a fresh jalapeño at step 1 or stir in 1–2 chipotle peppers in adobo sauce at step 5.\n7. Serve topped with shredded Monterey Jack or Pepper Jack cheese, a dollop of sour cream, chopped cilantro, lime wedges, and tortilla chips or strips.\n\n## Notes\n- **Make it milder:** Skip jalapeños entirely, use only mild green chiles, add extra cheese.\n- **Condensed soup shortcut:** Some popular recipes call for 1 can condensed cream of chicken soup instead of cream cheese — faster and equally creamy. Use whichever feels simpler.\n- **Leftovers:** Keeps 4 days refrigerated. Reheats beautifully on stovetop; thin with extra broth if needed.\n- **Double batch:** This makes enough for a crowd easily. Halving works fine too.\n\nSource: Aggregated from Allrecipes (Easy White Chicken Chili, Award-Winning White Chicken Chili, Creamy White Chili), Cha Cha's White Chicken Chili, Nicole McLaughlin's Creamy White Chicken Chili (Allrecipes), and other top-rated community recipes.\n"
   },
   {
     "id": "white-chicken-chili-cooking-classy",
@@ -14590,7 +14723,7 @@
   {
     "id": "wild-mushroom-soup-hotel-rang",
     "title": "Wild mushroom soup - Hotel Rangá",
-    "filename": "Wild mushroom soup - Hotel Rangá",
+    "filename": "Wild mushroom soup - Hotel Rangá",
     "subdir": "Todd's Kitchen/Soup",
     "description": "Wild mushroom soup - Hotel Rangá",
     "categories": [
