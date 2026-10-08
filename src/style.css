@@ -221,6 +221,7 @@ input, textarea { font: inherit; }
 
 /* ── SEARCH BAR (AI Chat-style) ── */
 .search-wrap {
+  position: relative;
   max-width: 600px;
   margin: 0 auto 24px;
 }
