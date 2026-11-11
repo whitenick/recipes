@@ -119,6 +119,13 @@
     }
     .header-home-link:hover { color: var(--text); }
     .header-home-link.active { color: var(--accent); }
+    .header-login {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 7px 13px; border-radius: 9999px; background: var(--accent);
+      color: #fff; font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; white-space: nowrap; transition: background 0.15s;
+    }
+    .header-login:hover { background: var(--accent-hover); color: #fff; }
 
     /* ── Hero ── */
     .hero {
@@ -531,6 +538,7 @@
           <a href="index.html" class="header-home-link">Recipes</a>
           <a href="menus.html" class="header-home-link">Menus</a>
           <a href="guides.html" class="header-home-link active">Guides</a>
+          <a href="https://dishsync-v1.pages.dev/login" class="header-login">Sign in</a>
         </div>
       </div>
     </div>
