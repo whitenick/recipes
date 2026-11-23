@@ -3,11 +3,14 @@
  *
  * Upgrades the existing #searchInput into a type-ahead autocomplete: debounced
  * natural-language queries go to the search service (src/search.js → Cloudflare
- * Worker → Meilisearch hybrid), and the ranked hits render below the bar as
- * recipe cards with keyboard + mouse navigation. Results link into the site's
- * recipe view (`#recipe/<id>` hash route).
+ * Worker → Meilisearch hybrid), and the ranked hits render as recipe cards in
+ * the page's in-flow results region (the #searchDropdown panel lives inside
+ * .main-content, above #recipeGrid — never as a floating overlay) with
+ * keyboard + mouse navigation. Results link into the site's recipe view
+ * (`#recipe/<id>` hash route), and the grid behind stays reactive with the
+ * page layout.
  *
- * States surfaced in the dropdown status row:
+ * States surfaced in the in-page status row:
  *   loading  — request in flight
  *   results  — ranked cards below the bar
  *   empty    — service answered, no matches

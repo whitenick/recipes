@@ -898,69 +898,35 @@ function buildCategoryChips() {
   const collectionLink = document.getElementById('sandwichSundaysLink');
   if (collectionLink) collectionLink.hidden = !allCategories.has(COLLECTION_CATEGORY);
   
-  // Desktop sidebar — add "Recent Recipes" as first pseudo-category
-  const sidebar = document.getElementById('categorySidebar');
-  
-  // Remove the default "All" that's in the HTML — we'll add it back sorted
-  const existingAll = sidebar.querySelector('[data-category=""]');
-  if (existingAll) existingAll.remove();
-  
-  // Add "Recent Recipes" as first item
-  const recentDiv = document.createElement('div');
-  recentDiv.className = 'sidebar-cat';
-  recentDiv.dataset.category = '__recent__';
-  recentDiv.textContent = 'Recent Recipes';
-  recentDiv.addEventListener('click', () => setCategory('__recent__'));
-  sidebar.appendChild(recentDiv);
-  
-  // Add "All"
-  const allDiv = document.createElement('div');
-  allDiv.className = 'sidebar-cat';
-  allDiv.dataset.category = '';
-  allDiv.textContent = 'All';
-  allDiv.addEventListener('click', () => setCategory(''));
-  sidebar.appendChild(allDiv);
-  
-  // Add real categories
-  sorted.forEach(cat => {
-    const div = document.createElement('div');
-    div.className = 'sidebar-cat';
-    div.dataset.category = cat;
-    div.textContent = cat;
-    div.addEventListener('click', () => setCategory(cat));
-    sidebar.appendChild(div);
-  });
-  
-  // Mobile filters — same structure
-  const mobileContainer = document.getElementById('mobileFilters');
-  // Clear existing "All"
-  mobileContainer.innerHTML = '';
+  // Horizontal top-bar filters (single chip row at every breakpoint).
+  // "Recent Recipes" leads as the default pseudo-category, then "All",
+  // then the real categories — the same data-driven set the sidebar used.
+  const container = document.getElementById('categoryFilters');
+  // Clear the static "All" from the HTML — we add it back in sorted order.
+  container.innerHTML = '';
   
   const recentSpan = document.createElement('span');
-  recentSpan.className = 'mobile-filter-chip';
+  recentSpan.className = 'filter-chip';
   recentSpan.dataset.category = '__recent__';
   recentSpan.textContent = 'Recent Recipes';
   recentSpan.addEventListener('click', () => setCategory('__recent__'));
-  mobileContainer.appendChild(recentSpan);
+  container.appendChild(recentSpan);
   
   const allSpan = document.createElement('span');
-  allSpan.className = 'mobile-filter-chip';
+  allSpan.className = 'filter-chip';
   allSpan.dataset.category = '';
   allSpan.textContent = 'All';
   allSpan.addEventListener('click', () => setCategory(''));
-  mobileContainer.appendChild(allSpan);
+  container.appendChild(allSpan);
   
   sorted.forEach(cat => {
     const span = document.createElement('span');
-    span.className = 'mobile-filter-chip';
+    span.className = 'filter-chip';
     span.dataset.category = cat;
     span.textContent = cat;
     span.addEventListener('click', () => setCategory(cat));
-    mobileContainer.appendChild(span);
+    container.appendChild(span);
   });
-  
-  const sidebarCount = document.getElementById('sidebarCount');
-  if (sidebarCount) sidebarCount.textContent = `${allRecipes.length} recipes`;
   
   // Default to Recent Recipes
   setCategory('__recent__');
@@ -969,13 +935,8 @@ function buildCategoryChips() {
 function setCategory(cat) {
   currentCategory = cat;
   
-  // Update sidebar
-  document.querySelectorAll('.sidebar-cat').forEach(el => {
-    el.classList.toggle('active', el.dataset.category === cat);
-  });
-  
-  // Update mobile filters
-  document.querySelectorAll('.mobile-filter-chip').forEach(el => {
+  // Update top-bar filters
+  document.querySelectorAll('.filter-chip').forEach(el => {
     el.classList.toggle('active', el.dataset.category === cat);
   });
   
@@ -1013,10 +974,11 @@ function setCategory(cat) {
 
 // ── Ranked grid update ──────────────────────────────
 // The search-bar component (WILS-5) debounces keystrokes and queries the
-// Cloudflare Worker search service; rankGrid() applies the current
-// category/favorites filter on top of the service's ranked hit list and keeps
-// any recipes the service missed at the tail. The local substring filter in
-// applyFilters() remains the fallback whenever the service is off the path.
+// Cloudflare Worker search service. The ranked hits themselves render in the
+// in-page results panel above the grid, so rankGrid() keeps the grid filled
+// with the REST of the collection — the category/favorites filters still
+// apply, and nothing is shown twice on the page. The local substring filter
+// in applyFilters() remains the fallback whenever the service is off the path.
 function rankGrid(hits) {
   // A ranked-but-empty answer means "no matches", not "show everything".
   if (!hits || hits.length === 0) {
@@ -1026,21 +988,24 @@ function rankGrid(hits) {
     return;
   }
 
-  const rankedIds = new Map();
-  hits.forEach((h, i) => { if (h && h.id) rankedIds.set(h.id, i); });
+  const rankedIds = new Set();
+  hits.forEach(h => { if (h && h.id) rankedIds.add(h.id); });
 
-  const byId = new Map(allRecipes.map(r => [r.id, r]));
-  // Keep the ranked order; merge any hits not yet present in allRecipes.
-  const ordered = (hits || [])
-    .map(h => byId.get(h?.id))
-    .filter(r => r);
-  const rest = allRecipes.filter(r => !rankedIds.has(r.id));
-
-  filteredRecipes = ordered.concat(rest).filter(recipe => {
+  filteredRecipes = allRecipes.filter(recipe => {
+    if (rankedIds.has(recipe.id)) return false;
     if (favoritesOnly && !favorites.has(recipe.id)) return false;
     if (currentCategory && currentCategory !== '__recent__' && !recipe.categories.includes(currentCategory)) return false;
     return true;
   });
+
+  // Keep the recent/collection date ordering consistent with applyFilters().
+  if (currentCategory === '__recent__' || currentCategory === COLLECTION_CATEGORY) {
+    filteredRecipes.sort((a, b) => {
+      const da = a.dateAdded ? new Date(a.dateAdded) : new Date(0);
+      const db = b.dateAdded ? new Date(b.dateAdded) : new Date(0);
+      return db - da;
+    });
+  }
 
   renderGrid();
   updateResultsMeta();
@@ -1249,13 +1214,15 @@ function renderCard(recipe, index) {
   
   return `
     <div class="recipe-card" data-id="${recipe.id}">
-      <div class="recipe-card-title">${escHtml(recipe.title)}</div>
-      ${desc ? `<div class="recipe-card-desc">${escHtml(desc)}</div>` : ''}
-      <button class="recipe-card-save">${isFav ? '♥' : '♡'}</button>
       <div class="recipe-card-image-wrap">
         <div class="recipe-card-image-inner"><span class="recipe-card-emoji">${emoji}</span>${cover}</div>
       </div>
-      <div class="recipe-card-attribution">${time ? `⏱ ${escHtml(time)}` : ''}</div>
+      <div class="recipe-card-body">
+        <div class="recipe-card-title">${escHtml(recipe.title)}</div>
+        ${desc ? `<div class="recipe-card-desc">${escHtml(desc)}</div>` : ''}
+      </div>
+      ${time ? `<div class="recipe-card-attribution">⏱ ${escHtml(time)}</div>` : ''}
+      <button class="recipe-card-save" aria-label="${isFav ? 'Remove from favorites' : 'Save to favorites'}">${isFav ? '♥' : '♡'}</button>
     </div>
   `;
 }

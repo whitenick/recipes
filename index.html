@@ -79,11 +79,6 @@
           </svg>
           <input type="search" id="searchInput" placeholder="What are you craving? Try 'quick chicken dinner' or 'something with kale'…" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-controls="searchDropdown" />
         </div>
-        <!-- AI rank results dropdown (WILS-5) -->
-        <div class="search-dropdown" id="searchDropdown" hidden>
-          <div class="search-dropdown-status" id="searchDropdownStatus"></div>
-          <div class="search-results" id="searchResults" role="listbox"></div>
-        </div>
         <div class="search-badge-row">
           <span class="search-badge active" data-facet="quick">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
@@ -117,45 +112,39 @@
         <div class="results-meta" id="resultsMeta"></div>
       </div>
 
-      <!-- Mobile Category Filters -->
-      <div class="mobile-filters" id="mobileFilters">
-        <span class="mobile-filter-chip active" data-category="">All</span>
+      <!-- Category Filters (horizontal top bar — all breakpoints) -->
+      <nav class="category-filters" id="categoryFilters" aria-label="Filter recipes by category">
+        <span class="filter-chip active" data-category="">All</span>
         <!-- Dynamic chips injected here -->
-      </div>
+      </nav>
 
-      <!-- DoorDash Layout: Sidebar + Grid -->
-      <div class="page-layout">
+      <!-- Results region (single column; no sidebar) -->
+      <div class="main-content">
 
-        <!-- Category Sidebar -->
-        <aside class="sidebar" id="categorySidebar">
-          <div class="sidebar-title">Full Menu</div>
-          <div class="sidebar-hours" id="sidebarCount"></div>
-          <div class="sidebar-cat active" data-category="">All</div>
-          <!-- Dynamic categories injected here -->
-        </aside>
-
-        <!-- Main content -->
-        <div class="main-content">
-
-          <!-- Section Header -->
-          <div class="section-header">
-            <div class="section-title" id="sectionTitle">Recent Recipes</div>
-            <div class="section-desc" id="sectionDesc">Fresh from the collection</div>
-          </div>
-
-          <!-- Recipe Grid -->
-          <div class="recipe-grid" id="recipeGrid">
-            <!-- Cards injected here -->
-          </div>
-
-          <!-- Empty State -->
-          <div class="empty-state" id="emptyState" style="display:none">
-            <div class="empty-icon">◌</div>
-            <h3>Nothing found</h3>
-            <p>Try a different term, or browse the full collection.</p>
-          </div>
-
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="section-title" id="sectionTitle">Recent Recipes</div>
+          <div class="section-desc" id="sectionDesc">Fresh from the collection</div>
         </div>
+
+        <!-- AI-ranked search results + status (in-page flow, WILS-5) -->
+        <div class="search-dropdown" id="searchDropdown" hidden>
+          <div class="search-dropdown-status" id="searchDropdownStatus"></div>
+          <div class="search-results" id="searchResults" role="listbox"></div>
+        </div>
+
+        <!-- Recipe Grid (row-based list) -->
+        <div class="recipe-grid" id="recipeGrid">
+          <!-- Cards injected here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display:none">
+          <div class="empty-icon">◌</div>
+          <h3>Nothing found</h3>
+          <p>Try a different term, or browse the full collection.</p>
+        </div>
+
       </div>
 
     </div>
