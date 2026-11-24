@@ -14,3 +14,15 @@ EMBEDDER = "default"
 # Routes: bind to a custom domain/subdomain, e.g.
 #   routes = [{ pattern = "search.recipes.example.com", zone_name = "example.com" }]
 # or use the default workers.dev route (see docs/search-deployment.md).
+
+# --- Semantic search (Vectorize + Workers AI embeddings) ---
+# Vector index "recipes-semantic" holds bge-small-en-v1.5 (384-dim, cosine)
+# embeddings of every recipe's title+description+ingredients+keywords.
+[[vectorize]]
+binding = "SEMANTIC"
+index_name = "recipes-semantic"
+
+# Workers AI binding for generating query embeddings serverless (free tier).
+# Model is passed at runtime: env.AI.run('@cf/baai/bge-small-en-v1.5', ...)
+[ai]
+binding = "AI"

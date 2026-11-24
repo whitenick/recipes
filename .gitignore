@@ -6,3 +6,7 @@ dist/
 .env.local
 .env.*.local
 !.env.example
+
+# Cloudflare local state
+.wrangler/
+search/worker/.wrangler/

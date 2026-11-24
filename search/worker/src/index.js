@@ -1,27 +1,31 @@
 /**
- * recipes-search — Cloudflare Worker in front of Meilisearch (WILS-4).
+ * recipes-search — Cloudflare Worker search service for recipes.serapiolabs.com.
  *
- * Cloudflare has no product that runs Meilisearch itself (it is a standalone
- * Rust search engine with its own storage and process model), so the search
- * service is a thin Worker in front of a hosted Meilisearch instance
- * (Meilisearch Cloud, or a self-hosted one the Worker can reach). The Worker
- * is the entire browser-facing surface of the search service:
+ * Hybrid search: the keyword half runs against hosted Meilisearch; the
+ * semantic (vector) half runs fully serverless on Cloudflare — query
+ * embeddings via Workers AI (@cf/baai/bge-small-en-v1.5) and nearest-neighbor
+ * lookup via Vectorize index "recipes-semantic" — no self-hosted model, no
+ * Meilisearch embedder. The two ranked lists are fused with reciprocal-rank
+ * fusion (RRF) and the top-`limit` results are returned.
  *
  *   - the site's fetch() calls only this Worker (never Meilisearch), so the
  *     Meilisearch API key lives in the Worker secrets and never ships to the
- *     browser (fixes the WILS-17 client-baked key)
+ *     browser
  *   - CORS is enforced here for the exact site origin
- *   - hybrid (keyword + vector) search is attempted when an embedder is
- *     configured; if the embedding half fails or is disabled, the request
- *     degrades to keyword-only and the response carries `degraded: true`
+ *   - if the vector half fails (AI/Vectorize error, missing bindings) the
+ *     request degrades to keyword-only and the response carries
+ *     `degraded: true`, `hybrid: false` — keyword search keeps working
  *   - a tiny, cheap filter layer (categories / max prep time) so the frontend
  *     can facet without knowing Meilisearch's filter syntax
  *
- * Deploy: `wrangler deploy` with the secrets in docs/search-deployment.md (vars:
- * MEILI_URL, MEILI_SEARCH_KEY, MEILI_INDEX, ALLOWED_ORIGINS, EMBEDDER).
+ * Deploy: `wrangler deploy` with secrets MEILI_URL, MEILI_SEARCH_KEY and the
+ * bindings in wrangler.toml ([vectorize] SEMANTIC, [ai] AI, vars MEILI_INDEX,
+ * ALLOWED_ORIGINS, EMBEDDER).
  */
 
 const JSON_CT = 'application/json; charset=utf-8';
+
+export const VECTOR_MODEL = '@cf/baai/bge-small-en-v1.5';
 
 export const DEFAULT_ATTRIBUTES = [
   'id',
@@ -62,9 +66,10 @@ export function json(data, status = 200, headers = {}) {
 
 /**
  * Build the Meilisearch /indexes/:index/search payload from a client request.
- * `hybrid` is true only when an embedder should be tried.
+ * Keyword-only: the semantic half is handled by this Worker via Vectorize, so
+ * no Meilisearch `hybrid` embedder block is ever sent.
  */
-export function buildSearchPayload({ q, limit, filter, categories, maxMinutes, hybrid, embedder }) {
+export function buildSearchPayload({ q, limit, filter, categories, maxMinutes }) {
   const body = {
     q,
     limit: Number(limit) > 0 ? Number(limit) : 24,
@@ -81,7 +86,6 @@ export function buildSearchPayload({ q, limit, filter, categories, maxMinutes, h
     exprs.push(`meta.totalTimeMinutes <= ${Number(maxMinutes)}`);
   }
   if (exprs.length) body.filter = exprs.join(' AND ');
-  if (hybrid) body.hybrid = { embedder: embedder || 'default', semanticRatio: 0.5 };
   return body;
 }
 
@@ -109,7 +113,91 @@ async function callMeili(env, payload) {
   return { res, text };
 }
 
-/** Core search routing: parse request → call Meilisearch (hybrid→keyword fallback). */
+/**
+ * Generate the query embedding via Workers AI. bge-small-en-v1.5 returns
+ * { data: [[...384 floats]] } for { text: [query] }.
+ */
+export async function embedQuery(env, text) {
+  const res = await env.AI.run(VECTOR_MODEL, { text: [text] });
+  const data = res && res.data;
+  if (!Array.isArray(data) || !Array.isArray(data[0])) {
+    throw new Error('AI embedding response had no data');
+  }
+  return data[0];
+}
+
+/**
+ * Nearest-neighbor candidates from Vectorize. Client filters (categories /
+ * maxMinutes) are applied on the vector metadata in JS — the vector index
+ * carries recipe_id/title/categories/time on every vector.
+ */
+export async function vectorCandidates(env, vector, { limit, categories, maxMinutes }) {
+  // Vectorize caps topK at 50 when returnMetadata: 'all' — stay under it.
+  const topK = Math.min(Math.max(Number(limit) || 24, 20) * 5, 50);
+  const res = await env.SEMANTIC.query(vector, { topK, returnMetadata: 'all' });
+  const matches = (res && res.matches) || [];
+  const out = [];
+  for (const m of matches) {
+    const md = m.metadata || {};
+    if (categories && categories.length) {
+      const cats = new Set((md.categories || []).map(String));
+      if (!categories.some((c) => cats.has(String(c)))) continue;
+    }
+    if (maxMinutes !== undefined && maxMinutes !== null && maxMinutes !== '' && md.totalTimeMinutes != null) {
+      if (Number(md.totalTimeMinutes) > Number(maxMinutes)) continue;
+    }
+    out.push({
+      id: md.recipe_id || m.id,
+      title: md.title || m.id,
+      categories: Array.isArray(md.categories) ? md.categories : [],
+      prepTimeMinutes: md.prepTimeMinutes != null ? Number(md.prepTimeMinutes) : null,
+      _vecScore: m.score,
+    });
+  }
+  return out;
+}
+
+/**
+ * Reciprocal-rank fusion: unify the keyword and vector candidate lists into a
+ * single ranked list. RRF is calibration-free, so the two score spaces
+ * (Meilisearch ranking vs cosine) don't need to agree.
+ */
+export function fuse(keywordHits, vectorHits, limit) {
+  const K = 60;
+  const rrf = new Map();
+  const add = (hits, weight) => {
+    hits.forEach((hit, rank) => {
+      const entry = rrf.get(hit.id) || { score: 0, hit: null };
+      entry.score += weight / (K + rank + 1);
+      if (!entry.hit) entry.hit = hit;
+      rrf.set(hit.id, entry);
+    });
+  };
+  add(keywordHits, 1);
+  add(vectorHits, 1);
+  return [...rrf.values()]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, Number(limit) > 0 ? Number(limit) : 24)
+    .map(({ score, hit }) => ({ ...hit, rankingScore: Number(score.toFixed(4)) }));
+}
+
+function toClientHits(hits) {
+  return hits.map((h) => {
+    const prep = h.prepTimeMinutes != null
+      ? h.prepTimeMinutes
+      : (h.meta && h.meta.prepTimeMinutes != null ? h.meta.prepTimeMinutes : null);
+    return {
+      id: h.id,
+      title: h.title,
+      description: h.description || '',
+      categories: h.categories || [],
+      prepTimeMinutes: prep,
+      rankingScore: h.rankingScore,
+    };
+  });
+}
+
+/** Core search routing: parse request → keyword + semantic → RRF merge. */
 export async function handleSearch(request, env) {
   let q, limit, filter, categories, maxMinutes, hybridRequested;
   let payloadJson = {};
@@ -140,51 +228,58 @@ export async function handleSearch(request, env) {
   }
 
   const embedderConfig = env.EMBEDDER || 'default';
-  const embedderEnabled = embedderConfig !== 'off' && embedderConfig.toLowerCase() !== 'false';
-  const wantHybrid = hybridRequested && embedderEnabled;
+  const embedderEnabled =
+    embedderConfig !== 'off' &&
+    embedderConfig.toLowerCase() !== 'false' &&
+    Boolean(env.AI && env.SEMANTIC);
 
-  const attempt = (hybrid) => callMeili(
-    env,
-    buildSearchPayload({ q, limit, filter, categories, maxMinutes, hybrid, embedder: env.EMBEDDER }),
-  );
-
-  let { res, text } = await attempt(wantHybrid);
-
-  let degraded = false;
-  if (wantHybrid) {
-    if (isEmbedderFailure(res, text)) {
-      // Embedding unavailable → degrade to keyword-only for this request.
-      const kw = await attempt(false);
-      if (kw.res.ok) {
-        degraded = true;
-        res = kw.res;
-        text = kw.text;
-      }
-      // on keyword fallback failure we surface the keyword error below
-    }
-  }
-
+  // --- Keyword half: Meilisearch keyword search (always). ---
+  const keywordPayload = buildSearchPayload({ q, limit, filter, categories, maxMinutes });
+  const { res, text } = await callMeili(env, keywordPayload);
   if (!res.ok) {
     return json({ error: 'search upstream failed', status: res.status, detail: text.slice(0, 500) }, 502, {
       'X-Recipes-Retry': 'site-local-filter',
     });
   }
 
-  const data = JSON.parse(text);
-  const hits = (data.hits || []).map((h) => ({
+  const meili = JSON.parse(text);
+  const keywordHits = (meili.hits || []).map((h) => ({
     id: h.id,
     title: h.title,
     description: h.description || '',
     categories: h.categories || [],
     prepTimeMinutes: h.meta && h.meta.prepTimeMinutes,
-    rankingScore: h._rankingScore,
+    _rankingScore: h._rankingScore,
   }));
+  const estimatedTotalHits = meili.estimatedTotalHits || 0;
+
+  // --- Semantic half: Workers AI embedding + Vectorize NN (best-effort). ---
+  let degraded = false;
+  let hybrid = false;
+  let fused = keywordHits;
+
+  if (hybridRequested && embedderEnabled) {
+    try {
+      const vector = await embedQuery(env, q);
+      const vectorHits = await vectorCandidates(env, vector, { limit, categories, maxMinutes });
+      fused = fuse(keywordHits, vectorHits, limit);
+      hybrid = true; // vector path produced results (possibly empty)
+      degraded = false;
+    } catch (err) {
+      // Embedding/Vectorize unavailable → keyword-only for this request.
+      console.error(`vector search failed for q="${q}":`, err && err.message ? err.message : err);
+      degraded = true;
+      hybrid = false;
+      fused = keywordHits;
+    }
+  }
+
   return json({
     query: q,
-    hits,
-    estimatedTotalHits: data.estimatedTotalHits || 0,
+    hits: toClientHits(fused),
+    estimatedTotalHits,
     degraded,
-    hybrid: wantHybrid && !degraded,
+    hybrid,
   });
 }
 

@@ -62,19 +62,21 @@ npm run preview
 [`docs/search-data-model.md`](docs/search-data-model.md) for the field contract,
 searchable-vs-filterable mapping, and rebuild/reindex instructions.
 
-## AI Search (WILS-4) — Cloudflare Worker + hosted Meilisearch
+## AI Search (WILS-4) — Cloudflare Worker: Meilisearch keyword + Vectorize semantic
 
 The site's search bar is **hybrid (keyword + vector) live search** against a
-**Cloudflare Worker in front of hosted Meilisearch**, replacing the old
-client-side substring filter. It is **opt-in**: unless a search endpoint is
-configured at build time, the site keeps the local substring filter exactly as
-before.
+**Cloudflare Worker**: Meilisearch supplies the keyword half and Cloudflare
+**Vectorize + Workers AI** (`@cf/baai/bge-small-en-v1.5`, all serverless, free
+tier, no self-hosted model) supplies the semantic half; the Worker merges both
+rankings with reciprocal-rank fusion. It is **opt-in**: unless a search
+endpoint is configured at build time, the site keeps the local substring
+filter exactly as before.
 
 - Search service: `search/worker/` (Cloudflare Worker — CORS, server-side key,
-  hybrid→keyword fallback). Deploy + full docs in
+  hybrid→keyword fallback, RRF fusion). Deploy + full docs in
   [`docs/search-deployment.md`](docs/search-deployment.md).
-- Indexer: `node search/indexer.js` (reads `data/recipes.json` → Meilisearch;
-  one idempotent command for initial + incremental sync).
+- Indexers: `node search/indexer.js` (Meilisearch, one idempotent command) and
+  `node search/vectorize-indexer.js` (Vectorize embeddings, idempotent).
 - Frontend search bar: `src/search-bar.js` — a type-ahead autocomplete over
   `#searchInput` (debounced queries, keyboard + mouse navigation, loading /
   empty / error states, results as recipe cards). Each ranked hit also drives
@@ -87,16 +89,17 @@ before.
   `docs/backend-decision.md` §4.
 
 ```bash
-# After regenerating data/recipes.json, refresh the search index:
+# After regenerating data/recipes.json, refresh both search indexes:
 MEILI_URL=https://<instance>.meilisearch.com MEILI_MASTER_KEY=<master key> node search/indexer.js
+node search/vectorize-indexer.js
 
 # Build the site pointed at the search Worker (no key in the build):
 VITE_SEARCH_ENDPOINT=https://recipes-search.<subdomain>.workers.dev npm run build
 ```
 
 The Meilisearch key never reaches the browser — the Worker holds
-`MEILI_SEARCH_KEY` as a secret. If embeddings are unavailable the service
-degrades each query to keyword-only (`degraded: true`).
+`MEILI_SEARCH_KEY` as a secret. If the vector half is unavailable (AI/Vectorize
+error) the service degrades each query to keyword-only (`degraded: true`).
 
 ## Backend Status (WILS-9)
 

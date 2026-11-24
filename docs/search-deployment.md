@@ -1,13 +1,12 @@
-# AI Search — Cloudflare Worker + hosted Meilisearch (WILS-4)
+# AI Search — Cloudflare Worker: Meilisearch (keyword) + Vectorize (semantic)
 
 The site's search bar is **live, ranked, hybrid (keyword + vector)
-search-as-you-type** served by a **Cloudflare Worker in front of hosted
-Meilisearch**. This replaces the WILS-17 self-hosted VPS sidecar: per the
-hosting rule the search service must live on the **Cloudflare path**, and
-Cloudflare has no product that runs Meilisearch itself — Meilisearch is a
-standalone Rust engine with its own storage and process model. That is the
-recorded fallback rationale: the service the browser talks to is fully on
-Cloudflare (a Worker), while the index it proxies to is hosted Meilisearch.
+search-as-you-type** served by a **Cloudflare Worker**. The keyword half runs
+against hosted Meilisearch; the semantic half runs fully serverless on
+Cloudflare — **Workers AI** embeddings (`@cf/baai/bge-small-en-v1.5`, 384-dim)
+with **Vectorize** (`recipes-semantic`) nearest-neighbor lookup, **no
+self-hosted model**. The two ranked lists are merged with reciprocal-rank
+fusion (RRF) in the Worker.
 
 The recipes site itself stays a static build on **Cloudflare Pages** (the GitHub
 Pages redirect stub is deprecated — see `docs/backend-decision.md` §4).
@@ -24,19 +23,26 @@ Pages redirect stub is deprecated — see `docs/backend-decision.md` §4).
 Cloudflare                        Hosted Meilisearch (Meilisearch Cloud / self-hosted)
 ┌────────────────────────┐        ┌─────────────────────────────┐
 │ GitHub/CF Pages site   │        │ index "recipes"             │
-│  src/main.js           │        │  └─ hybrid embedder         │
-│    └─ src/search.js ───┼───────▶│     (REST / Ollama / HF)    │
-│       POST /search     │  Auth  │  └─ documents (385 recipes) │
-│  (worker URL, no key)  │   ▶    └─────────────────────────────┘
-└───────────┬────────────┘        data/recipes.json
-            │     ▲ cORS on the
-            ▼     │ Worker (search/worker)
-   search/worker/index.js  ──proxies──▶  MEILI_* search key (worker secret)
+│  src/main.js           │        │  └─ documents (392 recipes) │
+│    └─ src/search.js ───┼───────▶│  keyword search only        │
+│       POST /search     │  Auth  └─────────────────────────────┘
+│  (worker URL, no key)  │   ▶
+└───────────┬────────────┘        Cloudflare (serverless)
+            │     ▲ CORS on the   ┌─────────────────────────────┐
+            ▼     │ Worker        │ Vectorize "recipes-semantic"│
+   search/worker/index.js         │  └─ 392 vectors, bge-small  │
+      ├─ Meilisearch (keyword) ──▶│    (384-dim, cosine, with   │
+      └─ AI embed + Vectorize ───▶│     recipe_id/title/cats/   │
+                                    │     time metadata)         │
+                                    │ Workers AI @cf/baai/       │
+                                    │  bge-small-en-v1.5 (query) │
+                                    └─────────────────────────────┘
 ```
 
-- Browser → Worker → Meilisearch. The browser never holds a Meilisearch key.
-- The Worker is the Cloudflare-run service: CORS, key, hybrid→keyword fallback,
-  and the cheap filter layer all live there.
+- Browser → Worker only. The Worker calls Meilisearch **and** Vectorize, fuses
+  the ranked lists (RRF), and never exposes either key to the browser.
+- The Worker is the entire browser-facing surface: CORS, keys, hybrid→keyword
+  fallback, and the cheap filter layer all live there.
 
 ---
 
@@ -146,40 +152,49 @@ MEILI_URL=... MEILI_MASTER_KEY=... node search/indexer.js             # refresh 
 
 ---
 
-## 3. Embeddings (the hybrid/vector side)
+## 3. Semantic half — Vectorize + Workers AI embeddings (serverless)
 
-Meilisearch fuses keyword and vector results into one ranking. The vector half
-needs an **embedder configured on the Meilisearch instance** — the Worker does
-not generate embeddings itself; it just sends `hybrid` and degrades if the
-instance can't comply.
+The vector half is 100% Cloudflare serverless (free tier): the Worker embeds
+each query with Workers AI and does nearest-neighbor lookup in Vectorize. No
+self-hosted model, no Meilisearch embedder.
 
-Configure once (free options first, per WILS-1's "no API cost" recommendation):
+**Setup (one-time):**
 
 ```bash
-# Free local REST embedder (e.g. Ollama on the same box):
-curl -s -H "Authorization: Bearer $MEILI_MASTER_KEY" -X PATCH \
-  https://<instance>.meilisearch.com/indexes/recipes/settings \
-  -d '{ "embedders": { "default": {
-         "source": "rest",
-         "url": "http://localhost:11434/api/embed",
-         "request": { "model": "nomic-embed-text" },
-         "query": { "input": ["{{embedding}}"] } } } }'
+# 1. Create the Vectorize index (preset sets 384 dims + cosine metric):
+cd search/worker
+npx wrangler vectorize create recipes-semantic --preset "@cf/baai/bge-small-en-v1.5"
+
+# 2. Bindings in search/worker/wrangler.toml:
+#    [[vectorize]] binding = "SEMANTIC" index_name = "recipes-semantic"
+#    [ai] binding = "AI"   (wrangler 4.x object syntax)
+
+# 3. Embed the corpus + upsert (idempotent; run after any corpus rebuild):
+cd ../..
+node search/vectorize-indexer.js        # ~392 vectors, bge-small-en-v1.5
 ```
 
-- `source: "rest"` against a free local HuggingFace model (via Ollama or a
-  tiny single-file server) keeps the vector side at **zero API cost**.
-- `source: "ollama"` / `"huggingFace"` / `"openAi"` are the managed
-  alternatives — `openAi` and the HuggingFace inference endpoint add an API
-  key and per-request cost. See Meilisearch's
-  [embedders docs](https://www.meilisearch.com/docs/learn/configuration/vector_search#embedders).
-- **If embeddings are unavailable** (no embedder configured, embedder down, or
-  costs unacceptable): nothing breaks. Set `EMBEDDER=off` on the Worker for
-  permanent keyword-only, or rely on the automatic per-query fallback
-  (`degraded: true`) — both keep the search bar ranked and useful.
+The indexer embeds the same `searchable_text` blob the Meilisearch indexer
+builds (title, description, categories, ingredients, body) and stores
+`recipe_id`, `title`, `categories`, `prepTimeMinutes`, `totalTimeMinutes` as
+vector metadata so the Worker can filter and map matches back to recipes
+(Vectorize ids are capped at 64 bytes; long recipe ids are hashed, with the
+original kept in metadata).
 
-> Note: with `EMBEDDER=off` there is no vector side at all; recipe matching is
-> fine (the corpus is English, per-recipe attributes are rich) but the
-> "researches and suggests matches" semantic lift is lost.
+**Query path (in the Worker):** `env.AI.run('@cf/baai/bge-small-en-v1.5',
+{ text: [q] })` → `env.SEMANTIC.query(vector, { topK, returnMetadata: 'all' })`
+→ candidates fused with the Meilisearch keyword hits via RRF.
+
+- **Free tier:** bge-small-en-v1.5 embeddings and Vectorize (≤5M vectors /
+  30k queries-day) are within the Cloudflare free tier for this corpus size
+  (392 vectors, a few query embeddings per search).
+- **If the vector half is unavailable** (AI/Vectorize error, or bindings
+  missing): nothing breaks — the Worker falls back per-query to keyword-only
+  and sets `degraded: true` in the response. Set `EMBEDDER=off` on the Worker
+  to force keyword-only always.
+
+> Note: `topK` is capped at 50 by Vectorize when `returnMetadata: 'all'` — the
+> Worker keeps `topK ≤ 50`.
 
 ---
 
